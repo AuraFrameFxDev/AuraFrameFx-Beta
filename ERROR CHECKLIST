@@ -1,4 +1,14 @@
-ERROR CHECKLIST
+ERROR CHECKLISTUnable to start the daemon process.
+This problem might be caused by incorrect configuration of the daemon.
+For example, an unrecognized jvm option is used.For more details on the daemon, please refer to https://docs.gradle.org/8.12/userguide/gradle_daemon.html in the Gradle documentation.
+Process command line: C:\Users\Wehtt\.jdks\liberica-full-24.0.1\bin\java.exe --add-opens=java.base/java.lang=ALL-UNNAMED --add-opens=java.base/java.lang.invoke=ALL-UNNAMED --add-opens=java.base/java.util=ALL-UNNAMED --add-opens=java.prefs/java.util.prefs=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED --add-opens=java.base/java.util=ALL-UNNAMED --add-opens=java.prefs/java.util.prefs=ALL-UNNAMED --add-opens=java.base/java.nio.charset=ALL-UNNAMED --add-opens=java.base/java.net=ALL-UNNAMED --add-opens=java.base/java.util.concurrent.atomic=ALL-UNNAMED --add-opens=java.xml/javax.xml.namespace=ALL-UNNAMED -XX:MaxMetaspaceSize=384m -XX:+HeapDumpOnOutOfMemoryError -agentlib:jdwp=transport=dt_socket,server=n,suspend=y,address=127.0.0.1:61265 -Xms256m -Xmx512m -Dfile.encoding=UTF-8 -Duser.country=US -Duser.language=en -Duser.variant -cp C:\Users\Wehtt\Oracle_JDK-21\wrapper\dists\gradle-8.12-bin\cetblhg4pflnnks72fxwobvgv\gradle-8.12\lib\gradle-daemon-main-8.12.jar -javaagent:C:\Users\Wehtt\Oracle_JDK-21\wrapper\dists\gradle-8.12-bin\cetblhg4pflnnks72fxwobvgv\gradle-8.12\lib\agents\gradle-instrumentation-agent-8.12.jar org.gradle.launcher.daemon.bootstrap.GradleDaemon 8.12
+Please read the following process output to find out more:
+-----------------------
+ERROR: transport error 202: connect failed: Connection refused
+ERROR: JDWP Transport dt_socket failed to initialize, TRANSPORT_INIT(510)
+JDWP exit error AGENT_ERROR_TRANSPORT_INIT(197): No transports initialized [s\src\jdk.jdwp.agent\share\native\libjdwp\debugInit.c:697]
+
+
 > Task :app:compileDebugKotlin
 e: file:///C:/Users/Wehtt/Desktop/auraframegit/AuraFrameFx-Beta/app/src/main/java/com/example/app/ui/screens/OracleDriveControlScreen.kt:15:24 Unresolved reference 'R'.
 e: file:///C:/Users/Wehtt/Desktop/auraframegit/AuraFrameFx-Beta/app/src/main/java/com/example/app/ui/screens/OracleDriveControlScreen.kt:52:35 None of the following candidates is applicable:
