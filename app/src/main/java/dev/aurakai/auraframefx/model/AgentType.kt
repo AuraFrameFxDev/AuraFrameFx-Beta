@@ -39,5 +39,10 @@ enum class AgentType {
      * AuraShield Agent - AI for security and threat analysis.
      * TODO: Adding this based on AuraShieldAgent.kt creation, was not in original list.
      */
-    AURASHIELD // Added based on previously created agent
+    AURASHIELD, // Added based on previously created agent
+
+    /**
+     * User - Represents a human user interacting with the system.
+     */
+    USER
 }
