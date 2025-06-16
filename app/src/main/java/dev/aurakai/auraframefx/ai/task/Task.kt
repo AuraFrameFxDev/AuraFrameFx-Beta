@@ -1,7 +1,6 @@
 package dev.aurakai.auraframefx.ai.task
 
 import kotlinx.serialization.Serializable
-import java.util.UUID // For default ID generation if needed, though ID is String
 
 // Task data class definition removed as per instruction.
 
