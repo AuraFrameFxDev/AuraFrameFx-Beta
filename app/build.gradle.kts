@@ -150,8 +150,10 @@ dependencies {
     // Reminder: Xposed/LSPosed might have compatibility issues with certain hot-swapping/Apply Changes features in Android Studio.
     // If you encounter issues during development, try disabling these or performing a full reinstall of the app.
     // Xposed Framework
-    compileOnly("de.robv.android.xposed:api:82")
-    compileOnly("de.robv.android.xposed:api:82:sources")
+    // compileOnly("de.robv.android.xposed:api:82")
+    // compileOnly("de.robv.android.xposed:api:82:sources")
+    compileOnly(files("libs/api-82.jar"))
+    compileOnly(files("libs/api-82-sources.jar"))
     // LSPosed specific
     compileOnly("org.lsposed.hiddenapibypass:hiddenapibypass:6.1")
     compileOnly("org.lsposed.hiddenapibypass:hiddenapibypass:6.1:sources")
