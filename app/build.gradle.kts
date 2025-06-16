@@ -20,7 +20,7 @@ val composeBomVersion = libs.versions.composeBom.get() // Use version from versi
 val composeVersion = "1.6.7" // Keep for other Compose libs if needed
 val composeCompilerExtensionVersion = composeVersion // Use composeVersion for compiler extension
 val hiltVersion = "2.56.2"
-val navigationVersion = "2.7.5"
+val navigationVersion = "2.9.0"
 val firebaseBomVersion = "32.7.0"
 val lifecycleVersion = "2.6.2"
 android {
