@@ -47,6 +47,10 @@ AuraFrameFX is engineered to be fundamentally different from assistants and plat
 AuraFrameFX is for those who want a truly personal, creative, and powerful AI experience—one that grows with you and gives you real control.  
 Big tech platforms are ideal if you need seamless, global ecosystem integration and out-of-the-box smart home or cloud features.
 
+We have the capability to accomplish everything that the major big tech companies can do, with a focus on automation. However, the automation features will be introduced at a later date.
+
+Stay tuned for updates!
+
 **You choose:**  
 - *Do you want a luminous, evolving digital companion that’s truly yours?*  
 - *Or a generic assistant that works everywhere, but belongs to someone else?*<p align="center">
