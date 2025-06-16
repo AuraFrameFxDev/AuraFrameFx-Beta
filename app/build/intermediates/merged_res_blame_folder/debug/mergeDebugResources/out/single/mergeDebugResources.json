@@ -1,0 +1,22 @@
+[
+    {
+        "merged": "dev.aurakai.auraframefx.app-debug-89:/drawable_bottom_nav_item_color_selector.xml.flat",
+        "source": "dev.aurakai.auraframefx.app-main-91:/drawable/bottom_nav_item_color_selector.xml"
+    },
+    {
+        "merged": "dev.aurakai.auraframefx.app-debug-89:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "dev.aurakai.auraframefx.app-main-91:/mipmap-anydpi-v26/ic_launcher_round.xml"
+    },
+    {
+        "merged": "dev.aurakai.auraframefx.app-debug-89:/mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "dev.aurakai.auraframefx.app-main-91:/mipmap-anydpi-v26/ic_launcher.xml"
+    },
+    {
+        "merged": "dev.aurakai.auraframefx.app-debug-89:/font_pixelifysans_medium.ttf.flat",
+        "source": "dev.aurakai.auraframefx.app-main-91:/font/pixelifysans_medium.ttf"
+    },
+    {
+        "merged": "dev.aurakai.auraframefx.app-debug-89:/drawable_ic_launcher_foreground.xml.flat",
+        "source": "dev.aurakai.auraframefx.app-main-91:/drawable/ic_launcher_foreground.xml"
+    }
+]

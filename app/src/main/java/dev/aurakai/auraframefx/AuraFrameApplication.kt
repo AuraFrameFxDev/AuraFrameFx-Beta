@@ -1,0 +1,19 @@
+package dev.aurakai.auraframefx
+
+import android.app.Application
+import androidx.work.Configuration
+import dagger.hilt.android.HiltAndroidApp
+
+@HiltAndroidApp
+class AuraFrameApplication : Application(), Configuration.Provider {
+    override fun onCreate() {
+        super.onCreate()
+        // Initialization code here
+    }
+
+    override fun getWorkManagerConfiguration(): Configuration {
+        return Configuration.Builder()
+            .setMinimumLoggingLevel(android.util.Log.INFO)
+            .build()
+    }
+}
