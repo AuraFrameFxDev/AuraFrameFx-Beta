@@ -1,18 +1,14 @@
 package dev.aurakai.auraframefx.model
 
 import kotlinx.serialization.Serializable
+import dev.aurakai.auraframefx.model.AgentType // Added import
 
 @Serializable
 data class AgentMessage(
     val content: String,
-    val sender: AgentType,
+    val sender: AgentType, // Should now refer to the imported AgentType
     val timestamp: Long,
     val confidence: Float,
 )
 
-enum class AgentType {
-    AURA,
-    KAI,
-    CASCADE,
-    USER
-}
+// Removed local AgentType enum

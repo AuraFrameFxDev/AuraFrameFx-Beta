@@ -11,10 +11,6 @@ data class TaskResult(
     val durationMs: Long? = null, // How long the task took
 )
 
-@Serializable
-enum class TaskStatus {
-    SUCCESS,
-    FAILED,
-    PENDING,
-    CANCELLED
-}
+// Removed local TaskStatus enum.
+// The 'status: TaskStatus' field in TaskResult data class
+// should now refer to TaskStatus from TaskModel.kt in the same package.

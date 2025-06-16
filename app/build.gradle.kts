@@ -1,5 +1,5 @@
 val kotlinVersion = "2.1.21"
-val composeBomVersion = "2025.06.00"
+val composeBomVersion = "2024.06.00" // Corrected Compose BOM version
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
@@ -142,9 +142,9 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-service:$lifecycleVersion")
 
     // Coroutines
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.10.2")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.10.2")
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.8.1")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.1") // Adjusted version
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.8.1") // Adjusted version
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3") // Adjusted version
 
     // Xposed Framework (local jar, since remote repo is unavailable)
     // compileOnly(files("libs/xposed-api-82.jar"))
@@ -161,10 +161,10 @@ dependencies {
     implementation("com.google.firebase:firebase-perf-ktx")
     implementation("com.google.firebase:firebase-messaging-ktx")
 
-    // Exclude firebase-common if needed
-    configurations.all {
-        exclude(group = "com.google.firebase", module = "firebase-common")
-    }
+    // Exclude firebase-common if needed - Commenting out for now
+    // configurations.all {
+    // exclude(group = "com.google.firebase", module = "firebase-common")
+    // }
 
     // Firebase ML Kit
     implementation("com.google.firebase:firebase-ml-modeldownloader-ktx")
@@ -217,12 +217,12 @@ dependencies {
     implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
 
     // DataStore for preferences (required by your code)
-    implementation("androidx.datastore:datastore-preferences:1.0.0")
+    implementation("androidx.datastore:datastore-preferences:1.1.1") // Updated version
 
     // Testing
     testImplementation("junit:junit:4.13.2")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlinVersion")
-    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.10.2")
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.8.1") // Adjusted version
     testImplementation("io.mockk:mockk:1.14.2")
     testImplementation("app.cash.turbine:turbine:1.2.1")
     testImplementation("com.google.truth:truth:1.4.4")
