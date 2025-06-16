@@ -57,7 +57,7 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import java.util.Locale
 
- coderabbitai/docstrings/16vmte55OAzxAErrj4TR2TZldKbMPATUT
+coderabbitai/docstrings/16vmte55OAzxAErrj4TR2TZldKbMPATUT
 /**
  * Displays an interactive, animated halo interface with agent nodes, task delegation, and task history.
  *

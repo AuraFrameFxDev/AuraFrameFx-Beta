@@ -28,7 +28,7 @@ object WorkManagerModule {
     @Provides
     @Singleton
     fun provideWorkManagerConfiguration(
-        workerFactory: HiltWorkerFactory
+        workerFactory: HiltWorkerFactory,
     ): Configuration =
         Configuration.Builder()
             .setWorkerFactory(workerFactory)

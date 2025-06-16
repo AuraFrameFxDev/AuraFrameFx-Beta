@@ -1,3 +1,5 @@
+val kotlinVersion = "2.1.21"
+val composeBomVersion = "2025.06.00"
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
@@ -15,21 +17,20 @@ plugins {
 // Repositories are configured in settings.gradle.kts
 
 // Common versions
-val kotlinVersion = libs.versions.kotlin.get()
-val composeBomVersion = libs.versions.composeBom.get() // Use version from version catalog
 val composeVersion = "1.6.7" // Keep for other Compose libs if needed
 val composeCompilerExtensionVersion = composeVersion // Use composeVersion for compiler extension
 val hiltVersion = "2.56.2"
-val navigationVersion = "2.7.5"
-val firebaseBomVersion = "32.7.0"
-val lifecycleVersion = "2.6.2"
+val navigationVersion = "2.9.0"
+val firebaseBomVersion = "33.15.0"
+val lifecycleVersion = "2.9.1"
 android {
     namespace = "dev.aurakai.auraframefx"
     compileSdk = 36
     ndkVersion = "28.1.13356709"
     defaultConfig {
+        testInstrumentationRunnerArguments += mapOf()
         applicationId = "dev.aurakai.auraframefx"
-        minSdk = 31
+        minSdk = 33
         targetSdk = 36
         versionCode = 1
         versionName = "1.0"
@@ -114,11 +115,11 @@ android {
 
 dependencies {
     // Core Android dependencies
-    implementation("androidx.core:core-ktx:1.12.0")
-    implementation("androidx.appcompat:appcompat:1.6.1")
-    implementation("com.google.android.material:material:1.11.0")
+    implementation("androidx.core:core-ktx:1.16.0")
+    implementation("androidx.appcompat:appcompat:1.7.1")
+    implementation("com.google.android.material:material:1.12.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleVersion")
-    implementation("androidx.activity:activity-compose:1.8.2")
+    implementation("androidx.activity:activity-compose:1.10.1")
 
     // Compose
     implementation(platform("androidx.compose:compose-bom:$composeBomVersion"))
@@ -131,7 +132,7 @@ dependencies {
     // Hilt for dependency injection
     implementation("com.google.dagger:hilt-android:$hiltVersion")
     ksp("com.google.dagger:hilt-android-compiler:$hiltVersion")
-    implementation("androidx.hilt:hilt-navigation-compose:1.1.0")
+    implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
     implementation("androidx.hilt:hilt-work:1.2.0")
 
     // Lifecycle
@@ -141,9 +142,9 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-service:$lifecycleVersion")
 
     // Coroutines
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.7.3")
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.10.2")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.10.2")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.8.1")
 
     // Xposed Framework (local jar, since remote repo is unavailable)
     // compileOnly(files("libs/xposed-api-82.jar"))
@@ -173,65 +174,65 @@ dependencies {
     implementation("com.google.mlkit:translate:17.0.3")
 
     // TensorFlow Lite
-    implementation("org.tensorflow:tensorflow-lite:2.14.0")
-    implementation("org.tensorflow:tensorflow-lite-support:0.4.4")
-    implementation("org.tensorflow:tensorflow-lite-metadata:0.4.4")
+    implementation("org.tensorflow:tensorflow-lite:2.17.0")
+    implementation("org.tensorflow:tensorflow-lite-support:0.5.0")
+    implementation("org.tensorflow:tensorflow-lite-metadata:0.5.0")
     implementation("org.tensorflow:tensorflow-lite-task-vision:0.4.4")
     implementation("org.tensorflow:tensorflow-lite-task-text:0.4.4")
 
     // Accompanist for Compose utilities
-    implementation("com.google.accompanist:accompanist-permissions:${libs.versions.accompanist.get()}")
-    implementation("com.google.accompanist:accompanist-pager:${libs.versions.accompanist.get()}")
-    implementation("com.google.accompanist:accompanist-flowlayout:${libs.versions.accompanist.get()}")
-    implementation("com.google.accompanist:accompanist-navigation-animation:${libs.versions.accompanist.get()}")
-    implementation("com.google.accompanist:accompanist-swiperefresh:${libs.versions.accompanist.get()}")
-    implementation("com.google.accompanist:accompanist-webview:${libs.versions.accompanist.get()}")
-    implementation("com.google.accompanist:accompanist-systemuicontroller:${libs.versions.accompanist.get()}")
-    implementation("com.google.accompanist:accompanist-pager-indicators:${libs.versions.accompanist.get()}")
-    implementation("com.google.accompanist:accompanist-placeholder-material:${libs.versions.accompanist.get()}")
-    implementation("com.google.accompanist:accompanist-navigation-material:${libs.versions.accompanist.get()}")
+    implementation("com.google.accompanist:accompanist-permissions:0.37.3")
+    implementation("com.google.accompanist:accompanist-pager:0.36.0")
+    implementation("com.google.accompanist:accompanist-flowlayout:0.36.0")
+    implementation("com.google.accompanist:accompanist-navigation-animation:0.36.0")
+    implementation("com.google.accompanist:accompanist-swiperefresh:0.36.0")
+    implementation("com.google.accompanist:accompanist-webview:0.36.0")
+    implementation("com.google.accompanist:accompanist-systemuicontroller:0.36.0")
+    implementation("com.google.accompanist:accompanist-pager-indicators:0.36.0")
+    implementation("com.google.accompanist:accompanist-placeholder-material:0.36.0")
+    implementation("com.google.accompanist:accompanist-navigation-material:0.36.0")
 
     // Room for local database
-    implementation("androidx.room:room-runtime:${libs.versions.room.get()}")
-    implementation("androidx.room:room-ktx:${libs.versions.room.get()}")
-    ksp("androidx.room:room-compiler:${libs.versions.room.get()}")
+    implementation("androidx.room:room-runtime:2.7.1")
+    implementation("androidx.room:room-ktx:2.7.1")
+    ksp("androidx.room:room-compiler:2.7.1")
 
     // WorkManager for background tasks
-    implementation("androidx.work:work-runtime-ktx:2.9.0")
+    implementation("androidx.work:work-runtime-ktx:2.10.1")
 
     // Navigation
     implementation("androidx.navigation:navigation-compose:$navigationVersion")
-    implementation("androidx.hilt:hilt-navigation-compose:1.1.0")
+    implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
 
     // Coil for image loading
-    implementation("io.coil-kt:coil-compose:2.5.0")
+    implementation("io.coil-kt:coil-compose:2.7.0")
 
     // Retrofit for network calls
-    implementation("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation("com.squareup.retrofit2:retrofit:3.0.0")
+    implementation("com.squareup.retrofit2:converter-gson:3.0.0")
     implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
 
     // Testing
     testImplementation("junit:junit:4.13.2")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlinVersion")
-    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3")
-    testImplementation("io.mockk:mockk:1.13.8")
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.10.2")
+    testImplementation("io.mockk:mockk:1.14.2")
     testImplementation("app.cash.turbine:turbine:1.2.1")
-    testImplementation("com.google.truth:truth:1.1.5")
-    testImplementation("org.mockito:mockito-core:5.2.0")
-    testImplementation("org.mockito.kotlin:mockito-kotlin:5.2.0")
+    testImplementation("com.google.truth:truth:1.4.4")
+    testImplementation("org.mockito:mockito-core:5.18.0")
+    testImplementation("org.mockito.kotlin:mockito-kotlin:5.4.0")
 
     // Hilt testing
     kaptTest("com.google.dagger:hilt-android-compiler:$hiltVersion")
     testImplementation("com.google.dagger:hilt-android-testing:$hiltVersion")
 
     // AndroidX Test
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
-    androidTestImplementation("androidx.compose.ui:ui-test-junit4:1.5.4")
-    androidTestImplementation("androidx.test:runner:1.5.2")
-    androidTestImplementation("androidx.test:rules:1.5.0")
-    androidTestImplementation("io.mockk:mockk-android:1.13.8")
+    androidTestImplementation("androidx.test.ext:junit:1.2.1")
+    androidTestImplementation("androidx.test.espresso:espresso-core:3.6.1")
+    androidTestImplementation("androidx.compose.ui:ui-test-junit4:1.8.2")
+    androidTestImplementation("androidx.test:runner:1.6.2")
+    androidTestImplementation("androidx.test:rules:1.6.1")
+    androidTestImplementation("io.mockk:mockk-android:1.14.2")
     androidTestImplementation("com.google.dagger:hilt-android-testing:$hiltVersion")
     kaptAndroidTest("com.google.dagger:hilt-android-compiler:$hiltVersion")
 

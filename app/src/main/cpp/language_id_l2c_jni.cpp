@@ -10,7 +10,9 @@
 extern "C" {
 #endif
 
-JNIEXPORT jstring JNICALL
+JNIEXPORT jstring
+
+JNICALL
 Java_com_example_app_language_LanguageIdentifier_nativeInitialize(
         JNIEnv *env,
         jobject /* this */,
@@ -28,7 +30,9 @@ Java_com_example_app_language_LanguageIdentifier_nativeInitialize(
     return env->NewStringUTF("1.0.0");
 }
 
-JNIEXPORT jstring JNICALL
+JNIEXPORT jstring
+
+JNICALL
 Java_com_example_app_language_LanguageIdentifier_nativeDetectLanguage(
         JNIEnv *env,
         jobject /* this */,
@@ -71,18 +75,22 @@ Java_com_example_app_language_LanguageIdentifier_nativeDetectLanguage(
 
 JNIEXPORT void JNICALL
 Java_com_example_app_language_LanguageIdentifier_nativeRelease(
-        JNIEnv *env,
-        jobject /* this */,
-        jlong handle) {
-    // Cleanup resources if needed
-    if (handle != 0) {
-        // TODO: Clean up any resources associated with the handle
-    }
+        JNIEnv
+*env,
+jobject /* this */,
+jlong handle
+) {
+// Cleanup resources if needed
+if (handle != 0) {
+// TODO: Clean up any resources associated with the handle
+}
 }
 
-JNIEXPORT jstring JNICALL
+JNIEXPORT jstring
+
+JNICALL
 Java_com_example_app_language_LanguageIdentifier_nativeGetVersion(
-        JNIEnv *env,
+        JNIEnv * env,
         jclass /* clazz */) {
     return env->NewStringUTF("1.0.0");
 }
