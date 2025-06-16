@@ -152,6 +152,8 @@ dependencies {
     // Xposed Framework
     // compileOnly("de.robv.android.xposed:api:82")
     // compileOnly("de.robv.android.xposed:api:82:sources")
+    // Using local JARs for Xposed API v82 as it's no longer reliably available
+    // from standard public repositories (like jCenter/Bintray which are deprecated).
     compileOnly(files("libs/api-82.jar"))
     compileOnly(files("libs/api-82-sources.jar"))
     // LSPosed specific
