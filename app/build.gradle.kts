@@ -141,13 +141,15 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-process:$lifecycleVersion")
     implementation("androidx.lifecycle:lifecycle-service:$lifecycleVersion")
 
-    // Coroutines
+    // Coroutines & Serialization & DateTime
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.1") // Adjusted version
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.8.1") // Adjusted version
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3") // Adjusted version
+    implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.6.0") // Added kotlinx-datetime
 
-    // Xposed Framework (local jar, since remote repo is unavailable)
-    // compileOnly(files("libs/xposed-api-82.jar"))
+    // Xposed Framework
+    compileOnly("de.robv.android.xposed:api:82") // Added Xposed API dependency
+    // compileOnly(files("libs/xposed-api-82.jar")) // Kept commented as file doesn't exist
 
     // LSPosed specific
     compileOnly("org.lsposed.hiddenapibypass:hiddenapibypass:6.1") {

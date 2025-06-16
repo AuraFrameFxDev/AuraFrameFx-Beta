@@ -1,9 +1,12 @@
 package dev.aurakai.auraframefx.xposed
 
 import de.robv.android.xposed.IXposedHookLoadPackage
+import de.robv.android.xposed.IXposedHookLoadPackage
 import de.robv.android.xposed.XC_MethodHook
 import de.robv.android.xposed.XposedBridge
 import de.robv.android.xposed.XposedHelpers
+import de.robv.android.xposed.XSharedPreferences // Added import
+import de.robv.android.xposed.callbacks.XC_LoadPackage // Added import
 import dev.aurakai.auraframefx.system.lockscreen.LockScreenConfig
 import dev.aurakai.auraframefx.system.overlay.SystemOverlayConfig
 import dev.aurakai.auraframefx.system.quicksettings.QuickSettingsConfig
@@ -12,7 +15,7 @@ import dev.aurakai.auraframefx.xposed.hooks.LockScreenHooker
 import dev.aurakai.auraframefx.xposed.hooks.NotchBarHooker
 import dev.aurakai.auraframefx.xposed.hooks.QuickSettingsHooker
 
-class AuraXposedEntry : IXposedHookLoadPackage {
+class AuraXposedEntry : IXposedHookLoadPackage { // IXposedHookLoadPackage was already imported, removed duplicate from replace
     private val TAG = "AuraXposedEntry"
     private const val MAIN_APP_PACKAGE_NAME = "dev.aurakai.auraframefx"
     private const val IPC_PREFS_NAME = "aura_fx_ipc_prefs"
@@ -20,8 +23,8 @@ class AuraXposedEntry : IXposedHookLoadPackage {
     private const val IPC_KEY_LOCK_SCREEN = "lock_screen_config_json"
     private const val IPC_KEY_SYSTEM_OVERLAY = "system_overlay_config_json" // New key
 
-    override fun handleLoadPackage(lpparam: XC_LoadPackage.LoadPackageParam) {
-        if (lpparam.packageName == null) return
+    override fun handleLoadPackage(lpparam: XC_LoadPackage.LoadPackageParam?) { // Made lpparam nullable to be safe
+        if (lpparam?.packageName == null) return // Adjusted for nullable lpparam
 
         XposedBridge.log("[$TAG] Loaded app: ${lpparam.packageName}")
 

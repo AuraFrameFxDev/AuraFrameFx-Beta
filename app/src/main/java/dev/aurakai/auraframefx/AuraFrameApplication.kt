@@ -1,6 +1,7 @@
 package dev.aurakai.auraframefx
 
 import android.app.Application
+import android.util.Log // Added import
 import androidx.work.Configuration
 import dagger.hilt.android.HiltAndroidApp
 

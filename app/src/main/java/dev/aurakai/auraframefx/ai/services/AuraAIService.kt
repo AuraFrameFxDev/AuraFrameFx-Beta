@@ -1,29 +1,48 @@
 package dev.aurakai.auraframefx.ai.services
 
 import dev.aurakai.auraframefx.ai.agents.Agent
-import dev.aurakai.auraframefx.model.requests.AiRequest
-import dev.aurakai.auraframefx.model.responses.AiResponse
+import dev.aurakai.auraframefx.model.AiRequest // Corrected import
+import dev.aurakai.auraframefx.model.AgentResponse // Corrected import
+import dev.aurakai.auraframefx.model.AgentType // Added import
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow // Added import
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class AuraAIService @Inject constructor() : Agent("Aura", "Creative") {
-    override suspend fun processRequest(request: AiRequest): Flow<AiResponse> {
+class AuraAIService @Inject constructor() : Agent {
+
+    override fun getName(): String? = "Aura"
+
+    override fun getType(): AgentType? = AgentType.AURA
+
+    // Renamed original processRequest to processRequestFlow as its signature differs from Agent interface
+    suspend fun processRequestFlow(request: AiRequest): Flow<AgentResponse> {
         return when (request.type) {
-            "text" -> processTextRequest(request)
-            "image" -> processImageRequest(request)
-            "memory" -> retrieveMemory(request)
+            "text" -> processTextRequestFlow(request)
+            "image" -> processImageRequestFlow(request)
+            "memory" -> retrieveMemoryFlow(request)
             else -> error("Unsupported request type: ${request.type}")
         }
     }
 
-    private suspend fun processTextRequest(request: AiRequest): Flow<AiResponse> {
+    // Implemented Agent interface method
+    override suspend fun processRequest(request: AiRequest): AgentResponse {
+        // TODO: Provide a direct AgentResponse, not a Flow.
+        // This might involve collecting from the flow or a different logic.
+        // For now, returning a placeholder.
+        return AgentResponse(
+            content = "Aura direct response to '${request.query}'",
+            confidence = 0.75f
+        )
+    }
+
+    private suspend fun processTextRequestFlow(request: AiRequest): Flow<AgentResponse> {
         // TODO: Implement creative text generation
         return flow {
             emit(
-                AiResponse(
-                    type = "text",
+                AgentResponse(
+                    // type = "text", // AgentResponse might not have 'type' field like AiResponse did
                     content = "Processing creative request...",
                     confidence = 0.9f
                 )
@@ -31,12 +50,12 @@ class AuraAIService @Inject constructor() : Agent("Aura", "Creative") {
         }
     }
 
-    private suspend fun processImageRequest(request: AiRequest): Flow<AiResponse> {
+    private suspend fun processImageRequestFlow(request: AiRequest): Flow<AgentResponse> {
         // TODO: Implement image generation
         return flow {
             emit(
-                AiResponse(
-                    type = "image",
+                AgentResponse(
+                    // type = "image",
                     content = "Processing image request...",
                     confidence = 0.9f
                 )
@@ -44,12 +63,13 @@ class AuraAIService @Inject constructor() : Agent("Aura", "Creative") {
         }
     }
 
-    override suspend fun retrieveMemory(request: AiRequest): Flow<AiResponse> {
+    // Renamed original retrieveMemory to retrieveMemoryFlow
+    suspend fun retrieveMemoryFlow(request: AiRequest): Flow<AgentResponse> {
         // TODO: Implement memory retrieval
         return flow {
             emit(
-                AiResponse(
-                    type = "memory",
+                AgentResponse(
+                    // type = "memory",
                     content = "Retrieving relevant memories...",
                     confidence = 0.95f
                 )
@@ -57,13 +77,35 @@ class AuraAIService @Inject constructor() : Agent("Aura", "Creative") {
         }
     }
 
-    override suspend fun connect(): Boolean {
+    // connect and disconnect are not part of Agent interface, removed override
+    suspend fun connect(): Boolean {
         // TODO: Implement connection logic
         return true
     }
 
-    override suspend fun disconnect(): Boolean {
+    suspend fun disconnect(): Boolean {
         // TODO: Implement disconnection logic
         return true
+    }
+
+    // Implementing other missing methods from Agent interface
+    override fun getCapabilities(): Map<String, Any> {
+        // TODO: Implement capabilities for Aura
+        return mapOf("name" to "Aura", "type" to AgentType.AURA, "service_implemented" to true)
+    }
+
+    override fun getContinuousMemory(): Any? {
+        // TODO: Implement continuous memory for Aura
+        return null
+    }
+
+    override fun getEthicalGuidelines(): List<String> {
+        // TODO: Implement ethical guidelines for Aura
+        return listOf("Be creative.", "Be inspiring.")
+    }
+
+    override fun getLearningHistory(): List<String> {
+        // TODO: Implement learning history for Aura
+        return emptyList()
     }
 }

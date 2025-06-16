@@ -3,43 +3,53 @@
 
 package dev.aurakai.auraframefx.ai.services
 
-import dev.aurakai.auraframefx.model.AgentMessage
-import dev.aurakai.auraframefx.model.requests.AiRequest
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
+import dev.aurakai.auraframefx.ai.agents.Agent // Added import
+import dev.aurakai.auraframefx.model.AiRequest // Corrected import
+import dev.aurakai.auraframefx.model.AgentResponse // Added import
+import dev.aurakai.auraframefx.model.AgentType // Added import
+// kotlinx.coroutines.flow imports are not needed for the direct AgentResponse implementation
 
-class MockAuraAIService : AuraAIService {
-    override fun processRequest(request: AiRequest): StateFlow<AgentMessage> {
-        val response = AgentMessage(
-            content = "AuraAI mock response for: ${request.input}",
-            sender = dev.aurakai.auraframefx.model.AgentType.AURA,
-            timestamp = System.currentTimeMillis(),
+class MockAuraAIService : Agent {
+    override fun getName(): String? = "MockAura"
+    override fun getType(): AgentType? = AgentType.AURA
+    override suspend fun processRequest(request: AiRequest): AgentResponse {
+        return AgentResponse(
+            content = "AuraAI mock response for: ${request.query}",
             confidence = 1.0f
         )
-        return MutableStateFlow(response)
     }
+    override fun getCapabilities(): Map<String, Any> = emptyMap()
+    override fun getContinuousMemory(): Any? = null
+    override fun getEthicalGuidelines(): List<String> = emptyList()
+    override fun getLearningHistory(): List<String> = emptyList()
 }
 
-class MockKaiAIService : KaiAIService {
-    override fun processRequest(request: AiRequest): StateFlow<AgentMessage> {
-        val response = AgentMessage(
-            content = "KaiAI mock response for: ${request.input}",
-            sender = dev.aurakai.auraframefx.model.AgentType.KAI,
-            timestamp = System.currentTimeMillis(),
+class MockKaiAIService : Agent {
+    override fun getName(): String? = "MockKai"
+    override fun getType(): AgentType? = AgentType.KAI
+    override suspend fun processRequest(request: AiRequest): AgentResponse {
+        return AgentResponse(
+            content = "KaiAI mock response for: ${request.query}",
             confidence = 1.0f
         )
-        return MutableStateFlow(response)
     }
+    override fun getCapabilities(): Map<String, Any> = emptyMap()
+    override fun getContinuousMemory(): Any? = null
+    override fun getEthicalGuidelines(): List<String> = emptyList()
+    override fun getLearningHistory(): List<String> = emptyList()
 }
 
-class MockCascadeAIService : CascadeAIService {
-    override fun processRequest(request: AiRequest): StateFlow<AgentMessage> {
-        val response = AgentMessage(
-            content = "CascadeAI mock response for: ${request.input}",
-            sender = dev.aurakai.auraframefx.model.AgentType.CASCADE,
-            timestamp = System.currentTimeMillis(),
+class MockCascadeAIService : Agent {
+    override fun getName(): String? = "MockCascade"
+    override fun getType(): AgentType? = AgentType.CASCADE
+    override suspend fun processRequest(request: AiRequest): AgentResponse {
+        return AgentResponse(
+            content = "CascadeAI mock response for: ${request.query}",
             confidence = 1.0f
         )
-        return MutableStateFlow(response)
     }
+    override fun getCapabilities(): Map<String, Any> = emptyMap()
+    override fun getContinuousMemory(): Any? = null
+    override fun getEthicalGuidelines(): List<String> = emptyList()
+    override fun getLearningHistory(): List<String> = emptyList()
 }

@@ -16,9 +16,12 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.drawWithCache
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.*
+import androidx.compose.ui.graphics.drawscope.Stroke // Added import
+import androidx.compose.ui.text.font.FontWeight // Added import
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.zIndex
+import kotlin.random.Random // Added import
 import dev.aurakai.auraframefx.ui.animation.DigitalTransitions
 import dev.aurakai.auraframefx.ui.theme.*
 import kotlin.math.*

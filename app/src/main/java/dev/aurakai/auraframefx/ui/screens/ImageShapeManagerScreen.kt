@@ -15,15 +15,23 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
-import dev.aurakai.auraframefx.system.overlay.*
-import dev.aurakai.auraframefx.ui.theme.Shape
+import dev.aurakai.auraframefx.system.overlay.model.OverlayShape // Corrected import
+import dev.aurakai.auraframefx.ui.model.ImageResource // Added import
+import dev.aurakai.auraframefx.ui.model.ShapeType // Added import
+// import dev.aurakai.auraframefx.ui.theme.Shape // Removed this, will use androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.graphics.Shape // Added standard Shape
+import androidx.compose.foundation.shape.RoundedCornerShape // For direct use
+import android.graphics.Bitmap // Added import
+import androidx.compose.foundation.lazy.LazyColumn // Added import
+import androidx.compose.foundation.lazy.items // Added import
+import androidx.compose.material.icons.filled.Brush // Changed from Shape
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ImageShapeManagerScreen(
-    viewModel: ImageShapeManagerViewModel = hiltViewModel(),
+    viewModel: ImageShapeManagerViewModel = hiltViewModel(), // Assuming ViewModel is defined
 ) {
-    LocalContext.current
+    // LocalContext.current // Removed as it wasn't used
     val images by viewModel.availableImages.collectAsState()
     val customImages by viewModel.customImages.collectAsState()
     val shapes by viewModel.shapes.collectAsState()
@@ -37,7 +45,7 @@ fun ImageShapeManagerScreen(
                         Icon(Icons.Default.Add, "Add Image")
                     }
                     IconButton(onClick = { viewModel.openAddShapeDialog() }) {
-                        Icon(Icons.Default.Shape, "Add Shape")
+                        Icon(Icons.Default.Brush, "Add Shape") // Changed Icon
                     }
                 }
             )
@@ -144,7 +152,7 @@ fun ImageCard(
         modifier = Modifier
             .fillMaxWidth()
             .padding(8.dp)
-            .clip(Shape.RoundedRectangle),
+            .clip(RoundedCornerShape(8.dp)), // Used RoundedCornerShape directly
         colors = CardDefaults.cardColors(
             containerColor = if (isSelected) Color(0xFF00FFCC).copy(alpha = 0.1f) else Color.Transparent
         )
@@ -156,11 +164,11 @@ fun ImageCard(
             verticalAlignment = Alignment.CenterVertically
         ) {
             AsyncImage(
-                model = image.bitmap,
+                model = image.bitmap, // Assuming image.bitmap is a type Coil can handle (Bitmap, URL, etc.)
                 contentDescription = image.id,
                 modifier = Modifier
                     .size(64.dp)
-                    .clip(Shape.RoundedRectangle),
+                    .clip(RoundedCornerShape(8.dp)), // Used RoundedCornerShape directly
                 contentScale = ContentScale.Crop
             )
             Spacer(modifier = Modifier.width(16.dp))
@@ -200,7 +208,7 @@ fun ShapeCard(
         modifier = Modifier
             .fillMaxWidth()
             .padding(8.dp)
-            .clip(Shape.RoundedRectangle),
+            .clip(RoundedCornerShape(8.dp)), // Used RoundedCornerShape directly
         colors = CardDefaults.cardColors(
             containerColor = if (isSelected) Color(0xFF00FFCC).copy(alpha = 0.1f) else Color.Transparent
         )
@@ -214,7 +222,7 @@ fun ShapeCard(
             Box(
                 modifier = Modifier
                     .size(64.dp)
-                    .clip(Shape.RoundedRectangle)
+                    .clip(RoundedCornerShape(8.dp)) // Used RoundedCornerShape directly
                     .background(Color(0xFF00FFCC))
             )
             Spacer(modifier = Modifier.width(16.dp))
@@ -226,7 +234,7 @@ fun ShapeCard(
                     style = MaterialTheme.typography.bodyLarge
                 )
                 Text(
-                    text = shape.type.name,
+                    text = shape.shapeType, // Changed from shape.type.name to shape.shapeType
                     style = MaterialTheme.typography.bodySmall
                 )
             }

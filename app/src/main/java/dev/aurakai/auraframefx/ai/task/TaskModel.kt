@@ -77,6 +77,7 @@ data class TaskImportance(
     }
 }
 
+@Serializable // Added annotation
 enum class TaskStatus {
     PENDING,
     IN_PROGRESS,
@@ -87,6 +88,7 @@ enum class TaskStatus {
     WAITING
 }
 
+@Serializable // Added annotation
 enum class DependencyType {
     BLOCKING,
     SEQUENTIAL,

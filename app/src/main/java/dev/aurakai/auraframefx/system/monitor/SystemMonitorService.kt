@@ -10,10 +10,21 @@ import android.os.BatteryManager
 import android.os.IBinder
 import android.util.Log
 import dagger.hilt.android.AndroidEntryPoint
+import android.app.Service
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
+import android.net.ConnectivityManager
+import android.os.BatteryManager
+import android.os.IBinder
+import android.util.Log
+import dagger.hilt.android.AndroidEntryPoint
 import dev.aurakai.auraframefx.ai.services.KaiAIService
 import dev.aurakai.auraframefx.data.logging.AuraFxLogger
 import dev.aurakai.auraframefx.data.offline.OfflineDataManager
-import dev.aurakai.auraframefx.model.requests.AiRequest
+import dev.aurakai.auraframefx.model.AiRequest // Corrected import
+import dev.aurakai.auraframefx.model.AgentResponse // For the return type of processRequest
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
@@ -71,16 +82,18 @@ class SystemMonitorService : Service() {
                                 TAG,
                                 "Battery low alert! Current level: ${batteryPct.toInt()}% (Threshold: ${config.batteryThresholdLow}%), Charging: $isCharging"
                             )
-                            kaiService.processSystemAlert(
-                                "battery_alert",
-                                mapOf(
+                            // Changed to use processRequest
+                            val batteryAlertRequest = AiRequest(
+                                query = "System Alert: battery_alert",
+                                details = mapOf(
                                     "level" to batteryPct.toInt().toString(),
                                     "isCharging" to isCharging.toString()
-                                )
-                            ).firstOrNull()?.let { message ->
-                                Log.d(TAG, "Kai's response to battery_alert: ${message.content}")
-                                // TODO: Propagate this to UI
-                            }
+                                ),
+                                type = "system_alert"
+                            )
+                            val response = kaiService.processRequest(batteryAlertRequest) // No .firstOrNull()
+                            Log.d(TAG, "Kai's response to battery_alert: ${response.content}")
+                            // TODO: Propagate this to UI
                         } else {
                             Log.d(
                                 TAG,
@@ -113,22 +126,25 @@ class SystemMonitorService : Service() {
                             TAG,
                             "Network change detected: Disconnected. Reporting 'network_offline_alert' to Kai."
                         )
-                        kaiService.processSystemAlert(
-                            "network_offline_alert",
-                            mapOf("status" to "disconnected")
-                        ).firstOrNull()?.let { message ->
-                            Log.d(TAG, "Kai's network_offline_alert response: ${message.content}")
-                        }
+                        val offlineAlertRequest = AiRequest(
+                            query = "System Alert: network_offline_alert",
+                            details = mapOf("status" to "disconnected"),
+                            type = "system_alert"
+                        )
+                        val offlineResponse = kaiService.processRequest(offlineAlertRequest) // No .firstOrNull()
+                        Log.d(TAG, "Kai's network_offline_alert response: ${offlineResponse.content}")
                     } else {
                         Log.i(
                             TAG,
                             "Network change detected: Connected. Reporting 'network_online_alert' to Kai."
                         )
-                        kaiService.processSystemAlert(
-                            "network_online_alert",
-                            mapOf("status" to "connected")
-                        ).firstOrNull()?.let { message ->
-                            Log.d(TAG, "Kai's network_online_alert response: ${message.content}")
+                        val onlineAlertRequest = AiRequest(
+                            query = "System Alert: network_online_alert",
+                            details = mapOf("status" to "connected"),
+                            type = "system_alert"
+                        )
+                        val onlineResponse = kaiService.processRequest(onlineAlertRequest) // No .firstOrNull()
+                        Log.d(TAG, "Kai's network_online_alert response: ${onlineResponse.content}")
                         }
                     }
                 }
@@ -185,15 +201,14 @@ class SystemMonitorService : Service() {
 
                     Log.i(TAG, "Initiating periodic security scan.")
                     try {
-                        kaiService.processRequest(
-                            AiRequest(
-                                "Perform a routine system security scan.",
-                                "security_scan"
-                            )
-                        ).firstOrNull()?.let { message ->
-                            Log.d(TAG, "Kai's periodic security scan response: ${message.content}")
-                            // TODO: Propagate results (e.g., notification if issues found)
-                        }
+                        val scanRequest = AiRequest(
+                            query = "Perform a routine system security scan.",
+                            type = "security_scan"
+                            // If AiRequest needs a 'details' map, add emptyMap() or relevant details
+                        )
+                        val scanResponse = kaiService.processRequest(scanRequest) // No .firstOrNull()
+                        Log.d(TAG, "Kai's periodic security scan response: ${scanResponse.content}")
+                        // TODO: Propagate results (e.g., notification if issues found)
                     } catch (e: Exception) {
                         auraFxLogger.e(
                             TAG,

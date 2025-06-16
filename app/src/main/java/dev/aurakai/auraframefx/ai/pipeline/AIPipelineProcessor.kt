@@ -6,6 +6,7 @@ import dev.aurakai.auraframefx.ai.services.CascadeAIService
 import dev.aurakai.auraframefx.ai.services.KaiAIService
 import dev.aurakai.auraframefx.model.AgentMessage
 import dev.aurakai.auraframefx.model.AgentType
+import dev.aurakai.auraframefx.model.AiRequest // Added import
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
@@ -46,38 +47,38 @@ class AIPipelineProcessor @Inject constructor(
         val responses = mutableListOf<AgentMessage>()
 
         // Process through Cascade first for state management
-        val cascadeResponse = cascadeService.processRequest(AiRequest(task, "context"))
+        val cascadeAgentResponse = cascadeService.processRequest(AiRequest(task, "context")) // Renamed variable, removed .first()
         responses.add(
             AgentMessage(
-                content = cascadeResponse.first().content,
+                content = cascadeAgentResponse.content, // Direct access
                 sender = AgentType.CASCADE,
                 timestamp = System.currentTimeMillis(),
-                confidence = cascadeResponse.first().confidence
+                confidence = cascadeAgentResponse.confidence // Direct access
             )
         )
 
         // Process through Kai for security analysis if needed
         if (selectedAgents.contains(AgentType.KAI)) {
-            val kaiResponse = kaiService.processRequest(AiRequest(task, "security"))
+            val kaiAgentResponse = kaiService.processRequest(AiRequest(task, "security")) // Renamed variable, removed .first()
             responses.add(
                 AgentMessage(
-                    content = kaiResponse.first().content,
+                    content = kaiAgentResponse.content, // Direct access
                     sender = AgentType.KAI,
                     timestamp = System.currentTimeMillis(),
-                    confidence = kaiResponse.first().confidence
+                    confidence = kaiAgentResponse.confidence // Direct access
                 )
             )
         }
 
         // Process through Aura for creative response
         if (selectedAgents.contains(AgentType.AURA)) {
-            val auraResponse = auraService.processRequest(AiRequest(task, "text"))
+            val auraAgentResponse = auraService.processRequest(AiRequest(task, "text")) // Renamed variable, removed .first()
             responses.add(
                 AgentMessage(
-                    content = auraResponse.first().content,
+                    content = auraAgentResponse.content, // Direct access
                     sender = AgentType.AURA,
                     timestamp = System.currentTimeMillis(),
-                    confidence = auraResponse.first().confidence
+                    confidence = auraAgentResponse.confidence // Direct access
                 )
             )
         }
@@ -125,7 +126,7 @@ class AIPipelineProcessor @Inject constructor(
     }
 
     private fun calculateConfidence(responses: List<AgentMessage>): Float {
-        return responses.map { it.confidence }.average().coerceIn(0.0f, 1.0f)
+        return responses.map { it.confidence }.average().toFloat().coerceIn(0.0f, 1.0f) // Added .toFloat()
     }
 
     private fun updateContext(task: String, responses: List<AgentMessage>) {

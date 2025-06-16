@@ -6,8 +6,10 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource // Added import
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
+import dev.aurakai.auraframefx.R // Added import
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.app.viewmodel.OracleDriveControlViewModel
 import kotlinx.coroutines.launch

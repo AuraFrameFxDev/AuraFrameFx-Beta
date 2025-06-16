@@ -2,6 +2,8 @@ package dev.aurakai.auraframefx.ai.agents
 
 import dev.aurakai.auraframefx.model.agent_states.ProcessingState
 import dev.aurakai.auraframefx.model.agent_states.VisionState
+import dev.aurakai.auraframefx.model.AiRequest // Added import
+import dev.aurakai.auraframefx.model.AgentResponse // Added import
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.emptyFlow
 
@@ -39,7 +41,8 @@ class AuraAgent(
     fun shouldHandleCreative(prompt: String): Boolean =
         true // Aura handles creative prompts by default
 
-    override suspend fun processRequest(prompt: String): String {
+    // Removed 'override' as this signature is likely not in BaseAgent or Agent interface
+    suspend fun processRequest(prompt: String): String {
         // TODO: Implement Aura-specific request processing
         return "Aura's response to '$prompt'"
     }
@@ -101,7 +104,7 @@ class AuraAgent(
      * @return The response from the agent, including content and confidence level.
      * TODO: Implement actual request processing logic. Method reported as unused.
      */
-    override suspend fun processRequest(request: AiRequest): AgentResponse {
+    override suspend fun processRequest(request: AiRequest): AgentResponse { // Added 'override' back
         // Aura-specific logic can be added here
         return AgentResponse(
             content = "Aura's response to '${request.query}'",

@@ -17,7 +17,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
-import com.example.app.R
+import dev.aurakai.auraframefx.R // Corrected import
 import dev.aurakai.auraframefx.ui.theme.AppDimensions
 
 /**

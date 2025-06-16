@@ -8,7 +8,9 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
-import kotlin.math.roundToInt
+import androidx.compose.ui.graphics.graphicsLayer // Added for Modifier.graphicsLayer
+import kotlin.math.* // Added import
+import kotlin.random.Random // Added import
 
 @Composable
 fun HologramTransition(
@@ -77,11 +79,12 @@ fun HologramTransition(
             }
         }
         // Content fades in as hologram forms
-        Box(modifier = Modifier.fillMaxSize()) {
-            val contentAlpha = progress
-            androidx.compose.ui.graphics.graphicsLayer(alpha = contentAlpha) {
-                content()
-            }
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .graphicsLayer { alpha = progress } // Corrected usage of graphicsLayer
+        ) {
+            content() // Content is drawn inside the Box with the modifier
         }
     }
 }
