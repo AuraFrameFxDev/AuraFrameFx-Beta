@@ -15,14 +15,15 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-import javax.inject.Singleton
+// import javax.inject.Singleton // ViewModels should use @HiltViewModel
 
-@Singleton
+// @Singleton // Replaced with @HiltViewModel (implicitly, if this were a Hilt ViewModel)
 class GenesisAgentViewModel @Inject constructor(
     private val genesisAgent: GenesisAgent,
 ) : ViewModel() {
 
-    val agents: StateFlow<List<AgentConfig>> = genesisAgent.getAgentsByPriority()
+    private val _agents = MutableStateFlow<List<AgentConfig>>(emptyList()) // Initialize properly
+    val agents: StateFlow<List<AgentConfig>> = _agents.asStateFlow()
 
     // Track agent status
     private val _agentStatus = MutableStateFlow<Map<AgentType, String>>(
@@ -37,6 +38,10 @@ class GenesisAgentViewModel @Inject constructor(
     // Track rotation state
     private val _isRotating = MutableStateFlow(true)
     val isRotating: StateFlow<Boolean> = _isRotating.asStateFlow()
+
+    init { // Initialize agents in init block
+        _agents.value = genesisAgent.getAgentsByPriority()
+    }
 
     fun toggleRotation() {
         _isRotating.value = !_isRotating.value

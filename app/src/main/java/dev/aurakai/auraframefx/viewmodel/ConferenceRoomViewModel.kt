@@ -1,41 +1,34 @@
 package dev.aurakai.auraframefx.viewmodel
 
 import android.util.Log
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+// Placeholder interfaces will be removed
+import dev.aurakai.auraframefx.ai.services.AuraAIService // Actual service import
+import dev.aurakai.auraframefx.ai.services.KaiAIService // Actual service import
+import dev.aurakai.auraframefx.ai.services.CascadeAIService // Actual service import
 import dev.aurakai.auraframefx.ai.services.NeuralWhisper
 import dev.aurakai.auraframefx.model.AgentMessage
 import dev.aurakai.auraframefx.model.AgentType
-import dev.aurakai.auraframefx.model.ConversationState
-import dev.aurakai.auraframefx.model.requests.AiRequest
+import dev.aurakai.auraframefx.model.ConversationState // Added import
+import dev.aurakai.auraframefx.model.AiRequest // Corrected import
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-import javax.inject.Singleton
+// Removed @Singleton from ViewModel, typically ViewModels are not Singletons
+// import javax.inject.Singleton // ViewModel should use @HiltViewModel
 
-// --- Placeholder AI Service Interfaces/Classes (if not defined elsewhere) ---
-// These are based on constructor parameters. User needs to ensure actual implementations exist.
-interface AuraAIService {
-    fun processRequest(request: AiRequest): StateFlow<AgentMessage> // Example signature
-}
+// Placeholder interfaces removed
 
-interface KaiAIService {
-    fun processRequest(request: AiRequest): StateFlow<AgentMessage> // Example signature
-}
-
-interface CascadeAIService {
-    fun processRequest(request: AiRequest): StateFlow<AgentMessage> // Example signature
-}
-// --- End Placeholder AI Services ---
-
-@Singleton // Or appropriate Hilt scope
-class ConferenceRoomViewModel @Inject constructor(
-    private val auraService: AuraAIService, // Using placeholder interface
-    private val kaiService: KaiAIService,     // Using placeholder interface
-    private val cascadeService: CascadeAIService, // Using placeholder interface
+// @Singleton // ViewModels should use @HiltViewModel for scoping
+class ConferenceRoomViewModel @Inject constructor( // Assuming @HiltViewModel will be added if this is a ViewModel
+    private val auraService: dev.aurakai.auraframefx.ai.services.AuraAIService, // Using actual service
+    private val kaiService: dev.aurakai.auraframefx.ai.services.KaiAIService,     // Using actual service
+    private val cascadeService: dev.aurakai.auraframefx.ai.services.CascadeAIService, // Using actual service
     private val neuralWhisper: NeuralWhisper,
 ) : ViewModel() {
 
@@ -100,10 +93,11 @@ class ConferenceRoomViewModel @Inject constructor(
     // This `sendMessage` was marked with `override` in user's snippet, suggesting an interface.
     // For now, assuming it's a direct method. If there's a base class/interface, it should be added.
     /*override*/ suspend fun sendMessage(message: String, sender: AgentType) {
-        val responseFlow: StateFlow<AgentMessage>? = when (sender) {
-            AgentType.AURA -> auraService.processRequest(AiRequest(message, "text"))
-            AgentType.KAI -> kaiService.processRequest(AiRequest(message, message))
-            AgentType.CASCADE -> cascadeService.processRequest(AiRequest(message, "context"))
+        // Assuming services now have processRequestFlow returning Flow<AgentResponse>
+        val responseFlow: Flow<AgentResponse>? = when (sender) {
+            AgentType.AURA -> auraService.processRequestFlow(AiRequest(query = message, type = "text"))
+            AgentType.KAI -> kaiService.processRequestFlow(AiRequest(query = message, type = message)) // type = message seems odd, but keeping original logic
+            AgentType.CASCADE -> cascadeService.processRequestFlow(AiRequest(query = message, type = "context"))
             AgentType.USER -> {
                 _messages.update { current ->
                     current + AgentMessage(
@@ -131,7 +125,15 @@ class ConferenceRoomViewModel @Inject constructor(
                     _messages.update { current ->
                         current + AgentMessage(
                             content = responseMessage.content,
-                            sender = sender, // This should be the AI agent that responded, not the original sender
+                        // The sender here should be the AI agent that responded (e.g., AgentType.AURA),
+                        // not the 'sender' parameter which initiated the call to this agent.
+                        // For simplicity, I'll use the AI's type.
+                        sender = when(sender) { // Determine actual responder type
+                            AgentType.AURA -> AgentType.AURA
+                            AgentType.KAI -> AgentType.KAI
+                            AgentType.CASCADE -> AgentType.CASCADE
+                            else -> sender // Fallback, though USER case is handled separately
+                        },
                             timestamp = System.currentTimeMillis(),
                             confidence = responseMessage.confidence
                         )

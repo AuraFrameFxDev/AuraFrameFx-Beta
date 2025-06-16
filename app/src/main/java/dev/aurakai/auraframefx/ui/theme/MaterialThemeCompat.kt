@@ -1,13 +1,15 @@
 package dev.aurakai.auraframefx.ui.theme
 
 import android.app.Activity
+import android.app.Activity
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
+import androidx.compose.ui.graphics.luminance // Added import
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
-
+// import android.app.Activity // Already imported by being moved up
 /**
  * MaterialThemeCompat serves as a compatibility layer between the XML theme and Compose Material3.
  * It ensures consistent theme application across both systems while respecting Android's theme

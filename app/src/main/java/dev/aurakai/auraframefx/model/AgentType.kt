@@ -1,9 +1,12 @@
 package dev.aurakai.auraframefx.model
 
+import kotlinx.serialization.Serializable // Added import
+
 /**
  * Enum representing different types of AI agents in the system.
  * TODO: Reported as unused symbol. Ensure this enum is used.
  */
+@Serializable // Added annotation
 enum class AgentType {
     /**
      * Genesis Agent - Core orchestrator or foundational AI.

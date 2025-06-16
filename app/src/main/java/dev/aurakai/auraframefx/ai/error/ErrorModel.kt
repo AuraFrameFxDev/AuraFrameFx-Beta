@@ -29,6 +29,7 @@ data class RecoveryAction(
     val metadata: Map<String, Any> = emptyMap(),
 )
 
+@Serializable // Added annotation
 enum class ErrorType {
     PROCESSING_ERROR,
     MEMORY_ERROR,
@@ -39,6 +40,7 @@ enum class ErrorType {
     USER_ERROR
 }
 
+@Serializable // Added annotation
 enum class RecoveryStatus {
     PENDING,
     IN_PROGRESS,
@@ -47,6 +49,7 @@ enum class RecoveryStatus {
     SKIPPED
 }
 
+@Serializable // Added annotation
 enum class RecoveryActionType {
     RETRY,
     FALLBACK,
@@ -56,6 +59,7 @@ enum class RecoveryActionType {
     ESCALATE
 }
 
+@Serializable // Added annotation
 enum class RecoveryResult {
     SUCCESS,
     FAILURE,

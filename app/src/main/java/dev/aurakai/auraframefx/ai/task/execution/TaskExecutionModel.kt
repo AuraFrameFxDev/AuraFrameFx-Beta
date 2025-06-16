@@ -50,6 +50,7 @@ data class Checkpoint(
     val metadata: Map<String, Any> = emptyMap(),
 )
 
+@Serializable // Added annotation
 enum class ExecutionStatus {
     PENDING,
     INITIALIZING,
@@ -61,6 +62,7 @@ enum class ExecutionStatus {
     TIMEOUT
 }
 
+@Serializable // Added annotation
 enum class ExecutionResult {
     SUCCESS,
     PARTIAL_SUCCESS,
@@ -70,6 +72,7 @@ enum class ExecutionResult {
     UNKNOWN
 }
 
+@Serializable // Added annotation
 enum class StepType {
     COMPUTATION,
     COMMUNICATION,
@@ -81,6 +84,7 @@ enum class StepType {
     REPORTING
 }
 
+@Serializable // Added annotation
 enum class CheckpointStatus {
     PENDING,
     STARTED,

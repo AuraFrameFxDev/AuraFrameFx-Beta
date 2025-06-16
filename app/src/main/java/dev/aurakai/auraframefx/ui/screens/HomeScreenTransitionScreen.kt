@@ -6,11 +6,15 @@ import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color // Corrected Color import
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import dev.aurakai.auraframefx.system.homescreen.*
-import dev.aurakai.auraframefx.ui.theme.Color
+// dev.aurakai.auraframefx.system.homescreen.* // Wildcard removed, will use specific imports
+import dev.aurakai.auraframefx.system.homescreen.model.HomeScreenTransitionType // Added import
+import dev.aurakai.auraframefx.viewmodel.HomeScreenTransitionViewModel // Added import
 import java.util.Locale
+// Assuming DigitalTransitionRow is in the same package or needs specific import if error persists.
+// For now, will rely on it being in dev.aurakai.auraframefx.ui.screens
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
