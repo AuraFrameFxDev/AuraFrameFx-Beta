@@ -179,6 +179,10 @@ dependencies {
     implementation("org.tensorflow:tensorflow-lite-metadata:0.5.0")
     implementation("org.tensorflow:tensorflow-lite-task-vision:0.4.4")
     implementation("org.tensorflow:tensorflow-lite-task-text:0.4.4")
+    // Remove any litert dependencies if present
+    configurations.all {
+        exclude(group = "com.google.ai.edge.litert")
+    }
 
     // Accompanist for Compose utilities
     implementation("com.google.accompanist:accompanist-permissions:0.37.3")
@@ -211,6 +215,9 @@ dependencies {
     implementation("com.squareup.retrofit2:retrofit:3.0.0")
     implementation("com.squareup.retrofit2:converter-gson:3.0.0")
     implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
+
+    // DataStore for preferences (required by your code)
+    implementation("androidx.datastore:datastore-preferences:1.0.0")
 
     // Testing
     testImplementation("junit:junit:4.13.2")
