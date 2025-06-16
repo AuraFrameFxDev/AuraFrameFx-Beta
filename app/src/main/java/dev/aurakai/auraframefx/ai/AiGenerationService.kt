@@ -7,6 +7,7 @@ import dev.aurakai.auraframefx.generated.model.auraframefxai.GenerateTextRequest
 import dev.aurakai.auraframefx.generated.model.auraframefxai.GenerateTextResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import kotlin.Result // Explicit import for Result
 
 class AiGenerationService(
     private val api: ContentApi,

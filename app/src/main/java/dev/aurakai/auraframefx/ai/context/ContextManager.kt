@@ -8,6 +8,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.datetime.Clock
 import kotlinx.datetime.Instant
+import kotlinx.datetime.Duration // Added import
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -97,7 +98,7 @@ class ContextManager @Inject constructor(
             .take(query.maxChainLength)
 
         return ContextChainResult(
-            chain = chains.firstOrNull() ?: ContextChain(rootContext = query.query),
+            chain = chains.firstOrNull() ?: ContextChain(rootContext = query.query, currentContext = query.query), // Added currentContext
             relatedChains = relatedChains,
             query = query
         )
@@ -110,7 +111,7 @@ class ContextManager @Inject constructor(
                 totalChains = chains.size,
                 activeChains = chains.count {
                     it.lastUpdated > Clock.System.now()
-                        .minus(config.contextChainingConfig.maxChainLength)
+                        .minus(Duration.milliseconds(config.contextChainingConfig.maxChainLength.toLong())) // Corrected minus call
                 },
                 longestChain = chains.maxOfOrNull { it.contextHistory.size } ?: 0,
                 lastUpdated = Clock.System.now()
