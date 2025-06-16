@@ -17,7 +17,7 @@ import de.robv.android.xposed.XposedBridge
 import de.robv.android.xposed.XposedHelpers
 import dev.aurakai.auraframefx.system.overlay.OverlayShape
 import dev.aurakai.auraframefx.system.overlay.ShapeManager
-import dev.aurakai.auraframefx.system.quicksettings.QuickSettingsConfig
+import dev.aurakai.auraframefx.system.quicksettings.model.QuickSettingsConfig
 import java.io.File
 
 
