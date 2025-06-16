@@ -148,8 +148,8 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.6.0") // Added kotlinx-datetime
 
     // Xposed Framework
-    compileOnly("de.robv.android.xposed:api:82") // Added Xposed API dependency
-    // compileOnly(files("libs/xposed-api-82.jar")) // Kept commented as file doesn't exist
+    // compileOnly("de.robv.android.xposed:api:82") // Commented out remote Xposed API dependency
+    compileOnly(files("libs/xposed-api-82.jar")) // Using local JAR
 
     // LSPosed specific
     compileOnly("org.lsposed.hiddenapibypass:hiddenapibypass:6.1") {
