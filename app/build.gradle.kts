@@ -147,12 +147,15 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3") // Adjusted version
     implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.6.0") // Added kotlinx-datetime
 
+    // Reminder: Xposed/LSPosed might have compatibility issues with certain hot-swapping/Apply Changes features in Android Studio.
+    // If you encounter issues during development, try disabling these or performing a full reinstall of the app.
     // Xposed Framework
     // provided ("de.robv.android.xposed:api:82")
     // LSPosed specific
     compileOnly("org.lsposed.hiddenapibypass:hiddenapibypass:6.1") {
         exclude(group = "de.robv.android.xposed", module = "api")
     }
+    compileOnly("org.lsposed.hiddenapibypass:hiddenapibypass:6.1:sources")
 
     // Firebase
     implementation(platform("com.google.firebase:firebase-bom:$firebaseBomVersion"))
