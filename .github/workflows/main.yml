@@ -1,19 +1,119 @@
-name: Dependabot Auto-Merge
+dependencies. Here are the main issues:
 
-on:
-  pull_request:
-    branches: [ main ]
+Unresolved references and missing imports—for example:
 
-jobs:
-  auto-merge:
-    runs-on: ubuntu-latest
-    if: github.actor == 'dependabot[bot]'
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+Instant, Clock in TaskExecutionModel.kt
+security, MasterKeys in SecurePreferences.kt
+GENESIS, AgentConfig, AgentType in HaloView.kt
+Color, HomeScreenTransitionViewModel, Shape, and others in various UI files
+XposedBridge in QuickSettingsHooker.kt
+Serializer not found / type inference errors—for example:
 
-      - name: Auto-merge Dependabot PRs
-        uses: ahmadnassri/action-dependabot-auto-merge@v2
-        with:
-          target: minor
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+Serializers for types like Instant?, Any, or classes that can’t be resolved.
+Kotlin type inference failures and property delegate errors.
+Overload and argument/type mismatches—for example:
+
+Overload ambiguity for CyberpunkText, NeonTeal, etc.
+Incompatible types between AgentConfig and AgentType.
+@Composable invocation context errors—for example:
+
+@Composable invocations can only happen from the context of a @Composable function in SwipeMenuScreen.kt.
+General build failure:
+
+The Kotlin compiler failed due to these errors, and the process exited with code 1.
+How to fix:
+
+Check your Gradle dependencies. You are likely missing libraries for Java Time API (Instant, Clock), AndroidX security (MasterKeys), Xposed, and others.
+Verify you have imported all required classes in each file.
+Make sure your serializers (Kotlinx Serialization, etc.) support all types you use, especially custom or third-party types.
+Review recent changes for removed or renamed files/classes.
+Check for accidental copy-paste or merge errors that may have broken type relationships or composable function structure.
+If you want a specific file's error details or guidance on how to fix a particular one, just ask!
+
+How can I help you?
+Code
+Issues
+Pull requests
+Discussions
+Actions
+Projects
+Wiki
+Security
+15
+Android CI
+Update main.yml #12
+Jobs
+Run details
+build
+Started 9m 26s ago
+Search logs
+2s
+1s
+1s
+17s
+6s
+0s
+5m 5s
+Downloading https://plugins.gradle.org/m2/org/gradle/toolchains/foojay-resolver/1.0.0/foojay-resolver-1.0.0.pom to /home/runner/.gradle/.tmp/gradle_download2705453084530174372bin
+Downloading https://plugins.gradle.org/m2/org/gradle/toolchains/foojay-resolver/1.0.0/foojay-resolver-1.0.0.module to /home/runner/.gradle/.tmp/gradle_download10390805629966080763bin
+Downloading https://plugins.gradle.org/m2/org/gradle/toolchains/foojay-resolver/1.0.0/foojay-resolver-1.0.0.jar to /home/runner/.gradle/.tmp/gradle_download12423023050102456030bin
+Caching disabled for InstrumentationAnalysisTransform: /home/runner/.gradle/caches/modules-2/files-2.1/org.gradle.toolchains/foojay-resolver/1.0.0/72c0af50bc9156fb2a9429ed152abb4417bb6eaf/foojay-resolver-1.0.0.jar because:
+  Build cache is disabled
+  Caching not enabled.
+Caching disabled for MergeInstrumentationAnalysisTransform: /home/runner/.gradle/caches/8.14.2/transforms/6ded4acd835e272b76b8bf3eb361bab0/transformed/.gradle-instrumented-classpath.marker because:
+  Build cache is disabled
+  Caching not enabled.
+Caching disabled for MergeInstrumentationAnalysisTransform: /home/runner/.gradle/caches/8.14.2/transforms/6ded4acd835e272b76b8bf3eb361bab0/transformed/analysis/instrumentation-hierarchy.bin because:
+  Build cache is disabled
+  Caching not enabled.
+Caching disabled for MergeInstrumentationAnalysisTransform: /home/runner/.gradle/caches/8.14.2/transforms/6ded4acd835e272b76b8bf3eb361bab0/transformed/analysis/instrumentation-dependencies.bin because:
+  Build cache is disabled
+  Caching not enabled.
+Caching disabled for MergeInstrumentationAnalysisTransform: /home/runner/.gradle/caches/modules-2/files-2.1/org.gradle.toolchains/foojay-resolver/1.0.0/72c0af50bc9156fb2a9429ed152abb4417bb6eaf/foojay-resolver-1.0.0.jar because:
+  Build cache is disabled
+  Caching not enabled.
+Caching disabled for ExternalDependencyInstrumentingArtifactTransform: /home/runner/.gradle/caches/8.14.2/transforms/dfb30df13ec9e7ead166295ec10862e0/transformed/.gradle-instrumented-classpath.marker because:
+  Build cache is disabled
+  Caching not enabled.
+Caching disabled for ExternalDependencyInstrumentingArtifactTransform: /home/runner/.gradle/caches/8.14.2/transforms/dfb30df13ec9e7ead166295ec10862e0/transformed/merge/instrumentation-dependencies.bin because:
+  Build cache is disabled
+  Caching not enabled.
+Caching disabled for ExternalDependencyInstrumentingArtifactTransform: /home/runner/.gradle/caches/modules-2/files-2.1/org.gradle.toolchains/foojay-resolver/1.0.0/72c0af50bc9156fb2a9429ed152abb4417bb6eaf/foojay-resolver-1.0.0.jar because:
+  Build cache is disabled
+  Caching not enabled.
+Caching disabled for Kotlin DSL accessors for settings 'AuraFrameFx-Beta' because:
+  Build cache is disabled
+Caching disabled for Kotlin DSL script compilation (Settings/TopLevel/stage2) because:
+  Build cache is disabled
+Settings evaluated using settings file '/home/runner/work/AuraFrameFx-Beta/AuraFrameFx-Beta/settings.gradle.kts'.
+Using local directory build cache for the root build (location = /home/runner/.gradle/caches/build-cache-1, remove unused entries = after 7 days).
+Caching disabled for generation of dependency accessors for libs because:
+  Not worth caching.
+Projects loaded. Root project using build file '/home/runner/work/AuraFrameFx-Beta/AuraFrameFx-Beta/build.gradle.kts'.
+Included projects: [root project 'AuraFrameFx', project ':app']
+
+> Configure project :
+Evaluating root project 'AuraFrameFx' using build file '/home/runner/work/AuraFrameFx-Beta/AuraFrameFx-Beta/build.gradle.kts'.
+Build cache key for Kotlin DSL version catalog plugin accessors for classpath '82798136188fd64006cff728387b83a2' is c56012cf62763a7f705c611438968e39
+Stored cache entry for Kotlin DSL version catalog plugin accessors for classpath '82798136188fd64006cff728387b83a2' with cache key c56012cf62763a7f705c611438968e39
+Build cache key for Kotlin DSL plugin specs accessors for classpath '82798136188fd64006cff728387b83a2' is 851e93bcfb5915d2475f0928394a0c4a
+Stored cache entry for Kotlin DSL plugin specs accessors for classpath '82798136188fd64006cff728387b83a2' with cache key 851e93bcfb5915d2475f0928394a0c4a
+Build cache key for Kotlin DSL script compilation (Project/TopLevel/stage1) is c6fe2a759a902cd29b9364bcdc109c31
+Stored cache entry for Kotlin DSL script compilation (Project/TopLevel/stage1) with cache key c6fe2a759a902cd29b9364bcdc109c31
+Downloading https://dl.google.com/dl/android/maven2/com/android/application/com.android.application.gradle.plugin/8.6.0/com.android.application.gradle.plugin-8.6.0.pom to /home/runner/.gradle/.tmp/gradle_download5425611541225654181bin
+Resource missing. [HTTP HEAD: https://dl.google.com/dl/android/maven2/com/android/application/com.android.application.gradle.plugin/8.6.0/com.android.application.gradle.plugin-8.6.0.jar]
+Resolved plugin [id: 'com.android.application', version: '8.6.0', apply: false]
+Resource missing. [HTTP GET: https://dl.google.com/dl/android/maven2/org/jetbrains/kotlin/android/org.jetbrains.kotlin.android.gradle.plugin/2.1.21/org.jetbrains.kotlin.android.gradle.plugin-2.1.21.pom]
+Downloading https://repo.maven.apache.org/maven2/org/jetbrains/kotlin/android/org.jetbrains.kotlin.android.gradle.plugin/2.1.21/org.jetbrains.kotlin.android.gradle.plugin-2.1.21.pom to /home/runner/.gradle/.tmp/gradle_download14981591271902555294bin
+Resource missing. [HTTP HEAD: https://repo.maven.apache.org/maven2/org/jetbrains/kotlin/android/org.jetbrains.kotlin.android.gradle.plugin/2.1.21/org.jetbrains.kotlin.android.gradle.plugin-2.1.21.jar]
+Resolved plugin [id: 'org.jetbrains.kotlin.android', version: '2.1.21', apply: false]
+Resource missing. [HTTP GET: https://dl.google.com/dl/android/maven2/org/jetbrains/kotlin/plugin/compose/org.jetbrains.kotlin.plugin.compose.gradle.plugin/2.1.21/org.jetbrains.kotlin.plugin.compose.gradle.plugin-2.1.21.pom]
+Downloading https://repo.maven.apache.org/maven2/org/jetbrains/kotlin/plugin/compose/org.jetbrains.kotlin.plugin.compose.gradle.plugin/2.1.21/org.jetbrains.kotlin.plugin.compose.gradle.plugin-2.1.21.pom to /home/runner/.gradle/.tmp/gradle_download17836899784358559360bin
+Resource missing. [HTTP HEAD: https://repo.maven.apache.org/maven2/org/jetbrains/kotlin/plugin/compose/org.jetbrains.kotlin.plugin.compose.gradle.plugin/2.1.21/org.jetbrains.kotlin.plugin.compose.gradle.plugin-2.1.21.jar]
+Resolved plugin [id: 'org.jetbrains.kotlin.plugin.compose', version: '2.1.21']
+Resource missing. [HTTP GET: https://dl.google.com/dl/android/maven2/com/google/dagger/hilt/android/com.google.dagger.hilt.android.gradle.plugin/2.56.2/com.google.dagger.hilt.android.gradle.plugin-2.56.2.pom]
+Downloading https://repo.maven.apache.org/maven2/com/google/dagger/hilt/android/com.google.dagger.hilt.android.gradle.plugin/2.56.2/com.google.dagger.hilt.android.gradle.plugin-2.56.2.pom to /home/runner/.gradle/.tmp/gradle_download7041357981956544690bin
+Resource missing. [HTTP GET: https://dl.google.com/dl/android/maven2/org/sonatype/oss/oss-parent/7/oss-parent-7.pom]
+Downloading https://repo.maven.apache.org/maven2/org/sonatype/oss/oss-parent/7/oss-parent-7.pom to /home/runner/.gradle/.tmp/gradle_download6766552529864250316bin
+Resource missing. [HTTP HEAD: https://repo.maven.apache.org/maven2/com/google/dagger/hilt/android/com.google.dagger.hilt.android.gradle.plugin/2.56.2/com.google.dagger.hilt.android.gradle.plugin-2.56.2.jar]
+Resolved plugin [id: 'com.google.dagger.hilt.android', versio
