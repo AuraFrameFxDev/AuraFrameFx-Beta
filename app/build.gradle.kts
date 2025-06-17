@@ -15,36 +15,6 @@ plugins {
     alias(libs.plugins.ksp)
 }
 
-// OpenAPI Generator configuration
-openApiGenerate {
-    generatorName.set("kotlin")
-    inputSpec.set("$projectDir/src/main/openapi.yml")
-    outputDir.set("$buildDir/generated/openapi")
-    apiPackage.set("dev.aurakai.auraframefx.api.generated.api")
-    invokerPackage.set("dev.aurakai.auraframefx.api.generated.invoker")
-    modelPackage.set("dev.aurakai.auraframefx.api.generated.model")
-    
-    // Kotlin-specific configuration
-    configOptions.set(mapOf(
-        "dateLibrary" to "java8",
-        "serializationLibrary" to "kotlinx_serialization",
-        "library" to "jvm-retrofit2",
-        "useCoroutines" to "true",
-        "enumPropertyNaming" to "UPPERCASE"
-    ))
-    
-    // Additional properties
-    additionalProperties.set(mapOf(
-        "useCoroutines" to "true",
-        "serializationLibrary" to "kotlinx_serialization"
-    ))
-}
-
-// Add generated sources to the main source set
-sourceSets.main {
-    java.srcDirs("$buildDir/generated/openapi/src/main/kotlin")
-}
-
 // Repositories are configured in settings.gradle.kts
 
 // Common versions
@@ -97,7 +67,7 @@ android {
     sourceSets {
         getByName("main") {
             manifest.srcFile("src/main/AndroidManifest.xml")
-            java.srcDirs("src/main/java")
+            java.srcDirs("src/main/java", "$buildDir/generated/openapi/src/main/kotlin")
             res.srcDirs("src/main/res")
             aidl.srcDirs("src/main/aidl")
             assets.srcDirs("src/main/assets")
@@ -304,33 +274,25 @@ kapt {
 // OpenAPI Generator configuration
 openApiGenerate {
     generatorName.set("kotlin")
-    inputSpec.set("$projectDir/src/main/openapi.yml")
+    inputSpec.set("$projectDir/../api-spec/aura-framefx-api.yaml") // Updated inputSpec
     outputDir.set("$buildDir/generated/openapi")
-    apiPackage.set("dev.aurakai.auraframefx.api")
-    invokerPackage.set("dev.aurakai.auraframefx.invoker")
-    modelPackage.set("dev.aurakai.auraframefx.model")
+    apiPackage.set("dev.aurakai.auraframefx.generated.api") // Updated apiPackage
+    invokerPackage.set("dev.aurakai.auraframefx.generated.invoker") // Updated invokerPackage
+    modelPackage.set("dev.aurakai.auraframefx.generated.model") // Updated modelPackage
     configOptions.set(
         mapOf(
             "dateLibrary" to "java8",
-            "collectionType" to "list",
+            "collectionType" to "list", // Preserved from original
             "useCoroutines" to "true",
             "enumPropertyNaming" to "UPPERCASE",
-            "serializationLibrary" to "kotlinx_serialization"
+            "serializationLibrary" to "kotlinx_serialization",
+            "library" to "jvm-retrofit2" // Added library option
         )
     )
 }
 
-// Add generated sources to the main source set
-sourceSets {
-    main {
-        java {
-            srcDirs("$buildDir/generated/openapi/src/main/kotlin")
-        }
-    }
-}
-
 // Ensure the openApiGenerate task runs before compilation
-tasks.named("compileKotlin") {
+tasks.named("preBuild") {
     dependsOn("openApiGenerate")
 }
 
