@@ -11,7 +11,38 @@ plugins {
     id("androidx.navigation.safeargs.kotlin")
     id("com.google.firebase.firebase-perf")
     id("org.jetbrains.kotlin.plugin.compose")
+    id("org.openapi.generator") version "7.5.0"
     alias(libs.plugins.ksp)
+}
+
+// OpenAPI Generator configuration
+openApiGenerate {
+    generatorName.set("kotlin")
+    inputSpec.set("$projectDir/src/main/openapi.yml")
+    outputDir.set("$buildDir/generated/openapi")
+    apiPackage.set("dev.aurakai.auraframefx.api.generated.api")
+    invokerPackage.set("dev.aurakai.auraframefx.api.generated.invoker")
+    modelPackage.set("dev.aurakai.auraframefx.api.generated.model")
+    
+    // Kotlin-specific configuration
+    configOptions.set(mapOf(
+        "dateLibrary" to "java8",
+        "serializationLibrary" to "kotlinx_serialization",
+        "library" to "jvm-retrofit2",
+        "useCoroutines" to "true",
+        "enumPropertyNaming" to "UPPERCASE"
+    ))
+    
+    // Additional properties
+    additionalProperties.set(mapOf(
+        "useCoroutines" to "true",
+        "serializationLibrary" to "kotlinx_serialization"
+    ))
+}
+
+// Add generated sources to the main source set
+sourceSets.main {
+    java.srcDirs("$buildDir/generated/openapi/src/main/kotlin")
 }
 
 // Repositories are configured in settings.gradle.kts
@@ -62,15 +93,16 @@ android {
         targetCompatibility = JavaVersion.VERSION_21
     }
 
-    // Fix for AIDL path issues - using absolute paths and explicit configuration
+    // Configure source sets with explicit paths
     sourceSets {
         getByName("main") {
-            aidl {
-                srcDirs("src/main/aidl")
-            }
-            // Use the correct property for file inclusions
-            java.srcDir("src/main/java")
-            res.srcDir("src/main/res")
+            manifest.srcFile("src/main/AndroidManifest.xml")
+            java.srcDirs("src/main/java")
+            res.srcDirs("src/main/res")
+            aidl.srcDirs("src/main/aidl")
+            assets.srcDirs("src/main/assets")
+            resources.srcDirs("src/main/resources")
+            jniLibs.srcDirs("src/main/jniLibs")
         }
     }
 
@@ -114,6 +146,13 @@ android {
 }
 
 dependencies {
+    // OpenAPI Client Dependencies
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3")
+    implementation("com.squareup.okhttp3:okhttp:4.12.0")
+    implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:1.0.0")
+
     // Core Android dependencies
     implementation("androidx.core:core-ktx:1.16.0")
     implementation("androidx.appcompat:appcompat:1.7.1")
@@ -260,6 +299,39 @@ dependencies {
 // KSP and KAPT configuration
 kapt {
     correctErrorTypes = true // KAPT is in maintenance mode, use KSP where possible
+}
+
+// OpenAPI Generator configuration
+openApiGenerate {
+    generatorName.set("kotlin")
+    inputSpec.set("$projectDir/src/main/openapi.yml")
+    outputDir.set("$buildDir/generated/openapi")
+    apiPackage.set("dev.aurakai.auraframefx.api")
+    invokerPackage.set("dev.aurakai.auraframefx.invoker")
+    modelPackage.set("dev.aurakai.auraframefx.model")
+    configOptions.set(
+        mapOf(
+            "dateLibrary" to "java8",
+            "collectionType" to "list",
+            "useCoroutines" to "true",
+            "enumPropertyNaming" to "UPPERCASE",
+            "serializationLibrary" to "kotlinx_serialization"
+        )
+    )
+}
+
+// Add generated sources to the main source set
+sourceSets {
+    main {
+        java {
+            srcDirs("$buildDir/generated/openapi/src/main/kotlin")
+        }
+    }
+}
+
+// Ensure the openApiGenerate task runs before compilation
+tasks.named("compileKotlin") {
+    dependsOn("openApiGenerate")
 }
 
 // Register a task to build a jar for Xposed/LSPosed modules after the Android plugin is configured

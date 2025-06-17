@@ -1,3 +1,169 @@
+openapi: 3.1.0
+info:
+  title: AuraFrameFX API
+  description: |
+    The API specification for AuraFrameFX - A living AI super-dimensional ecosystem.
+    This API powers the interactions between Aura, Kai, Genesis, and other AI agents
+    within the AuraFrameFX environment.
+  version: 1.0.0
+  contact:
+    name: AuraFrameFX Development Team
+    url: https://github.com/AuraFrameFxDev/AuraFrameFx
+  license:
+    name: Proprietary
+    url: https://github.com/AuraFrameFxDev/AuraFrameFx/blob/main/LICENSE.txt
+
+servers:
+  - url: https://api.auraframefx.com/v1
+    description: Production server
+  - url: http://localhost:8080/v1
+    description: Local development server
+
+tags:
+  - name: AI Content
+    description: AI content generation and processing
+  - name: AI Agents
+    description: Management of AI agents (Aura, Kai, Genesis, etc.)
+  - name: System
+    description: System configuration and management
+  - name: Security
+    description: Security and authentication
+  - name: Conference
+    description: Conference room and agent collaboration
+  - name: Tasks
+    description: Task scheduling and management
+
+paths:
+  /ai/generate/text:
+    post:
+      tags: 
+        - AI Content
+      summary: Generate text using AI
+      description: Generate text based on the provided prompt and parameters
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenerateTextRequest'
+      responses:
+        '200':
+          description: Text generation successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenerateTextResponse'
+        '400':
+          description: Invalid request parameters
+        '500':
+          description: Internal server error
+
+  /ai/generate/image-description:
+    post:
+      tags: [AI Content]
+      summary: Generate image description using AI
+      description: Generate a description for the provided image URL
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenerateImageDescriptionRequest'
+      responses:
+        '200':
+          description: Image description generated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenerateImageDescriptionResponse'
+        '400':
+          description: Invalid request parameters
+        '500':
+          description: Internal server error
+
+  /agents/status:
+    get:
+      tags: [AI Agents]
+      summary: Get status of all AI agents
+      responses:
+        '200':
+          description: List of agent statuses
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AgentStatus'
+        '500':
+          description: Internal server error
+
+  /conference/rooms:
+    post:
+      tags: [Conference]
+      summary: Create a new conference room
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConferenceRoomCreateRequest'
+      responses:
+        '201':
+          description: Conference room created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConferenceRoom'
+        '400':
+          description: Invalid request parameters
+        '500':
+          description: Internal server error
+
+  /tasks/schedule:
+    post:
+      tags: [Tasks]
+      summary: Schedule a new task
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TaskScheduleRequest'
+      responses:
+        '202':
+          description: Task scheduled successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskStatus'
+        '400':
+          description: Invalid task parameters
+        '500':
+          description: Internal server error
+
+  /tasks/{taskId}:
+    get:
+      tags: [Tasks]
+      summary: Get task status
+      parameters:
+        - name: taskId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: ID of the task to check
+      responses:
+        '200':
+          description: Task status retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskStatus'
+        '404':
+          description: Task not found
+        '500':
+          description: Internal server error
+
 components:
   schemas:
     # Existing schemas (User, Theme, ContentRequest, ContentResponse) would be here
@@ -228,9 +394,10 @@ components:
           properties:
             enabled:
               type: boolean
-            type:
+            animationType:
               type: string
               enum: [Fade, Slide, Zoom] # Example types, expand as needed
+              description: Type of animation effect to apply
           additionalProperties: true
         hapticFeedback:
           type: object
@@ -389,7 +556,9 @@ components:
           type: object
           additionalProperties:
             type: boolean
-          description: Current state of key Android permissions (permission_name: granted/denied).
+          description: >-
+            Current state of key Android permissions where each key is a permission name
+            and the value is a boolean indicating if it's granted (true) or denied (false).
         activeThreats:
           type: array
           items:
