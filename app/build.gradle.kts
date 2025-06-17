@@ -45,6 +45,7 @@ android {
 
         // Enable multidex support
         multiDexEnabled = true
+        manifestPlaceholders["appAuthRedirectScheme"] = "auraframefxbeta"
     }
 
     buildTypes {
