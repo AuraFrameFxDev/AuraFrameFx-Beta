@@ -140,6 +140,29 @@ paths:
         '429':
           $ref: '#/components/responses/RateLimitError'
 
+  /ai/generate/image-description:
+    post:
+      tags: [ai-content] # Changed from "AI Content" to "ai-content" to match existing tag style
+      summary: Generate image description using AI
+      description: Generate a description for the provided image URL
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenerateImageDescriptionRequest'
+      responses:
+        '200':
+          description: Image description generated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenerateImageDescriptionResponse'
+        '400':
+          description: Invalid request parameters # Consider using $ref: '#/components/responses/BadRequestError'
+        '500':
+          description: Internal server error # Consider creating a common InternalServerError response
+
   # ... (Additional endpoints for other AI content generation types)
 
   # AI Agents Endpoints
@@ -414,6 +437,31 @@ components:
           example: "STOP"
       required:
         - generatedText
+
+    GenerateImageDescriptionRequest:
+      type: object
+      properties:
+        imageUrl:
+          type: string
+          format: url
+          description: URL of the image to describe.
+          example: "https://example.com/image.jpg"
+        context:
+          type: string
+          description: Additional context for the image description (optional).
+          example: "The image shows a futuristic city at sunset."
+      required:
+        - imageUrl
+
+    GenerateImageDescriptionResponse:
+      type: object
+      properties:
+        description:
+          type: string
+          description: The AI-generated image description.
+          example: "A vibrant cityscape under a twilight sky, featuring towering neon-lit skyscrapers."
+      required:
+        - description
 
     # AI Agent schemas
     AgentType:
