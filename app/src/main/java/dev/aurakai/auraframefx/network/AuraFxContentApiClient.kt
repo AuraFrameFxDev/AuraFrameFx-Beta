@@ -1,8 +1,8 @@
 package dev.aurakai.auraframefx.network
 
 import dev.aurakai.auraframefx.generated.api.auraframefxai.ContentApi
-import dev.aurakai.auraframefx.generated.model.auraframefxai.GenerateImageDescriptionRequest
-import dev.aurakai.auraframefx.generated.model.auraframefxai.GenerateTextRequest
+import dev.aurakai.auraframefx.model.GenerateImageDescriptionRequest
+import dev.aurakai.auraframefx.model.GenerateTextRequest
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -29,8 +29,8 @@ class AuraFxContentApiClient @Inject constructor(
     ) = contentApi.generateText(
         GenerateTextRequest(
             prompt = prompt,
-            maxTokens = maxTokens,
-            temperature = temperature
+            maxTokens = maxTokens ?: 500,
+            temperature = temperature ?: 0.7f
         )
     )
 

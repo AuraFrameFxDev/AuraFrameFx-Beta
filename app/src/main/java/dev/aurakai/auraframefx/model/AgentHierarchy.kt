@@ -40,6 +40,7 @@ object AgentHierarchy {
         AgentConfig(
             name = "Aura",
             role = AgentRole.CREATIVE,
+            priority = AgentPriority.TERTIARY, // Added missing priority
             capabilities = setOf("generation", "creativity", "art", "writing")
         ),
         AgentConfig(

@@ -1,6 +1,9 @@
 package dev.aurakai.auraframefx.ai.agents
 
 import dev.aurakai.auraframefx.model.AgentType
+import dev.aurakai.auraframefx.model.Agent // Added import
+import dev.aurakai.auraframefx.model.AiRequest // Added import
+import dev.aurakai.auraframefx.model.AgentResponse // Added import
 
 /**
  * Base implementation of the [Agent] interface.

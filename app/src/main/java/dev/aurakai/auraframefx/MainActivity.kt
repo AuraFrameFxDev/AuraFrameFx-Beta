@@ -17,6 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.rememberNavController
 import dev.aurakai.auraframefx.ui.animation.DigitalTransitions
+import dev.aurakai.auraframefx.ui.animation.digitalPixelEffect
 import dev.aurakai.auraframefx.ui.components.BottomNavigationBar
 import dev.aurakai.auraframefx.ui.navigation.AppNavGraph
 import dev.aurakai.auraframefx.ui.theme.AuraFrameFXThemeCompat
@@ -75,12 +76,10 @@ fun MainScreen() {
                 .padding(paddingValues)
                 // Apply our custom digital effects
                 .then(
-                    // Only apply effects while transition is happening
                     if (showDigitalEffects) {
                         Modifier
-                            .DigitalTransitions.digitalPixelEffect(visible = true)
-                            // Optional: Add scanline effect for more cyberpunk feel
-                            .DigitalTransitions.digitalScanlineEffect(visible = true)
+                            .digitalPixelEffect(visible = true)
+                            .digitalScanlineEffect(visible = true)
                     } else {
                         Modifier
                     }

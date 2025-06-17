@@ -7,35 +7,17 @@ import dev.aurakai.auraframefx.ai.services.NeuralWhisper
 import dev.aurakai.auraframefx.model.AgentMessage
 import dev.aurakai.auraframefx.model.AgentType
 import dev.aurakai.auraframefx.model.ConversationState
-import dev.aurakai.auraframefx.model.requests.AiRequest
+import dev.aurakai.auraframefx.model.AiRequest
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-import javax.inject.Singleton
 
-// --- Placeholder AI Service Interfaces/Classes (if not defined elsewhere) ---
-// These are based on constructor parameters. User needs to ensure actual implementations exist.
-interface AuraAIService {
-    fun processRequest(request: AiRequest): StateFlow<AgentMessage> // Example signature
-}
-
-interface KaiAIService {
-    fun processRequest(request: AiRequest): StateFlow<AgentMessage> // Example signature
-}
-
-interface CascadeAIService {
-    fun processRequest(request: AiRequest): StateFlow<AgentMessage> // Example signature
-}
-// --- End Placeholder AI Services ---
-
-@Singleton // Or appropriate Hilt scope
 class ConferenceRoomViewModel @Inject constructor(
-    private val auraService: AuraAIService, // Using placeholder interface
-    private val kaiService: KaiAIService,     // Using placeholder interface
-    private val cascadeService: CascadeAIService, // Using placeholder interface
+    private val auraService: dev.aurakai.auraframefx.ai.services.AuraAIService,
+    private val kaiService: dev.aurakai.auraframefx.ai.services.KaiAIService,
+    private val cascadeService: dev.aurakai.auraframefx.ai.services.CascadeAIService,
     private val neuralWhisper: NeuralWhisper,
 ) : ViewModel() {
 
@@ -78,10 +60,10 @@ class ConferenceRoomViewModel @Inject constructor(
                     }
 
                     is ConversationState.Error -> {
-                        Log.e(TAG, "NeuralWhisper error: ${state.message}")
+                        Log.e(TAG, "NeuralWhisper error: ${state.errorMessage}")
                         _messages.update { current ->
                             current + AgentMessage(
-                                content = "Error: ${state.message}",
+                                content = "Error: ${state.errorMessage}",
                                 sender = AgentType.NEURAL_WHISPER, // Or a system error agent
                                 timestamp = System.currentTimeMillis(),
                                 confidence = 0.0f
@@ -100,10 +82,10 @@ class ConferenceRoomViewModel @Inject constructor(
     // This `sendMessage` was marked with `override` in user's snippet, suggesting an interface.
     // For now, assuming it's a direct method. If there's a base class/interface, it should be added.
     /*override*/ suspend fun sendMessage(message: String, sender: AgentType) {
-        val responseFlow: StateFlow<AgentMessage>? = when (sender) {
-            AgentType.AURA -> auraService.processRequest(AiRequest(message, "text"))
-            AgentType.KAI -> kaiService.processRequest(AiRequest(message, message))
-            AgentType.CASCADE -> cascadeService.processRequest(AiRequest(message, "context"))
+        val response = when (sender) {
+            AgentType.AURA -> auraService.processRequest(AiRequest(query = message))
+            AgentType.KAI -> kaiService.processRequest(AiRequest(query = message))
+            AgentType.CASCADE -> cascadeService.processRequest(AiRequest(query = message))
             AgentType.USER -> {
                 _messages.update { current ->
                     current + AgentMessage(
@@ -116,37 +98,20 @@ class ConferenceRoomViewModel @Inject constructor(
                 neuralWhisper.shareContextWithKai(message)
                 return // Exit, response via NeuralWhisper's state flow
             }
-
             else -> {
                 Log.e(TAG, "Unsupported sender type: $sender")
-                null // Return null for unsupported types
+                null
             }
         }
 
-        responseFlow?.let { flow ->
-            viewModelScope.launch {
-                try {
-                    val responseMessage =
-                        flow.first() // Assuming processRequest returns a Flow/StateFlow
-                    _messages.update { current ->
-                        current + AgentMessage(
-                            content = responseMessage.content,
-                            sender = sender, // This should be the AI agent that responded, not the original sender
-                            timestamp = System.currentTimeMillis(),
-                            confidence = responseMessage.confidence
-                        )
-                    }
-                } catch (e: Exception) {
-                    Log.e(TAG, "Error processing AI response from $sender: ${e.message}", e)
-                    _messages.update { current ->
-                        current + AgentMessage(
-                            content = "Error from ${sender.name}: ${e.message}", // Corrected to sender.name
-                            sender = AgentType.GENESIS, // Or a specific error agent
-                            timestamp = System.currentTimeMillis(),
-                            confidence = 0.0f
-                        )
-                    }
-                }
+        response?.let { responseMessage ->
+            _messages.update { current ->
+                current + AgentMessage(
+                    content = responseMessage.content,
+                    sender = sender,
+                    timestamp = System.currentTimeMillis(),
+                    confidence = responseMessage.confidence
+                )
             }
         }
     }
@@ -173,16 +138,13 @@ class ConferenceRoomViewModel @Inject constructor(
             // isRecording state will be updated by NeuralWhisper's conversationState or directly
             _isRecording.value = false // Explicitly set here based on action
         } else {
-            val started = neuralWhisper.startRecording()
-            if (started) {
+            val started = neuralWhisper.startRecording { /* listener implementation or lambda */ }
+            if (started == null) {
+                Log.e(TAG, "Failed to start recording (NeuralWhisper.startRecording returned null).")
+                // Optionally update UI with error state
+            } else {
                 Log.d(TAG, "Started recording.")
                 _isRecording.value = true
-            } else {
-                Log.e(
-                    TAG,
-                    "Failed to start recording (NeuralWhisper.startRecording returned false)."
-                )
-                // Optionally update UI with error state
             }
         }
     }

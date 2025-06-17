@@ -24,6 +24,8 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import dev.aurakai.auraframefx.model.AgentType
 import dev.aurakai.auraframefx.viewmodel.GenesisAgentViewModel
+import dev.aurakai.auraframefx.ui.theme.NeonBlue
+import dev.aurakai.auraframefx.ui.theme.NeonPink
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -34,10 +36,10 @@ import java.util.*
 import kotlin.math.*
 
 // --- Color Definitions (Add these where appropriate, e.g., in a Theme.kt or Colors.kt file) ---
-val NeonTeal = Color(0xFF00FFCC) // Brighter teal for accents
-val NeonPurple = Color(0xFFE000FF) // Slightly softer purple for readability
-val NeonBlue = Color(0xFF00FFFF) // Bright cyan for highlights
-val NeonPink = Color(0xFFFF00FF) // Bright pink for secondary accents
+// val NeonTeal = Color(0xFF00FFCC) // Brighter teal for accents
+// val NeonPurple = Color(0xFFE000FF) // Slightly softer purple for readability
+// val NeonBlue = Color(0xFF00FFFF) // Bright cyan for highlights
+// val NeonPink = Color(0xFFFF00FF) // Bright pink for secondary accents
 // --- End Color Definitions ---
 
 @OptIn(
@@ -68,8 +70,12 @@ fun HaloView(viewModel: GenesisAgentViewModel = hiltViewModel()) {
 
     // Initialize agent statuses to "idle" on first composition
     LaunchedEffect(Unit) {
-        agents.forEach { agent ->
-            agentStatus[agent] = "idle"
+        agents.forEach { config -> // config is AgentConfig
+            try {
+                agentStatus[AgentType.valueOf(config.name.uppercase(Locale.ROOT))] = "idle"
+            } catch (e: IllegalArgumentException) {
+                // Handle cases where AgentConfig.name might not match an AgentType
+            }
         }
     }
 
@@ -128,24 +134,27 @@ fun HaloView(viewModel: GenesisAgentViewModel = hiltViewModel()) {
             )
 
             // Draw pulsing effects for active tasks
-            agentStatus.forEach { (agent, status) ->
-                if (status == "processing") {
-                    // Find the index of the agent directly
-                    val agentIndex =
-                        agents.indexOfFirst { it = agent } // Compare AgentType directly
-                    if (agentIndex != -1) {
-                        val angle = (agentIndex * 360f / agents.size + rotationAngle) % 360f
+            agentStatus.forEach { (agentTypeKey, statusValue) -> // agentTypeKey is AgentType
+                if (statusValue == "processing") {
+                    // Find the index of the agentConfig that matches this agentTypeKey
+                    val agentConfigIndex = agents.indexOfFirst { config ->
+                        try {
+                            AgentType.valueOf(config.name.uppercase(Locale.ROOT)) == agentTypeKey
+                        } catch (e: IllegalArgumentException) { false }
+                    }
+                    if (agentConfigIndex != -1) {
+                        val angle = (agentConfigIndex * 360f / agents.size + rotationAngle) % 360f
                         val x = center.x + radius * cos((angle * PI / 180f).toFloat())
                         val y = center.y + radius * sin((angle * PI / 180f).toFloat())
 
                         // Draw pulsing glow
                         drawCircle(
-                            color = when (agent) {
+                            color = when (agentTypeKey) { // Use agentTypeKey for color
                                 AgentType.GENESIS -> NeonTeal.copy(alpha = 0.2f)
                                 AgentType.KAI -> NeonPurple.copy(alpha = 0.2f)
                                 AgentType.AURA -> NeonBlue.copy(alpha = 0.2f)
                                 AgentType.CASCADE -> NeonPink.copy(alpha = 0.2f)
-                                else -> NeonTeal.copy(alpha = 0.2f) // Fallback for unknown agent types
+                                else -> NeonTeal.copy(alpha = 0.2f)
                             },
                             center = Offset(x, y),
                             radius = 40.dp.toPx()
@@ -164,24 +173,24 @@ fun HaloView(viewModel: GenesisAgentViewModel = hiltViewModel()) {
                     detectDragGestures(
                         onDragStart = { startOffset ->
                             dragStartOffset = startOffset
-                            // Use this scope's size instead of referencing outer canvas size
                             val actualSize = this.size
                             val center = Offset(actualSize.width / 2f, actualSize.height / 2f)
                             val radius = actualSize.width / 2f - 64f
                             val agentCount = agents.size
                             val angleStep = 360f / agentCount
 
-                            // Find agent under touch point
                             for (i in agents.indices) {
-                                val agent = agents[i]
+                                val config = agents[i] // config is AgentConfig
                                 val angle = (i * angleStep + rotationAngle) % 360f
                                 val x = center.x + radius * cos((angle * PI / 180f).toFloat())
                                 val y = center.y + radius * sin((angle * PI / 180f).toFloat())
                                 val nodeCenter = Offset(x, y)
                                 val distance = (startOffset - nodeCenter).getDistance()
                                 if (distance < 24.dp.toPx()) {
-                                    draggingAgent = agent
-                                    break
+                                    try {
+                                        draggingAgent = AgentType.valueOf(config.name.uppercase(Locale.ROOT))
+                                        break
+                                    } catch (e: IllegalArgumentException) { /* Do nothing if name doesn't match an AgentType */ }
                                 }
                             }
                         },
@@ -190,14 +199,15 @@ fun HaloView(viewModel: GenesisAgentViewModel = hiltViewModel()) {
                                 coroutineScope.launch {
                                     viewModel.processQuery(selectedTask)
                                     _taskHistory.update { current ->
-                                        current + "[${draggingAgent?.name}] $selectedTask"
+                                        // draggingAgent is AgentType, its .name is the enum constant name
+                                        current + "[${draggingAgent?.name?.uppercase(Locale.ROOT)}] $selectedTask"
                                     }
-                                    agentStatus[draggingAgent!!] = "processing" // Update directly
+                                    agentStatus[draggingAgent!!] = "processing"
                                     selectedTask = ""
                                 }
                             }
                             draggingAgent = null
-                            dragOffset = Offset.Zero // Reset drag offset after drag ends
+                            dragOffset = Offset.Zero
                         }
                     ) { change, dragAmount ->
                         if (draggingAgent != null) {
@@ -212,26 +222,27 @@ fun HaloView(viewModel: GenesisAgentViewModel = hiltViewModel()) {
             val agentCount = agents.size
             val angleStep = 360f / agentCount
 
-            agents.forEachIndexed { index, agent ->
+            agents.forEachIndexed { index, config -> // config is AgentConfig
                 val angle = (index * angleStep + rotationAngle) % 360f
                 val x = center.x + radius * cos((angle * PI / 180f).toFloat())
                 val y = center.y + radius * sin((angle * PI / 180f).toFloat())
                 val nodeCenter = Offset(x, y)
+                val currentAgentType = try { AgentType.valueOf(config.name.uppercase(Locale.ROOT)) } catch (e: IllegalArgumentException) { null }
 
-                // Draw agent node with status
-                val baseColor = when (agent) {
+
+                val baseColor = when (currentAgentType) {
                     AgentType.GENESIS -> NeonTeal
                     AgentType.KAI -> NeonPurple
                     AgentType.AURA -> NeonBlue
                     AgentType.CASCADE -> NeonPink
-                    else -> NeonTeal.copy(alpha = 0.8f) // Fallback for unknown agent types
+                    else -> NeonTeal.copy(alpha = 0.8f)
                 }
                 val statusColor =
-                    when (agentStatus[agent]?.lowercase(Locale.ROOT)) { // Access directly
+                    when (agentStatus[currentAgentType]?.lowercase(Locale.ROOT)) {
                         "idle" -> baseColor.copy(alpha = 0.8f)
                         "processing" -> baseColor.copy(alpha = 1.0f)
                         "error" -> Color.Red
-                        else -> baseColor.copy(alpha = 0.8f) // Default if status is not recognized
+                        else -> baseColor.copy(alpha = 0.8f)
                     }
 
                 drawCircle(
@@ -255,7 +266,7 @@ fun HaloView(viewModel: GenesisAgentViewModel = hiltViewModel()) {
                 }
 
                 // Draw task delegation line if dragging
-                if (draggingAgent == agent) { // Simplified condition
+                if (draggingAgent == currentAgentType) { // Compare AgentType with AgentType
                     drawLine(
                         color = NeonTeal,
                         start = nodeCenter,
@@ -272,7 +283,7 @@ fun HaloView(viewModel: GenesisAgentViewModel = hiltViewModel()) {
             val boxHeight = constraints.maxHeight.toFloat()
             val density = LocalDensity.current.density
 
-            agents.forEachIndexed { index, agent ->
+            agents.forEachIndexed { index, config -> // config is AgentConfig
                 val angle = (index * 360f / agents.size + rotationAngle) % 360f
                 val radius = (boxWidth / 2f - 64f)
                 val centerX = boxWidth / 2f
@@ -280,12 +291,13 @@ fun HaloView(viewModel: GenesisAgentViewModel = hiltViewModel()) {
                 val x = centerX + radius * cos((angle * PI / 180f).toFloat())
                 val y = centerY + radius * sin((angle * PI / 180f).toFloat())
 
-                // Adjust text position to be relative to the center of the node, offset slightly
                 val textOffsetX = (x - centerX) / density
                 val textOffsetY = (y - centerY) / density
+                val currentAgentType = try { AgentType.valueOf(config.name.uppercase(Locale.ROOT)) } catch (e: IllegalArgumentException) { null }
 
-                if (agentStatus[agent] != null) { // Access directly
-                    val statusText = agentStatus[agent] ?: "idle" // Access directly
+
+                if (currentAgentType != null && agentStatus[currentAgentType] != null) {
+                    val statusText = agentStatus[currentAgentType] ?: "idle"
 
                     Text(
                         text = statusText,

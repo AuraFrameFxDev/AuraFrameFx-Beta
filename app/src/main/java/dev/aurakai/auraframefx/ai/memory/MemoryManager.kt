@@ -9,6 +9,8 @@ import kotlinx.datetime.Instant
 import java.util.concurrent.ConcurrentHashMap
 import javax.inject.Inject
 import javax.inject.Singleton
+import kotlin.time.Duration
+import kotlin.time.Duration.Companion.seconds
 
 @Singleton
 class MemoryManager @Inject constructor(
@@ -47,7 +49,7 @@ class MemoryManager @Inject constructor(
     fun getContextWindow(task: String): List<MemoryItem> {
         val recentItems = memoryStore.values
             .filter {
-                it.timestamp > Clock.System.now().minus(config.contextChainingConfig.maxChainLength)
+                it.timestamp > Clock.System.now().minus(config.contextChainingConfig.maxChainLength.seconds)
             }
             .sortedByDescending { it.timestamp }
             .take(config.contextChainingConfig.maxChainLength)
@@ -66,7 +68,7 @@ class MemoryManager @Inject constructor(
                 recentItems = memoryStore.values
                     .filter {
                         it.timestamp > Clock.System.now()
-                            .minus(config.contextChainingConfig.maxChainLength)
+                            .minus(config.contextChainingConfig.maxChainLength.seconds)
                     }
                     .size,
                 memorySize = memoryStore.values.sumOf { it.content.length }

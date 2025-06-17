@@ -2,6 +2,8 @@ package dev.aurakai.auraframefx.ai.agents
 
 import dev.aurakai.auraframefx.model.agent_states.ProcessingState
 import dev.aurakai.auraframefx.model.agent_states.VisionState
+import dev.aurakai.auraframefx.model.AiRequest // Added import
+import dev.aurakai.auraframefx.model.AgentResponse // Added import
 
 /**
  * KaiAgent, another specific implementation of BaseAgent.

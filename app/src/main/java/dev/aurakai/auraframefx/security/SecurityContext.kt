@@ -1,4 +1,4 @@
-package dev.aurakai.auraframefx.security // Updated package name
+ package dev.aurakai.auraframefx.security // Updated package name
 
 // SecretKeyFactory, PBEKeySpec, SecretKeySpec are removed as they are related to PBKDF2
 import android.content.Context
@@ -280,11 +280,12 @@ class SecurityContext @Inject constructor(
 
             // In a real app, we would verify the signature against a known good value
             val signatureBytes = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-                packageInfo.signingInfo.apkContentsSigners[0].toByteArray()
+                packageInfo.signingInfo?.apkContentsSigners?.getOrNull(0)?.toByteArray()
             } else {
                 @Suppress("DEPRECATION")
-                packageInfo.signatures[0].toByteArray()
+                packageInfo.signatures?.getOrNull(0)?.toByteArray()
             }
+            if (signatureBytes == null) throw Exception("No signature found")
 
             val md = MessageDigest.getInstance("SHA-256")
             val signatureDigest = md.digest(signatureBytes)
@@ -295,7 +296,7 @@ class SecurityContext @Inject constructor(
 
             return ApplicationIntegrity(
                 verified = isValid,
-                appVersion = packageInfo.versionName,
+                appVersion = packageInfo.versionName ?: "unknown",
                 signatureHash = signatureHex,
                 installTime = packageInfo.firstInstallTime,
                 lastUpdateTime = packageInfo.lastUpdateTime
@@ -370,7 +371,7 @@ class SecurityContext @Inject constructor(
      */
     fun logSecurityEvent(event: SecurityEvent) {
         scope.launch {
-            Log.d(TAG, "Security event logged: ${Json.encodeToString(event)}")
+            Log.d(TAG, "Security event logged: " + Json.encodeToString(SecurityEvent.serializer(), event))
             // In a real implementation, this would store events securely
         }
     }

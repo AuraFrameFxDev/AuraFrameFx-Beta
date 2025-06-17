@@ -55,7 +55,9 @@ private val AuraDarkColorScheme = darkColorScheme(
     // Additional Colors
     inversePrimary = NeonTeal,
     inverseOnPrimary = OnPrimary,
-    inverseSurface = Surface
+    inverseSurface = Surface,
+    surfaceTint = NeonTeal, // Added surfaceTint
+    scrim = Color(0x99000000) // Added scrim (semi-transparent black)
 )
 
 // Light Color Scheme - Enhanced for Cyberpunk
@@ -100,7 +102,9 @@ private val AuraLightColorScheme = lightColorScheme(
     // Additional Colors
     inversePrimary = LightPrimary,
     inverseOnPrimary = LightOnPrimary,
-    inverseSurface = LightSurface
+    inverseSurface = LightSurface,
+    surfaceTint = LightPrimary, // Added surfaceTint
+    scrim = Color(0x99000000) // Added scrim (semi-transparent black)
 )
 
 /**

@@ -1,6 +1,6 @@
 package dev.aurakai.auraframefx.ai.agents
 
-import android.util.Log
+import android.util.Log // Correctly adding this import now
 import dev.aurakai.auraframefx.ai.services.AuraAIService
 import dev.aurakai.auraframefx.ai.services.CascadeAIService
 import dev.aurakai.auraframefx.ai.services.KaiAIService
@@ -10,6 +10,8 @@ import dev.aurakai.auraframefx.model.AgentMessage
 import dev.aurakai.auraframefx.model.AgentResponse
 import dev.aurakai.auraframefx.model.AgentType
 import dev.aurakai.auraframefx.model.AiRequest
+import dev.aurakai.auraframefx.model.Agent // Added import
+import dev.aurakai.auraframefx.model.ContextAwareAgent // Added import
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
@@ -68,44 +70,44 @@ class GenesisAgent @Inject constructor(
         val responses = mutableListOf<AgentMessage>()
 
         // Process through Cascade first for state management
-        val cascadeResponse: List<AgentResponse> =
-            cascadeService.processRequest(AiRequest(query, "context"))
-        val cascadeMessage = cascadeResponse.first()
+        val cascadeAgentResponse: AgentResponse = // Changed type to single AgentResponse
+            cascadeService.processRequest(AiRequest(query = query, type = "context")) // Use named args for clarity
+        // val cascadeMessage = cascadeAgentResponse // No .first() needed
         responses.add(
             AgentMessage(
-                content = cascadeMessage.content,
+                content = cascadeAgentResponse.content,
                 sender = AgentType.CASCADE,
                 timestamp = System.currentTimeMillis(),
-                confidence = cascadeMessage.confidence
+                confidence = cascadeAgentResponse.confidence
             )
         )
 
         // Process through Kai for security analysis
         if (_activeAgents.value.contains(AgentType.KAI)) {
-            val kaiResponse: List<AgentResponse> =
-                kaiService.processRequest(AiRequest(query, "security"))
-            val kaiMessage = kaiResponse.first()
+            val kaiAgentResponse: AgentResponse = // Changed type
+                kaiService.processRequest(AiRequest(query = query, type = "security"))
+            // val kaiMessage = kaiAgentResponse
             responses.add(
                 AgentMessage(
-                    content = kaiMessage.content,
+                    content = kaiAgentResponse.content,
                     sender = AgentType.KAI,
                     timestamp = System.currentTimeMillis(),
-                    confidence = kaiMessage.confidence
+                    confidence = kaiAgentResponse.confidence
                 )
             )
         }
 
         // Process through Aura for creative response
         if (_activeAgents.value.contains(AgentType.AURA)) {
-            val auraResponse: List<AgentResponse> =
-                auraService.processRequest(AiRequest(query, "text"))
-            val auraMessage = auraResponse.first()
+            val auraAgentResponse: AgentResponse = // Changed type
+                auraService.processRequest(AiRequest(query = query, type = "text"))
+            // val auraMessage = auraAgentResponse
             responses.add(
                 AgentMessage(
-                    content = auraMessage.content,
+                    content = auraAgentResponse.content,
                     sender = AgentType.AURA,
                     timestamp = System.currentTimeMillis(),
-                    confidence = auraMessage.confidence
+                    confidence = auraAgentResponse.confidence
                 )
             )
         }

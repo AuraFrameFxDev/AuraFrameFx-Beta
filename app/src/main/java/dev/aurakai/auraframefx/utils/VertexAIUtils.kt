@@ -1,6 +1,6 @@
 package dev.aurakai.auraframefx.utils
 
-import android.util.Log
+import android.util.Log // Adding the import
 import dev.aurakai.auraframefx.ai.VertexAIConfig
 
 /**
@@ -57,7 +57,7 @@ object VertexAIUtils {
     fun validate(_config: VertexAIConfig?): Boolean {
         // TODO: Reported as unused. Implement actual validation logic.
         val isValid =
-            _config != null && _config.projectId.isNotBlank() && _config.region.isNotBlank()
+            _config != null && _config.projectId.isNotBlank() && _config.region?.isNotBlank() == true // Safe call for nullable region
         Log.d(TAG, "Validating config: ${isValid}")
         return isValid
     }

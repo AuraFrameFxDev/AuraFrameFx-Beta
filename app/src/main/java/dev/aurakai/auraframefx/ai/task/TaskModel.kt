@@ -14,7 +14,7 @@ data class Task(
     val importance: TaskImportance = TaskImportance.MEDIUM,
     val context: String,
     val content: String,
-    val metadata: Map<String, Any> = emptyMap(),
+    val metadata: Map<String, String> = emptyMap(),
     val status: TaskStatus = TaskStatus.PENDING,
     val assignedAgents: Set<AgentType> = emptySet(),
     val requiredAgents: Set<AgentType> = emptySet(),
@@ -29,14 +29,14 @@ data class TaskDependency(
     val dependencyId: String,
     val type: DependencyType,
     val priority: TaskPriority,
-    val metadata: Map<String, Any> = emptyMap(),
+    val metadata: Map<String, String> = emptyMap(),
 )
 
 @Serializable
 data class TaskPriority(
     val value: Float,
     val reason: String,
-    val metadata: Map<String, Any> = emptyMap(),
+    val metadata: Map<String, String> = emptyMap(),
 ) {
     companion object {
         val CRITICAL = TaskPriority(1.0f, "Critical system task")
@@ -51,7 +51,7 @@ data class TaskPriority(
 data class TaskUrgency(
     val value: Float,
     val reason: String,
-    val metadata: Map<String, Any> = emptyMap(),
+    val metadata: Map<String, String> = emptyMap(),
 ) {
     companion object {
         val IMMEDIATE = TaskUrgency(1.0f, "Immediate attention required")
@@ -59,6 +59,7 @@ data class TaskUrgency(
         val NORMAL = TaskUrgency(0.5f, "Normal urgency")
         val LOW = TaskUrgency(0.3f, "Low urgency")
         val BACKGROUND = TaskUrgency(0.1f, "Background task")
+        val MEDIUM = NORMAL
     }
 }
 
@@ -66,17 +67,19 @@ data class TaskUrgency(
 data class TaskImportance(
     val value: Float,
     val reason: String,
-    val metadata: Map<String, Any> = emptyMap(),
+    val metadata: Map<String, String> = emptyMap(),
 ) {
     companion object {
-        val CRITICAL = TaskImportance(1.0f, "Critical system task")
-        val HIGH = TaskImportance(0.8f, "High importance task")
-        val NORMAL = TaskImportance(0.5f, "Normal importance task")
-        val LOW = TaskImportance(0.3f, "Low importance task")
-        val MINOR = TaskImportance(0.1f, "Minor task")
+        val CRITICAL = TaskImportance(1.0f, "Critical importance")
+        val HIGH = TaskImportance(0.8f, "High importance")
+        val NORMAL = TaskImportance(0.5f, "Normal importance")
+        val LOW = TaskImportance(0.3f, "Low importance")
+        val MINOR = TaskImportance(0.1f, "Minor importance")
+        val MEDIUM = NORMAL
     }
 }
 
+@Serializable // Added annotation
 enum class TaskStatus {
     PENDING,
     IN_PROGRESS,
@@ -87,6 +90,7 @@ enum class TaskStatus {
     WAITING
 }
 
+@Serializable // Added annotation
 enum class DependencyType {
     BLOCKING,
     SEQUENTIAL,

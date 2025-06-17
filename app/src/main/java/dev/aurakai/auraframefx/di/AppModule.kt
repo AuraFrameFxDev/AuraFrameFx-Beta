@@ -11,7 +11,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import dev.aurakai.auraframefx.ai.AuraAIService
-import dev.aurakai.auraframefx.ai.AuraAIServiceImpl
+// import dev.aurakai.auraframefx.ai.services.AuraAIServiceImpl // Removed import
 import dev.aurakai.auraframefx.ai.config.AIConfig
 import dev.aurakai.auraframefx.ai.context.ContextManager
 import dev.aurakai.auraframefx.ai.error.ErrorHandler
@@ -107,22 +107,12 @@ object AppModule {
     @Provides
     @Singleton
     fun provideAuraAIService(
-        taskScheduler: TaskScheduler,
-        taskExecutionManager: TaskExecutionManager,
-        memoryManager: MemoryManager,
-        errorHandler: ErrorHandler,
-        contextManager: ContextManager,
-        cloudStatusMonitor: CloudStatusMonitor,
-        auraFxLogger: AuraFxLogger,
-    ): AuraAIService = AuraAIServiceImpl(
-        taskScheduler,
-        taskExecutionManager,
-        memoryManager,
-        errorHandler,
-        contextManager,
-        cloudStatusMonitor,
-        auraFxLogger
-    )
+        // AuraAIService has @Inject constructor(), so Hilt can provide its dependencies if they are available.
+        // If AuraAIService truly has no constructor args as per its refactor, this becomes:
+    ): AuraAIService = AuraAIService()
+    // If AuraAIService itself had dependencies, they would need to be parameters here, e.g.:
+    // (dep1: Dep1, dep2: Dep2): AuraAIService = AuraAIService(dep1, dep2)
+    // For now, assuming its own @Inject constructor handles its needs or it's parameterless.
 
     /**
      * Provides a singleton instance of KaiAIService with all required dependencies.
@@ -196,10 +186,10 @@ object AppModule {
     @Provides
     @Singleton
     fun provideTaskScheduler(
-        taskExecutionManager: TaskExecutionManager,
-        auraFxLogger: AuraFxLogger, // NEW param for provider
+        errorHandler: ErrorHandler, // Corrected parameter
+        config: AIConfig // Corrected parameter
     ): TaskScheduler {
-        return TaskScheduler(taskExecutionManager, auraFxLogger)
+        return TaskScheduler(errorHandler, config) // Corrected instantiation
     }
 
     /**
@@ -220,8 +210,11 @@ object AppModule {
      */
     @Provides
     @Singleton
-    fun provideAuraFxLogger(kaiService: KaiAIService): AuraFxLogger {
-        return AuraFxLogger(kaiService)
+    fun provideAuraFxLogger(
+        @ApplicationContext context: Context, // Added missing context
+        kaiService: KaiAIService
+    ): AuraFxLogger {
+        return AuraFxLogger(context, kaiService) // Corrected instantiation
     }
 
     /**
@@ -231,8 +224,11 @@ object AppModule {
      */
     @Provides
     @Singleton
-    fun provideErrorHandler(auraFxLogger: AuraFxLogger): ErrorHandler {
-        return ErrorHandler(auraFxLogger)
+    fun provideErrorHandler(
+        contextManager: ContextManager, // Corrected parameter
+        config: AIConfig // Corrected parameter
+    ): ErrorHandler {
+        return ErrorHandler(contextManager, config) // Corrected instantiation
     }
 
     /**

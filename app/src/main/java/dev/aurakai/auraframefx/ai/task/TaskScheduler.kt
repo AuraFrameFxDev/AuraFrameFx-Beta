@@ -34,7 +34,7 @@ class TaskScheduler @Inject constructor(
         importance: TaskImportance = TaskImportance.MEDIUM,
         requiredAgents: Set<AgentType> = emptySet(),
         dependencies: Set<String> = emptySet(),
-        metadata: Map<String, Any> = emptyMap(),
+        metadata: Map<String, String> = emptyMap(),
     ): Task {
         val task = Task(
             content = content,
@@ -62,22 +62,22 @@ class TaskScheduler @Inject constructor(
             val urgencyScore = calculateUrgencyScore(task)
             val importanceScore = calculateImportanceScore(task)
 
-            val totalScore = (priorityScore * 0.4f) +
-                    (urgencyScore * 0.3f) +
-                    (importanceScore * 0.3f)
+            val totalScore = (priorityScore * config.priorityWeight) +
+                    (urgencyScore * config.urgencyWeight) +
+                    (importanceScore * config.importanceWeight)
 
             _taskQueue.add(
                 task.copy(
                     metadata = task.metadata + mapOf(
-                        "priority_score" to priorityScore,
-                        "urgency_score" to urgencyScore,
-                        "importance_score" to importanceScore,
-                        "total_score" to totalScore
+                        "priority_score" to priorityScore.toString(),
+                        "urgency_score" to urgencyScore.toString(),
+                        "importance_score" to importanceScore.toString(),
+                        "total_score" to totalScore.toString()
                     )
                 )
             )
 
-            _taskQueue.sortByDescending { it.metadata["total_score"] as Float }
+            _taskQueue.sortByDescending { it.metadata["total_score"]?.toFloatOrNull() ?: 0f }
             processQueue()
         } catch (e: Exception) {
             errorHandler.handleError(

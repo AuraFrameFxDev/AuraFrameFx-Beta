@@ -14,7 +14,7 @@ data class MemoryItem(
     val context: String? = null,
     val priority: Float = 0.5f,
     val tags: List<String> = emptyList(),
-    val metadata: Map<String, Any> = emptyMap(),
+    val metadata: Map<String, String> = emptyMap(),
 )
 
 @Serializable

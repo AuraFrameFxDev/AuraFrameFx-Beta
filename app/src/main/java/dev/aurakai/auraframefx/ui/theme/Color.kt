@@ -7,6 +7,8 @@ val NeonTeal = Color(0xFF00FFCC) // Brighter teal for accents
 val NeonPurple = Color(0xFFE000FF) // Slightly softer purple for readability
 val NeonBlue = Color(0xFF00FFFF) // Bright cyan for highlights
 val NeonPink = Color(0xFFFF00FF) // Bright pink for secondary accents
+val NeonGreen = Color(0xFF00FF00) // Bright neon green
+val NeonRed = Color(0xFFFF0000)   // Bright neon red
 
 // Background Colors - Deep Cyberpunk Noir
 val DarkBackground = Color(0xFF000000) // Pure black for depth

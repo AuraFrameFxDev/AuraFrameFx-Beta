@@ -1,7 +1,8 @@
 package dev.aurakai.auraframefx.data.logging
 
+import android.content.Context // Added import
 import android.util.Log
-import dev.aurakai.auraframefx.ai.services.KaiAIService
+import dev.aurakai.auraframefx.ai.services.KaiAIService // Keep for now, might be used for other things not in checklist
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
@@ -18,17 +19,8 @@ import javax.inject.Singleton
 
 @Singleton
 class AuraFxLogger @Inject constructor(
-    private val kaiService: KaiAIService,
-    // Assumption: KaiAIService will provide access to applicationContext if needed for File operations,
-    // or KaiAIService's read/write methods are sufficient.
-    // The user's snippet directly used kaiService.applicationContext.filesDir.
-    // This requires KaiAIService to expose its applicationContext.
-    // Let's make applicationContext in KaiAIService public for this to work,
-    // or AuraFxLogger needs its own Context injection.
-    // For now, proceeding with user's direct access pattern.
-    // If KaiAIService's applicationContext is private, this needs adjustment.
-    // A cleaner way: Pass context to AuraFxLogger or have KaiAIService provide methods for listing/deleting log files.
-    // Given the user's snippet, I'll assume kaiService.applicationContext is accessible.
+    private val context: Context, // Injected Context
+    private val kaiService: KaiAIService // Kept kaiService for now
 ) {
     private val TAG = "AuraFxLogger" // For AuraFxLogger's own Logcat messages
     private val LOG_FILENAME_PREFIX = "aurafx_log_"
@@ -103,7 +95,7 @@ class AuraFxLogger @Inject constructor(
         }
 
         val success =
-            kaiService.writeToFile(filePath, fullLogEntry + "\n", isInternal = true, append = true)
+            writeToFileInternal(filePath, fullLogEntry + "\n", append = true) // Changed to internal method
         if (!success) {
             Log.e(TAG, "Failed to write log entry to file: $filePath")
             // Fallback log to Logcat if file write fails
@@ -176,10 +168,8 @@ class AuraFxLogger @Inject constructor(
      */
     suspend fun readAllLogs(): Map<String, String> = withContext(Dispatchers.IO) {
         val logs = mutableMapOf<String, String>()
-        // This requires KaiAIService to expose applicationContext or provide a method to list files in a dir.
-        // Assuming kaiService.applicationContext is accessible as per user's snippet.
-        // If not, this part needs KaiAIService to have a listLogFiles(dir: String) method.
-        val logDirFile = File(kaiService.applicationContext.filesDir, LOG_DIR)
+        // Use injected context
+        val logDirFile = File(context.filesDir, LOG_DIR) // Changed to use injected context
         Log.d(TAG, "Reading all logs from directory: ${logDirFile.absolutePath}")
 
         if (logDirFile.exists() && logDirFile.isDirectory) {
@@ -188,7 +178,7 @@ class AuraFxLogger @Inject constructor(
                     if (file.isFile && file.name.startsWith(LOG_FILENAME_PREFIX)) {
                         Log.d(TAG, "Reading log file: ${file.name}")
                         val content =
-                            kaiService.readFromFile("$LOG_DIR/${file.name}", isInternal = true)
+                            readFromFileInternal("$LOG_DIR/${file.name}") // Changed to internal method
                         if (content != null) {
                             logs[file.name] = content
                         } else {
@@ -213,7 +203,7 @@ class AuraFxLogger @Inject constructor(
     suspend fun readCurrentDayLogs(): String = withContext(Dispatchers.IO) {
         val fileName = getCurrentLogFileName()
         Log.d(TAG, "Reading current day logs from: $LOG_DIR/$fileName")
-        return@withContext kaiService.readFromFile("$LOG_DIR/$fileName", isInternal = true) ?: ""
+        return@withContext readFromFileInternal("$LOG_DIR/$fileName") ?: "" // Changed to internal method
     }
 
     /**
@@ -222,8 +212,8 @@ class AuraFxLogger @Inject constructor(
      * Scans the log directory for files matching the log filename prefix and removes those whose last modified time exceeds the configured retention period.
      */
     private suspend fun cleanupOldLogs() = withContext(Dispatchers.IO) {
-        // Requires applicationContext from KaiAIService to be accessible.
-        val logDirFile = File(kaiService.applicationContext.filesDir, LOG_DIR)
+        // Use injected context
+        val logDirFile = File(context.filesDir, LOG_DIR) // Changed to use injected context
         Log.i(TAG, "Running cleanup for old logs in: ${logDirFile.absolutePath}")
 
         if (logDirFile.exists() && logDirFile.isDirectory) {
@@ -256,5 +246,36 @@ class AuraFxLogger @Inject constructor(
     fun shutdown() {
         Log.d(TAG, "AuraFxLogger shutting down loggerScope.")
         loggerScope.cancel()
+    }
+
+    // Internal file operation methods using injected context
+    private fun writeToFileInternal(filePath: String, content: String, append: Boolean): Boolean {
+        return try {
+            val fullPath = File(context.filesDir, filePath)
+            fullPath.parentFile?.mkdirs() // Ensure directory exists
+            if (append) {
+                fullPath.appendText(content)
+            } else {
+                fullPath.writeText(content)
+            }
+            true
+        } catch (e: Exception) {
+            Log.e(TAG, "Error writing to file $filePath: ${e.message}", e)
+            false
+        }
+    }
+
+    private fun readFromFileInternal(filePath: String): String? {
+        return try {
+            val fullPath = File(context.filesDir, filePath)
+            if (fullPath.exists()) {
+                fullPath.readText()
+            } else {
+                null
+            }
+        } catch (e: Exception) {
+            Log.e(TAG, "Error reading from file $filePath: ${e.message}", e)
+            null
+        }
     }
 }

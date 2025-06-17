@@ -2,7 +2,11 @@ package dev.aurakai.auraframefx.system.homescreen
 
 import com.highcapable.yukihookapi.hook.xposed.prefs.data.YukiHookModulePrefs
 import com.highcapable.yukihookapi.hook.xposed.service.YukiHookServiceManager
-import dev.aurakai.auraframefx.system.overlay.*
+import dev.aurakai.auraframefx.system.overlay.SystemOverlayManager // Specific import
+import dev.aurakai.auraframefx.system.overlay.ShapeManager // Specific import
+import dev.aurakai.auraframefx.system.common.ImageResourceManager // Specific import
+import dev.aurakai.auraframefx.system.homescreen.model.HomeScreenTransitionConfig // Added import
+import dev.aurakai.auraframefx.system.homescreen.model.HomeScreenTransitionType // Added import
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import javax.inject.Inject
@@ -16,13 +20,13 @@ class HomeScreenTransitionManager @Inject constructor(
     private val prefs: YukiHookModulePrefs,
     private val overlayService: YukiHookServiceManager,
 ) {
-    private val _currentConfig = MutableStateFlow<HomeScreenTransitionConfig?>(null)
-    val currentConfig: StateFlow<HomeScreenTransitionConfig?> = _currentConfig
+    private val _currentConfig = MutableStateFlow(HomeScreenTransitionConfig()) // Initialize with default
+    val currentConfig: StateFlow<HomeScreenTransitionConfig?> = _currentConfig // Kept nullable for safety
 
     private val defaultConfig = HomeScreenTransitionConfig(
         type = HomeScreenTransitionType.GLOBE_ROTATE,
         duration = 500,
-        easing = "easeInOut",
+        // easing = "easeInOut", // Removed, not in HomeScreenTransitionConfig
         properties = mapOf(
             "angle" to 360f,
             "scale" to 1.2f,

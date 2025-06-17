@@ -13,7 +13,7 @@ data class ContextChain(
     val currentContext: String,
     val contextHistory: List<ContextNode> = emptyList(),
     val relatedMemories: List<MemoryItem> = emptyList(),
-    val metadata: Map<String, Any> = emptyMap(),
+    val metadata: Map<String, String> = emptyMap(),
     val priority: Float = 0.5f,
     val relevanceScore: Float = 0.0f,
     val lastUpdated: Instant = Clock.System.now(),
@@ -26,7 +26,7 @@ data class ContextNode(
     val content: String,
     val timestamp: Instant = Clock.System.now(),
     val agent: AgentType,
-    val metadata: Map<String, Any> = emptyMap(),
+    val metadata: Map<String, String> = emptyMap(),
     val relevance: Float = 0.0f,
     val confidence: Float = 0.0f,
 )

@@ -15,7 +15,7 @@ data class TaskExecution(
     val status: ExecutionStatus = ExecutionStatus.PENDING,
     val progress: Float = 0.0f,
     val result: ExecutionResult? = null,
-    val metadata: Map<String, Any> = emptyMap(),
+    val metadata: Map<String, String> = emptyMap(),
     val executionPlan: ExecutionPlan? = null,
     val checkpoints: List<Checkpoint> = emptyList(),
 )
@@ -26,7 +26,7 @@ data class ExecutionPlan(
     val steps: List<ExecutionStep>,
     val estimatedDuration: Long,
     val requiredResources: Set<String>,
-    val metadata: Map<String, Any> = emptyMap(),
+    val metadata: Map<String, String> = emptyMap(),
 )
 
 @Serializable
@@ -37,7 +37,7 @@ data class ExecutionStep(
     val priority: Float = 0.5f,
     val estimatedDuration: Long = 0,
     val dependencies: Set<String> = emptySet(),
-    val metadata: Map<String, Any> = emptyMap(),
+    val metadata: Map<String, String> = emptyMap(),
 )
 
 @Serializable
@@ -47,9 +47,10 @@ data class Checkpoint(
     val stepId: String,
     val status: CheckpointStatus,
     val progress: Float = 0.0f,
-    val metadata: Map<String, Any> = emptyMap(),
+    val metadata: Map<String, String> = emptyMap(),
 )
 
+@Serializable // Added annotation
 enum class ExecutionStatus {
     PENDING,
     INITIALIZING,
@@ -61,6 +62,7 @@ enum class ExecutionStatus {
     TIMEOUT
 }
 
+@Serializable // Added annotation
 enum class ExecutionResult {
     SUCCESS,
     PARTIAL_SUCCESS,
@@ -70,6 +72,7 @@ enum class ExecutionResult {
     UNKNOWN
 }
 
+@Serializable // Added annotation
 enum class StepType {
     COMPUTATION,
     COMMUNICATION,
@@ -81,6 +84,7 @@ enum class StepType {
     REPORTING
 }
 
+@Serializable // Added annotation
 enum class CheckpointStatus {
     PENDING,
     STARTED,

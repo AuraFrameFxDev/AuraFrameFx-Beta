@@ -1,17 +1,8 @@
 package dev.aurakai.auraframefx.ai.task
 
 import kotlinx.serialization.Serializable
-import java.util.UUID // For default ID generation if needed, though ID is String
 
-@Serializable
-data class Task(
-    val id: String = UUID.randomUUID().toString(), // Default to a random UUID if not provided
-    val type: TaskType,
-    val parameters: Map<String, String> = emptyMap(),
-    val schedule: TaskSchedule? = null,
-    val priority: Int = 5, // 1 (highest) to 10 (lowest)
-    val requestedBy: String = "AI_System", // E.g., "Kai", "Aura", "User", "SystemMonitor"
-)
+// Task data class definition removed as per instruction.
 
 @Serializable
 enum class TaskType {

@@ -11,29 +11,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import dev.aurakai.auraframefx.model.AgentMessage
 import dev.aurakai.auraframefx.model.AgentType
 import dev.aurakai.auraframefx.ui.theme.NeonBlue
 import dev.aurakai.auraframefx.ui.theme.NeonTeal
 import dev.aurakai.auraframefx.viewmodel.ConferenceRoomViewModel
-
-// Placeholder for RecordingButton - User should define this Composable
-@Composable
-fun RecordingButton(isRecording: Boolean, onClick: () -> Unit) {
-    Button(onClick = onClick) {
-        Text(if (isRecording) "Stop Recording" else "Start Recording")
-    }
-}
-
-// Placeholder for TranscribeButton - User should define this Composable
-@Composable
-fun TranscribeButton(isTranscribing: Boolean, onClick: () -> Unit) {
-    Button(
-        onClick = onClick,
-        enabled = !isTranscribing
-    ) { // Example: disable if already transcribing
-        Text("Transcribe")
-    }
-}
 
 // Placeholder for Header - User should define this Composable
 @Composable
@@ -74,15 +56,16 @@ fun ConferenceRoomScreen(
                 .padding(vertical = 16.dp),
             horizontalArrangement = Arrangement.Center
         ) {
-            RecordingButton(
-                isRecording = isRecording,
-                onClick = { viewModel.toggleRecording() }
-            )
-            Spacer(modifier = Modifier.width(8.dp)) // Added spacer
-            TranscribeButton(
-                isTranscribing = isTranscribing,
-                onClick = { viewModel.toggleTranscribing() }
-            )
+            Button(onClick = { viewModel.toggleRecording() }) {
+                Text(if (isRecording) "Stop Recording" else "Start Recording")
+            }
+            Spacer(modifier = Modifier.width(8.dp))
+            Button(
+                onClick = { viewModel.toggleTranscribing() },
+                enabled = !isTranscribing
+            ) {
+                Text("Transcribe")
+            }
         }
 
         // Chat Interface
@@ -92,11 +75,11 @@ fun ConferenceRoomScreen(
                 .fillMaxWidth(),
             reverseLayout = true
         ) {
-            items(messages.reversed()) { message -> // Reversed the list for typical chat display
-                // Basic display for now, assuming AgentMessage has sender and content
+            items(messages.reversed().size) { index ->
+                val message: AgentMessage = messages.reversed()[index]
                 Text(
                     text = "[${message.sender}] ${message.content}",
-                    color = Color.LightGray,
+                    color = NeonBlue, // Ensure only one NeonBlue import/definition
                     modifier = Modifier.padding(vertical = 4.dp)
                 )
             }
@@ -117,24 +100,24 @@ fun ConferenceRoomScreen(
                     .weight(1f)
                     .padding(end = 8.dp),
                 colors = TextFieldDefaults.colors(
-                    // Updated to new M3 API if needed, or use M2 equivalent
                     focusedContainerColor = NeonTeal.copy(alpha = 0.1f),
                     unfocusedContainerColor = NeonTeal.copy(alpha = 0.1f),
-                    // Ensure other color params are set if this causes issues with M3 defaults
-                    // For M2: backgroundColor = NeonTeal.copy(alpha = 0.1f) might be used
                 )
             )
 
             IconButton(
                 onClick = {
                     if (messageText.isNotBlank()) {
-                        viewModel.sendMessage(messageText, AgentType.USER) // Use AgentType.USER
-                        messageText = ""
+                        // Launch a coroutine for the suspend function using viewModelScope
+                        viewModel.viewModelScope.launch {
+                            viewModel.sendMessage(messageText, AgentType.USER)
+                            messageText = ""
+                        }
                     }
                 }
             ) {
                 Icon(
-                    Icons.Default.Send,
+                    Icons.Filled.Send,
                     contentDescription = "Send",
                     tint = NeonBlue
                 )

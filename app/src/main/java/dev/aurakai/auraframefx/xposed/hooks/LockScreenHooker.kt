@@ -4,12 +4,15 @@ import android.animation.Animator
 import android.animation.ObjectAnimator
 import android.content.Context
 import android.graphics.Color
+import android.animation.AnimatorSet // Added import
 import android.graphics.Typeface
 import android.os.VibrationEffect
 import android.os.Vibrator
+import android.util.TypedValue // Added import
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AccelerateDecelerateInterpolator
+import android.view.animation.AccelerateInterpolator // Added import
 import android.view.animation.DecelerateInterpolator
 import android.view.animation.LinearInterpolator
 import android.widget.TextClock

@@ -1,70 +1,14 @@
-# Gradle
+# Gradle cache
 .gradle/
+
+# Build directory
 build/
-*/build/
-!gradle/wrapper/gradle-wrapper.jar
 
-# Local configuration
+# Local properties file (SDK path, API keys, etc.)
 local.properties
+
+# IntelliJ IDEA module files
 *.iml
+
+# IntelliJ IDEA project files
 .idea/
-.DS_Store
-
-# Android Studio
-captures/
-.externalNativeBuild/
-.cxx/
-
-# Build outputs
-*.apk
-*.ap_
-*.dex
-*.class
-*.jar
-*.log
-*.xml
-*.json
-*.flat
-*.bin
-*.lock
-*.so
-*.tmp
-*.txt
-*.html
-*.c
-*.cpp
-*.h
-*.ttf
-*.db
-*.orig
-*.rej
-*.swp
-*.swo
-
-# Exclude reports and cache
-/reports/
-/build/
-/app/build/
-/gradle/wrapper/daemon/
-.cxx/
-.externalNativeBuild/
-captures/
-
-# Exclude generated files
-app/auraframefx-firebase-adminsdk-*.json
-app/google-services.json
-
-# Do not ignore essential gradle and manifest files
-!gradlew
-!gradlew.bat
-!gradle/wrapper/gradle-wrapper.jar
-!app/src/main/AndroidManifest.xml
-!app/google-services.json
-
-# If you need to keep any other .json or .xml files, add exceptions here
-# !app/src/main/res/values/strings.xml
-# !app/auraframefx-firebase-adminsdk-*.json
-
-# Misc
-*.hprof
-*.keystore

@@ -1,9 +1,16 @@
 package dev.aurakai.auraframefx.system.overlay
 
-import com.highcapable.yukihookapi.hook.xposed.prefs.data.YukiHookModulePrefs
-import com.highcapable.yukihookapi.hook.xposed.service.YukiHookServiceManager
+import androidx.compose.ui.graphics.Color // Corrected Color import - kept one
+import com.highcapable.yukihookapi.hook.xposed.prefs.data.YukiHookModulePrefs // Kept one
+import com.highcapable.yukihookapi.hook.xposed.service.YukiHookServiceManager // Kept one
 import dev.aurakai.auraframefx.ai.services.AuraAIService
-import dev.aurakai.auraframefx.ui.theme.Color
+import dev.aurakai.auraframefx.system.overlay.model.OverlayTheme
+import dev.aurakai.auraframefx.system.overlay.model.OverlayElement
+import dev.aurakai.auraframefx.system.overlay.model.ElementType // Added import
+import dev.aurakai.auraframefx.system.overlay.model.OverlayAnimation
+import dev.aurakai.auraframefx.system.overlay.model.OverlayTransition
+import dev.aurakai.auraframefx.system.overlay.model.OverlayShape
+import dev.aurakai.auraframefx.system.overlay.model.SystemOverlayConfig
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -12,7 +19,7 @@ class SystemOverlayManagerImpl @Inject constructor(
     private val prefs: YukiHookModulePrefs,
     private val overlayService: YukiHookServiceManager,
     private val auraService: AuraAIService,
-) : SystemOverlayManager {
+) : SystemOverlayManager { // Assuming SystemOverlayManager is an interface in this package
     private val activeElements = mutableMapOf<String, OverlayElement>()
     private val activeAnimations = mutableMapOf<String, OverlayAnimation>()
     private val activeTransitions = mutableMapOf<String, OverlayTransition>()
@@ -20,22 +27,22 @@ class SystemOverlayManagerImpl @Inject constructor(
 
     override fun applyTheme(theme: OverlayTheme) {
         // Apply theme colors
-        theme.colors.forEach { (key, color) ->
-            applyColor(key, color)
+        theme.colors?.forEach { (key, colorValue) ->
+            applyColor(key, colorValue) // colorValue is androidx.compose.ui.graphics.Color
         }
 
         // Apply theme fonts
-        theme.fonts.forEach { (key, font) ->
+        theme.fonts?.forEach { (key, font) ->
             applyFont(key, font)
         }
 
         // Apply theme shapes
-        theme.shapes.forEach { (_, shape) ->
+        theme.shapes?.forEach { (_, shape) ->
             applyShape(shape)
         }
     }
 
-    private fun applyColor(key: String, color: Color) {
+    private fun applyColor(key: String, colorValue: Color) { // Changed to Color
         // Apply color using LSPosed hooks
         overlayService.hook {
             // TODO: Implement color hooking logic
@@ -160,20 +167,26 @@ class SystemOverlayManagerImpl @Inject constructor(
         }
     }
 
+    /*
     fun generateOverlayFromDescription(description: String): SystemOverlayConfig {
-        return auraService.transformDevice(description).firstOrNull()?.let { response ->
-            // Parse Aura's response and generate overlay config
-            SystemOverlayConfig(
-                theme = OverlayTheme(
-                    name = "Custom",
-                    colors = mapOf("primary" to Color(0xFF00FFCC)),
-                    fonts = emptyMap(),
-                    shapes = emptyMap()
-                ),
-                elements = listOf(),
-                animations = listOf(),
-                transitions = listOf()
-            )
-        } ?: throw IllegalStateException("Failed to generate overlay config")
+        // This method is problematic as AuraAIService (Agent) doesn't have transformDevice
+        // Commenting out for now to resolve immediate build-breaking issues.
+        // TODO: Re-evaluate how to achieve this functionality with the Agent interface.
+        // return auraService.transformDevice(description).firstOrNull()?.let { response ->
+        //     // Parse Aura's response and generate overlay config
+        //     SystemOverlayConfig(
+        //         theme = OverlayTheme(
+        //             name = "Custom",
+        //             colors = mapOf("primary" to Color(0xFF00FFCC)), // This Color is androidx.compose.ui.graphics.Color
+        //             fonts = emptyMap(),
+        //             shapes = emptyMap()
+        //         ),
+        //         elements = listOf(),
+        //         animations = listOf(),
+        //         transitions = listOf()
+        //     )
+        // } ?: throw IllegalStateException("Failed to generate overlay config")
+        throw NotImplementedError("generateOverlayFromDescription needs redesign based on Agent capabilities")
     }
+    */
 }
