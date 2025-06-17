@@ -1,23 +1,34 @@
 package dev.aurakai.auraframefx.viewmodel
 
 import android.util.Log
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+// Placeholder interfaces will be removed
+import dev.aurakai.auraframefx.ai.services.AuraAIService // Actual service import
+import dev.aurakai.auraframefx.ai.services.KaiAIService // Actual service import
+import dev.aurakai.auraframefx.ai.services.CascadeAIService // Actual service import
 import dev.aurakai.auraframefx.ai.services.NeuralWhisper
 import dev.aurakai.auraframefx.model.AgentMessage
 import dev.aurakai.auraframefx.model.AgentType
-import dev.aurakai.auraframefx.model.ConversationState
-import dev.aurakai.auraframefx.model.AiRequest
+import dev.aurakai.auraframefx.model.ConversationState // Added import
+import dev.aurakai.auraframefx.model.AiRequest // Corrected import
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+// Removed @Singleton from ViewModel, typically ViewModels are not Singletons
+// import javax.inject.Singleton // ViewModel should use @HiltViewModel
 
-class ConferenceRoomViewModel @Inject constructor(
-    private val auraService: dev.aurakai.auraframefx.ai.services.AuraAIService,
-    private val kaiService: dev.aurakai.auraframefx.ai.services.KaiAIService,
-    private val cascadeService: dev.aurakai.auraframefx.ai.services.CascadeAIService,
+// Placeholder interfaces removed
+
+// @Singleton // ViewModels should use @HiltViewModel for scoping
+class ConferenceRoomViewModel @Inject constructor( // Assuming @HiltViewModel will be added if this is a ViewModel
+    private val auraService: dev.aurakai.auraframefx.ai.services.AuraAIService, // Using actual service
+    private val kaiService: dev.aurakai.auraframefx.ai.services.KaiAIService,     // Using actual service
+    private val cascadeService: dev.aurakai.auraframefx.ai.services.CascadeAIService, // Using actual service
     private val neuralWhisper: NeuralWhisper,
 ) : ViewModel() {
 
@@ -60,10 +71,10 @@ class ConferenceRoomViewModel @Inject constructor(
                     }
 
                     is ConversationState.Error -> {
-                        Log.e(TAG, "NeuralWhisper error: ${state.errorMessage}")
+                        Log.e(TAG, "NeuralWhisper error: ${state.message}")
                         _messages.update { current ->
                             current + AgentMessage(
-                                content = "Error: ${state.errorMessage}",
+                                content = "Error: ${state.message}",
                                 sender = AgentType.NEURAL_WHISPER, // Or a system error agent
                                 timestamp = System.currentTimeMillis(),
                                 confidence = 0.0f
@@ -82,10 +93,11 @@ class ConferenceRoomViewModel @Inject constructor(
     // This `sendMessage` was marked with `override` in user's snippet, suggesting an interface.
     // For now, assuming it's a direct method. If there's a base class/interface, it should be added.
     /*override*/ suspend fun sendMessage(message: String, sender: AgentType) {
-        val response = when (sender) {
-            AgentType.AURA -> auraService.processRequest(AiRequest(query = message))
-            AgentType.KAI -> kaiService.processRequest(AiRequest(query = message))
-            AgentType.CASCADE -> cascadeService.processRequest(AiRequest(query = message))
+        // Assuming services now have processRequestFlow returning Flow<AgentResponse>
+        val responseFlow: Flow<AgentResponse>? = when (sender) {
+            AgentType.AURA -> auraService.processRequestFlow(AiRequest(query = message, type = "text"))
+            AgentType.KAI -> kaiService.processRequestFlow(AiRequest(query = message, type = message)) // type = message seems odd, but keeping original logic
+            AgentType.CASCADE -> cascadeService.processRequestFlow(AiRequest(query = message, type = "context"))
             AgentType.USER -> {
                 _messages.update { current ->
                     current + AgentMessage(
@@ -98,20 +110,45 @@ class ConferenceRoomViewModel @Inject constructor(
                 neuralWhisper.shareContextWithKai(message)
                 return // Exit, response via NeuralWhisper's state flow
             }
+
             else -> {
                 Log.e(TAG, "Unsupported sender type: $sender")
-                null
+                null // Return null for unsupported types
             }
         }
 
-        response?.let { responseMessage ->
-            _messages.update { current ->
-                current + AgentMessage(
-                    content = responseMessage.content,
-                    sender = sender,
-                    timestamp = System.currentTimeMillis(),
-                    confidence = responseMessage.confidence
-                )
+        responseFlow?.let { flow ->
+            viewModelScope.launch {
+                try {
+                    val responseMessage =
+                        flow.first() // Assuming processRequest returns a Flow/StateFlow
+                    _messages.update { current ->
+                        current + AgentMessage(
+                            content = responseMessage.content,
+                        // The sender here should be the AI agent that responded (e.g., AgentType.AURA),
+                        // not the 'sender' parameter which initiated the call to this agent.
+                        // For simplicity, I'll use the AI's type.
+                        sender = when(sender) { // Determine actual responder type
+                            AgentType.AURA -> AgentType.AURA
+                            AgentType.KAI -> AgentType.KAI
+                            AgentType.CASCADE -> AgentType.CASCADE
+                            else -> sender // Fallback, though USER case is handled separately
+                        },
+                            timestamp = System.currentTimeMillis(),
+                            confidence = responseMessage.confidence
+                        )
+                    }
+                } catch (e: Exception) {
+                    Log.e(TAG, "Error processing AI response from $sender: ${e.message}", e)
+                    _messages.update { current ->
+                        current + AgentMessage(
+                            content = "Error from ${sender.name}: ${e.message}", // Corrected to sender.name
+                            sender = AgentType.GENESIS, // Or a specific error agent
+                            timestamp = System.currentTimeMillis(),
+                            confidence = 0.0f
+                        )
+                    }
+                }
             }
         }
     }
@@ -138,13 +175,16 @@ class ConferenceRoomViewModel @Inject constructor(
             // isRecording state will be updated by NeuralWhisper's conversationState or directly
             _isRecording.value = false // Explicitly set here based on action
         } else {
-            val started = neuralWhisper.startRecording { /* listener implementation or lambda */ }
-            if (started == null) {
-                Log.e(TAG, "Failed to start recording (NeuralWhisper.startRecording returned null).")
-                // Optionally update UI with error state
-            } else {
+            val started = neuralWhisper.startRecording()
+            if (started) {
                 Log.d(TAG, "Started recording.")
                 _isRecording.value = true
+            } else {
+                Log.e(
+                    TAG,
+                    "Failed to start recording (NeuralWhisper.startRecording returned false)."
+                )
+                // Optionally update UI with error state
             }
         }
     }

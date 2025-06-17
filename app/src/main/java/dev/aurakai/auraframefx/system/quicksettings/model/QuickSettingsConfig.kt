@@ -7,12 +7,6 @@ data class QuickSettingsConfig(
     val tileShape: OverlayShape? = null, // Example: Use the existing OverlayShape model
     val animationType: QuickSettingsAnimation = QuickSettingsAnimation.FADE,
     val hideLabels: Boolean = false,
-    // Added fields for QuickSettingsHooker compatibility
-    val hideTileLabels: Boolean? = null,
-    val customTextColorEnabled: Boolean? = null,
-    val customTextColor: String? = null,
-    val hideTileIcons: Boolean? = null,
-    val hideFooterButtons: Boolean? = null, // <-- Added for QuickSettingsHooker
     // Add other relevant fields based on SystemCustomizationViewModel operations
     val tiles: List<QuickSettingsTileConfig>? = null, // Added from QuickSettingsHooker
     val headerBackgroundConfig: HeaderBackgroundConfig? = null, // Added from QuickSettingsHooker

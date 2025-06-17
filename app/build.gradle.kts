@@ -148,10 +148,14 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.6.0") // Added kotlinx-datetime
 
     // Reminder: Xposed/LSPosed might have compatibility issues with certain hot-swapping/Apply Changes features in Android Studio.
-
-    // Xposed API (compileOnly, not packaged in APK)
-    compileOnly(files("../Libs/api-82.jar"))
-
+    // If you encounter issues during development, try disabling these or performing a full reinstall of the app.
+    // Xposed Framework
+    // compileOnly("de.robv.android.xposed:api:82")
+    // compileOnly("de.robv.android.xposed:api:82:sources")
+    // Using local JARs for Xposed API v82 as it's no longer reliably available
+    // from standard public repositories (like jCenter/Bintray which are deprecated).
+    compileOnly(files("Libs/api-82.jar"))
+    compileOnly(files("Libs/api-82-sources.jar"))
     // LSPosed specific
     compileOnly("org.lsposed.hiddenapibypass:hiddenapibypass:6.1")
     compileOnly("org.lsposed.hiddenapibypass:hiddenapibypass:6.1:sources")

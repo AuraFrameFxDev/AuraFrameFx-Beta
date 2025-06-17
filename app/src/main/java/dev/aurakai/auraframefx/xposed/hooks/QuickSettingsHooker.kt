@@ -18,8 +18,6 @@ import de.robv.android.xposed.XposedHelpers
 import dev.aurakai.auraframefx.system.overlay.OverlayShape
 import dev.aurakai.auraframefx.system.overlay.ShapeManager
 import dev.aurakai.auraframefx.system.quicksettings.model.QuickSettingsConfig
-import dev.aurakai.auraframefx.system.quicksettings.model.QuickSettingsTileAnimation
-import dev.aurakai.auraframefx.system.quicksettings.model.HapticFeedbackConfig
 import java.io.File
 
 
@@ -356,18 +354,5 @@ class QuickSettingsHooker(
             XposedBridge.log(e)
             return null
         }
-    }
-
-    // --- Utility/Helper Functions ---
-    private fun applyAnimation(view: View, animationConfig: QuickSettingsTileAnimation) {
-        // Stub: Implement animation logic as needed
-        // For now, just log
-        XposedBridge.log("[$TAG] applyAnimation called for view: $view with config: $animationConfig")
-    }
-
-    private fun applyHapticFeedback(context: android.content.Context, hapticConfig: HapticFeedbackConfig) {
-        // Stub: Implement haptic feedback logic as needed
-        // For now, just log
-        XposedBridge.log("[$TAG] applyHapticFeedback called for context: $context with config: $hapticConfig")
     }
 }

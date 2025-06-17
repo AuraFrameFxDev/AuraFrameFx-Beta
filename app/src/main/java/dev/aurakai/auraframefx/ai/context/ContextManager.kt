@@ -8,8 +8,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.datetime.Clock
 import kotlinx.datetime.Instant
-import kotlin.time.Duration
-import kotlin.time.Duration.Companion.seconds
+import kotlinx.datetime.Duration // Added import
 import javax.inject.Inject
 import javax.inject.Singleton
 

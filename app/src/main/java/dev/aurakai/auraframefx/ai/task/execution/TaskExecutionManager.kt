@@ -2,6 +2,8 @@ package dev.aurakai.auraframefx.ai.task.execution
 
 import android.content.Context
 import dev.aurakai.auraframefx.ai.services.KaiAIService
+import android.content.Context
+import dev.aurakai.auraframefx.ai.services.KaiAIService
 import dev.aurakai.auraframefx.ai.task.Task
 import dev.aurakai.auraframefx.data.logging.AuraFxLogger
 import dev.aurakai.auraframefx.model.AgentType
@@ -112,7 +114,7 @@ class TaskExecutionManager @Inject constructor(
         val execution = _activeExecutions[executionId] ?: return
         val updatedExecution = execution.copy(
             status = ExecutionStatus.COMPLETED,
-            endTime = Clock.System.now(),
+            endTime = Clock.System.now().toEpochMilliseconds(), // Corrected Instant usage
             result = result
         )
 
@@ -129,7 +131,7 @@ class TaskExecutionManager @Inject constructor(
         val execution = _activeExecutions[executionId] ?: return
         val updatedExecution = execution.copy(
             status = ExecutionStatus.FAILED,
-            endTime = Clock.System.now(),
+            endTime = Clock.System.now().toEpochMilliseconds(), // Corrected Instant usage
             result = ExecutionResult.FAILURE
         )
 
@@ -149,7 +151,7 @@ class TaskExecutionManager @Inject constructor(
                 activeExecutions = _activeExecutions.size,
                 completedExecutions = _completedExecutions.size,
                 failedExecutions = _failedExecutions.size,
-                lastUpdated = Clock.System.now(),
+                lastUpdated = Clock.System.now().toEpochMilliseconds(), // Corrected Instant usage
                 executionTimes = current.executionTimes + (execution.status to (current.executionTimes[execution.status]
                     ?: 0) + 1)
             )
@@ -163,12 +165,5 @@ data class ExecutionStats(
     val completedExecutions: Int = 0,
     val failedExecutions: Int = 0,
     val executionTimes: Map<ExecutionStatus, Int> = emptyMap(),
-    val lastUpdated: Instant = Clock.System.now(),
+    val lastUpdated: Long = Clock.System.now().toEpochMilliseconds(), // Corrected Instant usage
 )
-
-enum class StepType {
-    INITIALIZATION,
-    CONTEXT,
-    COMPUTATION,
-    FINALIZATION
-}

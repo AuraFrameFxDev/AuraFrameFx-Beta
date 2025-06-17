@@ -1,6 +1,7 @@
 package dev.aurakai.auraframefx.xposed
 
 import de.robv.android.xposed.IXposedHookLoadPackage
+import de.robv.android.xposed.IXposedHookLoadPackage
 import de.robv.android.xposed.XC_MethodHook
 import de.robv.android.xposed.XposedBridge
 import de.robv.android.xposed.XposedHelpers
@@ -14,7 +15,7 @@ import dev.aurakai.auraframefx.xposed.hooks.LockScreenHooker
 import dev.aurakai.auraframefx.xposed.hooks.NotchBarHooker
 import dev.aurakai.auraframefx.xposed.hooks.QuickSettingsHooker
 
-class AuraXposedEntry : IXposedHookLoadPackage {
+class AuraXposedEntry : IXposedHookLoadPackage { // IXposedHookLoadPackage was already imported, removed duplicate from replace
     private val TAG = "AuraXposedEntry"
     companion object {
         const val MAIN_APP_PACKAGE_NAME = "dev.aurakai.auraframefx"
