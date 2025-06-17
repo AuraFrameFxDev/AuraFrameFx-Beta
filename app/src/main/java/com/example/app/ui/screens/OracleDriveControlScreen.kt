@@ -16,6 +16,11 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.app.viewmodel.OracleDriveControlViewModel
 import kotlinx.coroutines.launch
 
+/**
+ * Displays a UI screen for controlling and monitoring the Oracle Drive service.
+ *
+ * Provides controls to refresh service status, view diagnostics logs, and enable or disable modules by package name. The screen reflects real-time connection status and displays error messages for failed operations.
+ */
 @Composable
 fun OracleDriveControlScreen(
     viewModel: OracleDriveControlViewModel = hiltViewModel(),
