@@ -1,0 +1,574 @@
+> Task :app:compileDebugKotlin FAILED
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/MainActivity.kt:20:45 Unresolved reference 'digitalPixelEffect'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/MainActivity.kt:81:30 Unresolved reference 'digitalPixelEffect'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ai/AiGenerationService.kt:4:42 Unresolved reference 'model'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ai/AiGenerationService.kt:5:42 Unresolved reference 'model'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ai/AiGenerationService.kt:6:42 Unresolved reference 'model'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ai/AiGenerationService.kt:7:42 Unresolved reference 'model'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ai/AiGenerationService.kt:19:15 Unresolved reference 'GenerateTextResponse'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ai/AiGenerationService.kt:20:9 Argument type mismatch: actual type is 'Result<GenerateTextResponse> & Result<GenerateTextResponse>', but 'Result<ERROR CLASS: Symbol not found for GenerateTextResponse>' was expected.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ai/AiGenerationService.kt:21:27 Unresolved reference 'GenerateTextRequest'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ai/AiGenerationService.kt:36:15 Unresolved reference 'GenerateImageDescriptionResponse'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ai/AiGenerationService.kt:37:9 Argument type mismatch: actual type is 'Result<GenerateImageDescriptionResponse> & Result<GenerateImageDescriptionResponse>', but 'Result<ERROR CLASS: Symbol not found for GenerateImageDescriptionResponse>' was expected.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ai/AiGenerationService.kt:38:27 Unresolved reference 'GenerateImageDescriptionRequest'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ai/agents/BaseAgent.kt:4:38 Unresolved reference 'Agent'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ai/agents/GenesisAgent.kt:13:38 Unresolved reference 'Agent'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ai/agents/GenesisAgent.kt:74:68 No parameter with name 'type' found.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ai/agents/GenesisAgent.kt:74:68 No value passed for parameter 'context'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ai/agents/GenesisAgent.kt:88:68 No parameter with name 'type' found.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ai/agents/GenesisAgent.kt:88:68 No value passed for parameter 'context'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ai/agents/GenesisAgent.kt:103:69 No parameter with name 'type' found.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ai/agents/GenesisAgent.kt:103:69 No value passed for parameter 'context'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ai/context/ContextManager.kt:41:32 Argument type mismatch: actual type is 'Map<String, Any>', but 'Map<String, String>' was expected.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ai/context/ContextManager.kt:45:24 Argument type mismatch: actual type is 'Map<String, Any>', but 'Map<String, String>' was expected.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ai/context/ContextManager.kt:70:28 Argument type mismatch: actual type is 'Map<String, Any>', but 'Map<String, String>' was expected.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ai/context/ContextManager.kt:115:41 Unresolved reference 'milliseconds'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ai/error/ErrorHandler.kt:39:24 Argument type mismatch: actual type is 'Map<String, Any>', but 'Map<String, String>' was expected.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ai/pipeline/AIPipelineProcessor.kt:33:33 Argument type mismatch: actual type is 'PipelineState.Processing', but 'PipelineState.Idle' was expected.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ai/pipeline/AIPipelineProcessor.kt:33:33 Type mismatch: inferred type is 'PipelineState.Processing', but 'PipelineState.Idle' was expected.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ai/pipeline/AIPipelineProcessor.kt:100:33 Argument type mismatch: actual type is 'PipelineState.Completed', but 'PipelineState.Idle' was expected.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ai/pipeline/AIPipelineProcessor.kt:100:33 Type mismatch: inferred type is 'PipelineState.Completed', but 'PipelineState.Idle' was expected.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ai/services/AuraAIService.kt:21:30 Unresolved reference 'type'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ai/services/AuraAIService.kt:25:64 Unresolved reference 'type'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ai/services/CascadeAIService.kt:27:30 Unresolved reference 'type'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ai/services/CascadeAIService.kt:32:64 Unresolved reference 'type'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ai/services/CascadeAIService.kt:62:38 Unresolved reference 'processRequestFlow'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ai/services/CascadeAIService.kt:62:66 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ai/services/CascadeAIService.kt:68:82 Unresolved reference 'content'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ai/services/CascadeAIService.kt:69:73 Unresolved reference 'confidence'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ai/services/CascadeAIService.kt:118:52 Unresolved reference 'connect'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ai/services/CascadeAIService.kt:123:55 Unresolved reference 'disconnect'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ai/services/KaiAIService.kt:36:22 Unresolved reference 'log'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ai/services/KaiAIService.kt:36:39 Unresolved reference 'LogLevel'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ai/services/KaiAIService.kt:42:30 Unresolved reference 'log'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ai/services/KaiAIService.kt:42:47 Unresolved reference 'LogLevel'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ai/task/TaskScheduler.kt:65:54 Unresolved reference 'priorityWeight'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ai/task/TaskScheduler.kt:66:44 Unresolved reference 'urgencyWeight'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ai/task/TaskScheduler.kt:67:47 Unresolved reference 'importanceWeight'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ai/task/TaskScheduler.kt:93:70 Unresolved reference 'maxActiveTasks'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ai/task/TaskScheduler.kt:164:45 Unresolved reference 'priorityWeight'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ai/task/TaskScheduler.kt:168:44 Unresolved reference 'urgencyWeight'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ai/task/TaskScheduler.kt:172:47 Unresolved reference 'importanceWeight'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ai/task/execution/TaskExecutionManager.kt:169:12 Redeclaration:
+enum class StepType : Enum<StepType>
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ai/task/execution/TaskExecutionModel.kt:76:12 Redeclaration:
+enum class StepType : Enum<StepType>
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/data/SecurePreferences.kt:4:17 Unresolved reference 'security'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/data/SecurePreferences.kt:5:17 Unresolved reference 'security'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/data/SecurePreferences.kt:20:9 Unresolved reference 'MasterKeys'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/data/SecurePreferences.kt:20:32 Unresolved reference 'MasterKeys'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/data/SecurePreferences.kt:24:29 Property delegate must have a 'getValue(SecurePreferences, KProperty1<SecurePreferences, ERROR CLASS: Cannot infer argument for type parameter T>)' method. None of the following functions is applicable:
+fun <T> Lazy<T>.getValue(thisRef: Any?, property: KProperty<*>): T
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/data/SecurePreferences.kt:24:32 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/data/SecurePreferences.kt:24:32 Not enough information to infer type argument for 'T'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/data/SecurePreferences.kt:24:32 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/data/SecurePreferences.kt:24:32 Not enough information to infer type argument for 'T'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/data/SecurePreferences.kt:25:9 Unresolved reference 'EncryptedSharedPreferences'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/data/SecurePreferences.kt:29:13 Unresolved reference 'EncryptedSharedPreferences'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/data/SecurePreferences.kt:30:13 Unresolved reference 'EncryptedSharedPreferences'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/data/SecurePreferences.kt:39:28 Unresolved reference 'getString'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/data/SecurePreferences.kt:47:21 Unresolved reference 'edit'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/data/SecurePreferences.kt:47:60 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/data/SecurePreferences.kt:55:28 Unresolved reference 'getString'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/data/SecurePreferences.kt:63:21 Unresolved reference 'edit'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/data/SecurePreferences.kt:63:54 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/data/SecurePreferences.kt:70:21 Unresolved reference 'edit'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/data/SecurePreferences.kt:70:41 No value passed for parameter 'block'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/di/AppModule.kt:112:24 Interface 'interface AuraAIService : Any' does not have constructors.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/di/AppModule.kt:192:44 Argument type mismatch: actual type is 'AIConfig', but 'AIPipelineConfig' was expected.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/di/AppModule.kt:231:45 Argument type mismatch: actual type is 'AIConfig', but 'AIPipelineConfig' was expected.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/di/AuraFxAiApiModule.kt:3:12 Unresolved reference 'jakewharton'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/di/AuraFxAiApiModule.kt:49:39 Unresolved reference 'asConverterFactory'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/screens/ConferenceRoomScreen.kt:82:29 Overload resolution ambiguity between candidates:
+val NeonBlue: Color
+val NeonBlue: Color
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/screens/ConferenceRoomScreen.kt:112:35 Unresolved reference 'viewModelScope'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/screens/ConferenceRoomScreen.kt:113:39 Suspend function 'suspend fun sendMessage(message: String, sender: AgentType): Unit' can only be called from a coroutine or another suspend function.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/screens/ConferenceRoomScreen.kt:122:28 Overload resolution ambiguity between candidates:
+val NeonBlue: Color
+val NeonBlue: Color
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/screens/DiagnosticsScreen.kt:108:57 Overload resolution ambiguity between candidates:
+val NeonGreen: Color
+val NeonGreen: Color
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/screens/DiagnosticsScreen.kt:109:86 Overload resolution ambiguity between candidates:
+val NeonRed: Color
+val NeonRed: Color
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/screens/DiagnosticsScreen.kt:144:33 Overload resolution ambiguity between candidates:
+val NeonBlue: Color
+val NeonBlue: Color
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/system/homescreen/HomeScreenTransitionManager.kt:47:33 Unresolved reference 'getString'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/system/homescreen/HomeScreenTransitionManager.kt:58:24 Unresolved reference 'hook'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/system/monitor/SystemMonitorService.kt:3:20 Conflicting import: imported name 'Service' is ambiguous.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/system/monitor/SystemMonitorService.kt:4:24 Conflicting import: imported name 'BroadcastReceiver' is ambiguous.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/system/monitor/SystemMonitorService.kt:5:24 Conflicting import: imported name 'Context' is ambiguous.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/system/monitor/SystemMonitorService.kt:6:24 Conflicting import: imported name 'Intent' is ambiguous.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/system/monitor/SystemMonitorService.kt:7:24 Conflicting import: imported name 'IntentFilter' is ambiguous.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/system/monitor/SystemMonitorService.kt:8:20 Conflicting import: imported name 'ConnectivityManager' is ambiguous.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/system/monitor/SystemMonitorService.kt:9:19 Conflicting import: imported name 'BatteryManager' is ambiguous.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/system/monitor/SystemMonitorService.kt:10:19 Conflicting import: imported name 'IBinder' is ambiguous.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/system/monitor/SystemMonitorService.kt:11:21 Conflicting import: imported name 'Log' is ambiguous.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/system/monitor/SystemMonitorService.kt:12:28 Conflicting import: imported name 'AndroidEntryPoint' is ambiguous.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/system/monitor/SystemMonitorService.kt:13:20 Conflicting import: imported name 'Service' is ambiguous.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/system/monitor/SystemMonitorService.kt:14:24 Conflicting import: imported name 'BroadcastReceiver' is ambiguous.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/system/monitor/SystemMonitorService.kt:15:24 Conflicting import: imported name 'Context' is ambiguous.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/system/monitor/SystemMonitorService.kt:16:24 Conflicting import: imported name 'Intent' is ambiguous.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/system/monitor/SystemMonitorService.kt:17:24 Conflicting import: imported name 'IntentFilter' is ambiguous.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/system/monitor/SystemMonitorService.kt:18:20 Conflicting import: imported name 'ConnectivityManager' is ambiguous.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/system/monitor/SystemMonitorService.kt:19:19 Conflicting import: imported name 'BatteryManager' is ambiguous.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/system/monitor/SystemMonitorService.kt:20:19 Conflicting import: imported name 'IBinder' is ambiguous.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/system/monitor/SystemMonitorService.kt:21:21 Conflicting import: imported name 'Log' is ambiguous.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/system/monitor/SystemMonitorService.kt:22:28 Conflicting import: imported name 'AndroidEntryPoint' is ambiguous.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/system/monitor/SystemMonitorService.kt:37:1 Class 'SystemMonitorService' is not abstract and does not implement abstract base class member:
+fun onBind(p0: Intent!): IBinder?
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/system/monitor/SystemMonitorService.kt:76:57 Unresolved reference 'loadCriticalOfflineData'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/system/monitor/SystemMonitorService.kt:78:63 Unresolved reference 'batteryOptimizationEnabled'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/system/monitor/SystemMonitorService.kt:79:50 Unresolved reference 'batteryThresholdLow'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/system/monitor/SystemMonitorService.kt:83:112 Unresolved reference 'batteryThresholdLow'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/system/monitor/SystemMonitorService.kt:88:33 No parameter with name 'details' found.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/system/monitor/SystemMonitorService.kt:92:33 No parameter with name 'type' found.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/system/monitor/SystemMonitorService.kt:92:33 No value passed for parameter 'context'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/system/monitor/SystemMonitorService.kt:131:29 No parameter with name 'details' found.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/system/monitor/SystemMonitorService.kt:132:29 No parameter with name 'type' found.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/system/monitor/SystemMonitorService.kt:132:29 No value passed for parameter 'context'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/system/monitor/SystemMonitorService.kt:143:29 No parameter with name 'details' found.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/system/monitor/SystemMonitorService.kt:144:29 No parameter with name 'type' found.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/system/monitor/SystemMonitorService.kt:144:29 No value passed for parameter 'context'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/system/monitor/SystemMonitorService.kt:160:5 Modifier 'override' is not applicable to 'top level function'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/system/monitor/SystemMonitorService.kt:161:9 No supertypes are accessible in this context.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/system/monitor/SystemMonitorService.kt:162:15 Unresolved reference 'TAG'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/system/monitor/SystemMonitorService.kt:166:13 Unresolved reference 'registerReceiver'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/system/monitor/SystemMonitorService.kt:166:30 Unresolved reference 'batteryReceiver'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/system/monitor/SystemMonitorService.kt:167:19 Unresolved reference 'TAG'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/system/monitor/SystemMonitorService.kt:170:13 Unresolved reference 'registerReceiver'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/system/monitor/SystemMonitorService.kt:170:30 Unresolved reference 'networkReceiver'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/system/monitor/SystemMonitorService.kt:171:19 Unresolved reference 'TAG'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/system/monitor/SystemMonitorService.kt:173:13 Unresolved reference 'auraFxLogger'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/system/monitor/SystemMonitorService.kt:173:28 Unresolved reference 'TAG'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/system/monitor/SystemMonitorService.kt:176:9 Unresolved reference 'serviceScope'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/system/monitor/SystemMonitorService.kt:179:17 Unresolved reference 'offlineDataManager'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/system/monitor/SystemMonitorService.kt:180:19 Unresolved reference 'TAG'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/system/monitor/SystemMonitorService.kt:187:25 Unresolved reference 'offlineDataManager'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/system/monitor/SystemMonitorService.kt:188:27 Unresolved reference 'TAG'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/system/monitor/SystemMonitorService.kt:191:89 Unresolved reference 'securityScanIntervalHours'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/system/monitor/SystemMonitorService.kt:193:49 Unresolved reference 'securityScanIntervalHours'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/system/monitor/SystemMonitorService.kt:196:25 Unresolved reference 'TAG'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/system/monitor/SystemMonitorService.kt:197:81 Unresolved reference 'securityScanIntervalHours'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/system/monitor/SystemMonitorService.kt:202:27 Unresolved reference 'TAG'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/system/monitor/SystemMonitorService.kt:206:29 No parameter with name 'type' found.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/system/monitor/SystemMonitorService.kt:206:29 No value passed for parameter 'context'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/system/monitor/SystemMonitorService.kt:209:44 Unresolved reference 'kaiService'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/system/monitor/SystemMonitorService.kt:210:31 Unresolved reference 'TAG'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/system/monitor/SystemMonitorService.kt:213:25 Unresolved reference 'auraFxLogger'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/system/monitor/SystemMonitorService.kt:214:29 Unresolved reference 'TAG'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/system/monitor/SystemMonitorService.kt:221:25 Unresolved reference 'offlineDataManager'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/system/monitor/SystemMonitorService.kt:225:25 Unresolved reference 'TAG'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/system/monitor/SystemMonitorService.kt:230:25 Unresolved reference 'offlineDataManager'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/system/monitor/SystemMonitorService.kt:243:5 Modifier 'override' is not applicable to 'top level function'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/system/monitor/SystemMonitorService.kt:244:15 Unresolved reference 'TAG'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/system/monitor/SystemMonitorService.kt:245:9 Unresolved reference 'serviceScope'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/system/monitor/SystemMonitorService.kt:247:17 Unresolved reference 'offlineDataManager'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/system/monitor/SystemMonitorService.kt:249:17 Unresolved reference 'auraFxLogger'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/system/monitor/SystemMonitorService.kt:249:32 Unresolved reference 'TAG'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/system/monitor/SystemMonitorService.kt:252:16 Unresolved reference 'START_STICKY'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/system/monitor/SystemMonitorService.kt:260:5 Modifier 'override' is not applicable to 'top level function'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/system/monitor/SystemMonitorService.kt:261:9 No supertypes are accessible in this context.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/system/monitor/SystemMonitorService.kt:262:15 Unresolved reference 'TAG'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/system/monitor/SystemMonitorService.kt:264:13 Unresolved reference 'unregisterReceiver'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/system/monitor/SystemMonitorService.kt:264:32 Unresolved reference 'batteryReceiver'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/system/monitor/SystemMonitorService.kt:265:19 Unresolved reference 'TAG'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/system/monitor/SystemMonitorService.kt:266:13 Unresolved reference 'unregisterReceiver'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/system/monitor/SystemMonitorService.kt:266:32 Unresolved reference 'networkReceiver'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/system/monitor/SystemMonitorService.kt:267:19 Unresolved reference 'TAG'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/system/monitor/SystemMonitorService.kt:269:13 Unresolved reference 'auraFxLogger'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/system/monitor/SystemMonitorService.kt:269:28 Unresolved reference 'TAG'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/system/monitor/SystemMonitorService.kt:271:9 Unresolved reference 'serviceScope'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/system/monitor/SystemMonitorService.kt:272:15 Unresolved reference 'TAG'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/system/monitor/SystemMonitorService.kt:275:5 Modifier 'override' is not applicable to 'top level function'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/system/monitor/SystemMonitorService.kt:278:1 Syntax error: Expecting a top level declaration.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/system/overlay/SystemOverlayManagerImpl.kt:47:24 Unresolved reference 'hook'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/system/overlay/SystemOverlayManagerImpl.kt:54:24 Unresolved reference 'hook'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/system/overlay/SystemOverlayManagerImpl.kt:60:9 'when' expression must be exhaustive. Add the 'TEXT', 'IMAGE', 'SHAPE' branches or an 'else' branch.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/system/overlay/SystemOverlayManagerImpl.kt:75:24 Unresolved reference 'hook'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/system/overlay/SystemOverlayManagerImpl.kt:81:24 Unresolved reference 'hook'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/system/overlay/SystemOverlayManagerImpl.kt:87:24 Unresolved reference 'hook'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/system/overlay/SystemOverlayManagerImpl.kt:93:24 Unresolved reference 'hook'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/system/overlay/SystemOverlayManagerImpl.kt:99:24 Unresolved reference 'hook'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/system/overlay/SystemOverlayManagerImpl.kt:105:24 Unresolved reference 'hook'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/system/overlay/SystemOverlayManagerImpl.kt:111:24 Unresolved reference 'hook'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/system/overlay/SystemOverlayManagerImpl.kt:117:24 Unresolved reference 'hook'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/system/overlay/SystemOverlayManagerImpl.kt:124:24 Unresolved reference 'hook'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/system/overlay/SystemOverlayManagerImpl.kt:132:24 Unresolved reference 'hook'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/system/overlay/SystemOverlayManagerImpl.kt:140:24 Unresolved reference 'hook'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/system/overlay/SystemOverlayManagerImpl.kt:155:24 Unresolved reference 'hook'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/system/overlay/SystemOverlayManagerImpl.kt:165:24 Unresolved reference 'hook'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/aicontent/AiContentViewModel.kt:10:8 Unresolved reference 'timber'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/aicontent/AiContentViewModel.kt:40:46 Unresolved reference 'generatedText'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/aicontent/AiContentViewModel.kt:41:45 Unresolved reference 'finishReason'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/aicontent/AiContentViewModel.kt:44:17 Unresolved reference 'Timber'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/aicontent/AiContentViewModel.kt:63:17 Unresolved reference 'Timber'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/animation/DigitalTransitions.kt:68:38 Overload resolution ambiguity between candidates:
+val NeonBlue: Color
+val NeonBlue: Color
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/animation/DigitalTransitions.kt:68:48 Overload resolution ambiguity between candidates:
+val NeonPink: Color
+val NeonPink: Color
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/animation/DigitalTransitions.kt:170:33 Overload resolution ambiguity between candidates:
+val NeonPink: Color
+val NeonPink: Color
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/animation/DigitalTransitions.kt:331:38 Overload resolution ambiguity between candidates:
+val NeonPink: Color
+val NeonPink: Color
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/animation/DigitalTransitions.kt:331:52 No parameter with name 'alpha' found.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/animation/DigitalTransitions.kt:332:41 Overload resolution ambiguity between candidates:
+val NeonBlue: Color
+val NeonBlue: Color
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/animation/DigitalTransitions.kt:332:55 No parameter with name 'alpha' found.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/animation/DigitalTransitions.kt:337:25 Unresolved reference 'save'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/animation/DigitalTransitions.kt:340:25 Unresolved reference 'clipRect'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/animation/DigitalTransitions.kt:348:25 Unresolved reference 'translate'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/animation/DigitalTransitions.kt:356:41 Argument type mismatch: actual type is 'Any', but 'Color' was expected.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/animation/DigitalTransitions.kt:364:25 Unresolved reference 'restore'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/components/CyberpunkBackgrounds.kt:22:27 Overload resolution ambiguity between candidates:
+val NeonBlue: Color
+val NeonBlue: Color
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/components/CyberpunkBackgrounds.kt:23:29 Overload resolution ambiguity between candidates:
+val NeonPink: Color
+val NeonPink: Color
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/components/CyberpunkBackgrounds.kt:159:13 Unresolved reference 'DrawScope'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/components/CyberpunkBackgrounds.kt:179:5 Unresolved reference 'drawPath'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/components/CyberpunkBackgrounds.kt:192:27 Overload resolution ambiguity between candidates:
+val NeonBlue: Color
+val NeonBlue: Color
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/components/CyberpunkBackgrounds.kt:193:29 Overload resolution ambiguity between candidates:
+val NeonPink: Color
+val NeonPink: Color
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/components/FloatingCyberWindow.kt:202:18 Unresolved reference 'DigitalTransitions'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/components/HaloView.kt:45:5 Annotation argument must be a compile-time constant.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/components/HaloView.kt:45:42 Unresolved reference 'ExperimentalFoundationApi'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/components/HaloView.kt:213:36 Unresolved reference 'consumeAllChanges'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/components/HaloView.kt:513:25 Argument type mismatch: actual type is 'AgentConfig', but 'AgentType' was expected.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/components/HaloView.kt:522:29 Argument type mismatch: actual type is 'AgentConfig', but 'AgentType' was expected.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/components/HaloView.kt:526:33 Argument type mismatch: actual type is 'AgentConfig', but 'AgentType' was expected.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/components/PlaceholderAuraOrb.kt:24:29 Unresolved reference 'padding'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/components/StaticOrb.kt:30:25 Overload resolution ambiguity between candidates:
+val NeonBlue: Color
+val NeonBlue: Color
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/components/StaticOrb.kt:30:34 Unresolved reference 'copy'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/components/StaticOrb.kt:39:21 Overload resolution ambiguity between candidates:
+val NeonPink: Color
+val NeonPink: Color
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/debug/CascadeZOrderPlayground.kt:24:22 Suspend function 'suspend fun updateVisionState(newState: VisionState): Unit' can only be called from a coroutine or another suspend function.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/debug/CascadeZOrderPlayground.kt:28:22 Suspend function 'suspend fun updateProcessingState(newState: ProcessingState): Unit' can only be called from a coroutine or another suspend function.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/debug/CascadeZOrderPlayground.kt:166:37 Unresolved reference 'history'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/debug/CascadeZOrderPlayground.kt:166:56 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/debug/CascadeZOrderPlayground.kt:167:29 @Composable invocations can only happen from the context of a @Composable function
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/debug/CascadeZOrderPlayground.kt:175:41 Unresolved reference 'history'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/debug/CascadeZOrderPlayground.kt:175:60 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/debug/CascadeZOrderPlayground.kt:176:29 @Composable invocations can only happen from the context of a @Composable function
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/debug/CascadeZOrderPlayground.kt:187:2 Unresolved reference 'Preview'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/navigation/AppNavGraph.kt:15:43 Unresolved reference 'OracleDriveControlScreen'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/navigation/AppNavGraph.kt:111:13 Unresolved reference 'OracleDriveControlScreen'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/navigation/NavHost.kt:35:18 Unresolved reference 'fillMaxSize'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/AIChatScreen.kt:150:24 Argument type mismatch: actual type is 'Alignment.Horizontal', but 'Alignment' was expected.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/AIChatScreen.kt:151:36 Unresolved reference 'dp'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/AurakaiEcoSysScreen.kt:19:35 Unresolved reference 'models'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/AurakaiEcoSysScreen.kt:27:20 Unresolved reference 'AuraMoodViewModel'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/AurakaiEcoSysScreen.kt:27:40 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/AurakaiEcoSysScreen.kt:28:21 Property delegate must have a 'getValue(Nothing?, KProperty0<ERROR CLASS: Cannot infer argument for type parameter T>)' method. None of the following functions is applicable:
+fun <T> State<T>.getValue(thisObj: Any?, property: KProperty<*>): T
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/AurakaiEcoSysScreen.kt:28:24 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/AurakaiEcoSysScreen.kt:28:34 Unresolved reference 'moodState'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/AurakaiEcoSysScreen.kt:28:44 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/AurakaiEcoSysScreen.kt:41:68 Unresolved reference 'name'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/AurakaiEcoSysScreen.kt:45:42 Unresolved reference 'onUserInput'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/AurakaiEcoSysScreen.kt:49:42 Unresolved reference 'onUserInput'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/ConferenceRoomScreen.kt:66:45 @Composable invocations can only happen from the context of a @Composable function
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/ConferenceRoomScreen.kt:71:45 @Composable invocations can only happen from the context of a @Composable function
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/ConferenceRoomScreen.kt:76:45 @Composable invocations can only happen from the context of a @Composable function
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/ConferenceRoomScreen.kt:118:62 Unresolved reference 'type_your_message'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/ConferenceRoomScreen.kt:134:28 Overload resolution ambiguity between candidates:
+val NeonBlue: Color
+val NeonBlue: Color
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/ConferenceRoomScreen.kt:157:14 Expression 'weight' of type 'Float' cannot be invoked as a function. Function 'invoke()' is not found.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/ConferenceRoomScreen.kt:195:52 Overload resolution ambiguity between candidates:
+val NeonBlue: Color
+val NeonBlue: Color
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/ConferenceRoomScreen.kt:212:2 Unresolved reference 'Preview'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/DigitalTransitionRow.kt:10:50 Unresolved reference 'HomeScreenTransitionType'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/DigitalTransitionRow.kt:14:18 Unresolved reference 'HomeScreenTransitionType'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/DigitalTransitionRow.kt:15:22 Unresolved reference 'HomeScreenTransitionType'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/DigitalTransitionRow.kt:22:40 Unresolved reference 'HomeScreenTransitionType'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/DigitalTransitionRow.kt:23:38 Unresolved reference 'HomeScreenTransitionType'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/DigitalTransitionRow.kt:28:40 Unresolved reference 'HomeScreenTransitionType'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/DigitalTransitionRow.kt:29:38 Unresolved reference 'HomeScreenTransitionType'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/EcosystemMenuScreen.kt:11:50 Unresolved reference 'HomeScreenTransitionType'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/EcosystemMenuScreen.kt:16:21 Unresolved reference 'HomeScreenTransitionType'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/EcosystemMenuScreen.kt:16:48 Unresolved reference 'HomeScreenTransitionType'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/EcosystemMenuScreen.kt:24:13 Unresolved reference 'Column'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/EcosystemMenuScreen.kt:25:17 @Composable invocations can only happen from the context of a @Composable function
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/EcosystemMenuScreen.kt:26:17 @Composable invocations can only happen from the context of a @Composable function
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/EcosystemMenuScreen.kt:28:38 Unresolved reference 'HomeScreenTransitionType'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/HomeScreen.kt:28:55 @Composable invocations can only happen from the context of a @Composable function
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/HomeScreen.kt:89:22 Unresolved reference 'DigitalTransitions'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/HomeScreen.kt:106:34 Unresolved reference 'DigitalTransitions'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/HomeScreen.kt:110:53 @Composable invocations can only happen from the context of a @Composable function
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/HomeScreen.kt:114:29 No value passed for parameter 'onClick'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/HomeScreen.kt:150:26 Unresolved reference 'DigitalTransitions'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/HomeScreen.kt:152:44 Overload resolution ambiguity between candidates:
+val NeonPink: Color
+val NeonPink: Color
+val NeonPink: Color
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/HomeScreen.kt:153:46 Overload resolution ambiguity between candidates:
+val NeonBlue: Color
+val NeonBlue: Color
+val NeonBlue: Color
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/HomeScreen.kt:171:26 Unresolved reference 'DigitalTransitions'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/HomeScreen.kt:174:46 Overload resolution ambiguity between candidates:
+val NeonBlue: Color
+val NeonBlue: Color
+val NeonBlue: Color
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/HomeScreen.kt:192:26 Unresolved reference 'DigitalTransitions'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/HomeScreen.kt:194:44 Overload resolution ambiguity between candidates:
+val NeonGreen: Color
+val NeonGreen: Color
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/HomeScreen.kt:195:46 Overload resolution ambiguity between candidates:
+val NeonBlue: Color
+val NeonBlue: Color
+val NeonBlue: Color
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/HomeScreen.kt:218:22 Unresolved reference 'DigitalTransitions'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/HomeScreenTransitionScreen.kt:14:42 Unresolved reference 'HomeScreenTransitionViewModel'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/HomeScreenTransitionScreen.kt:22:16 Unresolved reference 'HomeScreenTransitionViewModel'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/HomeScreenTransitionScreen.kt:22:48 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/HomeScreenTransitionScreen.kt:24:23 Property delegate must have a 'getValue(Nothing?, KProperty0<ERROR CLASS: Cannot infer argument for type parameter T>)' method. None of the following functions is applicable:
+fun <T> State<T>.getValue(thisObj: Any?, property: KProperty<*>): T
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/HomeScreenTransitionScreen.kt:24:26 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/HomeScreenTransitionScreen.kt:24:36 Unresolved reference 'currentConfig'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/HomeScreenTransitionScreen.kt:24:50 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/HomeScreenTransitionScreen.kt:39:39 Unresolved reference 'resetToDefault'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/HomeScreenTransitionScreen.kt:70:54 Unresolved reference 'type'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/HomeScreenTransitionScreen.kt:71:62 Unresolved reference 'updateTransitionType'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/HomeScreenTransitionScreen.kt:94:58 Unresolved reference 'duration'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/HomeScreenTransitionScreen.kt:96:39 Unresolved reference 'updateTransitionDuration'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/HomeScreenTransitionScreen.kt:122:60 Unresolved reference 'properties'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/HomeScreenTransitionScreen.kt:124:39 Unresolved reference 'updateTransitionProperties'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/ImageShapeManagerScreen.kt:32:16 Unresolved reference 'ImageShapeManagerViewModel'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/ImageShapeManagerScreen.kt:32:45 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/ImageShapeManagerScreen.kt:35:16 Property delegate must have a 'getValue(Nothing?, KProperty0<ERROR CLASS: Cannot infer argument for type parameter T>)' method. None of the following functions is applicable:
+fun <T> State<T>.getValue(thisObj: Any?, property: KProperty<*>): T
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/ImageShapeManagerScreen.kt:35:19 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/ImageShapeManagerScreen.kt:35:29 Unresolved reference 'availableImages'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/ImageShapeManagerScreen.kt:35:45 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/ImageShapeManagerScreen.kt:36:22 Property delegate must have a 'getValue(Nothing?, KProperty0<ERROR CLASS: Cannot infer argument for type parameter T>)' method. None of the following functions is applicable:
+fun <T> State<T>.getValue(thisObj: Any?, property: KProperty<*>): T
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/ImageShapeManagerScreen.kt:36:25 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/ImageShapeManagerScreen.kt:36:35 Unresolved reference 'customImages'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/ImageShapeManagerScreen.kt:36:48 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/ImageShapeManagerScreen.kt:37:16 Property delegate must have a 'getValue(Nothing?, KProperty0<ERROR CLASS: Cannot infer argument for type parameter T>)' method. None of the following functions is applicable:
+fun <T> State<T>.getValue(thisObj: Any?, property: KProperty<*>): T
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/ImageShapeManagerScreen.kt:37:19 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/ImageShapeManagerScreen.kt:37:29 Unresolved reference 'shapes'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/ImageShapeManagerScreen.kt:37:36 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/ImageShapeManagerScreen.kt:44:54 Unresolved reference 'openAddImageDialog'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/ImageShapeManagerScreen.kt:47:54 Unresolved reference 'openAddShapeDialog'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/ImageShapeManagerScreen.kt:55:39 Unresolved reference 'openAddImageDialog'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/ImageShapeManagerScreen.kt:81:33 Argument type mismatch: actual type is 'Int', but 'ImageResource' was expected.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/ImageShapeManagerScreen.kt:82:48 Unresolved reference 'selectedImage'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/ImageShapeManagerScreen.kt:82:69 Unresolved reference 'id'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/ImageShapeManagerScreen.kt:82:81 Unresolved reference 'id'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/ImageShapeManagerScreen.kt:83:47 Unresolved reference 'selectImage'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/ImageShapeManagerScreen.kt:84:46 Unresolved reference 'openEditImageDialog'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/ImageShapeManagerScreen.kt:85:48 Unresolved reference 'deleteImage'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/ImageShapeManagerScreen.kt:106:33 Argument type mismatch: actual type is 'Int', but 'ImageResource' was expected.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/ImageShapeManagerScreen.kt:107:48 Unresolved reference 'selectedImage'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/ImageShapeManagerScreen.kt:107:69 Unresolved reference 'id'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/ImageShapeManagerScreen.kt:107:81 Unresolved reference 'id'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/ImageShapeManagerScreen.kt:108:47 Unresolved reference 'selectImage'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/ImageShapeManagerScreen.kt:109:46 Unresolved reference 'openEditImageDialog'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/ImageShapeManagerScreen.kt:110:48 Unresolved reference 'deleteImage'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/ImageShapeManagerScreen.kt:131:33 Argument type mismatch: actual type is 'Int', but 'OverlayShape' was expected.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/ImageShapeManagerScreen.kt:132:48 Unresolved reference 'selectedShape'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/ImageShapeManagerScreen.kt:132:69 Unresolved reference 'id'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/ImageShapeManagerScreen.kt:132:81 Unresolved reference 'id'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/ImageShapeManagerScreen.kt:133:47 Unresolved reference 'selectShape'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/ImageShapeManagerScreen.kt:134:46 Unresolved reference 'openEditShapeDialog'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/ImageShapeManagerScreen.kt:135:48 Unresolved reference 'deleteShape'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/ImageShapeManagerScreen.kt:226:22 Unresolved reference 'background'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/ImageShapeManagerScreen.kt:324:29 No parameter with name 'selected' found.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/ImageShapeManagerScreen.kt:335:33 Unresolved reference 'viewModel'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/MenuScreen.kt:18:50 Unresolved reference 'HomeScreenTransitionType'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/MenuScreen.kt:23:21 Unresolved reference 'HomeScreenTransitionType'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/MenuScreen.kt:23:48 Unresolved reference 'HomeScreenTransitionType'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/MenuScreen.kt:43:34 Unresolved reference 'HomeScreenTransitionType'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/SwipeMenuScreen.kt:12:50 Unresolved reference 'HomeScreenTransitionType'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/SwipeMenuScreen.kt:17:21 Unresolved reference 'HomeScreenTransitionType'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/SwipeMenuScreen.kt:17:48 Unresolved reference 'HomeScreenTransitionType'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/SwipeMenuScreen.kt:29:38 Unresolved reference 'HomeScreenTransitionType'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/SystemCustomizationScreen.kt:11:41 Unresolved reference 'Color'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/SystemCustomizationScreen.kt:16:16 Unresolved reference 'SystemCustomizationViewModel'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/SystemCustomizationScreen.kt:16:47 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/SystemCustomizationScreen.kt:18:29 Property delegate must have a 'getValue(Nothing?, KProperty0<ERROR CLASS: Cannot infer argument for type parameter T>)' method. None of the following functions is applicable:
+fun <T> State<T>.getValue(thisObj: Any?, property: KProperty<*>): T
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/SystemCustomizationScreen.kt:18:32 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/SystemCustomizationScreen.kt:18:42 Unresolved reference 'quickSettingsConfig'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/SystemCustomizationScreen.kt:18:62 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/SystemCustomizationScreen.kt:19:26 Property delegate must have a 'getValue(Nothing?, KProperty0<ERROR CLASS: Cannot infer argument for type parameter T>)' method. None of the following functions is applicable:
+fun <T> State<T>.getValue(thisObj: Any?, property: KProperty<*>): T
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/SystemCustomizationScreen.kt:19:29 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/SystemCustomizationScreen.kt:19:39 Unresolved reference 'lockScreenConfig'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/SystemCustomizationScreen.kt:19:56 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/SystemCustomizationScreen.kt:34:39 Unresolved reference 'resetToDefaults'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/SystemCustomizationScreen.kt:51:38 Unresolved reference 'Color'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/SystemCustomizationScreen.kt:66:55 Unresolved reference 'OverlayShape'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/SystemCustomizationScreen.kt:67:39 Unresolved reference 'updateQuickSettingsTileShape'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/SystemCustomizationScreen.kt:69:59 Unresolved reference 'QuickSettingsAnimation'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/SystemCustomizationScreen.kt:70:39 Unresolved reference 'updateQuickSettingsTileAnimation'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/SystemCustomizationScreen.kt:72:48 Unresolved reference 'ImageResource'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/SystemCustomizationScreen.kt:73:39 Unresolved reference 'updateQuickSettingsBackground'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/SystemCustomizationScreen.kt:83:38 Unresolved reference 'Color'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/SystemCustomizationScreen.kt:98:50 Unresolved reference 'LockScreenElementType'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/SystemCustomizationScreen.kt:98:63 Unresolved reference 'OverlayShape'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/SystemCustomizationScreen.kt:99:39 Unresolved reference 'updateLockScreenElementShape'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/SystemCustomizationScreen.kt:101:54 Unresolved reference 'LockScreenElementType'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/SystemCustomizationScreen.kt:101:67 Unresolved reference 'LockScreenAnimation'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/SystemCustomizationScreen.kt:102:39 Unresolved reference 'updateLockScreenElementAnimation'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/SystemCustomizationScreen.kt:104:48 Unresolved reference 'ImageResource'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/SystemCustomizationScreen.kt:105:39 Unresolved reference 'updateLockScreenBackground'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/SystemCustomizationScreen.kt:116:13 Unresolved reference 'QuickSettingsConfig'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/SystemCustomizationScreen.kt:117:33 Unresolved reference 'OverlayShape'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/SystemCustomizationScreen.kt:118:37 Unresolved reference 'QuickSettingsAnimation'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/SystemCustomizationScreen.kt:119:26 Unresolved reference 'ImageResource'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/SystemCustomizationScreen.kt:121:13 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/SystemCustomizationScreen.kt:121:13 Unresolved reference. None of the following candidates is applicable because of a receiver type mismatch:
+fun <T, R> T.let(block: (T) -> R): R
+    [R|Contract description]
+     <
+        CallsInPlace(block, EXACTLY_ONCE)
+    >
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/SystemCustomizationScreen.kt:121:19 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/SystemCustomizationScreen.kt:133:21 Unresolved reference 'tiles'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/SystemCustomizationScreen.kt:133:37 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/SystemCustomizationScreen.kt:134:17 @Composable invocations can only happen from the context of a @Composable function
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/SystemCustomizationScreen.kt:136:39 Unresolved reference 'OverlayShape'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/SystemCustomizationScreen.kt:136:71 Unresolved reference 'id'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/SystemCustomizationScreen.kt:137:43 Unresolved reference 'QuickSettingsAnimation'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/SystemCustomizationScreen.kt:137:83 Unresolved reference 'id'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/SystemCustomizationScreen.kt:147:38 Unresolved reference 'background'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/SystemCustomizationScreen.kt:156:13 Unresolved reference 'LockScreenConfig'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/SystemCustomizationScreen.kt:157:28 Unresolved reference 'LockScreenElementType'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/SystemCustomizationScreen.kt:157:51 Unresolved reference 'OverlayShape'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/SystemCustomizationScreen.kt:158:32 Unresolved reference 'LockScreenElementType'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/SystemCustomizationScreen.kt:158:55 Unresolved reference 'LockScreenAnimation'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/SystemCustomizationScreen.kt:159:26 Unresolved reference 'ImageResource'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/SystemCustomizationScreen.kt:161:13 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/SystemCustomizationScreen.kt:161:13 Unresolved reference. None of the following candidates is applicable because of a receiver type mismatch:
+fun <T, R> T.let(block: (T) -> R): R
+    [R|Contract description]
+     <
+        CallsInPlace(block, EXACTLY_ONCE)
+    >
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/SystemCustomizationScreen.kt:161:19 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/SystemCustomizationScreen.kt:173:21 Unresolved reference 'elements'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/SystemCustomizationScreen.kt:173:40 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/SystemCustomizationScreen.kt:174:17 @Composable invocations can only happen from the context of a @Composable function
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/SystemCustomizationScreen.kt:176:39 Unresolved reference 'OverlayShape'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/SystemCustomizationScreen.kt:176:77 Unresolved reference 'type'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/SystemCustomizationScreen.kt:177:43 Unresolved reference 'LockScreenAnimation'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/SystemCustomizationScreen.kt:179:37 Unresolved reference 'type'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/SystemCustomizationScreen.kt:192:38 Unresolved reference 'background'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/SystemCustomizationScreen.kt:201:11 Unresolved reference 'QuickSettingsTileConfig'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/SystemCustomizationScreen.kt:202:21 Unresolved reference 'OverlayShape'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/SystemCustomizationScreen.kt:203:25 Unresolved reference 'QuickSettingsAnimation'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/SystemCustomizationScreen.kt:208:30 Unresolved reference 'Color'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/SystemCustomizationScreen.kt:217:29 Unresolved reference 'label'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/SystemCustomizationScreen.kt:228:37 Unresolved reference 'shape'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/SystemCustomizationScreen.kt:238:41 Unresolved reference 'animation'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/SystemCustomizationScreen.kt:247:14 Unresolved reference 'LockScreenElementConfig'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/SystemCustomizationScreen.kt:248:21 Unresolved reference 'OverlayShape'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/SystemCustomizationScreen.kt:249:25 Unresolved reference 'LockScreenAnimation'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/SystemCustomizationScreen.kt:254:30 Unresolved reference 'Color'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/SystemCustomizationScreen.kt:263:32 Unresolved reference 'type'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/SystemCustomizationScreen.kt:274:40 Unresolved reference 'shape'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/SystemCustomizationScreen.kt:284:44 Unresolved reference 'animation'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/SystemCustomizationScreen.kt:293:17 Unresolved reference 'ImageResource'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/SystemCustomizationScreen.kt:294:16 Unresolved reference 'ImageResource'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/SystemCustomizationScreen.kt:299:30 Unresolved reference 'Color'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/SystemCustomizationScreen.kt:324:19 Unresolved reference 'OverlayShape'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/SystemCustomizationScreen.kt:325:23 Unresolved reference 'OverlayShape'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/SystemCustomizationScreen.kt:332:23 Unresolved reference 'QuickSettingsAnimation'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/SystemCustomizationScreen.kt:333:27 Unresolved reference 'QuickSettingsAnimation'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/SystemCustomizationScreen.kt:340:19 Unresolved reference 'ImageResource'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/screens/SystemCustomizationScreen.kt:341:23 Unresolved reference 'ImageResource'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/theme/Color.kt:8:5 Conflicting declarations:
+val NeonBlue: Color
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/theme/Color.kt:9:5 Conflicting declarations:
+val NeonPink: Color
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/theme/Color.kt:10:5 Conflicting declarations:
+val NeonGreen: Color
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/theme/Color.kt:11:5 Conflicting declarations:
+val NeonRed: Color
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/theme/Colors.kt:6:5 Conflicting declarations:
+val NeonGreen: Color
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/theme/Colors.kt:7:5 Conflicting declarations:
+val NeonRed: Color
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/theme/Colors.kt:9:5 Conflicting declarations:
+val NeonPink: Color
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/theme/Colors.kt:10:5 Conflicting declarations:
+val NeonBlue: Color
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/theme/MaterialThemeCompat.kt:3:20 Conflicting import: imported name 'Activity' is ambiguous.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/theme/MaterialThemeCompat.kt:4:20 Conflicting import: imported name 'Activity' is ambiguous.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/theme/MaterialThemeCompat.kt:34:55 @Composable invocations can only happen from the context of a @Composable function
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/theme/MaterialThemeCompat.kt:38:35 @Composable invocations can only happen from the context of a @Composable function
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/theme/Theme.kt:21:24 Overload resolution ambiguity between candidates:
+val NeonBlue: Color
+val NeonBlue: Color
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/theme/Theme.kt:31:16 Overload resolution ambiguity between candidates:
+val NeonBlue: Color
+val NeonBlue: Color
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/theme/Theme.kt:33:25 Overload resolution ambiguity between candidates:
+val NeonBlue: Color
+val NeonBlue: Color
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/theme/Theme.kt:57:5 No parameter with name 'inverseOnPrimary' found.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/theme/Theme.kt:60:13 Unresolved reference 'Color'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/theme/Theme.kt:104:5 No parameter with name 'inverseOnPrimary' found.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/theme/Theme.kt:107:13 Unresolved reference 'Color'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/theme/Theme.kt:150:28 Unresolved reference 'Modifier'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/viewmodel/HomeScreenTransitionViewModel.kt:3:27 Conflicting import: imported name 'ViewModel' is ambiguous.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/viewmodel/HomeScreenTransitionViewModel.kt:4:27 Conflicting import: imported name 'ViewModel' is ambiguous.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/viewmodel/HomeScreenTransitionViewModel.kt:25:40 Assignment type mismatch: actual type is 'HomeScreenTransitionConfig?', but 'HomeScreenTransitionConfig' was expected.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/viewmodel/SystemCustomizationViewModel.kt:3:27 Conflicting import: imported name 'ViewModel' is ambiguous.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/viewmodel/SystemCustomizationViewModel.kt:4:27 Conflicting import: imported name 'ViewModel' is ambiguous.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/viewmodel/SystemCustomizationViewModel.kt:35:46 Assignment type mismatch: actual type is 'dev.aurakai.auraframefx.system.quicksettings.QuickSettingsConfig?', but 'dev.aurakai.auraframefx.system.quicksettings.model.QuickSettingsConfig' was expected.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/viewmodel/SystemCustomizationViewModel.kt:39:43 Assignment type mismatch: actual type is 'dev.aurakai.auraframefx.system.lockscreen.LockScreenConfig?', but 'dev.aurakai.auraframefx.system.lockscreen.model.LockScreenConfig' was expected.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/viewmodel/SystemCustomizationViewModel.kt:46:37 Unresolved reference 'updateTileShape'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/viewmodel/SystemCustomizationViewModel.kt:52:37 Unresolved reference 'updateTileAnimation'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/viewmodel/SystemCustomizationViewModel.kt:58:37 Unresolved reference 'updateBackground'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/viewmodel/SystemCustomizationViewModel.kt:64:34 Unresolved reference 'updateElementShape'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/viewmodel/SystemCustomizationViewModel.kt:73:34 Unresolved reference 'updateElementAnimation'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/viewmodel/SystemCustomizationViewModel.kt:79:34 Unresolved reference 'updateBackground'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/viewmodel/SystemCustomizationViewModel.kt:85:37 Unresolved reference 'resetToDefault'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/ui/viewmodel/SystemCustomizationViewModel.kt:86:34 Unresolved reference 'resetToDefault'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/utils/VertexAIUtils.kt:60:49 Only safe (?.) or non-null asserted (!!.) calls are allowed on a nullable receiver of type 'String?'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/utils/VertexAIUtils.kt:60:74 Unresolved reference 'region'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/utils/VertexAIUtils.kt:77:23 No parameter with name 'message' found.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/utils/VertexAIUtils.kt:77:23 No value passed for parameter '_message'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/viewmodel/ConferenceRoomViewModel.kt:86:68 No value passed for parameter 'context'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/viewmodel/ConferenceRoomViewModel.kt:87:66 No value passed for parameter 'context'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/viewmodel/ConferenceRoomViewModel.kt:88:74 No value passed for parameter 'context'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/viewmodel/DiagnosticsViewModel.kt:58:50 Unresolved reference 'loadCriticalOfflineData'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/viewmodel/DiagnosticsViewModel.kt:61:25 Argument type mismatch: actual type is 'String', but 'String' was expected.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/viewmodel/DiagnosticsViewModel.kt:61:58 Argument type mismatch: actual type is 'R? (of fun <T, R> T.let)', but 'K? (of fun <K> ELVIS_CALL)' was expected.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/viewmodel/DiagnosticsViewModel.kt:61:58 Argument type mismatch: actual type is 'K (of fun <K> ELVIS_CALL)', but 'String' was expected.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/viewmodel/DiagnosticsViewModel.kt:61:94 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/viewmodel/DiagnosticsViewModel.kt:61:98 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/viewmodel/DiagnosticsViewModel.kt:63:26 Argument type mismatch: actual type is 'String', but 'K (of fun <K> ELVIS_CALL)' was expected.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/viewmodel/DiagnosticsViewModel.kt:77:25 Argument type mismatch: actual type is 'String', but 'String' was expected.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/viewmodel/DiagnosticsViewModel.kt:78:25 Argument type mismatch: actual type is 'R? (of fun <T, R> T.let)', but 'K? (of fun <K> ELVIS_CALL)' was expected.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/viewmodel/DiagnosticsViewModel.kt:78:25 Argument type mismatch: actual type is 'K (of fun <K> ELVIS_CALL)', but 'String' was expected.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/viewmodel/DiagnosticsViewModel.kt:78:77 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/viewmodel/DiagnosticsViewModel.kt:78:81 Cannot infer type for this parameter. Specify it explicitly.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/viewmodel/DiagnosticsViewModel.kt:83:30 Argument type mismatch: actual type is 'String', but 'K (of fun <K> ELVIS_CALL)' was expected.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/xposed/hooks/QuickSettingsHooker.kt:102:118 Unresolved reference 'type'.
+e: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/app/src/main/java/dev/aurakai/auraframefx/xposed/hooks/QuickSettingsHooker.kt:104:71 Argument type mismatch: actual type is 'dev.aurakai.auraframefx.system.overlay.model.OverlayShape', but 'dev.aurakai.auraframefx.system.overlay.OverlayShape' was expected.
+
+[Incubating] Problems report is available at: file:///C:/Users/Wehtt/Documents/test2/AuraFrameFx-Beta-main/build/reports/problems/problems-report.html
+
