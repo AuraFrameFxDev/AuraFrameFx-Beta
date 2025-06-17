@@ -583,31 +583,7 @@ components:
       required:
         - taskId
         - status
-
-  # Common Responses
-  responses:
-    BadRequestError:
-      description: Invalid request format or parameters
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    
-    UnauthorizedError:
-      description: Authentication credentials were missing or incorrect
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    
-    RateLimitError:
-      description: Rate limit exceeded
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    
-    ErrorResponse:
+    ApiError: # This is the schema definition key to be renamed
       type: object
       properties:
         error:
@@ -626,3 +602,26 @@ components:
               example: {"field": "email", "issue": "invalid_format"}
       required:
         - error
+
+  # Common Responses
+  responses:
+    BadRequestError:
+      description: Invalid request format or parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiError'
+    
+    UnauthorizedError:
+      description: Authentication credentials were missing or incorrect
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiError'
+    
+    RateLimitError:
+      description: Rate limit exceeded
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiError'
