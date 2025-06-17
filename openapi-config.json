@@ -1,9 +1,0 @@
-{
-  "library": "jvm-okhttp4",
-  "serializationLibrary": "kotlinx_serialization",
-  "packageName": "dev.aurakai.auraframefx.api.client",
-  "groupId": "dev.aurakai.auraframefx",
-  "artifactId": "api-client",
-  "artifactVersion": "1.0.0",
-  "sourceFolder": "src/main/kotlin"
-}

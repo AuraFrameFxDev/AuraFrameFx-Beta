@@ -136,6 +136,10 @@ dependencies {
 
     // AppAuth (OAuth utilities)
     implementation("net.openid:appauth:0.11.1")
+    // Apache Oltu (OAuth 2.0 client, for generated code compatibility)
+    implementation("org.apache.oltu.oauth2:org.apache.oltu.oauth2.client:1.0.2") {
+        exclude(group = "org.apache.oltu.oauth2", module = "org.apache.oltu.oauth2.common")
+    }
 
     // Compose
     implementation(platform("androidx.compose:compose-bom:$composeBomVersion"))
