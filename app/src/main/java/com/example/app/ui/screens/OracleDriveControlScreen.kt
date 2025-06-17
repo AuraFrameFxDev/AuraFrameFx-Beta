@@ -77,8 +77,8 @@ fun OracleDriveControlScreen(
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         Text(
-            text = if (isConnected) stringResource(R.string.oracle_drive_connected) else stringResource(
-                R.string.oracle_drive_not_connected
+            text = if (isConnected) stringResource(dev.aurakai.auraframefx.R.string.oracle_drive_connected) else stringResource(
+                dev.aurakai.auraframefx.R.string.oracle_drive_not_connected
             ),
             style = MaterialTheme.typography.titleMedium,
             color = if (isConnected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.error
