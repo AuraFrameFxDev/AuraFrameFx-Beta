@@ -130,6 +130,12 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleVersion")
     implementation("androidx.activity:activity-compose:1.10.1")
 
+    // Security (MasterKeys)
+    implementation("androidx.security:security-crypto-ktx:1.1.0-alpha06")
+
+    // AppAuth (OAuth utilities)
+    implementation("net.openid:appauth:0.11.1")
+
     // Compose
     implementation(platform("androidx.compose:compose-bom:$composeBomVersion"))
     implementation("androidx.compose.ui:ui")
