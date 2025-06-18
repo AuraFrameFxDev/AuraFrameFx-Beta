@@ -8,7 +8,7 @@ class YukiHookServiceManager @Inject constructor() {
     /**
      * Registers a hook operation to be executed.
      *
-     * @param param The lambda function representing the hook logic to be invoked.
+     * @param param Lambda function containing the hook logic to execute.
      */
     fun hook(param: () -> Unit) {
         // TODO: Implement hook logic
