@@ -46,11 +46,11 @@ class QuickSettingsCustomizer @Inject constructor(
     }
 
     /**
-     * Applies the provided quick settings configuration and updates the shared preferences for IPC.
+     * Applies a new quick settings configuration and persists it for inter-process communication.
      *
-     * Updates the current configuration state, serializes the configuration to JSON, and stores it in shared preferences for inter-process communication. Triggers the overlay service hook for further processing.
+     * Updates the current configuration state, serializes it to JSON, and stores it in shared preferences for IPC. Also triggers the overlay service hook for further processing.
      *
-     * @param config The new quick settings configuration to apply.
+     * @param config The quick settings configuration to apply.
      */
     fun applyConfig(config: QuickSettingsConfig) {
         _currentConfig.value = config
@@ -71,38 +71,38 @@ class QuickSettingsCustomizer @Inject constructor(
     }
 
     /**
-     * Updates the shape of a quick settings tile identified by the given tile ID.
+     * Updates the shape of the specified quick settings tile.
      *
-     * @param tileId The unique identifier of the tile to update.
-     * @param shape The new shape to apply to the tile.
+     * @param tileId The unique identifier of the tile to modify.
+     * @param shape The shape to assign to the tile.
      */
     fun updateTileShape(tileId: String, shape: OverlayShape) {
         // TODO: Implement logic to update tile shape
     }
 
     /**
-     * Updates the animation of a specific quick settings tile.
+     * Updates the animation configuration for a specific quick settings tile.
      *
-     * @param tileId The identifier of the tile to update.
-     * @param animation The new animation configuration to apply to the tile.
+     * @param tileId The unique identifier of the tile to modify.
+     * @param animation The animation settings to apply to the tile.
      */
     fun updateTileAnimation(tileId: String, animation: QuickSettingsAnimation) {
         // TODO: Implement logic to update tile animation
     }
 
     /**
-     * Updates the background image of the quick settings interface.
+     * Sets or removes the background image for the quick settings interface.
      *
-     * @param image The new background image to apply, or null to remove the background.
+     * @param image The image to set as the background, or null to clear the background.
      */
     fun updateBackground(image: ImageResource?) {
         // TODO: Implement logic to update background
     }
 
     /**
-     * Resets the quick settings configuration to its default values.
+     * Resets the quick settings configuration to its default state.
      *
-     * This method is intended to restore all quick settings customizations to their original defaults.
+     * Intended to restore all quick settings customizations to their original default values.
      */
     fun resetToDefault() {
         // TODO: Implement logic to reset to default
