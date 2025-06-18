@@ -47,6 +47,13 @@ class LockScreenCustomizer @Inject constructor(
         private const val IPC_KEY_LOCK_SCREEN = "lock_screen_config_json"
     }
 
+    /**
+     * Applies the provided lock screen configuration and propagates it to the system.
+     *
+     * Updates the current configuration state, serializes the configuration to JSON, and stores it in shared preferences for inter-process communication. Triggers the overlay service to apply the configuration.
+     *
+     * @param config The lock screen configuration to apply.
+     */
     fun applyConfig(config: LockScreenConfig) {
         _currentConfig.value = config
 
@@ -65,18 +72,40 @@ class LockScreenCustomizer @Inject constructor(
         }
     }
 
+    /**
+     * Updates the shape of a specified lock screen element.
+     *
+     * @param elementType The type of lock screen element to update.
+     * @param shape The new shape to apply to the element.
+     */
     fun updateElementShape(elementType: LockScreenElementType, shape: dev.aurakai.auraframefx.system.overlay.model.OverlayShape) {
         // TODO: Implement logic to update element shape
     }
 
+    /**
+     * Updates the animation of a specified lock screen element.
+     *
+     * @param elementType The type of lock screen element to update.
+     * @param animation The animation configuration to apply to the element.
+     */
     fun updateElementAnimation(elementType: LockScreenElementType, animation: LockScreenAnimation) {
         // TODO: Implement logic to update element animation
     }
 
+    /**
+     * Updates the lock screen background image.
+     *
+     * @param image The new background image to set, or null to remove the background.
+     */
     fun updateBackground(image: ImageResource?) {
         // TODO: Implement logic to update background
     }
 
+    /**
+     * Resets the lock screen configuration to its default settings.
+     *
+     * This method is intended to restore all lock screen customization options to their original defaults.
+     */
     fun resetToDefault() {
         // TODO: Implement logic to reset to default
     }
