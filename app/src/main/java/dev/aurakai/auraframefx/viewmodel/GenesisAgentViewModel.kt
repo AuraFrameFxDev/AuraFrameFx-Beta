@@ -103,17 +103,22 @@ class GenesisAgentViewModel @Inject constructor(
         return genesisAgent.getAgentConfig(name)
     }
 
+    /**
+     * Returns a list of agent configurations sorted by priority.
+     *
+     * @return A list of AgentConfig objects ordered by their priority.
+     */
     fun getAgentsByPriority(): List<AgentConfig> {
         return genesisAgent.getAgentsByPriority()
     }
 
     /**
-     * Initiates asynchronous processing of a query by the GenesisAgent.
+     * Starts asynchronous processing of a query by the GenesisAgent and returns immediately.
      *
-     * The function launches the query processing in the background and immediately returns an empty list, as results are not available synchronously.
+     * The function launches query processing in the background and returns an empty list, as results are not available synchronously.
      *
-     * @param query The query string to be processed.
-     * @return An empty list, since query processing is performed asynchronously.
+     * @param query The query string to process.
+     * @return An empty list, since results are handled asynchronously.
      */
     fun processQuery(query: String): List<AgentConfig> {
         viewModelScope.launch {

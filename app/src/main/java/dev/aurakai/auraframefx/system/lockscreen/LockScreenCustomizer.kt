@@ -48,9 +48,9 @@ class LockScreenCustomizer @Inject constructor(
     }
 
     /**
-     * Applies the provided lock screen configuration and propagates it to the system.
+     * Applies a new lock screen configuration and updates the system state.
      *
-     * Updates the current configuration state, serializes the configuration to JSON, and stores it in shared preferences for inter-process communication. Triggers the overlay service to apply the configuration.
+     * Sets the current configuration, serializes it to JSON, stores it in shared preferences for inter-process communication, and triggers the overlay service to apply the changes.
      *
      * @param config The lock screen configuration to apply.
      */
@@ -73,38 +73,38 @@ class LockScreenCustomizer @Inject constructor(
     }
 
     /**
-     * Updates the shape of a specified lock screen element.
+     * Updates the shape of the specified lock screen element.
      *
-     * @param elementType The type of lock screen element to update.
-     * @param shape The new shape to apply to the element.
+     * @param elementType The lock screen element whose shape will be changed.
+     * @param shape The shape to apply to the element.
      */
     fun updateElementShape(elementType: LockScreenElementType, shape: dev.aurakai.auraframefx.system.overlay.model.OverlayShape) {
         // TODO: Implement logic to update element shape
     }
 
     /**
-     * Updates the animation of a specified lock screen element.
+     * Updates the animation configuration for a specific lock screen element.
      *
-     * @param elementType The type of lock screen element to update.
-     * @param animation The animation configuration to apply to the element.
+     * @param elementType The lock screen element whose animation will be updated.
+     * @param animation The new animation settings to apply.
      */
     fun updateElementAnimation(elementType: LockScreenElementType, animation: LockScreenAnimation) {
         // TODO: Implement logic to update element animation
     }
 
     /**
-     * Updates the lock screen background image.
+     * Sets or removes the lock screen background image.
      *
-     * @param image The new background image to set, or null to remove the background.
+     * @param image The image to use as the new background, or null to remove the current background.
      */
     fun updateBackground(image: ImageResource?) {
         // TODO: Implement logic to update background
     }
 
     /**
-     * Resets the lock screen configuration to its default settings.
+     * Restores the lock screen configuration to its default settings.
      *
-     * This method is intended to restore all lock screen customization options to their original defaults.
+     * Intended to revert all lock screen customization options to their original defaults.
      */
     fun resetToDefault() {
         // TODO: Implement logic to reset to default
