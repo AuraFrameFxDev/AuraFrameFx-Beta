@@ -31,26 +31,26 @@ import kotlinx.serialization.Contextual
  */
 @Serializable
 
-data class TaskStatus (
+public data class TaskStatus (
 
     /* Unique identifier for the task. */
     @SerialName(value = "taskId")
-    val taskId: kotlin.String,
+    public val taskId: kotlin.String,
 
     @SerialName(value = "status")
-    val status: TaskStatus.Status,
+    public val status: TaskStatus.Status,
 
     /* Percentage completion of the task (0-100). */
     @SerialName(value = "progress")
-    val progress: kotlin.Int? = null,
+    public val progress: kotlin.Int? = null,
 
     /* The outcome or output of the task (structure varies by taskType). */
     @Contextual @SerialName(value = "result")
-    val result: kotlin.collections.Map<kotlin.String, kotlin.Any>? = null,
+    public val result: kotlin.collections.Map<kotlin.String, kotlin.Any>? = null,
 
     /* Error message if the task failed. */
     @SerialName(value = "errorMessage")
-    val errorMessage: kotlin.String? = null
+    public val errorMessage: kotlin.String? = null
 
 ) {
 
@@ -60,7 +60,7 @@ data class TaskStatus (
      * Values: PENDING,IN_PROGRESS,COMPLETED,FAILED,CANCELLED
      */
     @Serializable
-    enum class Status(val value: kotlin.String) {
+    public enum class Status(val value: kotlin.String) {
         @SerialName(value = "PENDING") PENDING("PENDING"),
         @SerialName(value = "IN_PROGRESS") IN_PROGRESS("IN_PROGRESS"),
         @SerialName(value = "COMPLETED") COMPLETED("COMPLETED"),

@@ -1,6 +1,6 @@
 package dev.aurakai.auraframefx.system.homescreen.model
 
-enum class HomeScreenTransitionType {
+public enum class HomeScreenTransitionType {
     GLOBE_ROTATE,
     SLIDE_LEFT,
     SLIDE_RIGHT,

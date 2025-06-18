@@ -1,12 +1,12 @@
 package dev.aurakai.auraframefx.data
 
-class AppStateManager {
+public class AppStateManager {
     // Minimal placeholder implementation
     var state: String = "default"
 
-    fun updateState(newState: String) {
+    public fun updateState(newState: String) {
         state = newState
     }
 
-    fun getState(): String = state
+    public fun getState(): String = state
 }

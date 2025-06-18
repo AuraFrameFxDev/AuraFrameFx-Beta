@@ -6,31 +6,31 @@ import kotlinx.datetime.Instant
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class MemoryItem(
-    val id: String = "mem_${Clock.System.now().toEpochMilliseconds()}",
-    val content: String,
-    val timestamp: Instant = Clock.System.now(),
-    val agent: AgentType,
-    val context: String? = null,
-    val priority: Float = 0.5f,
-    val tags: List<String> = emptyList(),
-    val metadata: Map<String, String> = emptyMap(),
+public data class MemoryItem(
+    public val id: String = "mem_${Clock.System.now().toEpochMilliseconds()}",
+    public val content: String,
+    public val timestamp: Instant = Clock.System.now(),
+    public val agent: AgentType,
+    public val context: String? = null,
+    public val priority: Float = 0.5f,
+    public val tags: List<String> = emptyList(),
+    public val metadata: Map<String, String> = emptyMap(),
 )
 
 @Serializable
-data class MemoryQuery(
-    val query: String,
-    val context: String? = null,
-    val maxResults: Int = 5,
-    val minSimilarity: Float = 0.7f,
-    val tags: List<String> = emptyList(),
-    val timeRange: Pair<Instant, Instant>? = null,
-    val agentFilter: List<AgentType> = emptyList(),
+public data class MemoryQuery(
+    public val query: String,
+    public val context: String? = null,
+    public val maxResults: Int = 5,
+    public val minSimilarity: Float = 0.7f,
+    public val tags: List<String> = emptyList(),
+    public val timeRange: Pair<Instant, Instant>? = null,
+    public val agentFilter: List<AgentType> = emptyList(),
 )
 
 @Serializable
-data class MemoryRetrievalResult(
-    val items: List<MemoryItem>,
-    val total: Int,
-    val query: MemoryQuery,
+public data class MemoryRetrievalResult(
+    public val items: List<MemoryItem>,
+    public val total: Int,
+    public val query: MemoryQuery,
 )

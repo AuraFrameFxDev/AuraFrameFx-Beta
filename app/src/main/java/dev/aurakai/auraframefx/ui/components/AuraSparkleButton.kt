@@ -11,7 +11,7 @@ import androidx.compose.ui.unit.dp
 import dev.aurakai.auraframefx.ui.theme.NeonTeal
 
 @Composable
-fun AuraSparkleButton(
+public fun AuraSparkleButton(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
     text: String = "Sparkle",
@@ -38,6 +38,6 @@ fun AuraSparkleButton(
 
 @Preview(showBackground = true)
 @Composable
-fun AuraSparkleButtonPreview() { // Renamed
+public fun AuraSparkleButtonPreview() { // Renamed
     AuraSparkleButton(onClick = {})
 }

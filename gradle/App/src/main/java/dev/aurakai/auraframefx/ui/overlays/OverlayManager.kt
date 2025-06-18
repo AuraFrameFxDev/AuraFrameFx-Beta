@@ -9,7 +9,7 @@ import java.io.File // For saveImageForOverlay placeholder
  * TODO: Reported as unused declaration. Ensure this class is used.
  * @param _context Application context.
  */
-class OverlayManager(_context: Context) { // Assuming context might be used for file operations or resources
+public class OverlayManager(_context: Context) { // Assuming context might be used for file operations or resources
 
     /**
      * Placeholder for a delegate related to overlay directory management.
@@ -34,7 +34,7 @@ class OverlayManager(_context: Context) { // Assuming context might be used for 
      * @param _overlayData Data needed to create the overlay. Parameter reported as unused.
      * TODO: Reported as unused. Implement overlay creation logic.
      */
-    fun createOverlay(_overlayData: Any) {
+    public fun createOverlay(_overlayData: Any) {
         // TODO: Parameter _overlayData reported as unused.
         // Implement logic to create and display an overlay.
     }
@@ -45,7 +45,7 @@ class OverlayManager(_context: Context) { // Assuming context might be used for 
      * @param _updateData Data for updating the overlay. Parameter reported as unused.
      * TODO: Reported as unused. Implement overlay update logic.
      */
-    fun updateOverlay(_overlayId: String, _updateData: Any) {
+    public fun updateOverlay(_overlayId: String, _updateData: Any) {
         // TODO: Parameters _overlayId, _updateData reported as unused.
         // Implement logic to update an existing overlay.
     }
@@ -56,7 +56,7 @@ class OverlayManager(_context: Context) { // Assuming context might be used for 
      * @return A Bitmap object or null.
      * TODO: Reported as unused. Implement image loading logic.
      */
-    fun loadImageForOverlay(_imageIdentifier: String): Bitmap? {
+    public fun loadImageForOverlay(_imageIdentifier: String): Bitmap? {
         // TODO: Parameter _imageIdentifier reported as unused.
         // Implement logic to load an image (e.g., from _overlayDirDelegate).
         return null
@@ -69,7 +69,7 @@ class OverlayManager(_context: Context) { // Assuming context might be used for 
      * @return True if successful, false otherwise.
      * TODO: Reported as unused. Implement image saving logic.
      */
-    fun saveImageForOverlay(_imageIdentifier: String, _imageBitmap: Bitmap): Boolean {
+    public fun saveImageForOverlay(_imageIdentifier: String, _imageBitmap: Bitmap): Boolean {
         // TODO: Parameters _imageIdentifier, _imageBitmap reported as unused.
         // Implement logic to save an image (e.g., to _overlayDirDelegate).
         return false

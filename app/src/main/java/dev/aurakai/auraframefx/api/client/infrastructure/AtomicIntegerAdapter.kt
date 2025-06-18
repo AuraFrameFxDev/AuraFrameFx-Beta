@@ -8,7 +8,7 @@ import kotlinx.serialization.descriptors.PrimitiveKind
 import kotlinx.serialization.descriptors.SerialDescriptor
 import java.util.concurrent.atomic.AtomicInteger
 
-object AtomicIntegerAdapter : KSerializer<AtomicInteger> {
+public object AtomicIntegerAdapter : KSerializer<AtomicInteger> {
     override fun serialize(encoder: Encoder, value: AtomicInteger) {
         encoder.encodeInt(value.get())
     }

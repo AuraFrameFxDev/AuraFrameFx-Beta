@@ -5,7 +5,7 @@ package dev.aurakai.auraframefx.api.client.infrastructure
  * NOTE: Headers is a Map<String,String> because rfc2616 defines
  *       multi-valued headers as csv-only.
  */
-data class PartConfig<T>(
-    val headers: MutableMap<String, String> = mutableMapOf(),
-    val body: T? = null
+public data class PartConfig<T>(
+    public val headers: MutableMap<String, String> = mutableMapOf(),
+    public val body: T? = null
 )

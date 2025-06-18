@@ -3,22 +3,22 @@ package dev.aurakai.auraframefx.system.homescreen // Ensure this package is corr
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class HomeScreenTransitionConfig(
-    val defaultOutgoingEffect: HomeScreenTransitionEffect? = null,
-    val defaultIncomingEffect: HomeScreenTransitionEffect? = null,
+public data class HomeScreenTransitionConfig(
+    public val defaultOutgoingEffect: HomeScreenTransitionEffect? = null,
+    public val defaultIncomingEffect: HomeScreenTransitionEffect? = null,
 )
 
 @Serializable
-data class HomeScreenTransitionEffect(
-    val type: String, // e.g., "slide", "fade", "zoom"
-    val properties: TransitionProperties? = null,
+public data class HomeScreenTransitionEffect(
+    public val type: String, // e.g., "slide", "fade", "zoom"
+    public val properties: TransitionProperties? = null,
 )
 
 @Serializable
-data class TransitionProperties(
-    val duration: Long = 300L,
-    val direction: String? = null, // e.g., "left_to_right", "top_to_bottom" for slide
-    val interpolator: String = "linear",
+public data class TransitionProperties(
+    public val duration: Long = 300L,
+    public val direction: String? = null, // e.g., "left_to_right", "top_to_bottom" for slide
+    public val interpolator: String = "linear",
     // Add other relevant properties like scaleFactor for zoom, etc.
 )
 

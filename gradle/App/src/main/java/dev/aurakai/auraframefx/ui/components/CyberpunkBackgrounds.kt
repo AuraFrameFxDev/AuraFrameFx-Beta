@@ -17,7 +17,7 @@ import kotlin.math.*
  * Animated hexagon grid background for cyberpunk UI
  */
 @Composable
-fun HexagonGridBackground(
+public fun HexagonGridBackground(
     modifier: Modifier = Modifier,
     primaryColor: Color = NeonBlue,
     secondaryColor: Color = NeonPink,
@@ -187,7 +187,7 @@ private fun DrawScope.drawHexagon(
  * Creates a futuristic digital landscape background
  */
 @Composable
-fun DigitalLandscapeBackground(
+public fun DigitalLandscapeBackground(
     modifier: Modifier = Modifier,
     primaryColor: Color = NeonBlue,
     secondaryColor: Color = NeonPink,

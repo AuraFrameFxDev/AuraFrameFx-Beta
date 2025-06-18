@@ -6,15 +6,15 @@ import kotlinx.serialization.Serializable
  * Conference Room models generated from OpenAPI spec
  */
 @Serializable
-data class ConferenceRoomCreateRequest(
-    val roomName: String,
-    val orchestratorAgent: AgentType
+public data class ConferenceRoomCreateRequest(
+    public val roomName: String,
+    public val orchestratorAgent: AgentType
 )
 
 @Serializable
-data class ConferenceRoom(
-    val id: String,
-    val name: String,
-    val orchestrator: AgentType,
-    val activeAgents: List<AgentType>
+public data class ConferenceRoom(
+    public val id: String,
+    public val name: String,
+    public val orchestrator: AgentType,
+    public val activeAgents: List<AgentType>
 )

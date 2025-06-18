@@ -50,7 +50,7 @@ public class AuraController(
         // This is likely a core method that would delegate to AuraAIService,
         // update context, manage state, etc.
         // val response = auraAIService.getAIResponse(interactionData) // Example
-        val response = "Processed interaction: $_interactionData - Response Placeholder"
+        public val response = "Processed interaction: $_interactionData - Response Placeholder"
         println(response) // Placeholder
         return response
     }

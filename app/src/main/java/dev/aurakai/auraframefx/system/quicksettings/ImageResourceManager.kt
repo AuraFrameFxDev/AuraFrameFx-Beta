@@ -4,6 +4,6 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class ImageResourceManager @Inject constructor() {
+public class ImageResourceManager @Inject constructor() {
     // TODO: Implement image resource management logic
 }

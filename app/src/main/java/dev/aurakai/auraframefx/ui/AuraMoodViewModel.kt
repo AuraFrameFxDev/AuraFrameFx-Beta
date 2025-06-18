@@ -27,7 +27,7 @@ import javax.inject.Inject
 
 // TODO: Class reported as unused. Verify usage or remove if truly obsolete.
 @HiltViewModel
-class AuraMoodViewModel @Inject constructor(
+public class AuraMoodViewModel @Inject constructor(
     // private val _application: Application // Example: if Application context is needed
 ) : ViewModel() {
 
@@ -36,11 +36,11 @@ class AuraMoodViewModel @Inject constructor(
 
     // Public StateFlow that is read-only from the UI
     // TODO: Property moodState reported as unused. Implement or remove.
-    val moodState: StateFlow<Emotion> = _moodState
+    public val moodState: StateFlow<Emotion> = _moodState
 
     // Example function to handle user input
     // This function can be extended to let Aura respond to user mood, creative prompts, or UI changes.
-    fun onUserInput(_input: String) { // Parameter _input marked as unused as per template
+    public fun onUserInput(_input: String) { // Parameter _input marked as unused as per template
         viewModelScope.launch {
             // Use _input consistently (was 'input' in some branches)
             if (_input.contains("happy", ignoreCase = true)) {

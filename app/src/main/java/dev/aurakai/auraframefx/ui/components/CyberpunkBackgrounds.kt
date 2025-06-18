@@ -17,7 +17,7 @@ import kotlin.math.*
  * Animated hexagon grid background for cyberpunk UI
  */
 @Composable
-fun HexagonGridBackground(
+public fun HexagonGridBackground(
     modifier: Modifier = Modifier,
     primaryColor: Color = NeonBlue,
     secondaryColor: Color = NeonPink,
@@ -25,10 +25,10 @@ fun HexagonGridBackground(
     hexSize: Float = 60f,
     alpha: Float = 0.3f,
 ) {
-    val infiniteTransition = rememberInfiniteTransition(label = "hexBackground")
+    public val infiniteTransition = rememberInfiniteTransition(label = "hexBackground")
 
     // Animate hexagon pulse
-    val pulseMultiplier by infiniteTransition.animateFloat(
+    public val pulseMultiplier by infiniteTransition.animateFloat(
         initialValue = 0.8f,
         targetValue = 1.2f,
         animationSpec = infiniteRepeatable(
@@ -39,7 +39,7 @@ fun HexagonGridBackground(
     )
 
     // Animate grid movement
-    val gridOffsetX by infiniteTransition.animateFloat(
+    public val gridOffsetX by infiniteTransition.animateFloat(
         initialValue = 0f,
         targetValue = hexSize,
         animationSpec = infiniteRepeatable(
@@ -49,7 +49,7 @@ fun HexagonGridBackground(
         label = "gridOffsetX"
     )
 
-    val gridOffsetY by infiniteTransition.animateFloat(
+    public val gridOffsetY by infiniteTransition.animateFloat(
         initialValue = 0f,
         targetValue = hexSize * 0.866f, // Height of a hexagon is sin(60°) * size
         animationSpec = infiniteRepeatable(
@@ -60,7 +60,7 @@ fun HexagonGridBackground(
     )
 
     // Animate digital landscape effect
-    val digitalEffect by infiniteTransition.animateFloat(
+    public val digitalEffect by infiniteTransition.animateFloat(
         initialValue = 0f,
         targetValue = 1f,
         animationSpec = infiniteRepeatable(
@@ -71,17 +71,17 @@ fun HexagonGridBackground(
     )
 
     Canvas(modifier = modifier.fillMaxSize()) {
-        val width = size.width
-        val height = size.height
+        public val width = size.width
+        public val height = size.height
 
-        val rows = (height / (hexSize * 0.866f)).toInt() + 3
-        val cols = (width / (hexSize * 1.5f)).toInt() + 3
+        public val rows = (height / (hexSize * 0.866f)).toInt() + 3
+        public val cols = (width / (hexSize * 1.5f)).toInt() + 3
 
         // Draw hexagon grid
         for (row in -1 until rows) {
             for (col in -1 until cols) {
-                val offsetX = col * hexSize * 1.5f - gridOffsetX
-                val offsetY =
+                public val offsetX = col * hexSize * 1.5f - gridOffsetX
+                public val offsetY =
                     row * hexSize * 0.866f * 2 + (col % 2) * hexSize * 0.866f - gridOffsetY
 
                 // Skip hexagons that are too far outside the canvas
@@ -90,18 +90,18 @@ fun HexagonGridBackground(
                 ) continue
 
                 // Determine color based on position and animation
-                val distanceToCenter = sqrt(
+                public val distanceToCenter = sqrt(
                     ((offsetX - width / 2) * (offsetX - width / 2) +
                             (offsetY - height / 2) * (offsetY - height / 2)).toFloat()
                 )
-                val maxDistance = sqrt((width * width + height * height).toFloat()) / 2
-                val colorRatio = (distanceToCenter / maxDistance + digitalEffect) % 1f
+                public val maxDistance = sqrt((width * width + height * height).toFloat()) / 2
+                public val colorRatio = (distanceToCenter / maxDistance + digitalEffect) % 1f
 
                 // Create a variable pulse based on position
-                val positionFactor = sin((offsetX + offsetY) / 200f + digitalEffect * PI.toFloat())
-                val localPulse = pulseMultiplier * (0.8f + 0.2f * positionFactor)
+                public val positionFactor = sin((offsetX + offsetY) / 200f + digitalEffect * PI.toFloat())
+                public val localPulse = pulseMultiplier * (0.8f + 0.2f * positionFactor)
 
-                val hexColor = when {
+                public val hexColor = when {
                     colorRatio < 0.33f -> primaryColor
                     colorRatio < 0.66f -> secondaryColor
                     else -> accentColor
@@ -117,23 +117,23 @@ fun HexagonGridBackground(
         }
 
         // Draw some random "data lines" between hexagons
-        val random = kotlin.random.Random(digitalEffect.hashCode())
+        public val random = kotlin.random.Random(digitalEffect.hashCode())
         repeat(5) {
-            val startCol = random.nextInt(-1, cols)
-            val startRow = random.nextInt(-1, rows)
+            public val startCol = random.nextInt(-1, cols)
+            public val startRow = random.nextInt(-1, rows)
 
-            val endCol = startCol + random.nextInt(-3, 3)
-            val endRow = startRow + random.nextInt(-3, 3)
+            public val endCol = startCol + random.nextInt(-3, 3)
+            public val endRow = startRow + random.nextInt(-3, 3)
 
-            val startX = startCol * hexSize * 1.5f - gridOffsetX
-            val startY =
+            public val startX = startCol * hexSize * 1.5f - gridOffsetX
+            public val startY =
                 startRow * hexSize * 0.866f * 2 + (startCol % 2) * hexSize * 0.866f - gridOffsetY
 
-            val endX = endCol * hexSize * 1.5f - gridOffsetX
-            val endY = endRow * hexSize * 0.866f * 2 + (endCol % 2) * hexSize * 0.866f - gridOffsetY
+            public val endX = endCol * hexSize * 1.5f - gridOffsetX
+            public val endY = endRow * hexSize * 0.866f * 2 + (endCol % 2) * hexSize * 0.866f - gridOffsetY
 
             if (random.nextFloat() < 0.7f) {
-                val lineColor = when (random.nextInt(3)) {
+                public val lineColor = when (random.nextInt(3)) {
                     0 -> primaryColor
                     1 -> secondaryColor
                     else -> accentColor
@@ -162,11 +162,11 @@ private fun DrawScope.drawHexagon(
     color: Color,
     strokeWidth: Float = 1f,
 ) {
-    val path = Path()
+    public val path: Path = Path()
     for (i in 0 until 6) {
-        val angle = i * 60f
-        val x = center.x + radius * cos(Math.toRadians(angle.toDouble())).toFloat()
-        val y = center.y + radius * sin(Math.toRadians(angle.toDouble())).toFloat()
+        public val angle = i * 60f
+        public val x = center.x + radius * cos(Math.toRadians(angle.toDouble())).toFloat()
+        public val y = center.y + radius * sin(Math.toRadians(angle.toDouble())).toFloat()
 
         if (i == 0) {
             path.moveTo(x, y)
@@ -187,16 +187,16 @@ private fun DrawScope.drawHexagon(
  * Creates a futuristic digital landscape background
  */
 @Composable
-fun DigitalLandscapeBackground(
+public fun DigitalLandscapeBackground(
     modifier: Modifier = Modifier,
     primaryColor: Color = NeonBlue,
     secondaryColor: Color = NeonPink,
     gridLineCount: Int = 20,
 ) {
-    val infiniteTransition = rememberInfiniteTransition(label = "digitalLandscape")
+    public val infiniteTransition = rememberInfiniteTransition(label = "digitalLandscape")
 
     // Animate perspective shift
-    val perspectiveShift by infiniteTransition.animateFloat(
+    public val perspectiveShift by infiniteTransition.animateFloat(
         initialValue = 0f,
         targetValue = 1f,
         animationSpec = infiniteRepeatable(
@@ -207,7 +207,7 @@ fun DigitalLandscapeBackground(
     )
 
     // Terrain height map animation
-    val terrainAnimation by infiniteTransition.animateFloat(
+    public val terrainAnimation by infiniteTransition.animateFloat(
         initialValue = 0f,
         targetValue = 2 * PI.toFloat(),
         animationSpec = infiniteRepeatable(
@@ -218,24 +218,24 @@ fun DigitalLandscapeBackground(
     )
 
     Canvas(modifier = modifier.fillMaxSize()) {
-        val width = size.width
-        val height = size.height
+        public val width = size.width
+        public val height = size.height
 
-        val horizon = height * 0.6f
+        public val horizon = height * 0.6f
         width / (gridLineCount - 1)
 
         // Draw horizontal grid lines with perspective
         for (i in 0 until gridLineCount) {
-            val y = horizon + (i * height * 0.4f / gridLineCount)
-            val perspectiveFactor = (i + 1) / gridLineCount.toFloat()
+            public val y = horizon + (i * height * 0.4f / gridLineCount)
+            public val perspectiveFactor = (i + 1) / gridLineCount.toFloat()
 
             // Calculate perspective vanishing point
-            val startX =
+            public val startX =
                 width * 0.5f * (1 - perspectiveFactor) - width * 0.1f * perspectiveShift * perspectiveFactor
-            val endX =
+            public val endX =
                 width - width * 0.5f * (1 - perspectiveFactor) + width * 0.1f * perspectiveShift * perspectiveFactor
 
-            val lineAlpha = 0.1f + 0.3f * perspectiveFactor
+            public val lineAlpha = 0.1f + 0.3f * perspectiveFactor
 
             drawLine(
                 color = primaryColor.copy(alpha = lineAlpha),
@@ -247,13 +247,13 @@ fun DigitalLandscapeBackground(
 
         // Draw vertical grid lines with perspective
         for (i in 0 until gridLineCount) {
-            val normalizedX = i / (gridLineCount - 1f)
-            val x = normalizedX * width
+            public val normalizedX = i / (gridLineCount - 1f)
+            public val x = normalizedX * width
 
             // Apply perspective shift
-            val adjustedX = width * 0.5f + (x - width * 0.5f) * (1 + 0.2f * perspectiveShift)
+            public val adjustedX = width * 0.5f + (x - width * 0.5f) * (1 + 0.2f * perspectiveShift)
 
-            val lineAlpha = 0.05f + 0.2f * (1f - abs(normalizedX - 0.5f) * 2)
+            public val lineAlpha = 0.05f + 0.2f * (1f - abs(normalizedX - 0.5f) * 2)
 
             drawLine(
                 color = secondaryColor.copy(alpha = lineAlpha),
@@ -264,21 +264,21 @@ fun DigitalLandscapeBackground(
         }
 
         // Draw "terrain" in the horizon
-        val terrainPath = Path()
+        public val terrainPath: Path = Path()
         terrainPath.moveTo(0f, horizon)
 
-        val terrainSegments = 100
+        public val terrainSegments = 100
         for (i in 0..terrainSegments) {
-            val x = i * width / terrainSegments
+            public val x = i * width / terrainSegments
 
             // Generate height using multiple sine waves for interesting terrain
-            val normalizedX = i / terrainSegments.toFloat()
-            val terrainHeight =
+            public val normalizedX = i / terrainSegments.toFloat()
+            public val terrainHeight =
                 sin(normalizedX * 5 + terrainAnimation) * 10 +
                         sin(normalizedX * 13 + terrainAnimation * 0.7f) * 5 +
                         sin(normalizedX * 23 - terrainAnimation * 0.3f) * 2.5f
 
-            val y = horizon - terrainHeight
+            public val y = horizon - terrainHeight
             terrainPath.lineTo(x, y)
         }
 
@@ -287,7 +287,7 @@ fun DigitalLandscapeBackground(
         terrainPath.close()
 
         // Create gradient for terrain
-        val terrainGradient = Brush.verticalGradient(
+        public val terrainGradient = Brush.verticalGradient(
             colors = listOf(
                 primaryColor.copy(alpha = 0.5f),
                 secondaryColor.copy(alpha = 0.1f)
@@ -302,9 +302,9 @@ fun DigitalLandscapeBackground(
         )
 
         // Optional: Draw "sun" or focal point
-        val sunRadius = width * 0.05f
-        val sunX = width * (0.5f + 0.1f * sin(terrainAnimation * 0.2f))
-        val sunY = horizon - height * 0.15f
+        public val sunRadius = width * 0.05f
+        public val sunX = width * (0.5f + 0.1f * sin(terrainAnimation * 0.2f))
+        public val sunY = horizon - height * 0.15f
 
         drawCircle(
             color = primaryColor.copy(alpha = 0.3f),

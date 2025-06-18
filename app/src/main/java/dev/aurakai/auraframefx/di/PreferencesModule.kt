@@ -15,7 +15,7 @@ import javax.inject.Singleton
  */
 @Module
 @InstallIn(SingletonComponent::class)
-object PreferencesModule {
+public object PreferencesModule {
 
     /**
      * Provides UserPreferences.
@@ -25,7 +25,7 @@ object PreferencesModule {
      */
     @Provides
     @Singleton
-    fun provideUserPreferences(@ApplicationContext _context: Context): UserPreferences {
+    public fun provideUserPreferences(@ApplicationContext _context: Context): UserPreferences {
         // Minimal working placeholder
         return UserPreferences(_context)
     }

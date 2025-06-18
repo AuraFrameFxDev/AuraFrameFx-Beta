@@ -31,22 +31,22 @@ import kotlinx.serialization.Contextual
  */
 @Serializable
 
-data class TaskScheduleRequest (
+public data class TaskScheduleRequest (
 
     /* The type of task (e.g., \"CONTENT_GENERATION\", \"SYSTEM_OPTIMIZATION\", \"SECURITY_SCAN\"). */
     @SerialName(value = "taskType")
-    val taskType: kotlin.String,
+    public val taskType: kotlin.String,
 
     /* The AI agent responsible for the task. */
     @Contextual @SerialName(value = "agentType")
-    val agentType: AgentType,
+    public val agentType: AgentType,
 
     /* Specific parameters for the task, varying by taskType. */
     @Contextual @SerialName(value = "details")
-    val details: kotlin.collections.Map<kotlin.String, kotlin.Any>,
+    public val details: kotlin.collections.Map<kotlin.String, kotlin.Any>,
 
     @SerialName(value = "priority")
-    val priority: TaskScheduleRequest.Priority? = Priority.NORMAL
+    public val priority: TaskScheduleRequest.Priority? = Priority.NORMAL
 
 ) {
 
@@ -56,7 +56,7 @@ data class TaskScheduleRequest (
      * Values: HIGH,NORMAL,LOW
      */
     @Serializable
-    enum class Priority(val value: kotlin.String) {
+    public enum class Priority(val value: kotlin.String) {
         @SerialName(value = "HIGH") HIGH("HIGH"),
         @SerialName(value = "NORMAL") NORMAL("NORMAL"),
         @SerialName(value = "LOW") LOW("LOW");

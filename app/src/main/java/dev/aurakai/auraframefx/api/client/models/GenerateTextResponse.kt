@@ -28,15 +28,15 @@ import kotlinx.serialization.Contextual
  */
 @Serializable
 
-data class GenerateTextResponse (
+public data class GenerateTextResponse (
 
     /* The AI-generated text. */
     @SerialName(value = "generatedText")
-    val generatedText: kotlin.String,
+    public val generatedText: kotlin.String,
 
     /* Reason for generation completion (e.g., STOP, MAX_TOKENS). */
     @SerialName(value = "finishReason")
-    val finishReason: kotlin.String? = null
+    public val finishReason: kotlin.String? = null
 
 ) {
 

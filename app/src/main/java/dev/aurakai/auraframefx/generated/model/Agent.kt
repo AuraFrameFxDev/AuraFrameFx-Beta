@@ -7,19 +7,19 @@ import kotlinx.serialization.Contextual
  * AI Agent types and models generated from OpenAPI spec
  */
 @Serializable
-enum class AgentType {
+public enum class AgentType {
     Aura, Kai, Genesis, Cascade, NeuralWhisper, AuraShield, GenKitMaster
 }
 
 @Serializable
-data class AgentProcessRequest(
-    val prompt: String,
+public data class AgentProcessRequest(
+    public val prompt: String,
     @Contextual val context: Map<String, Any>? = null
 )
 
 @Serializable
-data class AgentMessage(
-    val sender: AgentType,
-    val message: String,
-    val timestamp: String
+public data class AgentMessage(
+    public val sender: AgentType,
+    public val message: String,
+    public val timestamp: String
 )

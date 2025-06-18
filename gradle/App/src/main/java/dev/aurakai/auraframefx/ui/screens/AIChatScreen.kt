@@ -18,7 +18,7 @@ import dev.aurakai.auraframefx.ui.theme.*
 /**
  * Data class representing a chat message
  */
-data class ChatMessage(
+public data class ChatMessage(
     val content: String,
     val isFromUser: Boolean,
     val timestamp: Long = System.currentTimeMillis(),
@@ -34,7 +34,7 @@ data class ChatMessage(
  * Presents a scrollable list of chat messages and allows the user to send new messages. User messages and simulated AI responses are displayed with distinct styling and alignment. The input field persists its content across configuration changes, and messages are retained during recomposition.
  */
 @Composable
-fun AiChatScreen() {
+public fun AiChatScreen() {
     // State handling with rememberSaveable to persist through configuration changes
     var messageText by rememberSaveable { mutableStateOf("") }
     var chatMessages by rememberSaveable {
@@ -127,7 +127,7 @@ fun AiChatScreen() {
  * @param message The chat message to display.
  */
 @Composable
-fun ChatMessageItem(message: ChatMessage) {
+public fun ChatMessageItem(message: ChatMessage) {
     val alignment = if (message.isFromUser) Alignment.End else Alignment.Start
     val background = if (message.isFromUser)
         MaterialTheme.colorScheme.primaryContainer
@@ -167,7 +167,7 @@ fun ChatMessageItem(message: ChatMessage) {
  */
 @Preview(showBackground = true)
 @Composable
-fun AiChatScreenPreview() {
+public fun AiChatScreenPreview() {
     AuraFrameFXTheme { // Using our custom theme for preview
         AiChatScreen()
     }

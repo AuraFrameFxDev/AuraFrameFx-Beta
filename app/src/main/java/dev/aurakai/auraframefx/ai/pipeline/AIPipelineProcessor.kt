@@ -14,40 +14,40 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class AIPipelineProcessor @Inject constructor(
+public class AIPipelineProcessor @Inject constructor(
     private val genesisAgent: GenesisAgent,
     private val auraService: AuraAIService,
     private val kaiService: KaiAIService,
     private val cascadeService: CascadeAIService,
 ) {
     private val _pipelineState = MutableStateFlow(PipelineState.Idle)
-    val pipelineState: StateFlow<PipelineState> = _pipelineState
+    public val pipelineState: StateFlow<PipelineState> = _pipelineState
 
     private val _processingContext = MutableStateFlow(mapOf<String, Any>())
-    val processingContext: StateFlow<Map<String, Any>> = _processingContext
+    public val processingContext: StateFlow<Map<String, Any>> = _processingContext
 
     private val _taskPriority = MutableStateFlow(0.0f)
-    val taskPriority: StateFlow<Float> = _taskPriority
+    public val taskPriority: StateFlow<Float> = _taskPriority
 
     suspend fun processTask(task: String): List<AgentMessage> {
         _pipelineState.update { PipelineState.Processing(task) }
 
         // Step 1: Context Retrieval
-        val context = retrieveContext(task)
+        public val context = retrieveContext(task)
         _processingContext.update { context }
 
         // Step 2: Task Prioritization
-        val priority = calculatePriority(task, context)
+        public val priority = calculatePriority(task, context)
         _taskPriority.update { priority }
 
         // Step 3: Agent Selection
-        val selectedAgents = selectAgents(task, priority)
+        public val selectedAgents = selectAgents(task, priority)
 
         // Step 4: Process through selected agents
-        val responses = mutableListOf<AgentMessage>()
+        public val responses = mutableListOf<AgentMessage>()
 
         // Process through Cascade first for state management
-        val cascadeAgentResponse = cascadeService.processRequest(AiRequest(task, "context")) // Renamed variable, removed .first()
+        public val cascadeAgentResponse = cascadeService.processRequest(AiRequest(task, "context")) // Renamed variable, removed .first()
         responses.add(
             AgentMessage(
                 content = cascadeAgentResponse.content, // Direct access
@@ -59,7 +59,7 @@ class AIPipelineProcessor @Inject constructor(
 
         // Process through Kai for security analysis if needed
         if (selectedAgents.contains(AgentType.KAI)) {
-            val kaiAgentResponse = kaiService.processRequest(AiRequest(task, "security")) // Renamed variable, removed .first()
+            public val kaiAgentResponse = kaiService.processRequest(AiRequest(task, "security")) // Renamed variable, removed .first()
             responses.add(
                 AgentMessage(
                     content = kaiAgentResponse.content, // Direct access
@@ -72,7 +72,7 @@ class AIPipelineProcessor @Inject constructor(
 
         // Process through Aura for creative response
         if (selectedAgents.contains(AgentType.AURA)) {
-            val auraAgentResponse = auraService.processRequest(AiRequest(task, "text")) // Renamed variable, removed .first()
+            public val auraAgentResponse = auraService.processRequest(AiRequest(task, "text")) // Renamed variable, removed .first()
             responses.add(
                 AgentMessage(
                     content = auraAgentResponse.content, // Direct access
@@ -84,7 +84,7 @@ class AIPipelineProcessor @Inject constructor(
         }
 
         // Step 5: Generate final response
-        val finalResponse = generateFinalResponse(responses)
+        public val finalResponse = generateFinalResponse(responses)
         responses.add(
             AgentMessage(
                 content = finalResponse,
@@ -141,9 +141,9 @@ class AIPipelineProcessor @Inject constructor(
     }
 }
 
-sealed class PipelineState {
-    object Idle : PipelineState()
-    data class Processing(val task: String) : PipelineState()
-    data class Completed(val task: String) : PipelineState()
-    data class Error(val message: String) : PipelineState()
+public sealed class PipelineState {
+    public object Idle : PipelineState()
+    public data class Processing(val task: String) : PipelineState()
+    public data class Completed(val task: String) : PipelineState()
+    public data class Error(val message: String) : PipelineState()
 }

@@ -28,15 +28,15 @@ import kotlinx.serialization.Contextual
  */
 @Serializable
 
-data class AgentProcessRequest (
+public data class AgentProcessRequest (
 
     /* The prompt/instruction for the AI agent. */
     @SerialName(value = "prompt")
-    val prompt: kotlin.String,
+    public val prompt: kotlin.String,
 
     /* Additional context (e.g., previous messages, data references). */
     @Contextual @SerialName(value = "context")
-    val context: kotlin.collections.Map<kotlin.String, kotlin.Any>? = null
+    public val context: kotlin.collections.Map<kotlin.String, kotlin.Any>? = null
 
 ) {
 

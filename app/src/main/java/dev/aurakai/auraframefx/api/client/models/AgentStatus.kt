@@ -32,27 +32,27 @@ import kotlinx.serialization.Contextual
  */
 @Serializable
 
-data class AgentStatus (
+public data class AgentStatus (
 
     /* The type of the AI agent. */
     @Contextual @SerialName(value = "agentType")
-    val agentType: AgentType,
+    public val agentType: AgentType,
 
     /* Current processing state of the agent (e.g., \"IDLE\", \"PROCESSING\", \"ERROR\"). */
     @SerialName(value = "processingState")
-    val processingState: kotlin.String,
+    public val processingState: kotlin.String,
 
     /* Current vision/awareness state (e.g., \"ACTIVE\", \"MONITORING\", \"SLEEP\"). */
     @SerialName(value = "visionState")
-    val visionState: kotlin.String,
+    public val visionState: kotlin.String,
 
     /* Timestamp of the last activity. */
     @Contextual @SerialName(value = "lastActivity")
-    val lastActivity: java.time.OffsetDateTime,
+    public val lastActivity: java.time.OffsetDateTime,
 
     /* Description of the current task being executed by the agent (if any). */
     @SerialName(value = "currentTask")
-    val currentTask: kotlin.String? = null
+    public val currentTask: kotlin.String? = null
 
 ) {
 

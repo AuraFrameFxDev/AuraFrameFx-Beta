@@ -4,6 +4,6 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class SystemOverlayManager @Inject constructor() {
+public class SystemOverlayManager @Inject constructor() {
     // TODO: Implement system overlay management logic
 }

@@ -28,13 +28,13 @@ import androidx.compose.material.icons.filled.Brush // Changed from Shape
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ImageShapeManagerScreen(
+public fun ImageShapeManagerScreen(
     viewModel: ImageShapeManagerViewModel = hiltViewModel(), // Assuming ViewModel is defined
 ) {
     // LocalContext.current // Removed as it wasn't used
-    val images by viewModel.availableImages.collectAsState()
-    val customImages by viewModel.customImages.collectAsState()
-    val shapes by viewModel.shapes.collectAsState()
+    public val images by viewModel.availableImages.collectAsState()
+    public val customImages by viewModel.customImages.collectAsState()
+    public val shapes by viewModel.shapes.collectAsState()
 
     Scaffold(
         topBar = {
@@ -141,7 +141,7 @@ fun ImageShapeManagerScreen(
 }
 
 @Composable
-fun ImageCard(
+public fun ImageCard(
     image: ImageResource,
     isSelected: Boolean,
     onClick: () -> Unit,
@@ -197,7 +197,7 @@ fun ImageCard(
 }
 
 @Composable
-fun ShapeCard(
+public fun ShapeCard(
     shape: OverlayShape,
     isSelected: Boolean,
     onClick: () -> Unit,
@@ -252,11 +252,11 @@ fun ShapeCard(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AddImageDialog(
+public fun AddImageDialog(
     onDismiss: () -> Unit,
     onConfirm: (Bitmap) -> Unit,
 ) {
-    var imageUri by remember { mutableStateOf<String?>(null) }
+    public var imageUri by remember { mutableStateOf<String?>(null) }
 
     AlertDialog(
         onDismissRequest = onDismiss,
@@ -299,12 +299,12 @@ fun AddImageDialog(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AddShapeDialog(
+public fun AddShapeDialog(
     onDismiss: () -> Unit,
     onConfirm: (OverlayShape) -> Unit,
 ) {
-    var shapeType by remember { mutableStateOf(ShapeType.ROUNDED_RECTANGLE) }
-    var properties by remember { mutableStateOf(mapOf<String, Any>()) }
+    public var shapeType by remember { mutableStateOf(ShapeType.ROUNDED_RECTANGLE) }
+    public var properties by remember { mutableStateOf(mapOf<String, Any>()) }
 
     AlertDialog(
         onDismissRequest = onDismiss,
@@ -332,7 +332,7 @@ fun AddShapeDialog(
         confirmButton = {
             Button(
                 onClick = {
-                    val shape = viewModel.shapeManager.createCustomShape(
+                    public val shape = viewModel.shapeManager.createCustomShape(
                         type = shapeType,
                         properties = properties
                     )

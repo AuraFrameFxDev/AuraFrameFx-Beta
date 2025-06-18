@@ -8,7 +8,7 @@ import kotlinx.serialization.descriptors.PrimitiveKind
 import kotlinx.serialization.descriptors.SerialDescriptor
 import java.util.concurrent.atomic.AtomicBoolean
 
-object AtomicBooleanAdapter : KSerializer<AtomicBoolean> {
+public object AtomicBooleanAdapter : KSerializer<AtomicBoolean> {
     override fun serialize(encoder: Encoder, value: AtomicBoolean) {
         encoder.encodeBoolean(value.get())
     }

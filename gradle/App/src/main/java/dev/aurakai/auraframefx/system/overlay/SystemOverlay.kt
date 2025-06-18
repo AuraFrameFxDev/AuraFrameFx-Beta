@@ -3,7 +3,7 @@ package dev.aurakai.auraframefx.system.overlay // Ensure this package is correct
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class SystemOverlayConfig(
+public data class SystemOverlayConfig(
     val theme: OverlayTheme? = null,
     val defaultAnimation: OverlayAnimation? = null,
     val notchBar: NotchBarConfig = NotchBarConfig(),
@@ -15,7 +15,7 @@ data class SystemOverlayConfig(
 
 // Added NotchBarConfig definition
 @Serializable
-data class NotchBarConfig(
+public data class NotchBarConfig(
     val enabled: Boolean = false,
     val customBackgroundColorEnabled: Boolean = false,
     val customBackgroundColor: String? = null, // Hex color string
@@ -36,7 +36,7 @@ data class NotchBarConfig(
 )
 
 @Serializable
-data class OverlayTheme(
+public data class OverlayTheme(
     val primaryColor: String = "#FFFFFF",
     val secondaryColor: String = "#000000",
     val accentColor: String = "#00BCD4",
@@ -46,7 +46,7 @@ data class OverlayTheme(
 )
 
 @Serializable
-data class OverlayElement(
+public data class OverlayElement(
     val id: String,
     val type: String, // e.g., "text", "image", "shape"
     val shape: OverlayShape? = null,
@@ -58,20 +58,20 @@ data class OverlayElement(
 )
 
 @Serializable
-data class OverlayAnimation(
+public data class OverlayAnimation(
     val type: String = "fade", // e.g., "fade", "slide_in_left"
     val duration: Long = 300L,
     val interpolator: String = "linear",
 )
 
 @Serializable
-data class OverlayTransition(
+public data class OverlayTransition(
     val type: String = "crossfade",
     val duration: Long = 500L,
 )
 
 @Serializable
-data class OverlayShape(
+public data class OverlayShape(
     val type: String = "rectangle", // e.g., "rectangle", "circle", "hexagon", "rounded_rectangle"
     val cornerRadius: Float = 0f, // For rounded_rectangle
     val sides: Int = 0, // For polygons like hexagon (6), triangle (3)
@@ -84,7 +84,7 @@ data class OverlayShape(
 )
 
 @Serializable
-data class ShapeMargins(
+public data class ShapeMargins(
     val top: Int = 0,
     val bottom: Int = 0,
     val left: Int = 0,
@@ -92,7 +92,7 @@ data class ShapeMargins(
 )
 
 @Serializable
-data class ShapePadding(
+public data class ShapePadding(
     val top: Int = 0,
     val bottom: Int = 0,
     val left: Int = 0,
@@ -100,14 +100,14 @@ data class ShapePadding(
 )
 
 @Serializable
-data class ShapeBorder(
+public data class ShapeBorder(
     val color: String = "#FFFFFF",
     val width: Int = 1,
     val style: String = "solid",
 )
 
 @Serializable
-data class ShapeShadow(
+public data class ShapeShadow(
     val color: String? = null, // Hex color for shadow
     val radius: Float = 0f, // Blur radius
     val offsetX: Float = 0f,
@@ -115,7 +115,7 @@ data class ShapeShadow(
 )
 
 @Serializable
-data class ShadowOffset(val x: Float = 0f, val y: Float = 2f)
+public data class ShadowOffset(val x: Float = 0f, val y: Float = 2f)
 
 // Enums like ElementType, AnimationType, TransitionType, ShapeType
 // do not need @Serializable as per user instructions.

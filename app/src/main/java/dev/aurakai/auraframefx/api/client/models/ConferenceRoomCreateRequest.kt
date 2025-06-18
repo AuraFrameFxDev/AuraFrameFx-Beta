@@ -29,15 +29,15 @@ import kotlinx.serialization.Contextual
  */
 @Serializable
 
-data class ConferenceRoomCreateRequest (
+public data class ConferenceRoomCreateRequest (
 
     /* Name of the new conference room. */
     @SerialName(value = "roomName")
-    val roomName: kotlin.String,
+    public val roomName: kotlin.String,
 
     /* The AI agent designated as the orchestrator for this room. */
     @Contextual @SerialName(value = "orchestratorAgent")
-    val orchestratorAgent: AgentType
+    public val orchestratorAgent: AgentType
 
 ) {
 

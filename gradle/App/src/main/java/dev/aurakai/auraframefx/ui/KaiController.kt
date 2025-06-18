@@ -3,7 +3,7 @@ package dev.aurakai.auraframefx.ui
 /**
  * Controller class for Kai UI elements or interactions.
  */
-class KaiController(
+public class KaiController(
     // private val context: Context // Example: if context is needed
 ) {
 
@@ -31,16 +31,16 @@ class KaiController(
 
     // Placeholder methods based on error report (originally part of an anonymous class)
     // TODO: These methods were reported as unused within an anonymous listener. Implement or remove.
-    fun onKaiTapped() { /* TODO: Implement or remove. */
+    public fun onKaiTapped() { /* TODO: Implement or remove. */
     }
 
-    fun onKaiLongPressed() { /* TODO: Implement or remove. */
+    public fun onKaiLongPressed() { /* TODO: Implement or remove. */
     }
 
-    fun onKaiSwipedLeft() { /* TODO: Implement or remove. */
+    public fun onKaiSwipedLeft() { /* TODO: Implement or remove. */
     }
 
-    fun onKaiSwipedRight() { /* TODO: Implement or remove. */
+    public fun onKaiSwipedRight() { /* TODO: Implement or remove. */
     }
 
     /**
@@ -49,7 +49,7 @@ class KaiController(
      *
      * @return A placeholder View object or Unit.
      */
-    fun getKaiNotchBar(): Any { // Using Any as a very generic placeholder type
+    public fun getKaiNotchBar(): Any { // Using Any as a very generic placeholder type
         // TODO: Implement logic to return or manage the Kai Notch Bar.
         // This might involve returning a Composable, a View instance, or managing its state directly.
         // return View(context) // Example if it were to return a View
@@ -59,17 +59,17 @@ class KaiController(
     /**
      * Cleans up resources used by the KaiController.
      */
-    fun destroy() {
+    public fun destroy() {
         // TODO: Implement cleanup logic, remove listeners, release resources.
         isActive = false
     }
 
-    fun activate() {
+    public fun activate() {
         // TODO: Implement activation logic
         isActive = true
     }
 
-    fun deactivate() {
+    public fun deactivate() {
         // TODO: Implement deactivation logic
         isActive = false
     }

@@ -7,44 +7,44 @@ import kotlinx.datetime.Instant
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class ContextChain(
-    val id: String = "ctx_${Clock.System.now().toEpochMilliseconds()}",
-    val rootContext: String,
-    val currentContext: String,
-    val contextHistory: List<ContextNode> = emptyList(),
-    val relatedMemories: List<MemoryItem> = emptyList(),
-    val metadata: Map<String, String> = emptyMap(),
-    val priority: Float = 0.5f,
-    val relevanceScore: Float = 0.0f,
-    val lastUpdated: Instant = Clock.System.now(),
-    val agentContext: Map<AgentType, String> = emptyMap(),
+public data class ContextChain(
+    public val id: String = "ctx_${Clock.System.now().toEpochMilliseconds()}",
+    public val rootContext: String,
+    public val currentContext: String,
+    public val contextHistory: List<ContextNode> = emptyList(),
+    public val relatedMemories: List<MemoryItem> = emptyList(),
+    public val metadata: Map<String, String> = emptyMap(),
+    public val priority: Float = 0.5f,
+    public val relevanceScore: Float = 0.0f,
+    public val lastUpdated: Instant = Clock.System.now(),
+    public val agentContext: Map<AgentType, String> = emptyMap(),
 )
 
 @Serializable
-data class ContextNode(
-    val id: String,
-    val content: String,
-    val timestamp: Instant = Clock.System.now(),
-    val agent: AgentType,
-    val metadata: Map<String, String> = emptyMap(),
-    val relevance: Float = 0.0f,
-    val confidence: Float = 0.0f,
+public data class ContextNode(
+    public val id: String,
+    public val content: String,
+    public val timestamp: Instant = Clock.System.now(),
+    public val agent: AgentType,
+    public val metadata: Map<String, String> = emptyMap(),
+    public val relevance: Float = 0.0f,
+    public val confidence: Float = 0.0f,
 )
 
 @Serializable
-data class ContextQuery(
-    val query: String,
-    val context: String? = null,
-    val maxChainLength: Int = 10,
-    val minRelevance: Float = 0.6f,
-    val agentFilter: List<AgentType> = emptyList(),
-    val timeRange: Pair<Instant, Instant>? = null,
-    val includeMemories: Boolean = true,
+public data class ContextQuery(
+    public val query: String,
+    public val context: String? = null,
+    public val maxChainLength: Int = 10,
+    public val minRelevance: Float = 0.6f,
+    public val agentFilter: List<AgentType> = emptyList(),
+    public val timeRange: Pair<Instant, Instant>? = null,
+    public val includeMemories: Boolean = true,
 )
 
 @Serializable
-data class ContextChainResult(
-    val chain: ContextChain,
-    val relatedChains: List<ContextChain>,
-    val query: ContextQuery,
+public data class ContextChainResult(
+    public val chain: ContextChain,
+    public val relatedChains: List<ContextChain>,
+    public val query: ContextQuery,
 )

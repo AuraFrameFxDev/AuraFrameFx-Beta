@@ -11,11 +11,11 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object NeuralWhisperModule {
+public object NeuralWhisperModule {
 
     @Provides
     @Singleton
-    fun provideNeuralWhisper(
+    public fun provideNeuralWhisper(
         @ApplicationContext context: Context,
     ): NeuralWhisper {
         return NeuralWhisper()

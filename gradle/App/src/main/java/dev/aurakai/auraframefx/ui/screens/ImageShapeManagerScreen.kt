@@ -28,7 +28,7 @@ import androidx.compose.material.icons.filled.Brush // Changed from Shape
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ImageShapeManagerScreen(
+public fun ImageShapeManagerScreen(
     viewModel: ImageShapeManagerViewModel = hiltViewModel(), // Assuming ViewModel is defined
 ) {
     // LocalContext.current // Removed as it wasn't used
@@ -141,7 +141,7 @@ fun ImageShapeManagerScreen(
 }
 
 @Composable
-fun ImageCard(
+public fun ImageCard(
     image: ImageResource,
     isSelected: Boolean,
     onClick: () -> Unit,
@@ -197,7 +197,7 @@ fun ImageCard(
 }
 
 @Composable
-fun ShapeCard(
+public fun ShapeCard(
     shape: OverlayShape,
     isSelected: Boolean,
     onClick: () -> Unit,
@@ -252,7 +252,7 @@ fun ShapeCard(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AddImageDialog(
+public fun AddImageDialog(
     onDismiss: () -> Unit,
     onConfirm: (Bitmap) -> Unit,
 ) {
@@ -299,7 +299,7 @@ fun AddImageDialog(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AddShapeDialog(
+public fun AddShapeDialog(
     onDismiss: () -> Unit,
     onConfirm: (OverlayShape) -> Unit,
 ) {

@@ -28,15 +28,15 @@ import kotlinx.serialization.Contextual
  */
 @Serializable
 
-data class OAuthStartRequest (
+public data class OAuthStartRequest (
 
     /* The OAuth provider (e.g., \"Google\", \"Firebase\", \"CustomAuth\"). */
     @SerialName(value = "provider")
-    val provider: kotlin.String,
+    public val provider: kotlin.String,
 
     /* The URI to redirect to after successful authentication. */
     @Contextual @SerialName(value = "redirectUri")
-    val redirectUri: java.net.URI
+    public val redirectUri: java.net.URI
 
 ) {
 

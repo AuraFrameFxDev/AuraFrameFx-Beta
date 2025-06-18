@@ -18,7 +18,7 @@ import dev.aurakai.auraframefx.ui.theme.NeonTeal
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ConferenceRoomScreen() {
+public fun ConferenceRoomScreen() {
     var selectedAgent by remember { mutableStateOf("Aura") }
     var isRecording by remember { mutableStateOf(false) }
     var isTranscribing by remember { mutableStateOf(false) }
@@ -139,7 +139,7 @@ fun ConferenceRoomScreen() {
 }
 
 @Composable
-fun AgentButton(
+public fun AgentButton(
     agent: String,
     isSelected: Boolean,
     onClick: () -> Unit,
@@ -165,7 +165,7 @@ fun AgentButton(
 }
 
 @Composable
-fun RecordingButton(
+public fun RecordingButton(
     isRecording: Boolean,
     onClick: () -> Unit,
 ) {
@@ -187,7 +187,7 @@ fun RecordingButton(
 }
 
 @Composable
-fun TranscribeButton(
+public fun TranscribeButton(
     isTranscribing: Boolean,
     onClick: () -> Unit,
 ) {
@@ -210,7 +210,7 @@ fun TranscribeButton(
 
 @Composable
 @Preview(showBackground = true)
-fun ConferenceRoomScreenPreview() {
+public fun ConferenceRoomScreenPreview() {
     MaterialTheme {
         ConferenceRoomScreen()
     }

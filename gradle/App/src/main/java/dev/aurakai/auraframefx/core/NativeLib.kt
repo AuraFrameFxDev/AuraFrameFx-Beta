@@ -1,6 +1,6 @@
 package dev.aurakai.auraframefx.core
 
-class NativeLib {
+public class NativeLib {
     // No init {} block, as the original issue was "redundant empty initializer".
     // If an init block is truly needed later, it can be added.
 
@@ -14,7 +14,7 @@ class NativeLib {
         // external fun stringFromJNI(): String
 
         // Placeholder implementation if JNI is not yet set up
-        fun stringFromJNI(): String {
+        public fun stringFromJNI(): String {
             // TODO: Replace with actual JNI implementation. This is a mock response.
             return "Native integration not implemented yet. This is a placeholder."
         }

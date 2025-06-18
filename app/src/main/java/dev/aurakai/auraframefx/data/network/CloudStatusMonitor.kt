@@ -19,23 +19,23 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class CloudStatusMonitor @Inject constructor(
+public class CloudStatusMonitor @Inject constructor(
     @ApplicationContext private val context: Context,
 ) {
     private val TAG = "CloudStatusMonitor"
     private val _isCloudReachable = MutableStateFlow(true) // Assume reachable initially
-    val isCloudReachable: StateFlow<Boolean> = _isCloudReachable.asStateFlow()
+    public val isCloudReachable: StateFlow<Boolean> = _isCloudReachable.asStateFlow()
 
     init {
         Log.d(TAG, "CloudStatusMonitor initialized.")
         // Consider an initial check or rely on explicit startMonitoring call
     }
 
-    fun isNetworkConnected(): Boolean {
-        val connectivityManager =
+    public fun isNetworkConnected(): Boolean {
+        public val connectivityManager =
             context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        val activeNetwork = connectivityManager.activeNetwork ?: return false
-        val networkCapabilities =
+        public val activeNetwork = connectivityManager.activeNetwork ?: return false
+        public val networkCapabilities =
             connectivityManager.getNetworkCapabilities(activeNetwork) ?: return false
         return networkCapabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET) &&
                 networkCapabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_VALIDATED)
@@ -48,9 +48,9 @@ class CloudStatusMonitor @Inject constructor(
             return@withContext false
         }
         try {
-            val host = "8.8.8.8"
-            val port = 53
-            val timeout = 1500
+            public val host = "8.8.8.8"
+            public val port = 53
+            public val timeout = 1500
             Socket().use { socket ->
                 socket.connect(InetSocketAddress(host, port), timeout)
                 _isCloudReachable.update { true }

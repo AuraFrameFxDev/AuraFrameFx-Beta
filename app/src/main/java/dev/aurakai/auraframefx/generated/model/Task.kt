@@ -7,28 +7,28 @@ import kotlinx.serialization.Contextual
  * Task management models generated from OpenAPI spec
  */
 @Serializable
-data class TaskScheduleRequest(
-    val taskType: String,
-    val agentType: AgentType,
+public data class TaskScheduleRequest(
+    public val taskType: String,
+    public val agentType: AgentType,
     @Contextual val details: Map<String, Any>,
-    val priority: TaskPriority = TaskPriority.NORMAL
+    public val priority: TaskPriority = TaskPriority.NORMAL
 )
 
 @Serializable
-enum class TaskPriority {
+public enum class TaskPriority {
     HIGH, NORMAL, LOW
 }
 
 @Serializable
-enum class TaskStatusType {
+public enum class TaskStatusType {
     PENDING, IN_PROGRESS, COMPLETED, FAILED, CANCELLED
 }
 
 @Serializable
-data class TaskStatus(
-    val taskId: String,
-    val status: TaskStatusType,
-    val progress: Int? = null,
+public data class TaskStatus(
+    public val taskId: String,
+    public val status: TaskStatusType,
+    public val progress: Int? = null,
     @Contextual val result: Map<String, Any>? = null,
-    val errorMessage: String? = null
+    public val errorMessage: String? = null
 )

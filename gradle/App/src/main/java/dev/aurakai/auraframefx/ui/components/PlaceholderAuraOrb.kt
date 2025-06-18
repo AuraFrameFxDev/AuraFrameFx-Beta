@@ -16,7 +16,7 @@ import dev.aurakai.auraframefx.ui.theme.NeonPurple
 import dev.aurakai.auraframefx.ui.theme.NeonTeal
 
 @Composable
-fun FragmentComposable(
+public fun FragmentComposable(
     modifier: Modifier = Modifier,
     name: String = "Fragment",
 ) { // Renamed from Fragment to avoid conflict with Android Fragment class
@@ -27,7 +27,7 @@ fun FragmentComposable(
 }
 
 @Composable
-fun PlaceholderAuraOrb(modifier: Modifier = Modifier) { // Renamed
+public fun PlaceholderAuraOrb(modifier: Modifier = Modifier) { // Renamed
     // TODO: Implement actual Aura Orb Composable with animations and states
     Box(
         modifier = modifier
@@ -53,12 +53,12 @@ fun PlaceholderAuraOrb(modifier: Modifier = Modifier) { // Renamed
 
 @Preview(showBackground = true, name = "Placeholder Aura Orb Preview")
 @Composable
-fun PlaceholderAuraOrbPreview() { // Renamed
+public fun PlaceholderAuraOrbPreview() { // Renamed
     PlaceholderAuraOrb()
 }
 
 @Preview(showBackground = true, name = "Fragment Composable Preview")
 @Composable
-fun FragmentComposablePreview() { // Renamed from FragmentPreview
+public fun FragmentComposablePreview() { // Renamed from FragmentPreview
     FragmentComposable(name = "Sample Fragment")
 }

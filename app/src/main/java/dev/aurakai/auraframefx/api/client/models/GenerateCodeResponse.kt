@@ -28,15 +28,15 @@ import kotlinx.serialization.Contextual
  */
 @Serializable
 
-data class GenerateCodeResponse (
+public data class GenerateCodeResponse (
 
     /* The AI-generated code snippet. */
     @SerialName(value = "codeSnippet")
-    val codeSnippet: kotlin.String,
+    public val codeSnippet: kotlin.String,
 
     /* An explanation of the generated code (optional). */
     @SerialName(value = "explanation")
-    val explanation: kotlin.String? = null
+    public val explanation: kotlin.String? = null
 
 ) {
 

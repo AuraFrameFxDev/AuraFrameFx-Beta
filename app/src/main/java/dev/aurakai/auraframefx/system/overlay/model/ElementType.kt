@@ -1,6 +1,6 @@
 package dev.aurakai.auraframefx.system.overlay.model
 
-enum class ElementType {
+public enum class ElementType {
     QUICK_SETTINGS,
     LOCK_SCREEN,
     NOTIFICATION,

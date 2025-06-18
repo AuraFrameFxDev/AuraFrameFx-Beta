@@ -10,7 +10,7 @@ import javax.inject.Singleton
  * Manages secure storage of sensitive data like OAuth tokens or API keys.
  */
 @Singleton
-class SecurePreferences @Inject constructor(private val context: Context) {
+public class SecurePreferences @Inject constructor(private val context: Context) {
 
     // Use applicationContext to prevent activity/fragment context leaks
     private val appContext = context.applicationContext
@@ -35,7 +35,7 @@ class SecurePreferences @Inject constructor(private val context: Context) {
      * Retrieves the stored OAuth token.
      * @return The OAuth token as a String, or null if not found.
      */
-    fun getOAuthToken(): String? {
+    public fun getOAuthToken(): String? {
         return securePrefs.getString("oauth_token", null)
     }
 
@@ -43,7 +43,7 @@ class SecurePreferences @Inject constructor(private val context: Context) {
      * Saves the OAuth token securely.
      * @param token The OAuth token to save.
      */
-    fun saveOAuthToken(token: String?) {
+    public fun saveOAuthToken(token: String?) {
         securePrefs.edit().putString("oauth_token", token).apply()
     }
 
@@ -51,7 +51,7 @@ class SecurePreferences @Inject constructor(private val context: Context) {
      * Retrieves API key for Generative AI models
      * @return The API key as a String, or null if not found.
      */
-    fun getApiKey(): String? {
+    public fun getApiKey(): String? {
         return securePrefs.getString("api_key", null)
     }
 
@@ -59,14 +59,14 @@ class SecurePreferences @Inject constructor(private val context: Context) {
      * Saves the API key securely.
      * @param key The API key to save.
      */
-    fun saveApiKey(key: String) {
+    public fun saveApiKey(key: String) {
         securePrefs.edit().putString("api_key", key).apply()
     }
 
     /**
      * Clear all secure preferences
      */
-    fun clearAll() {
+    public fun clearAll() {
         securePrefs.edit().clear().apply()
     }
 }

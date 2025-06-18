@@ -5,7 +5,7 @@ import android.content.Intent
 import android.os.IBinder
 import android.util.Log
 
-class VertexCloudService : Service() {
+public class VertexCloudService : Service() {
 
     private val tag = "VertexCloudService"
 

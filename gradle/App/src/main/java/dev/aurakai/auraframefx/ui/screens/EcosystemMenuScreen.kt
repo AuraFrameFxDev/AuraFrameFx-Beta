@@ -12,7 +12,7 @@ import dev.aurakai.auraframefx.system.homescreen.HomeScreenTransitionType
 import dev.aurakai.auraframefx.ui.components.HologramTransition
 
 @Composable
-fun EcosystemMenuScreen(
+public fun EcosystemMenuScreen(
     transitionType: HomeScreenTransitionType = HomeScreenTransitionType.DIGITAL_DECONSTRUCT,
     showHologram: Boolean = true,
 ) {

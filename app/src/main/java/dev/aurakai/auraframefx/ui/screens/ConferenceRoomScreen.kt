@@ -18,10 +18,10 @@ import dev.aurakai.auraframefx.ui.theme.NeonTeal
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ConferenceRoomScreen() {
-    var selectedAgent by remember { mutableStateOf("Aura") }
-    var isRecording by remember { mutableStateOf(false) }
-    var isTranscribing by remember { mutableStateOf(false) }
+public fun ConferenceRoomScreen() {
+    public var selectedAgent by remember { mutableStateOf("Aura") }
+    public var isRecording by remember { mutableStateOf(false) }
+    public var isTranscribing by remember { mutableStateOf(false) }
 
     Column(
         modifier = Modifier
@@ -139,13 +139,13 @@ fun ConferenceRoomScreen() {
 }
 
 @Composable
-fun AgentButton(
+public fun AgentButton(
     agent: String,
     isSelected: Boolean,
     onClick: () -> Unit,
 ) {
-    val backgroundColor = if (isSelected) NeonTeal else Color.Black
-    val contentColor = if (isSelected) Color.White else NeonTeal
+    public val backgroundColor = if (isSelected) NeonTeal else Color.Black
+    public val contentColor = if (isSelected) Color.White else NeonTeal
 
     Button(
         onClick = onClick,
@@ -165,12 +165,12 @@ fun AgentButton(
 }
 
 @Composable
-fun RecordingButton(
+public fun RecordingButton(
     isRecording: Boolean,
     onClick: () -> Unit,
 ) {
-    val icon = if (isRecording) Icons.Default.Stop else Icons.Default.FiberManualRecord
-    val color = if (isRecording) Color.Red else NeonPurple
+    public val icon = if (isRecording) Icons.Default.Stop else Icons.Default.FiberManualRecord
+    public val color = if (isRecording) Color.Red else NeonPurple
 
     IconButton(
         onClick = onClick,
@@ -187,12 +187,12 @@ fun RecordingButton(
 }
 
 @Composable
-fun TranscribeButton(
+public fun TranscribeButton(
     isTranscribing: Boolean,
     onClick: () -> Unit,
 ) {
-    val icon = if (isTranscribing) Icons.Default.Stop else Icons.Default.VoiceChat
-    val color = if (isTranscribing) Color.Red else NeonBlue
+    public val icon = if (isTranscribing) Icons.Default.Stop else Icons.Default.VoiceChat
+    public val color = if (isTranscribing) Color.Red else NeonBlue
 
     IconButton(
         onClick = onClick,
@@ -210,7 +210,7 @@ fun TranscribeButton(
 
 @Composable
 @Preview(showBackground = true)
-fun ConferenceRoomScreenPreview() {
+public fun ConferenceRoomScreenPreview() {
     MaterialTheme {
         ConferenceRoomScreen()
     }

@@ -29,15 +29,15 @@ import kotlinx.serialization.Contextual
  */
 @Serializable
 
-data class OrchestrationRequest (
+public data class OrchestrationRequest (
 
     /* The instruction or query for the orchestrator to manage. */
     @SerialName(value = "instruction")
-    val instruction: kotlin.String,
+    public val instruction: kotlin.String,
 
     /* Specific agents to involve in the orchestration (optional). */
     @SerialName(value = "targetAgents")
-    val targetAgents: kotlin.collections.List<@Contextual AgentType>? = null
+    public val targetAgents: kotlin.collections.List<@Contextual AgentType>? = null
 
 ) {
 

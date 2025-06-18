@@ -32,16 +32,16 @@ import kotlinx.serialization.Contextual
  */
 @Serializable
 
-data class LockScreenConfig (
+public data class LockScreenConfig (
 
     @Contextual @SerialName(value = "clockConfig")
-    val clockConfig: LockScreenConfigClockConfig? = null,
+    public val clockConfig: LockScreenConfigClockConfig? = null,
 
     @Contextual @SerialName(value = "animation")
-    val animation: LockScreenConfigAnimation? = null,
+    public val animation: LockScreenConfigAnimation? = null,
 
     @Contextual @SerialName(value = "hapticFeedback")
-    val hapticFeedback: LockScreenConfigHapticFeedback? = null
+    public val hapticFeedback: LockScreenConfigHapticFeedback? = null
 
 ) : kotlin.collections.HashMap<String, kotlin.Any>() {
 

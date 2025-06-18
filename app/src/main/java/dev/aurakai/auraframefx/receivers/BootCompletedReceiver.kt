@@ -5,7 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.util.Log
 
-class BootCompletedReceiver : BroadcastReceiver() {
+public class BootCompletedReceiver : BroadcastReceiver() {
 
     private val tag = "BootCompletedReceiver"
 

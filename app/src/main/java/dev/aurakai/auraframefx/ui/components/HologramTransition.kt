@@ -13,7 +13,7 @@ import kotlin.math.* // Added import
 import kotlin.random.Random // Added import
 
 @Composable
-fun HologramTransition(
+public fun HologramTransition(
     visible: Boolean,
     modifier: Modifier = Modifier,
     glowColor: Color = Color(0xFF00FFCC), // Neon teal
@@ -22,7 +22,7 @@ fun HologramTransition(
     content: @Composable () -> Unit,
 ) {
     // Animate progress: 0f (start/dispersed) to 1f (fully materialized)
-    val progress by animateFloatAsState(
+    public val progress by animateFloatAsState(
         targetValue = if (visible) 1f else 0f,
         animationSpec = tween(durationMillis = 900, easing = FastOutSlowInEasing)
     )
@@ -30,18 +30,18 @@ fun HologramTransition(
     Box(modifier = modifier.fillMaxSize()) {
         // Hologram effect layer
         Canvas(modifier = Modifier.fillMaxSize()) {
-            val width = size.width
-            val height = size.height
-            val blockSize = 24f
-            val scanlineSpacing = 8f
-            val dispersion = (1f - progress) * height
+            public val width = size.width
+            public val height = size.height
+            public val blockSize = 24f
+            public val scanlineSpacing = 8f
+            public val dispersion = (1f - progress) * height
 
             // Draw pitch black background
             drawRect(backgroundColor)
 
             // Scanline shimmer
             for (y in 0..(height / scanlineSpacing).roundToInt()) {
-                val alpha = 0.10f + 0.15f * (1f - progress)
+                public val alpha = 0.10f + 0.15f * (1f - progress)
                 drawRect(
                     color = glowColor.copy(alpha = alpha),
                     topLeft = Offset(0f, y * scanlineSpacing),
@@ -52,10 +52,10 @@ fun HologramTransition(
             // Blocky pixel materialization/dispersal
             for (x in 0..(width / blockSize).roundToInt()) {
                 for (y in 0..(height / blockSize).roundToInt()) {
-                    val blockY = y * blockSize
+                    public val blockY = y * blockSize
                     // Blocks rise/fall into place during transition
-                    val blockProgress = progress + 0.2f * kotlin.math.sin(x + y * 0.5f)
-                    val reveal = (blockY < height * blockProgress)
+                    public val blockProgress = progress + 0.2f * kotlin.math.sin(x + y * 0.5f)
+                    public val reveal = (blockY < height * blockProgress)
                     if (reveal) {
                         drawRect(
                             color = glowColor.copy(alpha = 0.13f + 0.10f * kotlin.math.sin(x * 0.7f + y)),

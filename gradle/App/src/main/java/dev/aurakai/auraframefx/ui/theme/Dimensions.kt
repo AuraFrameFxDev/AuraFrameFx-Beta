@@ -7,7 +7,7 @@ import androidx.compose.ui.unit.sp
  * Dimensions for the AuraFrameFX app
  * Using Kotlin object instead of dimens.xml for better integration with Compose
  */
-object AppDimensions {
+public object AppDimensions {
     // Spacing
     val spacing_xs = 4.dp
     val spacing_small = 8.dp

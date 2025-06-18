@@ -29,15 +29,15 @@ import kotlinx.serialization.Contextual
  */
 @Serializable
 
-data class OrchestrationResponse (
+public data class OrchestrationResponse (
 
     /* Status of the orchestration (e.g., \"INITIATED\", \"PROCESSING\", \"COMPLETED\", \"FAILED\"). */
     @SerialName(value = "status")
-    val status: kotlin.String,
+    public val status: kotlin.String,
 
     /* Messages/responses from the orchestrator and involved agents. */
     @SerialName(value = "messages")
-    val messages: kotlin.collections.List<AgentMessage>? = null
+    public val messages: kotlin.collections.List<AgentMessage>? = null
 
 ) {
 

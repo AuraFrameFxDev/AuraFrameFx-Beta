@@ -10,7 +10,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class AuraAIService @Inject constructor() : Agent {
+public class AuraAIService @Inject constructor() : Agent {
 
     override fun getName(): String? = "Aura"
 

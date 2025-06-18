@@ -28,6 +28,28 @@ plugins {
     id("org.openapi.generator") version "7.5.0" apply false
 }
 
+// Custom task to fix Kotlin visibility issues
+tasks.register("fixKotlinVisibility") {
+    group = "build"
+    description = "Fixes Kotlin visibility issues for explicit API mode"
+    
+    doLast {
+        val scriptPath = "${rootProject.projectDir}/fix-kotlin-visibility.sh"
+        
+        // Make sure the script is executable
+        exec {
+            commandLine("chmod", "+x", scriptPath)
+        }
+        
+        // Run the script
+        exec {
+            commandLine(scriptPath)
+        }
+        
+        println("Kotlin visibility fixing completed")
+    }
+}
+
 subprojects {
     tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
         // Use the new compilerOptions DSL for Kotlin 2.0+

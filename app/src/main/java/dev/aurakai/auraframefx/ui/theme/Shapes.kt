@@ -18,7 +18,7 @@ import kotlin.math.sin
  * Shape definitions for AuraFrameFX
  * Using Material3 shapes with cyberpunk styling - more angular for a futuristic look
  */
-val AppShapes = Shapes(
+public val AppShapes = Shapes(
     // Small components like chips, small buttons
     small = RoundedCornerShape(8.dp),
 
@@ -30,41 +30,41 @@ val AppShapes = Shapes(
 )
 
 // Additional custom shapes for specific components
-val ChatBubbleIncomingShape = RoundedCornerShape(
+public val ChatBubbleIncomingShape = RoundedCornerShape(
     topStart = 4.dp,
     topEnd = 16.dp,
     bottomStart = 16.dp,
     bottomEnd = 16.dp
 )
 
-val ChatBubbleOutgoingShape = RoundedCornerShape(
+public val ChatBubbleOutgoingShape = RoundedCornerShape(
     topStart = 16.dp,
     topEnd = 4.dp,
     bottomStart = 16.dp,
     bottomEnd = 16.dp
 )
 
-val ButtonShape = RoundedCornerShape(12.dp)
-val CardShape = RoundedCornerShape(16.dp)
-val InputFieldShape = RoundedCornerShape(12.dp)
-val BottomSheetShape = RoundedCornerShape(topStart = 24.dp, topEnd = 24.dp)
-val FloatingActionButtonShape = RoundedCornerShape(16.dp)
+public val ButtonShape = RoundedCornerShape(12.dp)
+public val CardShape = RoundedCornerShape(16.dp)
+public val InputFieldShape = RoundedCornerShape(12.dp)
+public val BottomSheetShape = RoundedCornerShape(topStart = 24.dp, topEnd = 24.dp)
+public val FloatingActionButtonShape = RoundedCornerShape(16.dp)
 
 /**
  * Cyberpunk themed custom shapes for the AuraFrameFx UI
  * Based on the reference designs with hexagonal and angled corners
  */
-object CyberpunkShapes {
+public object CyberpunkShapes {
     // Hexagonal window shape with sharp corners for menus
-    val hexWindowShape = object : Shape {
+    public val hexWindowShape = object : Shape {
         override fun createOutline(
             size: Size,
             layoutDirection: LayoutDirection,
             density: Density,
         ): Outline {
-            val path = Path().apply {
+            public val path: Path = Path().apply {
                 // Start from the top middle
-                val cornerSize = size.width.coerceAtMost(size.height) * 0.1f
+                public val cornerSize = size.width.coerceAtMost(size.height) * 0.1f
 
                 // Top-left corner cutout
                 moveTo(0f, cornerSize)
@@ -95,15 +95,15 @@ object CyberpunkShapes {
     }
 
     // Angled window shape with diagonal corners like in image reference 1
-    val angledWindowShape = object : Shape {
+    public val angledWindowShape = object : Shape {
         override fun createOutline(
             size: Size,
             layoutDirection: LayoutDirection,
             density: Density,
         ): Outline {
-            val cornerSize = size.height * 0.08f
+            public val cornerSize = size.height * 0.08f
 
-            val path = Path().apply {
+            public val path: Path = Path().apply {
                 // Top-left corner 
                 moveTo(0f, cornerSize)
                 lineTo(cornerSize, 0f)
@@ -133,15 +133,15 @@ object CyberpunkShapes {
     }
 
     // Angled button shape like in image reference 1 and 3
-    val angledButtonShape = object : Shape {
+    public val angledButtonShape = object : Shape {
         override fun createOutline(
             size: Size,
             layoutDirection: LayoutDirection,
             density: Density,
         ): Outline {
-            val cornerSize = size.height * 0.3f
+            public val cornerSize = size.height * 0.3f
 
-            val path = Path().apply {
+            public val path: Path = Path().apply {
                 // Start from left side, below the top-left angle
                 moveTo(0f, cornerSize)
 
@@ -167,20 +167,20 @@ object CyberpunkShapes {
     }
 
     // Hexagon shape for buttons and icons
-    val hexagonShape = object : Shape {
+    public val hexagonShape = object : Shape {
         override fun createOutline(
             size: Size,
             layoutDirection: LayoutDirection,
             density: Density,
         ): Outline {
-            val radius = size.minDimension / 2
-            val center = android.graphics.PointF(size.width / 2, size.height / 2)
+            public val radius = size.minDimension / 2
+            public val center = android.graphics.PointF(size.width / 2, size.height / 2)
 
-            val path = Path().apply {
+            public val path: Path = Path().apply {
                 for (i in 0..5) {
-                    val angle = (PI / 3.0 * i - PI / 2).toFloat()
-                    val x = center.x + radius * cos(angle)
-                    val y = center.y + radius * sin(angle)
+                    public val angle = (PI / 3.0 * i - PI / 2).toFloat()
+                    public val x = center.x + radius * cos(angle)
+                    public val y = center.y + radius * sin(angle)
 
                     if (i == 0) {
                         moveTo(x, y)

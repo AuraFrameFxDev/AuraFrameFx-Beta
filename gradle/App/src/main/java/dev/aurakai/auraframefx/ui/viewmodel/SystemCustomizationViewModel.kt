@@ -19,7 +19,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class SystemCustomizationViewModel @Inject constructor(
+public class SystemCustomizationViewModel @Inject constructor(
     private val quickSettingsCustomizer: QuickSettingsCustomizer,
     private val lockScreenCustomizer: LockScreenCustomizer,
 ) : ViewModel() {
@@ -41,31 +41,31 @@ class SystemCustomizationViewModel @Inject constructor(
         }
     }
 
-    fun updateQuickSettingsTileShape(tileId: String, shape: OverlayShape) {
+    public fun updateQuickSettingsTileShape(tileId: String, shape: OverlayShape) {
         viewModelScope.launch {
             quickSettingsCustomizer.updateTileShape(tileId, shape)
         }
     }
 
-    fun updateQuickSettingsTileAnimation(tileId: String, animation: QuickSettingsAnimation) {
+    public fun updateQuickSettingsTileAnimation(tileId: String, animation: QuickSettingsAnimation) {
         viewModelScope.launch {
             quickSettingsCustomizer.updateTileAnimation(tileId, animation)
         }
     }
 
-    fun updateQuickSettingsBackground(image: ImageResource?) {
+    public fun updateQuickSettingsBackground(image: ImageResource?) {
         viewModelScope.launch {
             quickSettingsCustomizer.updateBackground(image)
         }
     }
 
-    fun updateLockScreenElementShape(elementType: LockScreenElementType, shape: OverlayShape) {
+    public fun updateLockScreenElementShape(elementType: LockScreenElementType, shape: OverlayShape) {
         viewModelScope.launch {
             lockScreenCustomizer.updateElementShape(elementType, shape)
         }
     }
 
-    fun updateLockScreenElementAnimation(
+    public fun updateLockScreenElementAnimation(
         elementType: LockScreenElementType,
         animation: LockScreenAnimation,
     ) {
@@ -74,13 +74,13 @@ class SystemCustomizationViewModel @Inject constructor(
         }
     }
 
-    fun updateLockScreenBackground(image: ImageResource?) {
+    public fun updateLockScreenBackground(image: ImageResource?) {
         viewModelScope.launch {
             lockScreenCustomizer.updateBackground(image)
         }
     }
 
-    fun resetToDefaults() {
+    public fun resetToDefaults() {
         viewModelScope.launch {
             quickSettingsCustomizer.resetToDefault()
             lockScreenCustomizer.resetToDefault()

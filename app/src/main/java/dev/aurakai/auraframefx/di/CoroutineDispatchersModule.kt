@@ -13,7 +13,7 @@ import javax.inject.Named
  */
 @Module
 @InstallIn(SingletonComponent::class)
-object CoroutineDispatchersModule {
+public object CoroutineDispatchersModule {
 
     // Using Named qualifier instead of custom qualifiers to avoid annotation processing issues
     private const val IO_DISPATCHER = "io_dispatcher"
@@ -24,14 +24,14 @@ object CoroutineDispatchersModule {
      */
     @Provides
     @Named(IO_DISPATCHER)
-    fun providesIoDispatcher(): CoroutineDispatcher = Dispatchers.IO
+    public fun providesIoDispatcher(): CoroutineDispatcher = Dispatchers.IO
 
     /**
      * Provides the Default Coroutine Dispatcher.
      */
     @Provides
     @Named(DEFAULT_DISPATCHER)
-    fun providesDefaultDispatcher(): CoroutineDispatcher = Dispatchers.Default
+    public fun providesDefaultDispatcher(): CoroutineDispatcher = Dispatchers.Default
 
     // You could also provide Dispatchers.Main if needed, though it's often accessed directly.
     // @Provides

@@ -14,7 +14,7 @@ import javax.inject.Inject
  * ViewModel for the AI Content generation features
  */
 @HiltViewModel
-class AiContentViewModel @Inject constructor(
+public class AiContentViewModel @Inject constructor(
     private val contentApiClient: AuraFxContentApiClient,
 ) : ViewModel() {
 
@@ -30,7 +30,7 @@ class AiContentViewModel @Inject constructor(
     /**
      * Generates text content based on the provided prompt
      */
-    fun generateText(prompt: String, maxTokens: Int? = 500, temperature: Float? = 0.7f) {
+    public fun generateText(prompt: String, maxTokens: Int? = 500, temperature: Float? = 0.7f) {
         _textGenerationState.value = TextGenerationState.Loading
 
         viewModelScope.launch {
@@ -50,7 +50,7 @@ class AiContentViewModel @Inject constructor(
     /**
      * Generates a description for an image at the provided URL
      */
-    fun generateImageDescription(imageUrl: String, context: String? = null) {
+    public fun generateImageDescription(imageUrl: String, context: String? = null) {
         _imageDescriptionState.value = ImageDescriptionState.Loading
 
         viewModelScope.launch {
@@ -70,14 +70,14 @@ class AiContentViewModel @Inject constructor(
     /**
      * Reset the text generation state to idle
      */
-    fun resetTextGenerationState() {
+    public fun resetTextGenerationState() {
         _textGenerationState.value = TextGenerationState.Idle
     }
 
     /**
      * Reset the image description state to idle
      */
-    fun resetImageDescriptionState() {
+    public fun resetImageDescriptionState() {
         _imageDescriptionState.value = ImageDescriptionState.Idle
     }
 }
@@ -85,19 +85,19 @@ class AiContentViewModel @Inject constructor(
 /**
  * State class for text generation
  */
-sealed class TextGenerationState {
-    object Idle : TextGenerationState()
-    object Loading : TextGenerationState()
-    data class Success(val generatedText: String, val finishReason: String) : TextGenerationState()
-    data class Error(val errorMessage: String) : TextGenerationState()
+public sealed class TextGenerationState {
+    public object Idle : TextGenerationState()
+    public object Loading : TextGenerationState()
+    public data class Success(val generatedText: String, val finishReason: String) : TextGenerationState()
+    public data class Error(val errorMessage: String) : TextGenerationState()
 }
 
 /**
  * State class for image description generation
  */
-sealed class ImageDescriptionState {
-    object Idle : ImageDescriptionState()
-    object Loading : ImageDescriptionState()
-    data class Success(val description: String) : ImageDescriptionState()
-    data class Error(val errorMessage: String) : ImageDescriptionState()
+public sealed class ImageDescriptionState {
+    public object Idle : ImageDescriptionState()
+    public object Loading : ImageDescriptionState()
+    public data class Success(val description: String) : ImageDescriptionState()
+    public data class Error(val errorMessage: String) : ImageDescriptionState()
 }

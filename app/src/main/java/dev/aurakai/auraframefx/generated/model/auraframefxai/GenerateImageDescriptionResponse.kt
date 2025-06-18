@@ -6,7 +6,7 @@ import kotlinx.serialization.Serializable
  * GenerateImageDescriptionResponse model generated from OpenAPI spec
  */
 @Serializable
-data class GenerateImageDescriptionResponse(
-    val description: String,
-    val confidence: Float = 1.0f
+public data class GenerateImageDescriptionResponse(
+    public val description: String,
+    public val confidence: Float = 1.0f
 )

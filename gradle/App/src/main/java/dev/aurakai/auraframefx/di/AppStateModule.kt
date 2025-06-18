@@ -18,7 +18,7 @@ import javax.inject.Singleton
  */
 @Module
 @InstallIn(SingletonComponent::class)
-object AppStateModule {
+public object AppStateModule {
 
     /**
      * Provides a DataStore instance, potentially for app state.
@@ -32,7 +32,7 @@ object AppStateModule {
     @Provides
     @Singleton
     @Named("AppStateDataStore") // Example qualifier if different from DataStoreModule's
-    fun provideDataStore(@ApplicationContext _context: Context): Any { // Using Any as DataStore<Preferences> placeholder
+    public fun provideDataStore(@ApplicationContext _context: Context): Any { // Using Any as DataStore<Preferences> placeholder
         // TODO: Parameter _context reported as unused (Hilt will provide it).
         // TODO: Clarify if this is different from DataStoreModule.provideDataStore.
         // Example:
@@ -50,7 +50,7 @@ object AppStateModule {
      */
     @Provides
     @Singleton
-    fun provideAppStateManager(@Named("AppStateDataStore") _dataStore: Any): AppStateManager {
+    public fun provideAppStateManager(@Named("AppStateDataStore") _dataStore: Any): AppStateManager {
         // Minimal working placeholder
         return AppStateManager()
     }

@@ -7,7 +7,7 @@ import android.content.Context
  * TODO: Reported as unused declaration. Ensure this class is used for network operations.
  * @param _context Application context. Parameter reported as unused in the constructor.
  */
-class ApiService(_context: Context) { // TODO: Parameter _context reported as unused.
+public class ApiService(_context: Context) { // TODO: Parameter _context reported as unused.
 
     private var apiToken: String? = null
     private var oauthToken: String? = null
@@ -26,7 +26,7 @@ class ApiService(_context: Context) { // TODO: Parameter _context reported as un
      * @param _token The API token. Parameter reported as unused.
      * TODO: Reported as unused. Implement if API token auth is used.
      */
-    fun setApiToken(_token: String?) {
+    public fun setApiToken(_token: String?) {
         // TODO: Parameter _token reported as unused.
         this.apiToken = _token
         // TODO: Potentially reconfigure network client with new token.
@@ -37,7 +37,7 @@ class ApiService(_context: Context) { // TODO: Parameter _context reported as un
      * @param _token The OAuth token. Parameter reported as unused.
      * TODO: Reported as unused. Implement if OAuth is used.
      */
-    fun setOAuthToken(_token: String?) {
+    public fun setOAuthToken(_token: String?) {
         // TODO: Parameter _token reported as unused.
         this.oauthToken = _token
         // TODO: Potentially reconfigure network client with new token.
@@ -48,7 +48,7 @@ class ApiService(_context: Context) { // TODO: Parameter _context reported as un
      * @return A network service client instance. Type 'Any?' is a placeholder.
      * TODO: Reported as unused. Implement to return a configured network client.
      */
-    fun createService(): Any? {
+    public fun createService(): Any? {
         // TODO: Implement logic to create/configure and return a Retrofit/Ktor service.
         // Example:
         // if (_networkService == null) {

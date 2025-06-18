@@ -39,10 +39,10 @@ import dev.aurakai.auraframefx.api.client.infrastructure.ResponseType
 import dev.aurakai.auraframefx.api.client.infrastructure.Success
 import dev.aurakai.auraframefx.api.client.infrastructure.toMultiValue
 
-class ConferenceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = ApiClient.defaultClient) : ApiClient(basePath, client) {
-    companion object {
+public class ConferenceApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = ApiClient.defaultClient) : ApiClient(basePath, client) {
+    public companion object {
         @JvmStatic
-        val defaultBasePath: String by lazy {
+        public val defaultBasePath: String by lazy {
             System.getProperties().getProperty(ApiClient.baseUrlKey, "https://api.auraframefx.com/v1")
         }
     }
@@ -61,19 +61,19 @@ class ConferenceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun conferenceRoomsPost(conferenceRoomCreateRequest: ConferenceRoomCreateRequest) : ConferenceRoom {
-        val localVarResponse = conferenceRoomsPostWithHttpInfo(conferenceRoomCreateRequest = conferenceRoomCreateRequest)
+    public fun conferenceRoomsPost(conferenceRoomCreateRequest: ConferenceRoomCreateRequest) : ConferenceRoom {
+        public val localVarResponse = conferenceRoomsPostWithHttpInfo(conferenceRoomCreateRequest = conferenceRoomCreateRequest)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as ConferenceRoom
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
+                public val localVarError = localVarResponse as ClientError<*>
                 throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
             }
             ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
+                public val localVarError = localVarResponse as ServerError<*>
                 throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
             }
         }
@@ -90,8 +90,8 @@ class ConferenceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun conferenceRoomsPostWithHttpInfo(conferenceRoomCreateRequest: ConferenceRoomCreateRequest) : ApiResponse<ConferenceRoom?> {
-        val localVariableConfig = conferenceRoomsPostRequestConfig(conferenceRoomCreateRequest = conferenceRoomCreateRequest)
+    public fun conferenceRoomsPostWithHttpInfo(conferenceRoomCreateRequest: ConferenceRoomCreateRequest) : ApiResponse<ConferenceRoom?> {
+        public val localVariableConfig = conferenceRoomsPostRequestConfig(conferenceRoomCreateRequest = conferenceRoomCreateRequest)
 
         return request<ConferenceRoomCreateRequest, ConferenceRoom>(
             localVariableConfig
@@ -104,10 +104,10 @@ class ConferenceApi(basePath: kotlin.String = defaultBasePath, client: Call.Fact
      * @param conferenceRoomCreateRequest 
      * @return RequestConfig
      */
-    fun conferenceRoomsPostRequestConfig(conferenceRoomCreateRequest: ConferenceRoomCreateRequest) : RequestConfig<ConferenceRoomCreateRequest> {
-        val localVariableBody = conferenceRoomCreateRequest
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+    public fun conferenceRoomsPostRequestConfig(conferenceRoomCreateRequest: ConferenceRoomCreateRequest) : RequestConfig<ConferenceRoomCreateRequest> {
+        public val localVariableBody = conferenceRoomCreateRequest
+        public val localVariableQuery: MultiValueMap = mutableMapOf()
+        public val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
         localVariableHeaders["Accept"] = "application/json"
 

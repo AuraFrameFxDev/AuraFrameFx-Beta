@@ -12,21 +12,21 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class TaskScheduler @Inject constructor(
+public class TaskScheduler @Inject constructor(
     private val errorHandler: ErrorHandler,
     private val config: AIPipelineConfig,
 ) {
     private val _tasks = MutableStateFlow(mapOf<String, Task>())
-    val tasks: StateFlow<Map<String, Task>> = _tasks
+    public val tasks: StateFlow<Map<String, Task>> = _tasks
 
     private val _taskStats = MutableStateFlow(TaskStats())
-    val taskStats: StateFlow<TaskStats> = _taskStats
+    public val taskStats: StateFlow<TaskStats> = _taskStats
 
     private val _taskQueue = mutableListOf<Task>()
     private val _activeTasks = mutableMapOf<String, Task>()
     private val _completedTasks = mutableMapOf<String, Task>()
 
-    fun createTask(
+    public fun createTask(
         content: String,
         context: String,
         priority: TaskPriority = TaskPriority.NORMAL,
@@ -36,7 +36,7 @@ class TaskScheduler @Inject constructor(
         dependencies: Set<String> = emptySet(),
         metadata: Map<String, String> = emptyMap(),
     ): Task {
-        val task = Task(
+        public val task = Task(
             content = content,
             context = context,
             priority = priority,
@@ -58,11 +58,11 @@ class TaskScheduler @Inject constructor(
 
     private fun scheduleTask(task: Task) {
         try {
-            val priorityScore = calculatePriorityScore(task)
-            val urgencyScore = calculateUrgencyScore(task)
-            val importanceScore = calculateImportanceScore(task)
+            public val priorityScore = calculatePriorityScore(task)
+            public val urgencyScore = calculateUrgencyScore(task)
+            public val importanceScore = calculateImportanceScore(task)
 
-            val totalScore = (priorityScore * config.priorityWeight) +
+            public val totalScore = (priorityScore * config.priorityWeight) +
                     (urgencyScore * config.urgencyWeight) +
                     (importanceScore * config.importanceWeight)
 
@@ -91,7 +91,7 @@ class TaskScheduler @Inject constructor(
 
     private fun processQueue() {
         while (_taskQueue.isNotEmpty() && _activeTasks.size < config.maxActiveTasks) {
-            val nextTask = _taskQueue.first()
+            public val nextTask = _taskQueue.first()
             if (canExecuteTask(nextTask)) {
                 executeTask(nextTask)
                 _taskQueue.remove(nextTask)
@@ -103,13 +103,13 @@ class TaskScheduler @Inject constructor(
 
     private fun canExecuteTask(task: Task): Boolean {
         // Check dependencies
-        val dependencies = task.dependencies.mapNotNull { _tasks.value[it] }
+        public val dependencies = task.dependencies.mapNotNull { _tasks.value[it] }
         if (dependencies.any { it.status != TaskStatus.COMPLETED }) {
             return false
         }
 
         // Check agent availability
-        val requiredAgents = task.requiredAgents
+        public val requiredAgents = task.requiredAgents
         if (requiredAgents.isNotEmpty()) {
             // TODO: Implement agent availability check
             return true
@@ -119,7 +119,7 @@ class TaskScheduler @Inject constructor(
     }
 
     private fun executeTask(task: Task) {
-        val updatedTask = task.copy(
+        public val updatedTask = task.copy(
             status = TaskStatus.IN_PROGRESS,
             assignedAgents = task.requiredAgents
         )
@@ -130,9 +130,9 @@ class TaskScheduler @Inject constructor(
         }
     }
 
-    fun updateTaskStatus(taskId: String, status: TaskStatus) {
-        val task = _tasks.value[taskId] ?: return
-        val updatedTask = task.copy(status = status)
+    public fun updateTaskStatus(taskId: String, status: TaskStatus) {
+        public val task = _tasks.value[taskId] ?: return
+        public val updatedTask = task.copy(status = status)
 
         when (status) {
             TaskStatus.COMPLETED -> {
@@ -187,11 +187,11 @@ class TaskScheduler @Inject constructor(
     }
 }
 
-data class TaskStats(
-    val totalTasks: Int = 0,
-    val activeTasks: Int = 0,
-    val completedTasks: Int = 0,
-    val pendingTasks: Int = 0,
-    val taskCounts: Map<TaskStatus, Int> = emptyMap(),
-    val lastUpdated: Instant = Clock.System.now(),
+public data class TaskStats(
+    public val totalTasks: Int = 0,
+    public val activeTasks: Int = 0,
+    public val completedTasks: Int = 0,
+    public val pendingTasks: Int = 0,
+    public val taskCounts: Map<TaskStatus, Int> = emptyMap(),
+    public val lastUpdated: Instant = Clock.System.now(),
 )

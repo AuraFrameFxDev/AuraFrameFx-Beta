@@ -27,11 +27,11 @@ import kotlinx.serialization.Contextual
  */
 @Serializable
 
-data class OAuthStartResponse (
+public data class OAuthStartResponse (
 
     /* The URL the user should be redirected to for authentication. */
     @SerialName(value = "authUrl")
-    val authUrl: kotlin.String
+    public val authUrl: kotlin.String
 
 ) {
 

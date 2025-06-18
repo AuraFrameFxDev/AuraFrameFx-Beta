@@ -19,48 +19,48 @@ import javax.inject.Inject
 // import javax.inject.Singleton // ViewModels should use @HiltViewModel
 
 @HiltViewModel
-class GenesisAgentViewModel @Inject constructor(
+public class GenesisAgentViewModel @Inject constructor(
     private val genesisAgent: GenesisAgent,
 ) : ViewModel() {
 
     private val _agents = MutableStateFlow<List<AgentConfig>>(emptyList()) // Initialize properly
-    val agents: StateFlow<List<AgentConfig>> = _agents.asStateFlow()
+    public val agents: StateFlow<List<AgentConfig>> = _agents.asStateFlow()
 
     // Track agent status
     private val _agentStatus = MutableStateFlow<Map<AgentType, String>>(
         AgentType.values().associateWith { STATUS_IDLE }
     )
-    val agentStatus: StateFlow<Map<AgentType, String>> = _agentStatus.asStateFlow()
+    public val agentStatus: StateFlow<Map<AgentType, String>> = _agentStatus.asStateFlow()
 
     // Track task history
     private val _taskHistory = MutableStateFlow<List<HistoricalTask>>(emptyList())
-    val taskHistory: StateFlow<List<HistoricalTask>> = _taskHistory.asStateFlow()
+    public val taskHistory: StateFlow<List<HistoricalTask>> = _taskHistory.asStateFlow()
 
     // Track rotation state
     private val _isRotating = MutableStateFlow(true)
-    val isRotating: StateFlow<Boolean> = _isRotating.asStateFlow()
+    public val isRotating: StateFlow<Boolean> = _isRotating.asStateFlow()
 
     init { // Initialize agents in init block
         _agents.value = genesisAgent.getAgentsByPriority()
     }
 
-    fun toggleRotation() {
+    public fun toggleRotation() {
         _isRotating.value = !_isRotating.value
     }
 
-    fun toggleAgent(agent: AgentType) {
+    public fun toggleAgent(agent: AgentType) {
         viewModelScope.launch {
             genesisAgent.toggleAgent(agent)
         }
     }
 
-    fun updateAgentStatus(agent: AgentType, status: String) {
-        val currentStatuses = _agentStatus.value.toMutableMap()
+    public fun updateAgentStatus(agent: AgentType, status: String) {
+        public val currentStatuses = _agentStatus.value.toMutableMap()
         currentStatuses[agent] = status
         _agentStatus.value = currentStatuses
     }
 
-    fun assignTaskToAgent(agent: AgentType, taskDescription: String) {
+    public fun assignTaskToAgent(agent: AgentType, taskDescription: String) {
         viewModelScope.launch {
             try {
                 // Update status to processing
@@ -81,14 +81,14 @@ class GenesisAgentViewModel @Inject constructor(
         }
     }
 
-    fun addTaskToHistory(agent: AgentType, description: String) {
-        val newTask = HistoricalTask(agent, description)
-        val updatedHistory = _taskHistory.value.toMutableList()
+    public fun addTaskToHistory(agent: AgentType, description: String) {
+        public val newTask = HistoricalTask(agent, description)
+        public val updatedHistory = _taskHistory.value.toMutableList()
         updatedHistory.add(0, newTask) // Add to the beginning for most recent first
         _taskHistory.value = updatedHistory
     }
 
-    fun clearTaskHistory() {
+    public fun clearTaskHistory() {
         _taskHistory.value = emptyList()
     }
 
@@ -99,7 +99,7 @@ class GenesisAgentViewModel @Inject constructor(
      * @param capabilities The set of capabilities assigned to the agent.
      * @return The configuration of the newly registered agent.
      */
-    fun registerAuxiliaryAgent(
+    public fun registerAuxiliaryAgent(
         name: String,
         capabilities: Set<String>,
     ): AgentConfig {
@@ -112,7 +112,7 @@ class GenesisAgentViewModel @Inject constructor(
      * @param name The name of the agent to retrieve.
      * @return The agent's configuration if found, or null if no agent with the specified name exists.
      */
-    fun getAgentConfig(name: String): AgentConfig? {
+    public fun getAgentConfig(name: String): AgentConfig? {
         return genesisAgent.getAgentConfig(name)
     }
 
@@ -121,7 +121,7 @@ class GenesisAgentViewModel @Inject constructor(
      *
      * @return The list of agent configurations sorted by priority.
      */
-    fun getAgentsByPriority(): List<AgentConfig> {
+    public fun getAgentsByPriority(): List<AgentConfig> {
         return genesisAgent.getAgentsByPriority()
     }
 
@@ -133,7 +133,7 @@ class GenesisAgentViewModel @Inject constructor(
      * @param query The query string to process.
      * @return An empty list, as results are handled asynchronously.
      */
-    fun processQuery(query: String): List<AgentConfig> {
+    public fun processQuery(query: String): List<AgentConfig> {
         viewModelScope.launch {
             genesisAgent.processQuery(query)
         }

@@ -6,31 +6,31 @@ import kotlinx.datetime.Instant
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class AIError(
-    val id: String = "err_${Clock.System.now().toEpochMilliseconds()}",
-    val timestamp: Instant = Clock.System.now(),
-    val agent: AgentType,
-    val type: ErrorType,
-    val message: String,
-    val context: String,
-    val metadata: Map<String, String> = emptyMap(),
-    val recoveryAttempts: Int = 0,
-    val recoveryStatus: RecoveryStatus = RecoveryStatus.PENDING,
-    val recoveryActions: List<RecoveryAction> = emptyList(),
+public data class AIError(
+    public val id: String = "err_${Clock.System.now().toEpochMilliseconds()}",
+    public val timestamp: Instant = Clock.System.now(),
+    public val agent: AgentType,
+    public val type: ErrorType,
+    public val message: String,
+    public val context: String,
+    public val metadata: Map<String, String> = emptyMap(),
+    public val recoveryAttempts: Int = 0,
+    public val recoveryStatus: RecoveryStatus = RecoveryStatus.PENDING,
+    public val recoveryActions: List<RecoveryAction> = emptyList(),
 )
 
 @Serializable
-data class RecoveryAction(
-    val id: String = "act_${Clock.System.now().toEpochMilliseconds()}",
-    val timestamp: Instant = Clock.System.now(),
-    val actionType: RecoveryActionType,
-    val description: String,
-    val result: RecoveryResult? = null,
-    val metadata: Map<String, String> = emptyMap(),
+public data class RecoveryAction(
+    public val id: String = "act_${Clock.System.now().toEpochMilliseconds()}",
+    public val timestamp: Instant = Clock.System.now(),
+    public val actionType: RecoveryActionType,
+    public val description: String,
+    public val result: RecoveryResult? = null,
+    public val metadata: Map<String, String> = emptyMap(),
 )
 
 @Serializable // Added annotation
-enum class ErrorType {
+public enum class ErrorType {
     PROCESSING_ERROR,
     MEMORY_ERROR,
     CONTEXT_ERROR,
@@ -41,7 +41,7 @@ enum class ErrorType {
 }
 
 @Serializable // Added annotation
-enum class RecoveryStatus {
+public enum class RecoveryStatus {
     PENDING,
     IN_PROGRESS,
     SUCCESS,
@@ -50,7 +50,7 @@ enum class RecoveryStatus {
 }
 
 @Serializable // Added annotation
-enum class RecoveryActionType {
+public enum class RecoveryActionType {
     RETRY,
     FALLBACK,
     RESTART,
@@ -60,7 +60,7 @@ enum class RecoveryActionType {
 }
 
 @Serializable // Added annotation
-enum class RecoveryResult {
+public enum class RecoveryResult {
     SUCCESS,
     FAILURE,
     PARTIAL_SUCCESS,

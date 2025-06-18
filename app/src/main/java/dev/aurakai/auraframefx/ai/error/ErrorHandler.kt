@@ -12,26 +12,26 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class ErrorHandler @Inject constructor(
+public class ErrorHandler @Inject constructor(
     private val contextManager: ContextManager,
     private val config: AIPipelineConfig,
 ) {
     private val _errors = MutableStateFlow(mapOf<String, AIError>())
-    val errors: StateFlow<Map<String, AIError>> = _errors
+    public val errors: StateFlow<Map<String, AIError>> = _errors
 
     private val _errorStats = MutableStateFlow(ErrorStats())
-    val errorStats: StateFlow<ErrorStats> = _errorStats
+    public val errorStats: StateFlow<ErrorStats> = _errorStats
 
-    fun handleError(
+    public fun handleError(
         error: Throwable,
         agent: AgentType,
         context: String,
         metadata: Map<String, Any> = emptyMap(),
     ): AIError {
-        val errorType = determineErrorType(error)
-        val errorMessage = error.message ?: "Unknown error"
+        public val errorType = determineErrorType(error)
+        public val errorMessage = error.message ?: "Unknown error"
 
-        val aiError = AIError(
+        public val aiError = AIError(
             agent = agent,
             type = errorType,
             message = errorMessage,
@@ -162,20 +162,20 @@ class ErrorHandler @Inject constructor(
     }
 }
 
-data class ErrorStats(
-    val totalErrors: Int = 0,
-    val activeErrors: Int = 0,
-    val lastError: AIError? = null,
-    val errorTypes: Map<ErrorType, Int> = emptyMap(),
-    val lastUpdated: Instant = Clock.System.now(),
+public data class ErrorStats(
+    public val totalErrors: Int = 0,
+    public val activeErrors: Int = 0,
+    public val lastError: AIError? = null,
+    public val errorTypes: Map<ErrorType, Int> = emptyMap(),
+    public val lastUpdated: Instant = Clock.System.now(),
 )
 
-class ProcessingException(message: String? = null) : Exception(message)
+public class ProcessingException(message: String? = null) : Exception(message)
 
-class MemoryException(message: String? = null) : Exception(message)
+public class MemoryException(message: String? = null) : Exception(message)
 
-class ContextException(message: String? = null) : Exception(message)
+public class ContextException(message: String? = null) : Exception(message)
 
-class NetworkException(message: String? = null) : Exception(message)
+public class NetworkException(message: String? = null) : Exception(message)
 
-class TimeoutException(message: String? = null) : Exception(message)
+public class TimeoutException(message: String? = null) : Exception(message)

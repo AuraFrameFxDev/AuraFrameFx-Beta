@@ -6,7 +6,7 @@ import kotlinx.datetime.Instant
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class AIError(
+public data class AIError(
     val id: String = "err_${Clock.System.now().toEpochMilliseconds()}",
     val timestamp: Instant = Clock.System.now(),
     val agent: AgentType,
@@ -20,7 +20,7 @@ data class AIError(
 )
 
 @Serializable
-data class RecoveryAction(
+public data class RecoveryAction(
     val id: String = "act_${Clock.System.now().toEpochMilliseconds()}",
     val timestamp: Instant = Clock.System.now(),
     val actionType: RecoveryActionType,
@@ -30,7 +30,7 @@ data class RecoveryAction(
 )
 
 @Serializable // Added annotation
-enum class ErrorType {
+public enum class ErrorType {
     PROCESSING_ERROR,
     MEMORY_ERROR,
     CONTEXT_ERROR,
@@ -41,7 +41,7 @@ enum class ErrorType {
 }
 
 @Serializable // Added annotation
-enum class RecoveryStatus {
+public enum class RecoveryStatus {
     PENDING,
     IN_PROGRESS,
     SUCCESS,
@@ -50,7 +50,7 @@ enum class RecoveryStatus {
 }
 
 @Serializable // Added annotation
-enum class RecoveryActionType {
+public enum class RecoveryActionType {
     RETRY,
     FALLBACK,
     RESTART,
@@ -60,7 +60,7 @@ enum class RecoveryActionType {
 }
 
 @Serializable // Added annotation
-enum class RecoveryResult {
+public enum class RecoveryResult {
     SUCCESS,
     FAILURE,
     PARTIAL_SUCCESS,

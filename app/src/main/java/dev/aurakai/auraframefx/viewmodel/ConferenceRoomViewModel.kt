@@ -26,7 +26,7 @@ import dev.aurakai.auraframefx.model.AgentResponse
 // Placeholder interfaces removed
 
 // @Singleton // ViewModels should use @HiltViewModel for scoping
-class ConferenceRoomViewModel @Inject constructor( // Assuming @HiltViewModel will be added if this is a ViewModel
+public class ConferenceRoomViewModel @Inject constructor( // Assuming @HiltViewModel will be added if this is a ViewModel
     private val auraService: dev.aurakai.auraframefx.ai.services.AuraAIService, // Using actual service
     private val kaiService: dev.aurakai.auraframefx.ai.services.KaiAIService,     // Using actual service
     private val cascadeService: dev.aurakai.auraframefx.ai.services.CascadeAIService, // Using actual service
@@ -36,19 +36,19 @@ class ConferenceRoomViewModel @Inject constructor( // Assuming @HiltViewModel wi
     private val TAG = "ConfRoomViewModel"
 
     private val _messages = MutableStateFlow<List<AgentMessage>>(emptyList())
-    val messages: StateFlow<List<AgentMessage>> = _messages
+    public val messages: StateFlow<List<AgentMessage>> = _messages
 
     private val _activeAgents = MutableStateFlow(setOf<AgentType>())
-    val activeAgents: StateFlow<Set<AgentType>> = _activeAgents
+    public val activeAgents: StateFlow<Set<AgentType>> = _activeAgents
 
     private val _selectedAgent = MutableStateFlow<AgentType>(AgentType.AURA) // Default to AURA
-    val selectedAgent: StateFlow<AgentType> = _selectedAgent
+    public val selectedAgent: StateFlow<AgentType> = _selectedAgent
 
     private val _isRecording = MutableStateFlow(false)
-    val isRecording: StateFlow<Boolean> = _isRecording
+    public val isRecording: StateFlow<Boolean> = _isRecording
 
     private val _isTranscribing = MutableStateFlow(false)
-    val isTranscribing: StateFlow<Boolean> = _isTranscribing
+    public val isTranscribing: StateFlow<Boolean> = _isTranscribing
 
     init {
         viewModelScope.launch {
@@ -95,7 +95,7 @@ class ConferenceRoomViewModel @Inject constructor( // Assuming @HiltViewModel wi
     // For now, assuming it's a direct method. If there's a base class/interface, it should be added.
     /*override*/ suspend fun sendMessage(message: String, sender: AgentType, context: String) {
         // Fixed duplicate case for AgentType.AURA and added missing context parameter
-        val responseFlow: Flow<AgentResponse>? = when (sender) {
+        public val responseFlow: Flow<AgentResponse>? = when (sender) {
             AgentType.AURA -> auraService.processRequestFlow(AiRequest(query = message, type = "text", context = context))
             AgentType.KAI -> kaiService.processRequestFlow(AiRequest(query = message, type = "text", context = context))
             AgentType.CASCADE -> cascadeService.processRequestFlow(AiRequest(query = message, type = "context", context = context))
@@ -108,7 +108,7 @@ class ConferenceRoomViewModel @Inject constructor( // Assuming @HiltViewModel wi
         responseFlow?.let { flow ->
             viewModelScope.launch {
                 try {
-                    val responseMessage = flow.first()
+                    public val responseMessage = flow.first()
                     _messages.update { current ->
                         current + AgentMessage(
                             content = responseMessage.content,
@@ -143,18 +143,18 @@ class ConferenceRoomViewModel @Inject constructor( // Assuming @HiltViewModel wi
         }
     }
 
-    fun selectAgent(agent: AgentType) {
+    public fun selectAgent(agent: AgentType) {
         _selectedAgent.value = agent
     }
 
-    fun toggleRecording() {
+    public fun toggleRecording() {
         if (_isRecording.value) {
-            val result = neuralWhisper.stopRecording() // stopRecording now returns a string status
+            public val result = neuralWhisper.stopRecording() // stopRecording now returns a string status
             Log.d(TAG, "Stopped recording. Status: $result")
             // isRecording state will be updated by NeuralWhisper's conversationState or directly
             _isRecording.value = false // Explicitly set here based on action
         } else {
-            val started = neuralWhisper.startRecording()
+            public val started = neuralWhisper.startRecording()
             if (started) {
                 Log.d(TAG, "Started recording.")
                 _isRecording.value = true
@@ -168,7 +168,7 @@ class ConferenceRoomViewModel @Inject constructor( // Assuming @HiltViewModel wi
         }
     }
 
-    fun toggleTranscribing() {
+    public fun toggleTranscribing() {
         // For beta, link transcribing state to recording state or a separate logic if needed.
         // User's snippet implies this might be a simple toggle for now.
         _isTranscribing.update { !it } // Simple toggle

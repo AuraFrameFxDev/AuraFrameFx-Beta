@@ -28,15 +28,15 @@ import kotlinx.serialization.Contextual
  */
 @Serializable
 
-data class GenerateImageDescriptionRequest (
+public data class GenerateImageDescriptionRequest (
 
     /* URL of the image to describe. */
     @SerialName(value = "imageUrl")
-    val imageUrl: kotlin.String,
+    public val imageUrl: kotlin.String,
 
     /* Additional context for the image description (optional). */
     @SerialName(value = "context")
-    val context: kotlin.String? = null
+    public val context: kotlin.String? = null
 
 ) {
 

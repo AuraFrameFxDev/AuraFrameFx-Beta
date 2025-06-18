@@ -6,81 +6,81 @@ import kotlinx.datetime.Instant
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class Task(
-    val id: String = "task_${Clock.System.now().toEpochMilliseconds()}",
-    val timestamp: Instant = Clock.System.now(),
-    val priority: TaskPriority = TaskPriority.NORMAL,
-    val urgency: TaskUrgency = TaskUrgency.MEDIUM,
-    val importance: TaskImportance = TaskImportance.MEDIUM,
-    val context: String,
-    val content: String,
-    val metadata: Map<String, String> = emptyMap(),
-    val status: TaskStatus = TaskStatus.PENDING,
-    val assignedAgents: Set<AgentType> = emptySet(),
-    val requiredAgents: Set<AgentType> = emptySet(),
-    val completionTime: Instant? = null,
-    val estimatedDuration: Long = 0,
-    val dependencies: Set<String> = emptySet(),
+public data class Task(
+    public val id: String = "task_${Clock.System.now().toEpochMilliseconds()}",
+    public val timestamp: Instant = Clock.System.now(),
+    public val priority: TaskPriority = TaskPriority.NORMAL,
+    public val urgency: TaskUrgency = TaskUrgency.MEDIUM,
+    public val importance: TaskImportance = TaskImportance.MEDIUM,
+    public val context: String,
+    public val content: String,
+    public val metadata: Map<String, String> = emptyMap(),
+    public val status: TaskStatus = TaskStatus.PENDING,
+    public val assignedAgents: Set<AgentType> = emptySet(),
+    public val requiredAgents: Set<AgentType> = emptySet(),
+    public val completionTime: Instant? = null,
+    public val estimatedDuration: Long = 0,
+    public val dependencies: Set<String> = emptySet(),
 )
 
 @Serializable
-data class TaskDependency(
-    val taskId: String,
-    val dependencyId: String,
-    val type: DependencyType,
-    val priority: TaskPriority,
-    val metadata: Map<String, String> = emptyMap(),
+public data class TaskDependency(
+    public val taskId: String,
+    public val dependencyId: String,
+    public val type: DependencyType,
+    public val priority: TaskPriority,
+    public val metadata: Map<String, String> = emptyMap(),
 )
 
 @Serializable
-data class TaskPriority(
-    val value: Float,
-    val reason: String,
-    val metadata: Map<String, String> = emptyMap(),
+public data class TaskPriority(
+    public val value: Float,
+    public val reason: String,
+    public val metadata: Map<String, String> = emptyMap(),
 ) {
-    companion object {
-        val CRITICAL = TaskPriority(1.0f, "Critical system task")
-        val HIGH = TaskPriority(0.8f, "High priority task")
-        val NORMAL = TaskPriority(0.5f, "Normal priority task")
-        val LOW = TaskPriority(0.3f, "Low priority background task")
-        val MINOR = TaskPriority(0.1f, "Minor maintenance task")
+    public companion object {
+        public val CRITICAL = TaskPriority(1.0f, "Critical system task")
+        public val HIGH = TaskPriority(0.8f, "High priority task")
+        public val NORMAL = TaskPriority(0.5f, "Normal priority task")
+        public val LOW = TaskPriority(0.3f, "Low priority background task")
+        public val MINOR = TaskPriority(0.1f, "Minor maintenance task")
     }
 }
 
 @Serializable
-data class TaskUrgency(
-    val value: Float,
-    val reason: String,
-    val metadata: Map<String, String> = emptyMap(),
+public data class TaskUrgency(
+    public val value: Float,
+    public val reason: String,
+    public val metadata: Map<String, String> = emptyMap(),
 ) {
-    companion object {
-        val IMMEDIATE = TaskUrgency(1.0f, "Immediate attention required")
-        val HIGH = TaskUrgency(0.8f, "High urgency")
-        val NORMAL = TaskUrgency(0.5f, "Normal urgency")
-        val LOW = TaskUrgency(0.3f, "Low urgency")
-        val BACKGROUND = TaskUrgency(0.1f, "Background task")
-        val MEDIUM = NORMAL
+    public companion object {
+        public val IMMEDIATE = TaskUrgency(1.0f, "Immediate attention required")
+        public val HIGH = TaskUrgency(0.8f, "High urgency")
+        public val NORMAL = TaskUrgency(0.5f, "Normal urgency")
+        public val LOW = TaskUrgency(0.3f, "Low urgency")
+        public val BACKGROUND = TaskUrgency(0.1f, "Background task")
+        public val MEDIUM = NORMAL
     }
 }
 
 @Serializable
-data class TaskImportance(
-    val value: Float,
-    val reason: String,
-    val metadata: Map<String, String> = emptyMap(),
+public data class TaskImportance(
+    public val value: Float,
+    public val reason: String,
+    public val metadata: Map<String, String> = emptyMap(),
 ) {
-    companion object {
-        val CRITICAL = TaskImportance(1.0f, "Critical importance")
-        val HIGH = TaskImportance(0.8f, "High importance")
-        val NORMAL = TaskImportance(0.5f, "Normal importance")
-        val LOW = TaskImportance(0.3f, "Low importance")
-        val MINOR = TaskImportance(0.1f, "Minor importance")
-        val MEDIUM = NORMAL
+    public companion object {
+        public val CRITICAL = TaskImportance(1.0f, "Critical importance")
+        public val HIGH = TaskImportance(0.8f, "High importance")
+        public val NORMAL = TaskImportance(0.5f, "Normal importance")
+        public val LOW = TaskImportance(0.3f, "Low importance")
+        public val MINOR = TaskImportance(0.1f, "Minor importance")
+        public val MEDIUM = NORMAL
     }
 }
 
 @Serializable // Added annotation
-enum class TaskStatus {
+public enum class TaskStatus {
     PENDING,
     IN_PROGRESS,
     COMPLETED,
@@ -91,7 +91,7 @@ enum class TaskStatus {
 }
 
 @Serializable // Added annotation
-enum class DependencyType {
+public enum class DependencyType {
     BLOCKING,
     SEQUENTIAL,
     PARALLEL,

@@ -19,12 +19,12 @@ public class AiGenerationService(
         temperature: Float = 0.7f,
     ): Result<GenerateTextResponse> = withContext(Dispatchers.IO) {
         try {
-            val request = GenerateTextRequest(
+            public val request = GenerateTextRequest(
                 prompt = prompt,
                 maxTokens = maxTokens,
                 temperature = temperature
             )
-            val response = api.generateText(request)
+            public val response = api.generateText(request)
             Result.success(response)
         } catch (e: Exception) {
             Result.failure(e)
@@ -40,7 +40,7 @@ public class AiGenerationService(
         imageData: ByteArray? = null
     ): Result<GenerateImageDescriptionResponse> = withContext(Dispatchers.IO) {
         try {
-            val request = GenerateImageDescriptionRequest(
+            public val request = GenerateImageDescriptionRequest(
                 imageUrl = imageUrl,
                 context = context,
                 imageData = imageData,
@@ -48,7 +48,7 @@ public class AiGenerationService(
                 maxTokens = maxTokens,
                 model = model
             )
-            val response = api.generateImageDescription(request)
+            public val response = api.generateImageDescription(request)
             Result.success(response)
         } catch (e: Exception) {
             Result.failure(e)

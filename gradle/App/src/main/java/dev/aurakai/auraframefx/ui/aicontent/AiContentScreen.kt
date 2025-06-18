@@ -38,7 +38,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AiContentScreen(
+public fun AiContentScreen(
     viewModel: AiContentViewModel = hiltViewModel(),
 ) {
     val textGenerationState by viewModel.textGenerationState.collectAsStateWithLifecycle()

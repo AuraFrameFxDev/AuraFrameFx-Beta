@@ -31,7 +31,7 @@ import kotlin.math.*
  * Based on the reference designs that show transparent panels with neon borders and hexagonal elements
  */
 @Composable
-fun FloatingCyberWindow(
+public fun FloatingCyberWindow(
     modifier: Modifier = Modifier,
     title: String? = null,
     cornerStyle: CornerStyle = CornerStyle.Hex,
@@ -39,9 +39,9 @@ fun FloatingCyberWindow(
     backgroundStyle: BackgroundStyle = BackgroundStyle.Transparent,
     content: @Composable BoxScope.() -> Unit,
 ) {
-    val infiniteTransition = rememberInfiniteTransition(label = "cyberWindow")
+    public val infiniteTransition = rememberInfiniteTransition(label = "cyberWindow")
 
-    val borderGlowIntensity by infiniteTransition.animateFloat(
+    public val borderGlowIntensity by infiniteTransition.animateFloat(
         initialValue = 0.7f,
         targetValue = 1f,
         animationSpec = infiniteRepeatable(
@@ -51,7 +51,7 @@ fun FloatingCyberWindow(
         label = "glowPulse"
     )
 
-    val clipShape = when (cornerStyle) {
+    public val clipShape = when (cornerStyle) {
         CornerStyle.Hex -> CyberpunkShapes.hexWindowShape
         CornerStyle.Angled -> CyberpunkShapes.angledWindowShape
         CornerStyle.Rounded -> RoundedCornerShape(16.dp)
@@ -81,8 +81,8 @@ fun FloatingCyberWindow(
             .then(
                 if (borderGlow) {
                     Modifier.drawWithCache {
-                        val width = size.width
-                        val height = size.height
+                        public val width = size.width
+                        public val height = size.height
 
                         onDrawBehind {
                             // Draw inner border
@@ -105,8 +105,8 @@ fun FloatingCyberWindow(
                             )
 
                             // Draw corner accents
-                            val cornerSize = 12f
-                            val corners = listOf(
+                            public val cornerSize = 12f
+                            public val corners = listOf(
                                 Offset(0f, 0f),
                                 Offset(width, 0f),
                                 Offset(0f, height),
@@ -115,7 +115,7 @@ fun FloatingCyberWindow(
 
                             corners.forEachIndexed { index, offset ->
                                 // Alternate colors for corner accents
-                                val cornerColor = if (index % 2 == 0) NeonCyan else NeonPink
+                                public val cornerColor = if (index % 2 == 0) NeonCyan else NeonPink
                                 drawCircle(
                                     color = cornerColor.copy(alpha = borderGlowIntensity),
                                     radius = cornerSize / 2,
@@ -208,15 +208,15 @@ fun FloatingCyberWindow(
  * Special text component for cyberpunk UI with digital glitch effects
  */
 @Composable
-fun CyberpunkText(
+public fun CyberpunkText(
     text: String,
     modifier: Modifier = Modifier,
     color: CyberpunkTextColor = CyberpunkTextColor.Primary,
     style: CyberpunkTextStyle = CyberpunkTextStyle.Body,
     enableGlitch: Boolean = true,
 ) {
-    val infiniteTransition = rememberInfiniteTransition(label = "textGlitch")
-    val glitchChance by infiniteTransition.animateFloat(
+    public val infiniteTransition = rememberInfiniteTransition(label = "textGlitch")
+    public val glitchChance by infiniteTransition.animateFloat(
         initialValue = 0f,
         targetValue = 1f,
         animationSpec = infiniteRepeatable(
@@ -226,7 +226,7 @@ fun CyberpunkText(
         label = "glitchChance"
     )
 
-    val textColor = when (color) {
+    public val textColor = when (color) {
         CyberpunkTextColor.Primary -> NeonCyan
         CyberpunkTextColor.Secondary -> NeonPink
         CyberpunkTextColor.Accent -> NeonBlue
@@ -234,7 +234,7 @@ fun CyberpunkText(
         CyberpunkTextColor.White -> Color.White
     }
 
-    val textStyle = when (style) {
+    public val textStyle = when (style) {
         CyberpunkTextStyle.Header -> MaterialTheme.typography.headlineMedium.copy(
             fontWeight = FontWeight.Bold,
             letterSpacing = 2.sp
@@ -260,9 +260,9 @@ fun CyberpunkText(
     }
 
     // Apply digital glitch effect occasionally
-    val displayText = if (enableGlitch && glitchChance > 0.95f) {
-        val random = kotlin.random.Random(glitchChance.hashCode())
-        val glitchPos = random.nextInt(text.length)
+    public val displayText = if (enableGlitch && glitchChance > 0.95f) {
+        public val random = kotlin.random.Random(glitchChance.hashCode())
+        public val glitchPos = random.nextInt(text.length)
         if (glitchPos < text.length - 1) {
             text.substring(0, glitchPos) +
                     (text[glitchPos].code + 10).toChar() +
@@ -294,19 +294,19 @@ fun CyberpunkText(
     }
 }
 
-enum class CornerStyle {
+public enum class CornerStyle {
     Hex,
     Angled,
     Rounded
 }
 
-enum class BackgroundStyle {
+public enum class BackgroundStyle {
     Transparent,
     HexGrid,
     DigitalLandscape
 }
 
-enum class CyberpunkTextColor {
+public enum class CyberpunkTextColor {
     Primary,
     Secondary,
     Accent,
@@ -314,7 +314,7 @@ enum class CyberpunkTextColor {
     White
 }
 
-enum class CyberpunkTextStyle {
+public enum class CyberpunkTextStyle {
     Header,
     Title,
     Body,
@@ -326,7 +326,7 @@ enum class CyberpunkTextStyle {
  * A floating menu item in cyberpunk style based on the reference images
  */
 @Composable
-fun CyberMenuItem(
+public fun CyberMenuItem(
     text: String,
     modifier: Modifier = Modifier,
     isSelected: Boolean = false,

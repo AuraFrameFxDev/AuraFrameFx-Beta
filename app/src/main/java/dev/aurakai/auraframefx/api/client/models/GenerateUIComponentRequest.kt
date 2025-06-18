@@ -29,19 +29,19 @@ import kotlinx.serialization.Contextual
  */
 @Serializable
 
-data class GenerateUIComponentRequest (
+public data class GenerateUIComponentRequest (
 
     /* The UI framework (e.g., \"JetpackCompose\", \"XML Layout\"). */
     @SerialName(value = "framework")
-    val framework: GenerateUIComponentRequest.Framework,
+    public val framework: GenerateUIComponentRequest.Framework,
 
     /* Natural language description of the UI component. */
     @SerialName(value = "description")
-    val description: kotlin.String,
+    public val description: kotlin.String,
 
     /* ID of a specific theme to use for styling. */
     @SerialName(value = "themeId")
-    val themeId: kotlin.String? = null
+    public val themeId: kotlin.String? = null
 
 ) {
 
@@ -51,7 +51,7 @@ data class GenerateUIComponentRequest (
      * Values: JetpackCompose,XMLLayout
      */
     @Serializable
-    enum class Framework(val value: kotlin.String) {
+    public enum class Framework(val value: kotlin.String) {
         @SerialName(value = "JetpackCompose") JetpackCompose("JetpackCompose"),
         @SerialName(value = "XMLLayout") XMLLayout("XMLLayout");
     }

@@ -4,6 +4,6 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class ShapeManager @Inject constructor() {
+public class ShapeManager @Inject constructor() {
     // TODO: Implement shape management logic
 }

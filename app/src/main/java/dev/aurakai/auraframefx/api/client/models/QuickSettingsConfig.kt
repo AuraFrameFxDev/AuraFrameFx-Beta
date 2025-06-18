@@ -32,16 +32,16 @@ import kotlinx.serialization.Contextual
  */
 @Serializable
 
-data class QuickSettingsConfig (
+public data class QuickSettingsConfig (
 
     @SerialName(value = "layout")
-    val layout: QuickSettingsConfigLayout? = null,
+    public val layout: QuickSettingsConfigLayout? = null,
 
     @SerialName(value = "padding")
-    val padding: QuickSettingsConfigPadding? = null,
+    public val padding: QuickSettingsConfigPadding? = null,
 
     @SerialName(value = "tiles")
-    val tiles: kotlin.collections.List<@Contextual QuickSettingsConfigTilesInner>? = null
+    public val tiles: kotlin.collections.List<@Contextual QuickSettingsConfigTilesInner>? = null
 
 ) : kotlin.collections.HashMap<String, kotlin.Any>() {
 

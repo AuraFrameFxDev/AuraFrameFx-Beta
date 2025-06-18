@@ -19,7 +19,7 @@ import javax.inject.Singleton
  */
 @Module
 @InstallIn(SingletonComponent::class)
-object DataStoreModule {
+public object DataStoreModule {
 
     /**
      * Placeholder for a property that might be related to DataStore instance creation or name.
@@ -37,7 +37,7 @@ object DataStoreModule {
      */
     @Provides
     @Singleton
-    fun provideDataStore(@ApplicationContext _context: Context): DataStore<Preferences>? { // Return type changed
+    public fun provideDataStore(@ApplicationContext _context: Context): DataStore<Preferences>? { // Return type changed
         // TODO: Parameter _context reported as unused (Hilt will provide it as @ApplicationContext).
         // TODO: Implement actual DataStore creation. Requires 'androidx.datastore:datastore-preferences:1.0.0' (or newer) dependency.
         // Example: return androidx.datastore.preferences.core.PreferenceDataStoreFactory.create { _context.preferencesDataStoreFile("aura_settings") }

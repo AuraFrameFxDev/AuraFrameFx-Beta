@@ -30,21 +30,21 @@ import kotlinx.serialization.Contextual
  */
 @Serializable
 
-data class LockScreenConfigClockConfig (
+public data class LockScreenConfigClockConfig (
 
     @SerialName(value = "customTextColorEnabled")
-    val customTextColorEnabled: kotlin.Boolean? = null,
+    public val customTextColorEnabled: kotlin.Boolean? = null,
 
     /* Hex color code (e.g., \"#00FFCC\") */
     @SerialName(value = "customTextColor")
-    val customTextColor: kotlin.String? = null,
+    public val customTextColor: kotlin.String? = null,
 
     @SerialName(value = "customTextSizeEnabled")
-    val customTextSizeEnabled: kotlin.Boolean? = null,
+    public val customTextSizeEnabled: kotlin.Boolean? = null,
 
     /* Text size in sp. */
     @SerialName(value = "customTextSize")
-    val customTextSize: kotlin.Float? = null
+    public val customTextSize: kotlin.Float? = null
 
 ) : kotlin.collections.HashMap<String, kotlin.Any>() {
 

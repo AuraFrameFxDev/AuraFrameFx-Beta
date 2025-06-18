@@ -8,7 +8,7 @@ import kotlinx.serialization.descriptors.PrimitiveKind
 import kotlinx.serialization.descriptors.SerialDescriptor
 import java.util.concurrent.atomic.AtomicLong
 
-object AtomicLongAdapter : KSerializer<AtomicLong> {
+public object AtomicLongAdapter : KSerializer<AtomicLong> {
     override fun serialize(encoder: Encoder, value: AtomicLong) {
         encoder.encodeLong(value.get())
     }

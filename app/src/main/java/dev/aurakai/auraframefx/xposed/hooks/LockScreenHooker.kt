@@ -24,18 +24,18 @@ import dev.aurakai.auraframefx.system.lockscreen.model.HapticFeedbackConfig
 import dev.aurakai.auraframefx.system.lockscreen.model.LockScreenAnimationConfig
 import dev.aurakai.auraframefx.system.lockscreen.model.LockScreenConfig
 
-class LockScreenHooker(
+public class LockScreenHooker(
     private val classLoader: ClassLoader,
     private val config: LockScreenConfig,
 ) {
     private val TAG = "LockScreenHooker"
 
-    fun applyLockScreenHooks() {
+    public fun applyLockScreenHooks() {
         XposedBridge.log("[$TAG] Applying Lock Screen Hooks with config: $config")
 
         // --- Lock Screen Clock Modification ---
         try {
-            val textClockClass = XposedHelpers.findClass(
+            public val textClockClass = XposedHelpers.findClass(
                 "android.widget.TextClock",
                 classLoader
             )
@@ -43,13 +43,13 @@ class LockScreenHooker(
             XposedHelpers.findAndHookMethod(
                 textClockClass,
                 "onAttachedToWindow",
-                object : XC_MethodHook() {
+                public object : XC_MethodHook() {
                     override fun afterHookedMethod(param: MethodHookParam) {
-                        val textClockView = param.thisObject as? TextClock
+                        public val textClockView = param.thisObject as? TextClock
                         if (textClockView != null) {
                             XposedBridge.log("[$TAG] Hooked TextClock.onAttachedToWindow for Lock Screen: $textClockView")
 
-                            val clockConfig = config.clockConfig
+                            public val clockConfig = config.clockConfig
                             if (clockConfig != null) {
                                 // Apply custom text color
                                 if (clockConfig.customTextColorEnabled == true && !clockConfig.customTextColor.isNullOrEmpty()) {
@@ -77,7 +77,7 @@ class LockScreenHooker(
                                 // Apply custom font style (NEW)
                                 if (!clockConfig.customFontStyle.isNullOrEmpty()) {
                                     try {
-                                        val style =
+                                        public val style =
                                             when (clockConfig.customFontStyle?.lowercase()) {
                                                 "bold" -> Typeface.BOLD
                                                 "italic" -> Typeface.ITALIC
@@ -98,7 +98,7 @@ class LockScreenHooker(
                                 }
 
                                 // Apply Animation to Clock
-                                val clockAnimationConfig =
+                                public val clockAnimationConfig =
                                     clockConfig.animation // clockConfig is already checked for null
                                 if (clockAnimationConfig.type != "none" && clockAnimationConfig.durationMs > 0) {
                                     XposedBridge.log("[$TAG] Applying animation to Lock Screen Clock: Type=${clockAnimationConfig.type}")
@@ -131,7 +131,7 @@ class LockScreenHooker(
             try {
                 // This class name is an example and highly device/version dependent.
                 // Common containers for date/time on lock screen.
-                val keyguardStatusViewClass = XposedHelpers.findClass(
+                public val keyguardStatusViewClass = XposedHelpers.findClass(
                     "com.android.keyguard.KeyguardStatusView",
                     classLoader
                 )
@@ -139,9 +139,9 @@ class LockScreenHooker(
                 XposedHelpers.findAndHookMethod(
                     keyguardStatusViewClass,
                     "onFinishInflate", // Or another suitable lifecycle method
-                    object : XC_MethodHook() {
+                    public object : XC_MethodHook() {
                         override fun afterHookedMethod(param: MethodHookParam) {
-                            val statusView = param.thisObject as? View
+                            public val statusView = param.thisObject as? View
                             if (statusView != null) {
                                 XposedBridge.log("[$TAG] Hooked KeyguardStatusView.onFinishInflate.")
                                 // Attempt to find the date TextView. This is speculative.
@@ -149,7 +149,7 @@ class LockScreenHooker(
                                 // For this example, let's assume it's the first TextView found,
                                 // or one with specific characteristics if identifiable.
                                 // A more robust solution would involve ID lookup if known, or more specific class.
-                                val dateTextView =
+                                public val dateTextView =
                                     findDateView(statusView) // Using a more specific helper
                                 if (dateTextView != null) {
                                     dateTextView.visibility = View.GONE
@@ -181,15 +181,15 @@ class LockScreenHooker(
             // The provided snippet structure implies animation logic is within the KeyguardStatusView hook.
             // Let's refine the KeyguardStatusView hook to handle visibility AND animation.
             try {
-                val keyguardStatusViewClass =
+                public val keyguardStatusViewClass =
                     XposedHelpers.findClass("com.android.keyguard.KeyguardStatusView", classLoader)
                 XposedHelpers.findAndHookMethod(
                     keyguardStatusViewClass,
                     "onFinishInflate",
-                    object : XC_MethodHook() {
+                    public object : XC_MethodHook() {
                         override fun afterHookedMethod(param: MethodHookParam) {
-                            val statusView = param.thisObject as? View ?: return
-                            val dateTextView = findDateView(statusView)
+                            public val statusView = param.thisObject as? View ?: return
+                            public val dateTextView = findDateView(statusView)
                             if (dateTextView != null) {
                                 if (config.hideDate == true) {
                                     dateTextView.visibility = View.GONE
@@ -199,7 +199,7 @@ class LockScreenHooker(
                                         View.VISIBLE // Ensure visible if not hidden
                                     XposedBridge.log("[$TAG] Lock Screen date view visible: $dateTextView")
                                     // Apply Animation to Date (if visible)
-                                    val dateAnimationConfig = config.dateConfig?.animation
+                                    public val dateAnimationConfig = config.dateConfig?.animation
                                         ?: config.defaultElementAnimation
                                     if (dateAnimationConfig.type != "none" && dateAnimationConfig.durationMs > 0) {
                                         XposedBridge.log("[$TAG] Applying animation to Lock Screen Date: Type=${dateAnimationConfig.type}")
@@ -226,19 +226,19 @@ class LockScreenHooker(
         // --- Haptic Feedback on KeyguardSimView (Example Hook) ---
         // This is a generic example; specific interactions (e.g., unlock, PIN entry) would need more targeted hooks.
         try {
-            val keyguardSimViewClass = XposedHelpers.findClass(
+            public val keyguardSimViewClass = XposedHelpers.findClass(
                 "com.android.keyguard.KeyguardSimView", // Example target class
                 classLoader
             )
             XposedHelpers.findAndHookMethod(
                 keyguardSimViewClass,
                 "onFinishInflate", // Hooking a lifecycle method for simplicity
-                object : XC_MethodHook() {
+                public object : XC_MethodHook() {
                     override fun afterHookedMethod(param: MethodHookParam) {
-                        val view = param.thisObject as? View
+                        public val view = param.thisObject as? View
                         if (view != null) {
                             XposedBridge.log("[$TAG] Hooked KeyguardSimView.onFinishInflate for haptics.")
-                            val hapticConfig = config.hapticFeedback // Get global LS haptic config
+                            public val hapticConfig = config.hapticFeedback // Get global LS haptic config
                             if (hapticConfig.enabled == true) {
                                 // This will trigger haptic on view inflation, which might be too early/frequent.
                                 // A more specific interaction hook (e.g. on a button click within this view)
@@ -260,10 +260,10 @@ class LockScreenHooker(
     }
 
     private fun applyHapticFeedback(context: Context, hapticConfig: HapticFeedbackConfig) {
-        val vibrator = context.getSystemService(Context.VIBRATOR_SERVICE) as? Vibrator
+        public val vibrator = context.getSystemService(Context.VIBRATOR_SERVICE) as? Vibrator
 
         if (vibrator?.hasVibrator() == true) {
-            val effectId: Int? = when (hapticConfig.effect.lowercase()) {
+            public val effectId: Int? = when (hapticConfig.effect.lowercase()) {
                 "click" -> VibrationEffect.EFFECT_CLICK
                 "double_click" -> VibrationEffect.EFFECT_DOUBLE_CLICK
                 "heavy_click" -> VibrationEffect.EFFECT_HEAVY_CLICK
@@ -275,11 +275,11 @@ class LockScreenHooker(
             }
 
             if (effectId != null) {
-                val vibrationEffect: VibrationEffect
+                public val vibrationEffect: VibrationEffect
                 // minSdkVersion is 31, so API >= 26 (O) is always true
                 if (true) {
                     if (hapticConfig.effect.lowercase() == "click" && hapticConfig.intensity.toFloat() != 50f) {
-                        val scaledAmplitude =
+                        public val scaledAmplitude =
                             (hapticConfig.intensity / 100f * 255f).toInt().coerceIn(1, 255)
                         vibrationEffect = VibrationEffect.createOneShot(10, scaledAmplitude)
                         XposedBridge.log("[$TAG] Applying custom 'click' with intensity (amplitude ${scaledAmplitude}).")
@@ -312,8 +312,8 @@ class LockScreenHooker(
     }
 
     private fun applyAnimation(view: View, animationConfig: LockScreenAnimationConfig) {
-        val animatorSet = AnimatorSet()
-        val animators = mutableListOf<Animator>()
+        public val animatorSet: AnimatorSet = AnimatorSet()
+        public val animators = mutableListOf<Animator>()
 
         when (animationConfig.type.lowercase()) { // Use lowercase
             "fade_in" -> {
@@ -375,8 +375,8 @@ class LockScreenHooker(
         }
         if (parent is ViewGroup) {
             for (i in 0 until parent.childCount) {
-                val child = parent.getChildAt(i)
-                val found = findViewByClass(child, clazz)
+                public val child = parent.getChildAt(i)
+                public val found = findViewByClass(child, clazz)
                 if (found != null) return found
             }
         }
@@ -390,11 +390,11 @@ class LockScreenHooker(
         // or by a more unique characteristic.
         if (parent is ViewGroup) {
             for (i in 0 until parent.childCount) {
-                val child = parent.getChildAt(i)
+                public val child = parent.getChildAt(i)
                 if (child is TextView) {
                     // Example heuristic: date usually contains day, month, or year.
                     // This is unreliable.
-                    val text = child.text.toString().lowercase()
+                    public val text = child.text.toString().lowercase()
                     if (text.contains("mon") || text.contains("tue") || text.contains("wed") ||
                         text.contains("thu") || text.contains("fri") || text.contains("sat") || text.contains(
                             "sun"
@@ -415,7 +415,7 @@ class LockScreenHooker(
                 }
                 // Recursively search in child ViewGroups if this is a ViewGroup
                 if (child is ViewGroup) {
-                    val foundInChild = findDateView(child)
+                    public val foundInChild = findDateView(child)
                     if (foundInChild != null) return foundInChild
                 }
             }

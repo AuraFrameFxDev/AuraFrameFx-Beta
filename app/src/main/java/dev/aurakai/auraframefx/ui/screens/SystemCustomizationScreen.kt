@@ -43,11 +43,11 @@ import dev.aurakai.auraframefx.ui.viewmodel.SystemCustomizationViewModel
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SystemCustomizationScreen(
+public fun SystemCustomizationScreen(
     viewModel: SystemCustomizationViewModel = hiltViewModel(),
 ) {
-    val quickSettingsConfig by viewModel.quickSettingsConfig.collectAsState()
-    val lockScreenConfig by viewModel.lockScreenConfig.collectAsState()
+    public val quickSettingsConfig by viewModel.quickSettingsConfig.collectAsState()
+    public val lockScreenConfig by viewModel.lockScreenConfig.collectAsState()
 
     Scaffold(
         topBar = {
@@ -143,7 +143,7 @@ fun SystemCustomizationScreen(
 }
 
 @Composable
-fun QuickSettingsCustomization(
+public fun QuickSettingsCustomization(
     config: QuickSettingsConfig?,
     onTileShapeChange: (String, OverlayShape) -> Unit,
     onTileAnimationChange: (String, QuickSettingsAnimation) -> Unit,
@@ -183,7 +183,7 @@ fun QuickSettingsCustomization(
 }
 
 @Composable
-fun LockScreenCustomization(
+public fun LockScreenCustomization(
     config: LockScreenConfig?,
     onElementShapeChange: (LockScreenElementType, OverlayShape) -> Unit,
     onElementAnimationChange: (LockScreenElementType, LockScreenAnimation) -> Unit,
@@ -228,7 +228,7 @@ fun LockScreenCustomization(
 }
 
 @Composable
-fun TileCustomization(
+public fun TileCustomization(
     tile: QuickSettingsTileConfig,
     onShapeChange: (OverlayShape) -> Unit,
     onAnimationChange: (QuickSettingsAnimation) -> Unit,
@@ -284,7 +284,7 @@ fun TileCustomization(
  * @param onAnimationChange Callback invoked when a new animation is selected for the element.
  */
 @Composable
-fun ElementCustomization(
+public fun ElementCustomization(
     element: LockScreenElementConfig,
     onShapeChange: (OverlayShape) -> Unit,
     onAnimationChange: (LockScreenAnimation) -> Unit,
@@ -338,7 +338,7 @@ fun ElementCustomization(
  * @param onChange Invoked when the background image is changed or cleared.
  */
 @Composable
-fun BackgroundCustomization(
+public fun BackgroundCustomization(
     background: ImageResource?,
     onChange: (ImageResource?) -> Unit,
 ) {
@@ -377,7 +377,7 @@ fun BackgroundCustomization(
  * @param onShapeSelected Callback invoked with the newly selected shape.
  */
 @Composable
-fun ShapePicker(
+public fun ShapePicker(
     currentShape: OverlayShape,
     onShapeSelected: (OverlayShape) -> Unit,
 ) {
@@ -391,7 +391,7 @@ fun ShapePicker(
  * @param onAnimationSelected Invoked when the user selects a different animation.
  */
 @Composable
-fun AnimationPicker(
+public fun AnimationPicker(
     currentAnimation: QuickSettingsAnimation,
     onAnimationSelected: (QuickSettingsAnimation) -> Unit,
 ) {
@@ -405,7 +405,7 @@ fun AnimationPicker(
  * @param onAnimationSelected Callback invoked when a new animation is selected.
  */
 @Composable
-fun AnimationPicker(
+public fun AnimationPicker(
     currentAnimation: LockScreenAnimation,
     onAnimationSelected: (LockScreenAnimation) -> Unit,
 ) {
@@ -421,7 +421,7 @@ fun AnimationPicker(
  * @param onImageSelected Callback invoked when the user selects a new image or clears the selection.
  */
 @Composable
-fun ImagePicker(
+public fun ImagePicker(
     currentImage: ImageResource?,
     onImageSelected: (ImageResource?) -> Unit,
 ) {

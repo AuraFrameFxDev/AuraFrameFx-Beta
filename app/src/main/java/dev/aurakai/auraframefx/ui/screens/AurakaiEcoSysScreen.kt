@@ -20,12 +20,12 @@ import dev.aurakai.auraframefx.ui.models.AuraMoodViewModel // Adjust import if A
 
 // TODO: Function reported as unused or needs implementation.
 @Composable
-fun AurakaiEcoSysScreen(
+public fun AurakaiEcoSysScreen(
     // viewModel: AuraMoodViewModel = hiltViewModel() // Alternative injection for previews if needed
     // TODO: Parameter onBack reported as unused in original error (if it was present)
 ) {
-    val viewModel: AuraMoodViewModel = hiltViewModel()
-    val currentMood by viewModel.moodState.collectAsState()
+    public val viewModel: AuraMoodViewModel = hiltViewModel()
+    public val currentMood by viewModel.moodState.collectAsState()
 
     Box(
         modifier = Modifier.fillMaxSize(),
@@ -55,7 +55,7 @@ fun AurakaiEcoSysScreen(
 
 @Preview(showBackground = true)
 @Composable
-fun AurakaiEcoSysScreenPreview() {
+public fun AurakaiEcoSysScreenPreview() {
     MaterialTheme {
         // In Previews, hiltViewModel() won't work directly without extra setup.
         // For a simple preview, you might pass a mocked/stubbed ViewModel instance

@@ -1,7 +1,7 @@
 package dev.aurakai.auraframefx.model
 
 // TODO: Enum reported as unused or needs implementation. Ensure this is utilized, e.g., by NeuralWhisper & AuraMoodViewModel.
-enum class Emotion {
+public enum class Emotion {
     NEUTRAL,
     HAPPY,
     SAD,

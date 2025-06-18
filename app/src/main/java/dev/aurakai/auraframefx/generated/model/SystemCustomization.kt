@@ -6,33 +6,33 @@ import kotlinx.serialization.Serializable
  * System customization models generated from OpenAPI spec
  */
 @Serializable
-data class LockScreenConfig(
-    val clockConfig: ClockConfig? = null,
-    val animation: AnimationConfig? = null,
-    val hapticFeedback: HapticFeedbackConfig? = null
+public data class LockScreenConfig(
+    public val clockConfig: ClockConfig? = null,
+    public val animation: AnimationConfig? = null,
+    public val hapticFeedback: HapticFeedbackConfig? = null
 )
 
 @Serializable
-data class ClockConfig(
-    val customTextColorEnabled: Boolean = false,
-    val customTextColor: String? = null,
-    val customTextSizeEnabled: Boolean = false,
-    val customTextSize: Float? = null
+public data class ClockConfig(
+    public val customTextColorEnabled: Boolean = false,
+    public val customTextColor: String? = null,
+    public val customTextSizeEnabled: Boolean = false,
+    public val customTextSize: Float? = null
 )
 
 @Serializable
-data class AnimationConfig(
-    val enabled: Boolean = true,
-    val type: AnimationType = AnimationType.Fade
+public data class AnimationConfig(
+    public val enabled: Boolean = true,
+    public val type: AnimationType = AnimationType.Fade
 )
 
 @Serializable
-enum class AnimationType {
+public enum class AnimationType {
     Fade, Slide, Zoom
 }
 
 @Serializable
-data class HapticFeedbackConfig(
-    val enabled: Boolean = true,
-    val intensity: Int = 150
+public data class HapticFeedbackConfig(
+    public val enabled: Boolean = true,
+    public val intensity: Int = 150
 )

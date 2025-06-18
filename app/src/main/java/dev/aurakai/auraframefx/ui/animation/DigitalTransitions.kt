@@ -23,12 +23,12 @@ import kotlin.random.Random
  * Custom Digital Transitions inspired by cyberpunk aesthetics
  * These transitions create a "digitalization" effect for screen changes
  */
-object DigitalTransitions {
+public object DigitalTransitions {
 
     /**
      * Creates a Navigation Animation to materialize content with a digital effect
      */
-    val EnterDigitalMaterialization: EnterTransition = fadeIn(
+    public val EnterDigitalMaterialization: EnterTransition = fadeIn(
         animationSpec = tween(
             durationMillis = 500,
             easing = FastOutSlowInEasing
@@ -45,7 +45,7 @@ object DigitalTransitions {
     /**
      * Creates a Navigation Animation to dematerialize content with a digital effect
      */
-    val ExitDigitalDematerialization: ExitTransition = fadeOut(
+    public val ExitDigitalDematerialization: ExitTransition = fadeOut(
         animationSpec = tween(
             durationMillis = 300,
             easing = FastOutLinearInEasing
@@ -62,33 +62,33 @@ object DigitalTransitions {
      * Applies a digital pixelation effect modifier to a composable
      * Creates a dissolving/materializing effect using digital particles
      */
-    fun Modifier.digitalPixelEffect(
+    public fun Modifier.digitalPixelEffect(
         visible: Boolean = true,
         pixelsCount: Int = 400,
         colors: List<Color> = listOf(NeonBlue, NeonPink, NeonCyan),
     ) = composed {
-        val animatedVisible by animateFloatAsState(
+        public val animatedVisible by animateFloatAsState(
             targetValue = if (visible) 1f else 0f,
             animationSpec = tween(durationMillis = 800, easing = FastOutSlowInEasing),
             label = "pixelationAnimation"
         )
 
         this.drawWithCache {
-            val canvasWidth = size.width
-            val canvasHeight = size.height
-            val pixelSize = 4f
-            val random = Random(System.currentTimeMillis().toInt())
+            public val canvasWidth = size.width
+            public val canvasHeight = size.height
+            public val pixelSize = 4f
+            public val random = Random(System.currentTimeMillis().toInt())
 
             onDrawWithContent {
                 drawContent()
 
                 if (animatedVisible > 0.01f) {
                     // Create digital materialization effect
-                    val numPixels = (pixelsCount * animatedVisible).toInt()
+                    public val numPixels = (pixelsCount * animatedVisible).toInt()
                     for (i in 0 until numPixels) {
-                        val x = random.nextFloat() * canvasWidth
-                        val y = random.nextFloat() * canvasHeight
-                        val color = colors[random.nextInt(colors.size)]
+                        public val x = random.nextFloat() * canvasWidth
+                        public val y = random.nextFloat() * canvasHeight
+                        public val color = colors[random.nextInt(colors.size)]
 
                         drawRect(
                             color = color.copy(alpha = random.nextFloat() * 0.5f * animatedVisible),
@@ -103,10 +103,10 @@ object DigitalTransitions {
 
                     // Add some digital circuit lines
                     for (i in 0 until (15 * animatedVisible).toInt()) {
-                        val startX = random.nextFloat() * canvasWidth
-                        val startY = random.nextFloat() * canvasHeight
-                        val endX = startX + random.nextFloat() * canvasWidth / 3
-                        val endY = startY + (random.nextFloat() - 0.5f) * 60
+                        public val startX = random.nextFloat() * canvasWidth
+                        public val startY = random.nextFloat() * canvasHeight
+                        public val endX = startX + random.nextFloat() * canvasWidth / 3
+                        public val endY = startY + (random.nextFloat() - 0.5f) * 60
 
                         drawLine(
                             color = colors[random.nextInt(colors.size)].copy(alpha = 0.6f * animatedVisible),
@@ -125,10 +125,10 @@ object DigitalTransitions {
     /**
      * Applies a scanning line effect similar to old CRT monitors
      */
-    fun Modifier.digitalScanlineEffect(visible: Boolean = true) = composed {
-        var offsetY by remember { mutableFloatStateOf(0f) }
-        val infiniteTransition = rememberInfiniteTransition(label = "scanline")
-        val scanlinePosition by infiniteTransition.animateFloat(
+    public fun Modifier.digitalScanlineEffect(visible: Boolean = true) = composed {
+        public var offsetY by remember { mutableFloatStateOf(0f) }
+        public val infiniteTransition = rememberInfiniteTransition(label = "scanline")
+        public val scanlinePosition by infiniteTransition.animateFloat(
             initialValue = -200f,
             targetValue = 2000f,
             animationSpec = infiniteRepeatable(
@@ -139,8 +139,8 @@ object DigitalTransitions {
         )
 
         this.drawWithCache {
-            val canvasHeight = size.height
-            val scanlineHeight = 2f
+            public val canvasHeight = size.height
+            public val scanlineHeight = 2f
 
             onDrawWithContent {
                 drawContent()
@@ -164,20 +164,20 @@ object DigitalTransitions {
      * Applies an edge glow effect around a composable
      * Creates a cyberpunk-style glowing border
      */
-    fun Modifier.cyberEdgeGlow(
+    public fun Modifier.cyberEdgeGlow(
         visible: Boolean = true,
         primaryColor: Color = NeonCyan,
         secondaryColor: Color = NeonPink,
         cornerRadius: Float = 12f,
     ) = composed {
-        val animatedVisible by animateFloatAsState(
+        public val animatedVisible by animateFloatAsState(
             targetValue = if (visible) 1f else 0f,
             animationSpec = tween(durationMillis = 800),
             label = "edgeGlowAnimation"
         )
 
-        val infiniteTransition = rememberInfiniteTransition(label = "glow")
-        val glowIntensity by infiniteTransition.animateFloat(
+        public val infiniteTransition = rememberInfiniteTransition(label = "glow")
+        public val glowIntensity by infiniteTransition.animateFloat(
             initialValue = 0.7f,
             targetValue = 1.0f,
             animationSpec = infiniteRepeatable(
@@ -188,10 +188,10 @@ object DigitalTransitions {
         )
 
         this.drawWithCache {
-            val width = size.width
-            val height = size.height
+            public val width = size.width
+            public val height = size.height
 
-            val borderPath = Path().apply {
+            public val borderPath: Path = Path().apply {
                 moveTo(cornerRadius, 0f)
                 lineTo(width - cornerRadius, 0f)
 
@@ -253,8 +253,8 @@ object DigitalTransitions {
                     )
 
                     // Draw nodes at corners
-                    val nodeSize = 6f
-                    val corners = listOf(
+                    public val nodeSize = 6f
+                    public val corners = listOf(
                         Offset(cornerRadius, 0f),
                         Offset(width - cornerRadius, 0f),
                         Offset(width, cornerRadius),
@@ -267,7 +267,7 @@ object DigitalTransitions {
 
                     corners.forEachIndexed { index, offset ->
                         // Alternate colors for corner nodes
-                        val nodeColor = if (index % 2 == 0) primaryColor else secondaryColor
+                        public val nodeColor = if (index % 2 == 0) primaryColor else secondaryColor
                         drawCircle(
                             color = nodeColor.copy(alpha = glowIntensity * animatedVisible),
                             radius = nodeSize,
@@ -284,11 +284,11 @@ object DigitalTransitions {
      * Digital glitch effect that randomly displaces small portions of the UI
      */
     @Composable
-    fun Modifier.digitalGlitchEffect(visible: Boolean = true): Modifier {
+    public fun Modifier.digitalGlitchEffect(visible: Boolean = true): Modifier {
         if (!visible) return this
 
-        val infiniteTransition = rememberInfiniteTransition(label = "glitch")
-        val glitchTiming by infiniteTransition.animateFloat(
+        public val infiniteTransition = rememberInfiniteTransition(label = "glitch")
+        public val glitchTiming by infiniteTransition.animateFloat(
             initialValue = 0f,
             targetValue = 1f,
             animationSpec = infiniteRepeatable(
@@ -300,12 +300,12 @@ object DigitalTransitions {
 
         return this.then(
             Modifier.drawWithCache {
-                val width = size.width
-                val height = size.height
-                val random = Random(glitchTiming.hashCode())
+                public val width = size.width
+                public val height = size.height
+                public val random = Random(glitchTiming.hashCode())
 
                 // Determine if a glitch should occur (randomly with timing)
-                val shouldGlitch = glitchTiming > 0.95f ||
+                public val shouldGlitch = glitchTiming > 0.95f ||
                         (glitchTiming > 0.4f && glitchTiming < 0.42f) ||
                         (glitchTiming > 0.7f && glitchTiming < 0.71f)
 
@@ -316,16 +316,16 @@ object DigitalTransitions {
                     }
 
                     // Create glitch by shifting random horizontal slices
-                    val sliceCount = 8
-                    val sliceHeight = height / sliceCount
+                    public val sliceCount = 8
+                    public val sliceHeight = height / sliceCount
 
                     for (i in 0 until sliceCount) {
-                        val yOffset = i * sliceHeight
-                        val xOffset = if (random.nextFloat() > 0.7f) {
+                        public val yOffset = i * sliceHeight
+                        public val xOffset = if (random.nextFloat() > 0.7f) {
                             (random.nextFloat() * 20 - 10)
                         } else 0f
 
-                        val glitchColor = if (random.nextFloat() > 0.9f) {
+                        public val glitchColor = if (random.nextFloat() > 0.9f) {
                             when (random.nextInt(3)) {
                                 0 -> NeonCyan.copy(alpha = 0.3f)
                                 1 -> NeonPink.copy(alpha = 0.3f)

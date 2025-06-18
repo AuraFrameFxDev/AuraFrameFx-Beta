@@ -31,10 +31,10 @@ import java.util.regex.Pattern
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 
-val EMPTY_REQUEST: RequestBody = ByteArray(0).toRequestBody()
+public val EMPTY_REQUEST: RequestBody = ByteArray(0).toRequestBody()
 
 open class ApiClient(val baseUrl: String, val client: Call.Factory = defaultClient) {
-    companion object {
+    public companion object {
         protected const val ContentType: String = "Content-Type"
         protected const val Accept: String = "Accept"
         protected const val Authorization: String = "Authorization"
@@ -45,20 +45,20 @@ open class ApiClient(val baseUrl: String, val client: Call.Factory = defaultClie
         protected const val OctetMediaType: String = "application/octet-stream"
         protected const val TextMediaType: String = "text/plain"
 
-        val apiKey: MutableMap<String, String> = mutableMapOf()
-        val apiKeyPrefix: MutableMap<String, String> = mutableMapOf()
-        var username: String? = null
-        var password: String? = null
-        var accessToken: String? = null
-        const val baseUrlKey: String = "dev.aurakai.auraframefx.api.client.baseUrl"
+        public val apiKey: MutableMap<String, String> = mutableMapOf()
+        public val apiKeyPrefix: MutableMap<String, String> = mutableMapOf()
+        public var username: String? = null
+        public var password: String? = null
+        public var accessToken: String? = null
+        public const val baseUrlKey: String = "dev.aurakai.auraframefx.api.client.baseUrl"
 
         @JvmStatic
-        val defaultClient: OkHttpClient by lazy {
+        public val defaultClient: OkHttpClient by lazy {
             builder.build()
         }
 
         @JvmStatic
-        val builder: OkHttpClient.Builder = OkHttpClient.Builder()
+        public val builder: OkHttpClient.Builder = OkHttpClient.Builder()
     }
 
     /**
@@ -68,7 +68,7 @@ open class ApiClient(val baseUrl: String, val client: Call.Factory = defaultClie
      * @return The guessed Content-Type
      */
     protected fun guessContentTypeFromByteArray(byteArray: ByteArray): String {
-        val contentType = try {
+        public val contentType = try {
             URLConnection.guessContentTypeFromStream(byteArray.inputStream())
         } catch (io: IOException) {
             "application/octet-stream"
@@ -83,7 +83,7 @@ open class ApiClient(val baseUrl: String, val client: Call.Factory = defaultClie
      * @return The guessed Content-Type
      */
     protected fun guessContentTypeFromFile(file: File): String {
-        val contentType = URLConnection.guessContentTypeFromName(file.name)
+        public val contentType = URLConnection.guessContentTypeFromName(file.name)
         return contentType ?: "application/octet-stream"
     }
 
@@ -99,9 +99,9 @@ open class ApiClient(val baseUrl: String, val client: Call.Factory = defaultClie
      * @see requestBody
      */
     protected fun MultipartBody.Builder.addPartToMultiPart(name: String, headers: Map<String, String>, file: File) {
-        val partHeaders = headers.toMutableMap() +
+        public val partHeaders = headers.toMutableMap() +
             ("Content-Disposition" to "form-data; name=\"$name\"; filename=\"${file.name}\"")
-        val fileMediaType = guessContentTypeFromFile(file).toMediaTypeOrNull()
+        public val fileMediaType = guessContentTypeFromFile(file).toMediaTypeOrNull()
         addPart(
             partHeaders.toHeaders(),
             file.asRequestBody(fileMediaType)
@@ -120,7 +120,7 @@ open class ApiClient(val baseUrl: String, val client: Call.Factory = defaultClie
      * @see requestBody
      */
     protected fun <T> MultipartBody.Builder.addPartToMultiPart(name: String, headers: Map<String, String>, obj: T?) {
-        val partHeaders = headers.toMutableMap() +
+        public val partHeaders = headers.toMutableMap() +
             ("Content-Disposition" to "form-data; name=\"$name\"")
         addPart(
             partHeaders.toHeaders(),
@@ -178,7 +178,7 @@ open class ApiClient(val baseUrl: String, val client: Call.Factory = defaultClie
         }
 
     protected inline fun <reified T: Any?> responseBody(response: Response, mediaType: String? = JsonMediaType): T? {
-        val body = response.body
+        public val body = response.body
         if(body == null) {
             return null
         } else if (T::class.java == Unit::class.java) {
@@ -187,12 +187,12 @@ open class ApiClient(val baseUrl: String, val client: Call.Factory = defaultClie
             return null
         } else if (T::class.java == File::class.java) {
             // return tempFile
-            val contentDisposition = response.header("Content-Disposition")
+            public val contentDisposition = response.header("Content-Disposition")
 
-            val fileName = if (contentDisposition != null) {
+            public val fileName = if (contentDisposition != null) {
                 // Get filename from the Content-Disposition header.
-                val pattern = Pattern.compile("filename=['\"]?([^'\"\\s]+)['\"]?")
-                val matcher = pattern.matcher(contentDisposition)
+                public val pattern = Pattern.compile("filename=['\"]?([^'\"\\s]+)['\"]?")
+                public val matcher = pattern.matcher(contentDisposition)
                 if (matcher.find()) {
                     matcher.group(1)
                         ?.replace(".*[/\\\\]", "")
@@ -204,13 +204,13 @@ open class ApiClient(val baseUrl: String, val client: Call.Factory = defaultClie
                 null
             }
 
-            var prefix: String?
-            val suffix: String?
+            public var prefix: String?
+            public val suffix: String?
             if (fileName == null) {
                 prefix = "download"
                 suffix = ""
             } else {
-                val pos = fileName.lastIndexOf(".")
+                public val pos = fileName.lastIndexOf(".")
                 if (pos == -1) {
                     prefix = fileName
                     suffix = null
@@ -225,7 +225,7 @@ open class ApiClient(val baseUrl: String, val client: Call.Factory = defaultClie
             }
 
             // Attention: if you are developing an android app that supports API Level 25 and below, please check flag supportAndroidApiLevel25AndBelow in https://openapi-generator.tech/docs/generators/kotlin#config-options
-            val tempFile = java.nio.file.Files.createTempFile(prefix, suffix).toFile()
+            public val tempFile = java.nio.file.Files.createTempFile(prefix, suffix).toFile()
             tempFile.deleteOnExit()
             body.byteStream().use { inputStream ->
                 tempFile.outputStream().use { tempFileOutputStream ->
@@ -237,7 +237,7 @@ open class ApiClient(val baseUrl: String, val client: Call.Factory = defaultClie
 
         return when {
             mediaType == null || (mediaType.startsWith("application/") && mediaType.endsWith("json")) -> {
-                val bodyContent = body.string()
+                public val bodyContent = body.string()
                 if (bodyContent.isEmpty()) {
                     return null
                 }
@@ -251,9 +251,9 @@ open class ApiClient(val baseUrl: String, val client: Call.Factory = defaultClie
 
 
     protected inline fun <reified I, reified T: Any?> request(requestConfig: RequestConfig<I>): ApiResponse<T?> {
-        val httpUrl = baseUrl.toHttpUrlOrNull() ?: throw IllegalStateException("baseUrl is invalid.")
+        public val httpUrl = baseUrl.toHttpUrlOrNull() ?: throw IllegalStateException("baseUrl is invalid.")
 
-        val url = httpUrl.newBuilder()
+        public val url = httpUrl.newBuilder()
             .addEncodedPathSegments(requestConfig.path.trimStart('/'))
             .apply {
                 requestConfig.query.forEach { query ->
@@ -270,20 +270,20 @@ open class ApiClient(val baseUrl: String, val client: Call.Factory = defaultClie
         if (requestConfig.headers[Accept].isNullOrEmpty()) {
             requestConfig.headers[Accept] = JsonMediaType
         }
-        val headers = requestConfig.headers
+        public val headers = requestConfig.headers
 
         if (headers[Accept].isNullOrEmpty()) {
             throw kotlin.IllegalStateException("Missing Accept header. This is required.")
         }
 
-        val contentType = if (headers[ContentType] != null) {
+        public val contentType = if (headers[ContentType] != null) {
             // TODO: support multiple contentType options here.
             (headers[ContentType] as String).substringBefore(";").lowercase(Locale.US)
         } else {
             null
         }
 
-        val request = when (requestConfig.method) {
+        public val request = when (requestConfig.method) {
             RequestMethod.DELETE -> Request.Builder().url(url).delete(requestBody(requestConfig.body, contentType))
             RequestMethod.GET -> Request.Builder().url(url)
             RequestMethod.HEAD -> Request.Builder().url(url).head()
@@ -292,16 +292,16 @@ open class ApiClient(val baseUrl: String, val client: Call.Factory = defaultClie
             RequestMethod.POST -> Request.Builder().url(url).post(requestBody(requestConfig.body, contentType))
             RequestMethod.OPTIONS -> Request.Builder().url(url).method("OPTIONS", null)
         }.apply {
-            val headersBuilder = Headers.Builder()
+            public val headersBuilder = Headers.Builder()
             headers.forEach { header ->
                 headersBuilder.add(header.key, header.value)
             }
             this.headers(headersBuilder.build())
         }.build()
 
-        val response = client.newCall(request).execute()
+        public val response = client.newCall(request).execute()
 
-        val accept = response.header(ContentType)?.substringBefore(";")?.lowercase(Locale.US)
+        public val accept = response.header(ContentType)?.substringBefore(";")?.lowercase(Locale.US)
 
         // TODO: handle specific mapping types. e.g. Map<int, Class<?>>
         @Suppress("UNNECESSARY_SAFE_CALL")

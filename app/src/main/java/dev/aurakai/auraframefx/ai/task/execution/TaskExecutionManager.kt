@@ -16,24 +16,24 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class TaskExecutionManager @Inject constructor(
+public class TaskExecutionManager @Inject constructor(
     private val context: Context,
     private val kaiService: KaiAIService,
     private val auraFxLogger: AuraFxLogger,
 ) {
     private val _executions = MutableStateFlow<Map<String, TaskExecution>>(emptyMap()) // Added type for emptyMap
-    val executions: StateFlow<Map<String, TaskExecution>> = _executions
+    public val executions: StateFlow<Map<String, TaskExecution>> = _executions
 
     private val _executionStats = MutableStateFlow(ExecutionStats())
-    val executionStats: StateFlow<ExecutionStats> = _executionStats
+    public val executionStats: StateFlow<ExecutionStats> = _executionStats
 
     private val _activeExecutions = mutableMapOf<String, TaskExecution>()
     private val _completedExecutions = mutableMapOf<String, TaskExecution>()
     private val _failedExecutions = mutableMapOf<String, TaskExecution>()
 
-    fun startExecution(task: Task, agent: AgentType): TaskExecution {
-        val executionPlan = createExecutionPlan(task)
-        val execution = TaskExecution(
+    public fun startExecution(task: Task, agent: AgentType): TaskExecution {
+        public val executionPlan = createExecutionPlan(task)
+        public val execution = TaskExecution(
             taskId = task.id,
             agent = agent,
             executionPlan = executionPlan
@@ -49,7 +49,7 @@ class TaskExecutionManager @Inject constructor(
     }
 
     private fun createExecutionPlan(task: Task): ExecutionPlan {
-        val steps = listOf(
+        public val steps = listOf(
             ExecutionStep(
                 description = "Initialize task",
                 type = StepType.INITIALIZATION,
@@ -83,9 +83,9 @@ class TaskExecutionManager @Inject constructor(
         )
     }
 
-    fun updateExecutionProgress(executionId: String, progress: Float) {
-        val execution = _activeExecutions[executionId] ?: return
-        val updatedExecution = execution.copy(progress = progress)
+    public fun updateExecutionProgress(executionId: String, progress: Float) {
+        public val execution = _activeExecutions[executionId] ?: return
+        public val updatedExecution = execution.copy(progress = progress)
 
         _executions.update { current ->
             current + (executionId to updatedExecution)
@@ -93,14 +93,14 @@ class TaskExecutionManager @Inject constructor(
         updateStats(updatedExecution)
     }
 
-    fun updateCheckpoint(executionId: String, stepId: String, status: CheckpointStatus) {
-        val execution = _activeExecutions[executionId] ?: return
-        val checkpoint = Checkpoint(
+    public fun updateCheckpoint(executionId: String, stepId: String, status: CheckpointStatus) {
+        public val execution = _activeExecutions[executionId] ?: return
+        public val checkpoint = Checkpoint(
             stepId = stepId,
             status = status
         )
 
-        val updatedExecution = execution.copy(
+        public val updatedExecution = execution.copy(
             checkpoints = execution.checkpoints + checkpoint
         )
 
@@ -110,9 +110,9 @@ class TaskExecutionManager @Inject constructor(
         updateStats(updatedExecution)
     }
 
-    fun completeExecution(executionId: String, result: ExecutionResult) {
-        val execution = _activeExecutions[executionId] ?: return
-        val updatedExecution = execution.copy(
+    public fun completeExecution(executionId: String, result: ExecutionResult) {
+        public val execution = _activeExecutions[executionId] ?: return
+        public val updatedExecution = execution.copy(
             status = ExecutionStatus.COMPLETED,
             endTime = Clock.System.now().toEpochMilliseconds(), // Corrected Instant usage
             result = result
@@ -127,9 +127,9 @@ class TaskExecutionManager @Inject constructor(
         updateStats(updatedExecution)
     }
 
-    fun failExecution(executionId: String, error: Throwable) {
-        val execution = _activeExecutions[executionId] ?: return
-        val updatedExecution = execution.copy(
+    public fun failExecution(executionId: String, error: Throwable) {
+        public val execution = _activeExecutions[executionId] ?: return
+        public val updatedExecution = execution.copy(
             status = ExecutionStatus.FAILED,
             endTime = Clock.System.now().toEpochMilliseconds(), // Corrected Instant usage
             result = ExecutionResult.FAILURE
@@ -159,11 +159,11 @@ class TaskExecutionManager @Inject constructor(
     }
 }
 
-data class ExecutionStats(
-    val totalExecutions: Int = 0,
-    val activeExecutions: Int = 0,
-    val completedExecutions: Int = 0,
-    val failedExecutions: Int = 0,
-    val executionTimes: Map<ExecutionStatus, Int> = emptyMap(),
-    val lastUpdated: Long = Clock.System.now().toEpochMilliseconds(), // Corrected Instant usage
+public data class ExecutionStats(
+    public val totalExecutions: Int = 0,
+    public val activeExecutions: Int = 0,
+    public val completedExecutions: Int = 0,
+    public val failedExecutions: Int = 0,
+    public val executionTimes: Map<ExecutionStatus, Int> = emptyMap(),
+    public val lastUpdated: Long = Clock.System.now().toEpochMilliseconds(), // Corrected Instant usage
 )

@@ -6,7 +6,7 @@ import kotlinx.serialization.Serializable
  * GenerateTextResponse model generated from OpenAPI spec
  */
 @Serializable
-data class GenerateTextResponse(
-    val generatedText: String,
-    val finishReason: String
+public data class GenerateTextResponse(
+    public val generatedText: String,
+    public val finishReason: String
 )
