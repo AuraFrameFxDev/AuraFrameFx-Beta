@@ -58,28 +58,35 @@ class DiagnosticsViewModel @Inject constructor(
             val offlineData = offlineDataManager.loadCriticalOfflineData() // Suspend call
             _systemStatus.update { currentMap ->
                 currentMap.toMutableMap().apply {
-                    put("Last Full Sync (Offline Data)", offlineData?.lastFullSyncTimestamp?.let {
-                        SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.US).format(Date(it))
-                    } ?: "N/A")
+                    put("Last Full Sync (Offline Data)",
+                        offlineData?.lastFullSyncTimestamp?.let { ts ->
+                            SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.US).format(Date(ts))
+                        } ?: "N/A"
+                    )
                     put(
                         "Offline AI Config Version (Timestamp)",
-                        (offlineData?.aiConfig?.lastSyncTimestamp ?: 0L).let {
-                            if (it == 0L) "N/A" else SimpleDateFormat(
+                        (offlineData?.aiConfig?.lastSyncTimestamp ?: 0L).let { ts ->
+                            if (ts == 0L) "N/A" else SimpleDateFormat(
                                 "yyyy-MM-dd HH:mm:ss",
                                 Locale.US
-                            ).format(Date(it))
-                        })
+                            ).format(Date(ts))
+                        }
+                    )
                     put(
                         "Monitoring Enabled",
-                        (offlineData?.systemMonitoring?.enabled ?: false).toString()
+                        ((offlineData?.systemMonitoring?.enabled ?: false).toString())
                     )
                     put(
                         "Contextual Memory Last Update",
-                        offlineData?.contextualMemory?.lastUpdateTimestamp?.let {
-                            if (it == 0L) "N/A" else SimpleDateFormat(
+                        offlineData?.contextualMemory?.lastUpdateTimestamp?.let { ts ->
+                            if (ts == 0L) "N/A" else SimpleDateFormat(
                                 "yyyy-MM-dd HH:mm:ss",
                                 Locale.US
+<<<<<<< codespace-upgraded-yodel-7vwg6p6vj4q92rv6g
                             ).format(Date(it))
+=======
+                            ).format(Date(ts))
+>>>>>>> main
                         } ?: "N/A"
                     )
                     // Add more status items as needed

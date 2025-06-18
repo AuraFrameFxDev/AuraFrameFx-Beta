@@ -11,6 +11,7 @@ plugins {
     id("androidx.navigation.safeargs.kotlin")
     id("com.google.firebase.firebase-perf")
     id("org.jetbrains.kotlin.plugin.compose")
+    id("org.openapi.generator") version "7.5.0"
     alias(libs.plugins.ksp)
     id("org.openapi.generator") version "7.4.0"
 }
@@ -45,8 +46,12 @@ android {
 
         // Enable multidex support
         multiDexEnabled = true
+<<<<<<< codespace-upgraded-yodel-7vwg6p6vj4q92rv6g
 
         manifestPlaceholders ["appAuthRedirectScheme"] = "auraframefx"
+=======
+        manifestPlaceholders["appAuthRedirectScheme"] = "auraframefxbeta"
+>>>>>>> main
     }
 
     buildTypes {
@@ -65,15 +70,16 @@ android {
         targetCompatibility = JavaVersion.VERSION_21
     }
 
-    // Fix for AIDL path issues - using absolute paths and explicit configuration
+    // Configure source sets with explicit paths
     sourceSets {
         getByName("main") {
-            aidl {
-                srcDirs("src/main/aidl")
-            }
-            // Use the correct property for file inclusions
-            java.srcDir("src/main/java")
-            res.srcDir("src/main/res")
+            manifest.srcFile("src/main/AndroidManifest.xml")
+            java.srcDirs("src/main/java", "$buildDir/generated/openapi/src/main/kotlin")
+            res.srcDirs("src/main/res")
+            aidl.srcDirs("src/main/aidl")
+            assets.srcDirs("src/main/assets")
+            resources.srcDirs("src/main/resources")
+            jniLibs.srcDirs("src/main/jniLibs")
         }
     }
 
@@ -123,7 +129,10 @@ dependencies {
     implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:1.0.0")
+<<<<<<< codespace-upgraded-yodel-7vwg6p6vj4q92rv6g
     implementation("com.squareup.retrofit2:converter-scalars:2.9.0") // Scalars converter for OpenAPI/Retrofit
+=======
+>>>>>>> main
 
     // Core Android dependencies
     implementation("androidx.core:core-ktx:1.16.0")
@@ -286,6 +295,7 @@ kapt {
 // OpenAPI Generator configuration
 openApiGenerate {
     generatorName.set("kotlin")
+<<<<<<< codespace-upgraded-yodel-7vwg6p6vj4q92rv6g
     inputSpec.set("$projectDir/../api-spec/aura-framefx-api.yaml")
     outputDir.set("$buildDir/generated/openapi")
     packageName.set("dev.aurakai.auraframefx.generated.api")
@@ -312,6 +322,29 @@ android.sourceSets["main"].java.srcDirs("src/main/java")
 
 // Note: OpenAPI generation is handled manually for now
 // TODO: Fix OpenAPI generator plugin configuration
+=======
+    inputSpec.set("$projectDir/../api-spec/aura-framefx-api.yaml") // Updated inputSpec
+    outputDir.set("$buildDir/generated/openapi")
+    apiPackage.set("dev.aurakai.auraframefx.generated.api") // Updated apiPackage
+    invokerPackage.set("dev.aurakai.auraframefx.generated.invoker") // Updated invokerPackage
+    modelPackage.set("dev.aurakai.auraframefx.generated.model") // Updated modelPackage
+    configOptions.set(
+        mapOf(
+            "dateLibrary" to "java8",
+            "collectionType" to "list", // Preserved from original
+            "useCoroutines" to "true",
+            "enumPropertyNaming" to "UPPERCASE",
+            "serializationLibrary" to "kotlinx_serialization",
+            "library" to "jvm-retrofit2" // Added library option
+        )
+    )
+}
+
+// Ensure the openApiGenerate task runs before compilation
+tasks.named("preBuild") {
+    dependsOn("openApiGenerate")
+}
+>>>>>>> main
 
 // Register a task to build a jar for Xposed/LSPosed modules after the Android plugin is configured
 afterEvaluate {

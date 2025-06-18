@@ -9,7 +9,7 @@ import de.robv.android.xposed.XSharedPreferences // Added import
 import de.robv.android.xposed.callbacks.XC_LoadPackage // Added import
 import dev.aurakai.auraframefx.system.lockscreen.LockScreenConfig
 import dev.aurakai.auraframefx.system.overlay.SystemOverlayConfig
-import dev.aurakai.auraframefx.system.quicksettings.QuickSettingsConfig
+import dev.aurakai.auraframefx.system.quicksettings.model.QuickSettingsConfig
 import dev.aurakai.auraframefx.utils.JsonUtils
 import dev.aurakai.auraframefx.xposed.hooks.LockScreenHooker
 import dev.aurakai.auraframefx.xposed.hooks.NotchBarHooker
@@ -17,11 +17,13 @@ import dev.aurakai.auraframefx.xposed.hooks.QuickSettingsHooker
 
 class AuraXposedEntry : IXposedHookLoadPackage { // IXposedHookLoadPackage was already imported, removed duplicate from replace
     private val TAG = "AuraXposedEntry"
-    private const val MAIN_APP_PACKAGE_NAME = "dev.aurakai.auraframefx"
-    private const val IPC_PREFS_NAME = "aura_fx_ipc_prefs"
-    private const val IPC_KEY_QUICK_SETTINGS = "quick_settings_config_json"
-    private const val IPC_KEY_LOCK_SCREEN = "lock_screen_config_json"
-    private const val IPC_KEY_SYSTEM_OVERLAY = "system_overlay_config_json" // New key
+    companion object {
+        const val MAIN_APP_PACKAGE_NAME = "dev.aurakai.auraframefx"
+        const val IPC_PREFS_NAME = "aura_fx_ipc_prefs"
+        const val IPC_KEY_QUICK_SETTINGS = "quick_settings_config_json"
+        const val IPC_KEY_LOCK_SCREEN = "lock_screen_config_json"
+        const val IPC_KEY_SYSTEM_OVERLAY = "system_overlay_config_json" // New key
+    }
 
     override fun handleLoadPackage(lpparam: XC_LoadPackage.LoadPackageParam?) { // Made lpparam nullable to be safe
         if (lpparam?.packageName == null) return // Adjusted for nullable lpparam

@@ -7,6 +7,8 @@ val NeonTeal = Color(0xFF00FFCC) // Brighter teal for accents
 val NeonPurple = Color(0xFFE000FF) // Slightly softer purple for readability
 val NeonBlue = Color(0xFF00FFFF) // Bright cyan for highlights
 val NeonPink = Color(0xFFFF00FF) // Bright pink for secondary accents
+val NeonGreen = Color(0xFF00FF00) // Bright neon green
+val NeonRed = Color(0xFFFF0000)   // Bright neon red
 
 // Additional Neon Colors
 val NeonCyan = Color(0xFF00FFFF) // Alias for NeonBlue for backwards compatibility  
