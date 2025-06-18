@@ -49,7 +49,6 @@ class QuickSettingsCustomizer @Inject constructor(
      * Applies and persists a new quick settings configuration for inter-process communication.
      *
      * Updates the current configuration state, serializes it to JSON, stores it in shared preferences for IPC, and triggers the overlay service hook for further processing.
-
      *
      * @param config The quick settings configuration to apply.
      */
@@ -72,32 +71,29 @@ class QuickSettingsCustomizer @Inject constructor(
     }
 
     /**
-     * Updates the shape of a specific quick settings tile.
-
+     * Updates the shape of the specified quick settings tile.
      *
-     * @param tileId The unique identifier of the tile to modify.
-     * @param shape The shape to assign to the tile.
+     * @param tileId The unique identifier of the tile to update.
+     * @param shape The new shape to apply to the tile.
      */
     fun updateTileShape(tileId: String, shape: OverlayShape) {
         // TODO: Implement logic to update tile shape
     }
 
     /**
-     * Updates the animation settings for a specific quick settings tile.
+     * Updates the animation configuration for a specific quick settings tile.
      *
      * @param tileId The unique identifier of the tile to update.
-     * @param animation The animation configuration to apply.
-
+     * @param animation The animation settings to apply to the tile.
      */
     fun updateTileAnimation(tileId: String, animation: QuickSettingsAnimation) {
         // TODO: Implement logic to update tile animation
     }
 
     /**
-     * Sets or clears the background image for the quick settings interface.
+     * Sets or removes the background image for the quick settings interface.
      *
-     * @param image The image to use as the background, or null to remove the current background.
-
+     * @param image The image to set as the background, or null to clear the background.
      */
     fun updateBackground(image: ImageResource?) {
         // TODO: Implement logic to update background
@@ -106,8 +102,7 @@ class QuickSettingsCustomizer @Inject constructor(
     /**
      * Resets all quick settings customizations to their default values.
      *
-     * Intended to restore the quick settings configuration to its original state.
-
+     * Intended to restore the quick settings interface to its original configuration.
      */
     fun resetToDefault() {
         // TODO: Implement logic to reset to default

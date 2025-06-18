@@ -17,7 +17,11 @@ class OfflineDataManager @Inject constructor(
         println("OfflineDataManager example method called with context: ${context.packageName}")
     }
 
-    // Example of a more realistic method signature you might need
+    /**
+     * Loads critical offline data required by the application.
+     *
+     * @return The loaded offline data, or null if no data is available.
+     */
     fun loadCriticalOfflineData(): Any? {
         // Replace with actual data loading logic
         println("Attempting to load critical offline data...")
@@ -25,11 +29,11 @@ class OfflineDataManager @Inject constructor(
     }
 
     /**
-     * Saves critical offline data.
+     * Saves critical offline data for offline use.
      *
-     * This is a placeholder method; actual data saving logic should be implemented.
+     * This is a placeholder method; actual data persistence logic should be implemented.
      *
-     * @param data The data to be saved.
+     * @param data The critical data to be saved.
      */
     fun saveCriticalOfflineData(data: Any) {
         // Replace with actual data saving logic

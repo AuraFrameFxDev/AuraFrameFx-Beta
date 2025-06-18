@@ -92,6 +92,13 @@ class GenesisAgentViewModel @Inject constructor(
         _taskHistory.value = emptyList()
     }
 
+    /**
+     * Registers a new auxiliary agent with the specified name and capabilities.
+     *
+     * @param name The unique name for the auxiliary agent.
+     * @param capabilities The set of capabilities assigned to the agent.
+     * @return The configuration of the newly registered agent.
+     */
     fun registerAuxiliaryAgent(
         name: String,
         capabilities: Set<String>,
@@ -102,31 +109,29 @@ class GenesisAgentViewModel @Inject constructor(
     /**
      * Retrieves the configuration for an agent by its name.
      *
-     * @param name The name of the agent to look up.
-     * @return The corresponding AgentConfig if found, or null if no agent with the given name exists.
+     * @param name The name of the agent to retrieve.
+     * @return The agent's configuration if found, or null if no agent with the specified name exists.
      */
     fun getAgentConfig(name: String): AgentConfig? {
         return genesisAgent.getAgentConfig(name)
     }
 
     /**
-     * Retrieves all agent configurations sorted by priority.
+     * Returns a list of agent configurations ordered by priority, from highest to lowest.
      *
-     * @return A list of agent configurations ordered from highest to lowest priority.
-
+     * @return The list of agent configurations sorted by priority.
      */
     fun getAgentsByPriority(): List<AgentConfig> {
         return genesisAgent.getAgentsByPriority()
     }
 
     /**
-     * Initiates asynchronous processing of a query by the GenesisAgent and returns immediately.
+     * Triggers asynchronous processing of the given query by the GenesisAgent and returns immediately.
      *
-     * The function triggers background processing of the provided query string. No results are returned synchronously; the returned list is always empty.
+     * The function launches background processing for the provided query string. No results are returned synchronously; the returned list is always empty.
      *
-     * @param query The query string to be processed.
-     * @return An empty list, as query results are handled asynchronously.
-
+     * @param query The query string to process.
+     * @return An empty list, as results are handled asynchronously.
      */
     fun processQuery(query: String): List<AgentConfig> {
         viewModelScope.launch {
