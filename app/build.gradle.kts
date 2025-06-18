@@ -12,6 +12,7 @@ plugins {
     id("com.google.firebase.firebase-perf")
     id("org.jetbrains.kotlin.plugin.compose")
     alias(libs.plugins.ksp)
+    id("org.openapi.generator") version "7.4.0"
 }
 
 // Repositories are configured in settings.gradle.kts
@@ -44,6 +45,8 @@ android {
 
         // Enable multidex support
         multiDexEnabled = true
+
+        manifestPlaceholders ["appAuthRedirectScheme"] = "auraframefx"
     }
 
     buildTypes {
@@ -279,6 +282,36 @@ dependencies {
 kapt {
     correctErrorTypes = true // KAPT is in maintenance mode, use KSP where possible
 }
+
+// OpenAPI Generator configuration
+openApiGenerate {
+    generatorName.set("kotlin")
+    inputSpec.set("$projectDir/../api-spec/aura-framefx-api.yaml")
+    outputDir.set("$buildDir/generated/openapi")
+    packageName.set("dev.aurakai.auraframefx.generated.api")
+    modelPackage.set("dev.aurakai.auraframefx.generated.model")
+    apiPackage.set("dev.aurakai.auraframefx.generated.api")
+    configOptions.set(mapOf(
+        "serializationLibrary" to "kotlinx_serialization",
+        "library" to "jvm-retrofit2",
+        "useCoroutines" to "true",
+        "enumPropertyNaming" to "UPPERCASE",
+        "sortParamsByRequiredFlag" to "true",
+        "sortModelPropertiesByRequiredFlag" to "true",
+        "ensureUniqueParams" to "true",
+        "dateLibrary" to "kotlinx-datetime"
+    ))
+    globalProperties.set(mapOf(
+        "models" to "",
+        "apis" to ""
+    ))
+}
+
+// Make sure generated sources are included in compilation
+android.sourceSets["main"].java.srcDirs("src/main/java")
+
+// Note: OpenAPI generation is handled manually for now
+// TODO: Fix OpenAPI generator plugin configuration
 
 // Register a task to build a jar for Xposed/LSPosed modules after the Android plugin is configured
 afterEvaluate {

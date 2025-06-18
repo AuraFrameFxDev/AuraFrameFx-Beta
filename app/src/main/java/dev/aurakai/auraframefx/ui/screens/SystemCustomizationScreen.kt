@@ -8,7 +8,17 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import dev.aurakai.auraframefx.ui.theme.Color
+import androidx.compose.ui.graphics.Color // Use Compose Color
+import dev.aurakai.auraframefx.system.overlay.model.OverlayShape
+import dev.aurakai.auraframefx.system.quicksettings.model.QuickSettingsConfig
+import dev.aurakai.auraframefx.system.lockscreen.model.LockScreenConfig
+import dev.aurakai.auraframefx.ui.model.ImageResource
+import dev.aurakai.auraframefx.system.quicksettings.model.QuickSettingsAnimation
+import dev.aurakai.auraframefx.system.lockscreen.model.LockScreenAnimation
+import dev.aurakai.auraframefx.system.lockscreen.model.LockScreenElementType
+import dev.aurakai.auraframefx.system.quicksettings.model.QuickSettingsTileConfig
+import dev.aurakai.auraframefx.system.lockscreen.model.LockScreenElementConfig
+import dev.aurakai.auraframefx.ui.viewmodel.SystemCustomizationViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -331,6 +341,14 @@ fun ShapePicker(
 fun AnimationPicker(
     currentAnimation: QuickSettingsAnimation,
     onAnimationSelected: (QuickSettingsAnimation) -> Unit,
+) {
+    // TODO: Implement animation picker UI
+}
+
+@Composable
+fun AnimationPicker(
+    currentAnimation: LockScreenAnimation,
+    onAnimationSelected: (LockScreenAnimation) -> Unit,
 ) {
     // TODO: Implement animation picker UI
 }

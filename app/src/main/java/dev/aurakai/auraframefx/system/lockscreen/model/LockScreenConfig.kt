@@ -1,6 +1,9 @@
 package dev.aurakai.auraframefx.system.lockscreen.model
 
+import kotlinx.serialization.Serializable
+
 // Placeholder based on SystemCustomizationViewModel.kt usage
+@Serializable
 data class LockScreenConfig(
     val clockElement: LockScreenElementConfig? = null,
     val dateElement: LockScreenElementConfig? = null,
@@ -17,6 +20,7 @@ data class LockScreenConfig(
 )
 
 // Referenced in LockScreenConfig and LockScreenHooker
+@Serializable
 data class ClockConfig(
     val customTextColorEnabled: Boolean? = null,
     val customTextColor: String? = null,
@@ -27,6 +31,7 @@ data class ClockConfig(
 )
 
 // Referenced in LockScreenConfig and LockScreenHooker
+@Serializable
 data class DateConfig(
     // Assuming similar properties to ClockConfig for now if needed
     val animation: LockScreenAnimationConfig = LockScreenAnimationConfig()
@@ -34,6 +39,7 @@ data class DateConfig(
 
 
 // Assuming similar HapticFeedbackConfig as in QuickSettings
+@Serializable
 data class HapticFeedbackConfig(
     val enabled: Boolean? = false,
     val effect: String = "click",
@@ -41,6 +47,7 @@ data class HapticFeedbackConfig(
 )
 
 // Referenced in LockScreenConfig and LockScreenHooker
+@Serializable
 data class LockScreenAnimationConfig(
     val type: String = "none", // e.g., "fade_in", "slide_up"
     val durationMs: Long = 300,
@@ -50,21 +57,11 @@ data class LockScreenAnimationConfig(
 
 
 // Placeholder, defined based on SystemCustomizationViewModel usage context
+@Serializable
 data class LockScreenElementConfig(
-    val type: LockScreenElementType,
-    val animation: LockScreenAnimation // Assuming this LockScreenAnimation is an enum
+    val elementId: String,
+    val isVisible: Boolean = true,
+    val customText: String? = null,
+    val type: LockScreenElementType, // Import from LockScreenElementType.kt
+    val animation: LockScreenAnimation = LockScreenAnimation.NONE // Import from LockScreenAnimation.kt
 )
-
-enum class LockScreenElementType {
-    CLOCK,
-    DATE,
-    NOTIFICATIONS
-    // Add other element types as needed
-}
-
-enum class LockScreenAnimation { // As used by LockScreenElementConfig
-    FADE_IN,
-    SLIDE_UP,
-    NONE
-    // Add other animation types as needed
-}
