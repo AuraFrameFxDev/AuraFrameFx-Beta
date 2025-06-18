@@ -26,7 +26,7 @@ import dev.aurakai.auraframefx.ui.screens.SettingsScreen
  * @param navController The navigation controller used to manage app navigation.
  */
 @Composable
-fun AppNavGraph(navController: NavHostController) {
+public fun AppNavGraph(navController: NavHostController) {
     NavHost(
         navController = navController,
         startDestination = NavDestination.Home.route

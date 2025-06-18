@@ -3,7 +3,7 @@ package dev.aurakai.auraframefx.ai.conference
 import dev.aurakai.auraframefx.ai.agents.Agent
 import dev.aurakai.auraframefx.ai.agents.GenesisAgent
 
-class ConferenceRoom(
+public class ConferenceRoom(
     val name: String,
     val orchestrator: GenesisAgent,
 ) {
@@ -21,26 +21,26 @@ class ConferenceRoom(
     private var requestCount: Int = 0
     private val errorLog = mutableListOf<String>()
 
-    fun join(agent: Agent) {
+    public fun join(agent: Agent) {
         agents.add(agent)
     }
 
-    fun leave(agent: Agent) {
+    public fun leave(agent: Agent) {
         agents.remove(agent)
     }
 
-    fun broadcastContext(newContext: Map<String, Any>) {
+    public fun broadcastContext(newContext: Map<String, Any>) {
         context = newContext
         // Optionally, notify all agents
     }
 
-    fun addToHistory(entry: String) {
+    public fun addToHistory(entry: String) {
         history.add(entry)
     }
 
-    fun getHistory(): List<String> = history
-    fun getAgents(): Set<Agent> = agents
-    fun getContext(): Map<String, Any> = context
+    public fun getHistory(): List<String> = history
+    public fun getAgents(): Set<Agent> = agents
+    public fun getContext(): Map<String, Any> = context
 
     suspend fun orchestrateConversation(userInput: String): List<Any> {
         // Use GenesisAgent to orchestrate a multi-agent conversation
@@ -55,54 +55,54 @@ class ConferenceRoom(
      * Aggregates responses from all agents for consensus or decision-making.
      * Returns the consensus response or a map of agent responses.
      */
-    fun aggregateConsensus(responses: List<Map<String, dev.aurakai.auraframefx.model.AgentResponse>>): Map<String, dev.aurakai.auraframefx.model.AgentResponse> {
+    public fun aggregateConsensus(responses: List<Map<String, dev.aurakai.auraframefx.model.AgentResponse>>): Map<String, dev.aurakai.auraframefx.model.AgentResponse> {
         return orchestrator.aggregateAgentResponses(responses)
     }
 
     /**
      * Distributes the current context/memory to all agents for shared state.
      */
-    fun distributeContext() {
+    public fun distributeContext() {
         orchestrator.shareContextWithAgents()
     }
 
     /**
      * Returns a snapshot of the conference room state for diagnostics or UI.
      */
-    fun getRoomSnapshot(): Map<String, Any> = mapOf(
+    public fun getRoomSnapshot(): Map<String, Any> = mapOf(
         "name" to name,
         "agents" to agents.map { it.getName() },
         "context" to context,
         "history" to history
     )
 
-    fun persistHistory(persist: (List<String>) -> Unit) {
+    public fun persistHistory(persist: (List<String>) -> Unit) {
         persist(history)
     }
 
-    fun loadHistory(load: () -> List<String>) {
+    public fun loadHistory(load: () -> List<String>) {
         history.clear()
         history.addAll(load())
     }
 
-    fun registerWebhook(callback: (event: String, payload: Any) -> Unit) {
+    public fun registerWebhook(callback: (event: String, payload: Any) -> Unit) {
         webhookCallbacks.add(callback)
     }
 
-    fun logError(error: String) {
+    public fun logError(error: String) {
         errorLog.add("[${System.currentTimeMillis()}] $error")
     }
 
-    fun getErrorLog(): List<String> = errorLog
+    public fun getErrorLog(): List<String> = errorLog
 
-    fun incrementRequestCount() {
+    public fun incrementRequestCount() {
         requestCount++
         lastActivityAt = System.currentTimeMillis()
     }
 
-    fun getRequestCount(): Int = requestCount
+    public fun getRequestCount(): Int = requestCount
 
-    fun queueAsyncTask(taskId: String, task: suspend () -> Any) {
+    public fun queueAsyncTask(taskId: String, task: suspend () -> Any) {
         asyncTaskQueue.add(taskId to task)
     }
 
@@ -121,7 +121,7 @@ class ConferenceRoom(
     }
 
     // --- Utility & Diagnostics ---
-    fun getRoomMetadata(): Map<String, Any> = mapOf(
+    public fun getRoomMetadata(): Map<String, Any> = mapOf(
         "name" to name,
         "createdAt" to createdAt,
         "lastActivityAt" to lastActivityAt,
@@ -131,24 +131,24 @@ class ConferenceRoom(
         "errorCount" to errorLog.size
     )
 
-    fun clearErrorLog() {
+    public fun clearErrorLog() {
         errorLog.clear()
     }
 
-    fun clearHistory() {
+    public fun clearHistory() {
         history.clear()
     }
 
-    fun clearAsyncQueue() {
+    public fun clearAsyncQueue() {
         asyncTaskQueue.clear()
     }
 
     // --- Extensibility: Custom Room Properties ---
     private val customProperties = mutableMapOf<String, Any>()
-    fun setCustomProperty(key: String, value: Any) {
+    public fun setCustomProperty(key: String, value: Any) {
         customProperties[key] = value
     }
 
-    fun getCustomProperty(key: String): Any? = customProperties[key]
-    fun getAllCustomProperties(): Map<String, Any> = customProperties.toMap()
+    public fun getCustomProperty(key: String): Any? = customProperties[key]
+    public fun getAllCustomProperties(): Map<String, Any> = customProperties.toMap()
 }

@@ -8,12 +8,12 @@ package dev.aurakai.auraframefx.api.client.infrastructure
  * NOTE: Headers is a Map<String,String> because rfc2616 defines
  *       multi-valued headers as csv-only.
  */
-data class RequestConfig<T>(
-    val method: RequestMethod,
-    val path: String,
-    val headers: MutableMap<String, String> = mutableMapOf(),
-    val params: MutableMap<String, Any> = mutableMapOf(),
-    val query: MutableMap<String, List<String>> = mutableMapOf(),
-    val requiresAuthentication: Boolean,
-    val body: T? = null
+public data class RequestConfig<T>(
+    public val method: RequestMethod,
+    public val path: String,
+    public val headers: MutableMap<String, String> = mutableMapOf(),
+    public val params: MutableMap<String, Any> = mutableMapOf(),
+    public val query: MutableMap<String, List<String>> = mutableMapOf(),
+    public val requiresAuthentication: Boolean,
+    public val body: T? = null
 )

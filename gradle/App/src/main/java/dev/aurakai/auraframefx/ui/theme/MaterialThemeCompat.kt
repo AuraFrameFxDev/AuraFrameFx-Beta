@@ -20,7 +20,7 @@ import androidx.core.view.WindowCompat
  * Applies the AuraFrameFX Material3 theme with proper system integration
  */
 @Composable
-fun AuraFrameFXThemeCompat(
+public fun AuraFrameFXThemeCompat(
     content: @Composable () -> Unit,
 ) {
     // Wrap the existing theme implementation

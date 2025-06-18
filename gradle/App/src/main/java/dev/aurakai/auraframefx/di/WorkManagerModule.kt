@@ -17,7 +17,7 @@ import javax.inject.Singleton
  */
 @Module
 @InstallIn(SingletonComponent::class)
-object WorkManagerModule {
+public object WorkManagerModule {
 
     /**
      * Provides WorkManager Configuration.
@@ -27,7 +27,7 @@ object WorkManagerModule {
      */
     @Provides
     @Singleton
-    fun provideWorkManagerConfiguration(
+    public fun provideWorkManagerConfiguration(
         workerFactory: HiltWorkerFactory,
     ): Configuration =
         Configuration.Builder()
@@ -43,7 +43,7 @@ object WorkManagerModule {
      */
     @Provides
     @Singleton
-    fun provideWorkManager(
+    public fun provideWorkManager(
         @ApplicationContext _context: Context,
         _configuration: Configuration, // Hilt will provide this from the method above
     ): WorkManager {

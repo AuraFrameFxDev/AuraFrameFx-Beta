@@ -29,19 +29,19 @@ import kotlinx.serialization.Contextual
  */
 @Serializable
 
-data class GenerateCodeRequest (
+public data class GenerateCodeRequest (
 
     /* The programming language for code generation (e.g., \"Kotlin\", \"Python\"). */
     @SerialName(value = "language")
-    val language: GenerateCodeRequest.Language,
+    public val language: GenerateCodeRequest.Language,
 
     /* Natural language description of the code to generate. */
     @SerialName(value = "description")
-    val description: kotlin.String,
+    public val description: kotlin.String,
 
     /* Additional context or existing code for better generation. */
     @SerialName(value = "context")
-    val context: kotlin.String? = null
+    public val context: kotlin.String? = null
 
 ) {
 
@@ -51,7 +51,7 @@ data class GenerateCodeRequest (
      * Values: Kotlin,Python,Java,JavaScript,TypeScript,Swift,CPlusPlus,CHash
      */
     @Serializable
-    enum class Language(val value: kotlin.String) {
+    public enum class Language(val value: kotlin.String) {
         @SerialName(value = "Kotlin") Kotlin("Kotlin"),
         @SerialName(value = "Python") Python("Python"),
         @SerialName(value = "Java") Java("Java"),

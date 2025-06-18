@@ -19,7 +19,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class CloudStatusMonitor @Inject constructor(
+public class CloudStatusMonitor @Inject constructor(
     @ApplicationContext private val context: Context,
 ) {
     private val TAG = "CloudStatusMonitor"
@@ -31,7 +31,7 @@ class CloudStatusMonitor @Inject constructor(
         // Consider an initial check or rely on explicit startMonitoring call
     }
 
-    fun isNetworkConnected(): Boolean {
+    public fun isNetworkConnected(): Boolean {
         val connectivityManager =
             context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val activeNetwork = connectivityManager.activeNetwork ?: return false

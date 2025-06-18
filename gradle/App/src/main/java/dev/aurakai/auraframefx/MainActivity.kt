@@ -24,7 +24,7 @@ import dev.aurakai.auraframefx.ui.theme.AuraFrameFXThemeCompat
 
 // Using Jetpack Navigation 3 with built-in animation support
 
-class MainActivity : ComponentActivity() {
+public class MainActivity : ComponentActivity() {
     /**
      * Initializes the activity and sets the Compose UI content to the main screen within the app's theme.
      * Uses digital transition animations for a cyberpunk aesthetic.
@@ -60,7 +60,7 @@ class MainActivity : ComponentActivity() {
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MainScreen() {
+public fun MainScreen() {
     // Use Jetpack Navigation 3's nav controller for digital transitions
     val navController = rememberNavController()
 
@@ -95,7 +95,7 @@ fun MainScreen() {
  */
 @Preview(showBackground = true)
 @Composable
-fun MainScreenPreview() {
+public fun MainScreenPreview() {
     AuraFrameFXThemeCompat {
         MainScreen()
     }

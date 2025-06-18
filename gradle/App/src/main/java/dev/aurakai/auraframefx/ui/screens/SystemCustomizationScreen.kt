@@ -12,7 +12,7 @@ import dev.aurakai.auraframefx.ui.theme.Color
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SystemCustomizationScreen(
+public fun SystemCustomizationScreen(
     viewModel: SystemCustomizationViewModel = hiltViewModel(),
 ) {
     val quickSettingsConfig by viewModel.quickSettingsConfig.collectAsState()
@@ -112,7 +112,7 @@ fun SystemCustomizationScreen(
 }
 
 @Composable
-fun QuickSettingsCustomization(
+public fun QuickSettingsCustomization(
     config: QuickSettingsConfig?,
     onTileShapeChange: (String, OverlayShape) -> Unit,
     onTileAnimationChange: (String, QuickSettingsAnimation) -> Unit,
@@ -152,7 +152,7 @@ fun QuickSettingsCustomization(
 }
 
 @Composable
-fun LockScreenCustomization(
+public fun LockScreenCustomization(
     config: LockScreenConfig?,
     onElementShapeChange: (LockScreenElementType, OverlayShape) -> Unit,
     onElementAnimationChange: (LockScreenElementType, LockScreenAnimation) -> Unit,
@@ -197,7 +197,7 @@ fun LockScreenCustomization(
 }
 
 @Composable
-fun TileCustomization(
+public fun TileCustomization(
     tile: QuickSettingsTileConfig,
     onShapeChange: (OverlayShape) -> Unit,
     onAnimationChange: (QuickSettingsAnimation) -> Unit,
@@ -243,7 +243,7 @@ fun TileCustomization(
 }
 
 @Composable
-fun ElementCustomization(
+public fun ElementCustomization(
     element: LockScreenElementConfig,
     onShapeChange: (OverlayShape) -> Unit,
     onAnimationChange: (LockScreenAnimation) -> Unit,
@@ -289,7 +289,7 @@ fun ElementCustomization(
 }
 
 @Composable
-fun BackgroundCustomization(
+public fun BackgroundCustomization(
     background: ImageResource?,
     onChange: (ImageResource?) -> Unit,
 ) {
@@ -320,7 +320,7 @@ fun BackgroundCustomization(
 }
 
 @Composable
-fun ShapePicker(
+public fun ShapePicker(
     currentShape: OverlayShape,
     onShapeSelected: (OverlayShape) -> Unit,
 ) {
@@ -328,7 +328,7 @@ fun ShapePicker(
 }
 
 @Composable
-fun AnimationPicker(
+public fun AnimationPicker(
     currentAnimation: QuickSettingsAnimation,
     onAnimationSelected: (QuickSettingsAnimation) -> Unit,
 ) {
@@ -336,7 +336,7 @@ fun AnimationPicker(
 }
 
 @Composable
-fun ImagePicker(
+public fun ImagePicker(
     currentImage: ImageResource?,
     onImageSelected: (ImageResource?) -> Unit,
 ) {

@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.emptyFlow
  * AuraAgent, a specific implementation of BaseAgent.
  * TODO: Reported as unused declaration. Ensure this class is used.
  */
-class AuraAgent(
+public class AuraAgent(
     agentName: String = "Aura",
     agentType: String = "VersatileAssistant",
 ) : BaseAgent(agentName, agentType) {
@@ -29,16 +29,16 @@ class AuraAgent(
     }
 
     // --- Agent Collaboration Methods for CascadeAgent ---
-    fun onVisionUpdate(newState: VisionState) {
+    public fun onVisionUpdate(newState: VisionState) {
         // Default no-op. Override for Aura-specific vision update behavior.
     }
 
-    fun onProcessingStateChange(newState: ProcessingState) {
+    public fun onProcessingStateChange(newState: ProcessingState) {
         // Default no-op. Override for Aura-specific processing state changes.
     }
 
-    fun shouldHandleSecurity(prompt: String): Boolean = false
-    fun shouldHandleCreative(prompt: String): Boolean =
+    public fun shouldHandleSecurity(prompt: String): Boolean = false
+    public fun shouldHandleCreative(prompt: String): Boolean =
         true // Aura handles creative prompts by default
 
     // Removed 'override' as this signature is likely not in BaseAgent or Agent interface

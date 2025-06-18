@@ -30,22 +30,22 @@ import kotlinx.serialization.Contextual
  */
 @Serializable
 
-data class QuickSettingsConfigTilesInner (
+public data class QuickSettingsConfigTilesInner (
 
     @SerialName(value = "tileId")
-    val tileId: kotlin.String? = null,
+    public val tileId: kotlin.String? = null,
 
     /* Hex color code for tile label. */
     @SerialName(value = "labelColor")
-    val labelColor: kotlin.String? = null,
+    public val labelColor: kotlin.String? = null,
 
     /* Hex color code for tile icon. */
     @SerialName(value = "iconColor")
-    val iconColor: kotlin.String? = null,
+    public val iconColor: kotlin.String? = null,
 
     /* Hex color code for tile background. */
     @SerialName(value = "backgroundColor")
-    val backgroundColor: kotlin.String? = null
+    public val backgroundColor: kotlin.String? = null
 
 ) : kotlin.collections.HashMap<String, kotlin.Any>() {
 

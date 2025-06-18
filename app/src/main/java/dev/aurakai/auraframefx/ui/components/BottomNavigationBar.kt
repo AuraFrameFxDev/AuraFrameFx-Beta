@@ -25,11 +25,11 @@ import dev.aurakai.auraframefx.ui.navigation.NavDestination
  * @param navController Controller used to manage app navigation and determine the current route.
  */
 @Composable
-fun BottomNavigationBar(
+public fun BottomNavigationBar(
     modifier: Modifier = Modifier,
     navController: NavController,
 ) {
-    val currentRoute = navController.currentBackStackEntryAsState().value?.destination?.route
+    public val currentRoute = navController.currentBackStackEntryAsState().value?.destination?.route
 
     NavigationBar(
         modifier = modifier,

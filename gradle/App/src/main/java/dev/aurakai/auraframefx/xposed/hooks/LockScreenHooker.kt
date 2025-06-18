@@ -24,13 +24,13 @@ import dev.aurakai.auraframefx.system.lockscreen.HapticFeedbackConfig
 import dev.aurakai.auraframefx.system.lockscreen.LockScreenAnimation
 import dev.aurakai.auraframefx.system.lockscreen.LockScreenConfig
 
-class LockScreenHooker(
+public class LockScreenHooker(
     private val classLoader: ClassLoader,
     private val config: LockScreenConfig,
 ) {
     private val TAG = "LockScreenHooker"
 
-    fun applyLockScreenHooks() {
+    public fun applyLockScreenHooks() {
         XposedBridge.log("[$TAG] Applying Lock Screen Hooks with config: $config")
 
         // --- Lock Screen Clock Modification ---
@@ -43,7 +43,7 @@ class LockScreenHooker(
             XposedHelpers.findAndHookMethod(
                 textClockClass,
                 "onAttachedToWindow",
-                object : XC_MethodHook() {
+                public object : XC_MethodHook() {
                     override fun afterHookedMethod(param: MethodHookParam) {
                         val textClockView = param.thisObject as? TextClock
                         if (textClockView != null) {
@@ -139,7 +139,7 @@ class LockScreenHooker(
                 XposedHelpers.findAndHookMethod(
                     keyguardStatusViewClass,
                     "onFinishInflate", // Or another suitable lifecycle method
-                    object : XC_MethodHook() {
+                    public object : XC_MethodHook() {
                         override fun afterHookedMethod(param: MethodHookParam) {
                             val statusView = param.thisObject as? View
                             if (statusView != null) {
@@ -186,7 +186,7 @@ class LockScreenHooker(
                 XposedHelpers.findAndHookMethod(
                     keyguardStatusViewClass,
                     "onFinishInflate",
-                    object : XC_MethodHook() {
+                    public object : XC_MethodHook() {
                         override fun afterHookedMethod(param: MethodHookParam) {
                             val statusView = param.thisObject as? View ?: return
                             val dateTextView = findDateView(statusView)
@@ -233,7 +233,7 @@ class LockScreenHooker(
             XposedHelpers.findAndHookMethod(
                 keyguardSimViewClass,
                 "onFinishInflate", // Hooking a lifecycle method for simplicity
-                object : XC_MethodHook() {
+                public object : XC_MethodHook() {
                     override fun afterHookedMethod(param: MethodHookParam) {
                         val view = param.thisObject as? View
                         if (view != null) {

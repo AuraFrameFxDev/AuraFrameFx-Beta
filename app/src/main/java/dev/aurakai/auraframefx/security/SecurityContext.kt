@@ -29,11 +29,11 @@ import javax.inject.Singleton
  * This class is tied to the KAI agent persona and handles all security-related operations.
  */
 @Singleton
-class SecurityContext @Inject constructor(
+public class SecurityContext @Inject constructor(
     @ApplicationContext private val context: Context,
     private val keystoreManager: KeystoreManager, // Added KeystoreManager
 ) {
-    companion object {
+    public companion object {
         private const val TAG = "SecurityContext"
         private const val THREAT_DETECTION_INTERVAL_MS = 30000L // 30 seconds
 
@@ -46,16 +46,16 @@ class SecurityContext @Inject constructor(
     private val scope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
 
     private val _securityState = MutableStateFlow(SecurityState())
-    val securityState: StateFlow<SecurityState> = _securityState.asStateFlow()
+    public val securityState: StateFlow<SecurityState> = _securityState.asStateFlow()
 
     private val _threatDetectionActive = MutableStateFlow(false)
-    val threatDetectionActive: StateFlow<Boolean> = _threatDetectionActive.asStateFlow()
+    public val threatDetectionActive: StateFlow<Boolean> = _threatDetectionActive.asStateFlow()
 
     private val _permissionsState = MutableStateFlow<Map<String, Boolean>>(emptyMap())
-    val permissionsState: StateFlow<Map<String, Boolean>> = _permissionsState.asStateFlow()
+    public val permissionsState: StateFlow<Map<String, Boolean>> = _permissionsState.asStateFlow()
 
     private val _encryptionStatus = MutableStateFlow(EncryptionStatus.NOT_INITIALIZED)
-    val encryptionStatus: StateFlow<EncryptionStatus> = _encryptionStatus.asStateFlow()
+    public val encryptionStatus: StateFlow<EncryptionStatus> = _encryptionStatus.asStateFlow()
 
     init {
         Log.d(TAG, "Security context initialized by KAI")
@@ -65,14 +65,14 @@ class SecurityContext @Inject constructor(
     /**
      * Start monitoring for security threats in the background
      */
-    fun startThreatDetection() {
+    public fun startThreatDetection() {
         if (_threatDetectionActive.value) return
 
         _threatDetectionActive.value = true
         scope.launch {
             while (_threatDetectionActive.value) {
                 try {
-                    val threats = detectThreats()
+                    public val threats: detectThreats = detectThreats()
                     _securityState.value = _securityState.value.copy(
                         detectedThreats = threats,
                         threatLevel = calculateThreatLevel(threats),
@@ -91,14 +91,14 @@ class SecurityContext @Inject constructor(
         }
     }
 
-    fun stopThreatDetection() {
+    public fun stopThreatDetection() {
         _threatDetectionActive.value = false
     }
 
     /**
      * Check if the app has the specified permission
      */
-    fun hasPermission(permission: String): Boolean {
+    public fun hasPermission(permission: String): Boolean {
         return ContextCompat.checkSelfPermission(
             context,
             permission
@@ -108,8 +108,8 @@ class SecurityContext @Inject constructor(
     /**
      * Update the current state of all permissions relevant to the app
      */
-    fun updatePermissionsState() {
-        val permissionsToCheck = listOf(
+    public fun updatePermissionsState() {
+        public val permissionsToCheck = listOf(
             android.Manifest.permission.RECORD_AUDIO,
             android.Manifest.permission.CAMERA,
             android.Manifest.permission.ACCESS_FINE_LOCATION,
@@ -126,9 +126,9 @@ class SecurityContext @Inject constructor(
     /**
      * Initialize the encryption subsystem using Keystore.
      */
-    fun initializeEncryption(): Boolean {
+    public fun initializeEncryption(): Boolean {
         Log.d(TAG, "Initializing encryption using KeystoreManager.")
-        val secretKey = keystoreManager.getOrCreateSecretKey()
+        public val secretKey = keystoreManager.getOrCreateSecretKey()
         return if (secretKey != null) {
             _encryptionStatus.value = EncryptionStatus.ACTIVE
             _securityState.value = _securityState.value.copy(
@@ -152,7 +152,7 @@ class SecurityContext @Inject constructor(
     /**
      * Encrypt sensitive data using Keystore.
      */
-    fun encrypt(data: String): EncryptedData? {
+    public fun encrypt(data: String): EncryptedData? {
         if (_encryptionStatus.value != EncryptionStatus.ACTIVE) {
             Log.w(TAG, "Encryption not initialized. Attempting to initialize.")
             if (!initializeEncryption()) {
@@ -166,7 +166,7 @@ class SecurityContext @Inject constructor(
         }
 
         try {
-            val secretKey = keystoreManager.getOrCreateSecretKey()
+            public val secretKey = keystoreManager.getOrCreateSecretKey()
             if (secretKey == null) {
                 Log.e(TAG, "Failed to get secret key for encryption.")
                 _securityState.value = _securityState.value.copy(
@@ -176,15 +176,15 @@ class SecurityContext @Inject constructor(
                 return null
             }
 
-            val iv = ByteArray(16)
+            public val iv = ByteArray(16)
             SecureRandom().nextBytes(iv)
-            val ivSpec = IvParameterSpec(iv)
+            public val ivSpec = IvParameterSpec(iv)
 
-            val cipher =
+            public val cipher =
                 Cipher.getInstance(AES_ALGORITHM_WITH_PADDING) // Using the defined constant
             cipher.init(Cipher.ENCRYPT_MODE, secretKey, ivSpec)
 
-            val encryptedBytes = cipher.doFinal(data.toByteArray(Charsets.UTF_8))
+            public val encryptedBytes = cipher.doFinal(data.toByteArray(Charsets.UTF_8))
             return EncryptedData(
                 data = encryptedBytes,
                 iv = iv,
@@ -204,7 +204,7 @@ class SecurityContext @Inject constructor(
     /**
      * Decrypt previously encrypted data using Keystore.
      */
-    fun decrypt(encryptedData: EncryptedData): String? {
+    public fun decrypt(encryptedData: EncryptedData): String? {
         if (_encryptionStatus.value != EncryptionStatus.ACTIVE) {
             Log.w(TAG, "Encryption not initialized. Attempting to initialize for decryption.")
             if (!initializeEncryption()) {
@@ -219,7 +219,7 @@ class SecurityContext @Inject constructor(
 
         try {
             // KeystoreManager's getDecryptionCipher handles key retrieval and cipher init with IV
-            val decryptionCipher = keystoreManager.getDecryptionCipher(encryptedData.iv)
+            public val decryptionCipher = keystoreManager.getDecryptionCipher(encryptedData.iv)
 
             if (decryptionCipher == null) {
                 Log.e(TAG, "Failed to get decryption cipher from KeystoreManager.")
@@ -230,7 +230,7 @@ class SecurityContext @Inject constructor(
                 return null
             }
 
-            val decryptedBytes = decryptionCipher.doFinal(encryptedData.data)
+            public val decryptedBytes = decryptionCipher.doFinal(encryptedData.data)
             return String(decryptedBytes, Charsets.UTF_8)
         } catch (e: Exception) { // Catch generic exceptions
             Log.e(TAG, "Decryption error", e)
@@ -245,9 +245,9 @@ class SecurityContext @Inject constructor(
     /**
      * Share a secure context with another agent
      */
-    fun shareSecureContextWith(agentType: AgentType, context: String): SharedSecureContext {
-        val secureId = generateSecureId()
-        val timestamp = System.currentTimeMillis()
+    public fun shareSecureContextWith(agentType: AgentType, context: String): SharedSecureContext {
+        public val secureId: generateSecureId = generateSecureId()
+        public val timestamp = System.currentTimeMillis()
 
         return SharedSecureContext(
             id = secureId,
@@ -262,10 +262,10 @@ class SecurityContext @Inject constructor(
     /**
      * Verify the integrity of the application
      */
-    fun verifyApplicationIntegrity(): ApplicationIntegrity {
+    public fun verifyApplicationIntegrity(): ApplicationIntegrity {
         try {
             // Get the app's package info
-            val packageInfo = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            public val packageInfo = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
                 context.packageManager.getPackageInfo(
                     context.packageName,
                     PackageManager.PackageInfoFlags.of(PackageManager.GET_SIGNATURES.toLong())
@@ -279,7 +279,7 @@ class SecurityContext @Inject constructor(
             }
 
             // In a real app, we would verify the signature against a known good value
-            val signatureBytes = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            public val signatureBytes = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
                 packageInfo.signingInfo?.apkContentsSigners?.getOrNull(0)?.toByteArray()
             } else {
                 @Suppress("DEPRECATION")
@@ -287,12 +287,12 @@ class SecurityContext @Inject constructor(
             }
             if (signatureBytes == null) throw Exception("No signature found")
 
-            val md = MessageDigest.getInstance("SHA-256")
-            val signatureDigest = md.digest(signatureBytes)
-            val signatureHex = signatureDigest.joinToString("") { "%02x".format(it) }
+            public val md = MessageDigest.getInstance("SHA-256")
+            public val signatureDigest = md.digest(signatureBytes)
+            public val signatureHex = signatureDigest.joinToString("") { "%02x".format(it) }
 
             // In a real implementation, we would compare against a known good signature
-            val isValid = signatureHex.isNotEmpty()
+            public val isValid = signatureHex.isNotEmpty()
 
             return ApplicationIntegrity(
                 verified = isValid,
@@ -345,9 +345,9 @@ class SecurityContext @Inject constructor(
     private fun calculateThreatLevel(threats: List<SecurityThreat>): ThreatLevel {
         if (threats.isEmpty()) return ThreatLevel.SAFE
 
-        val hasCritical = threats.any { it.severity == ThreatSeverity.CRITICAL }
-        val hasHigh = threats.any { it.severity == ThreatSeverity.HIGH }
-        val hasMedium = threats.any { it.severity == ThreatSeverity.MEDIUM }
+        public val hasCritical = threats.any { it.severity == ThreatSeverity.CRITICAL }
+        public val hasHigh = threats.any { it.severity == ThreatSeverity.HIGH }
+        public val hasMedium = threats.any { it.severity == ThreatSeverity.MEDIUM }
 
         return when {
             hasCritical -> ThreatLevel.CRITICAL
@@ -361,7 +361,7 @@ class SecurityContext @Inject constructor(
      * Generate a secure ID for context sharing
      */
     private fun generateSecureId(): String {
-        val bytes = ByteArray(16)
+        public val bytes = ByteArray(16)
         SecureRandom().nextBytes(bytes)
         return bytes.joinToString("") { "%02x".format(it) }
     }
@@ -369,7 +369,7 @@ class SecurityContext @Inject constructor(
     /**
      * Log a security event
      */
-    fun logSecurityEvent(event: SecurityEvent) {
+    public fun logSecurityEvent(event: SecurityEvent) {
         scope.launch {
             Log.d(TAG, "Security event logged: " + Json.encodeToString(SecurityEvent.serializer(), event))
             // In a real implementation, this would store events securely
@@ -381,30 +381,30 @@ class SecurityContext @Inject constructor(
  * Represents the current security state
  */
 @Serializable
-data class SecurityState(
-    val detectedThreats: List<SecurityThreat> = emptyList(),
-    val threatLevel: ThreatLevel = ThreatLevel.UNKNOWN,
-    val lastScanTime: Long = 0,
-    val errorState: Boolean = false,
-    val errorMessage: String? = null,
+public data class SecurityState(
+    public val detectedThreats: List<SecurityThreat> = emptyList(),
+    public val threatLevel: ThreatLevel = ThreatLevel.UNKNOWN,
+    public val lastScanTime: Long = 0,
+    public val errorState: Boolean = false,
+    public val errorMessage: String? = null,
 )
 
 /**
  * Represents a security threat detected by KAI
  */
 @Serializable
-data class SecurityThreat(
-    val id: String,
-    val type: ThreatType,
-    val severity: ThreatSeverity,
-    val description: String,
-    val detectedAt: Long,
+public data class SecurityThreat(
+    public val id: String,
+    public val type: ThreatType,
+    public val severity: ThreatSeverity,
+    public val description: String,
+    public val detectedAt: Long,
 )
 
 /**
  * Types of security threats
  */
-enum class ThreatType {
+public enum class ThreatType {
     MALWARE,
     NETWORK_VULNERABILITY,
     PERMISSION_ABUSE,
@@ -415,7 +415,7 @@ enum class ThreatType {
 /**
  * Severity levels for security threats
  */
-enum class ThreatSeverity {
+public enum class ThreatSeverity {
     LOW,
     MEDIUM,
     HIGH,
@@ -425,7 +425,7 @@ enum class ThreatSeverity {
 /**
  * Overall threat levels for the system
  */
-enum class ThreatLevel {
+public enum class ThreatLevel {
     SAFE,
     LOW,
     MODERATE,
@@ -437,7 +437,7 @@ enum class ThreatLevel {
 /**
  * Status of the encryption subsystem
  */
-enum class EncryptionStatus {
+public enum class EncryptionStatus {
     NOT_INITIALIZED,
     ACTIVE,
     DISABLED,
@@ -448,12 +448,12 @@ enum class EncryptionStatus {
  * Data class for encrypted information
  */
 @Serializable
-data class EncryptedData(
-    val data: ByteArray,
+public data class EncryptedData(
+    public val data: ByteArray,
     // val salt: ByteArray, // Removed salt field
-    val iv: ByteArray,
-    val timestamp: Long,
-    val metadata: String? = null,
+    public val iv: ByteArray,
+    public val timestamp: Long,
+    public val metadata: String? = null,
 ) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
@@ -471,7 +471,7 @@ data class EncryptedData(
     }
 
     override fun hashCode(): Int {
-        var result = data.contentHashCode()
+        public var result = data.contentHashCode()
         // result = 31 * result + salt.contentHashCode() // Removed salt from hashCode
         result = 31 * result + iv.contentHashCode()
         result = 31 * result + timestamp.hashCode()
@@ -484,31 +484,31 @@ data class EncryptedData(
  * Data class for application integrity information
  */
 @Serializable
-data class ApplicationIntegrity(
-    val verified: Boolean,
-    val appVersion: String,
-    val signatureHash: String,
-    val installTime: Long,
-    val lastUpdateTime: Long,
-    val errorMessage: String? = null,
+public data class ApplicationIntegrity(
+    public val verified: Boolean,
+    public val appVersion: String,
+    public val signatureHash: String,
+    public val installTime: Long,
+    public val lastUpdateTime: Long,
+    public val errorMessage: String? = null,
 )
 
 /**
  * Data class for security events to be logged
  */
 @Serializable
-data class SecurityEvent(
-    val id: String = java.util.UUID.randomUUID().toString(),
-    val type: SecurityEventType,
-    val timestamp: Long = System.currentTimeMillis(),
-    val details: String,
-    val severity: EventSeverity,
+public data class SecurityEvent(
+    public val id: String = java.util.UUID.randomUUID().toString(),
+    public val type: SecurityEventType,
+    public val timestamp: Long = System.currentTimeMillis(),
+    public val details: String,
+    public val severity: EventSeverity,
 )
 
 /**
  * Types of security events
  */
-enum class SecurityEventType {
+public enum class SecurityEventType {
     PERMISSION_CHANGE,
     THREAT_DETECTED,
     ENCRYPTION_EVENT,
@@ -519,7 +519,7 @@ enum class SecurityEventType {
 /**
  * Severity levels for security events
  */
-enum class EventSeverity {
+public enum class EventSeverity {
     INFO,
     WARNING,
     ERROR,
@@ -530,13 +530,13 @@ enum class EventSeverity {
  * Data class for secure context sharing between agents
  */
 @Serializable
-data class SharedSecureContext(
-    val id: String,
-    val originatingAgent: AgentType,
-    val targetAgent: AgentType,
-    val encryptedContent: ByteArray,
-    val timestamp: Long,
-    val expiresAt: Long,
+public data class SharedSecureContext(
+    public val id: String,
+    public val originatingAgent: AgentType,
+    public val targetAgent: AgentType,
+    public val encryptedContent: ByteArray,
+    public val timestamp: Long,
+    public val expiresAt: Long,
 ) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
@@ -555,7 +555,7 @@ data class SharedSecureContext(
     }
 
     override fun hashCode(): Int {
-        var result = id.hashCode()
+        public var result = id.hashCode()
         result = 31 * result + originatingAgent.hashCode()
         result = 31 * result + targetAgent.hashCode()
         result = 31 * result + encryptedContent.contentHashCode()

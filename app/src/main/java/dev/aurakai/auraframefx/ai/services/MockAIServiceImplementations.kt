@@ -9,7 +9,7 @@ import dev.aurakai.auraframefx.model.AgentResponse // Added import
 import dev.aurakai.auraframefx.model.AgentType // Added import
 // kotlinx.coroutines.flow imports are not needed for the direct AgentResponse implementation
 
-class MockAuraAIService : Agent {
+public class MockAuraAIService : Agent {
     override fun getName(): String? = "MockAura"
     override fun getType(): AgentType? = AgentType.AURA
     override suspend fun processRequest(request: AiRequest): AgentResponse {
@@ -24,7 +24,7 @@ class MockAuraAIService : Agent {
     override fun getLearningHistory(): List<String> = emptyList()
 }
 
-class MockKaiAIService : Agent {
+public class MockKaiAIService : Agent {
     override fun getName(): String? = "MockKai"
     override fun getType(): AgentType? = AgentType.KAI
     override suspend fun processRequest(request: AiRequest): AgentResponse {
@@ -39,7 +39,7 @@ class MockKaiAIService : Agent {
     override fun getLearningHistory(): List<String> = emptyList()
 }
 
-class MockCascadeAIService : Agent {
+public class MockCascadeAIService : Agent {
     override fun getName(): String? = "MockCascade"
     override fun getType(): AgentType? = AgentType.CASCADE
     override suspend fun processRequest(request: AiRequest): AgentResponse {

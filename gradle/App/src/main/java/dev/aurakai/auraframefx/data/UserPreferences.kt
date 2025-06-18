@@ -9,7 +9,7 @@ import dev.aurakai.auraframefx.model.UserData
 // Example: Define a DataStore instance
 // val Context.dataStore by preferencesDataStore(name = "user_settings")
 
-class UserPreferences(context: Context) {
+public class UserPreferences(context: Context) {
 
     // private val dataStore = context.dataStore
 
@@ -41,11 +41,11 @@ class UserPreferences(context: Context) {
     // Minimal working implementation for placeholder
     private val prefs = mutableMapOf<String, String>()
 
-    fun getPreference(key: String, defaultValue: String): String {
+    public fun getPreference(key: String, defaultValue: String): String {
         return prefs[key] ?: defaultValue
     }
 
-    fun setPreference(key: String, value: String) {
+    public fun setPreference(key: String, value: String) {
         prefs[key] = value
     }
 
@@ -55,7 +55,7 @@ class UserPreferences(context: Context) {
     var apiKey: String? = null
 
     // TODO: Reported as unused. Implement if needed.
-    fun setApiKey(_key: String?) {
+    public fun setApiKey(_key: String?) {
         this.apiKey = _key
         // TODO: Persist API key
     }
@@ -64,7 +64,7 @@ class UserPreferences(context: Context) {
     var userId: String? = null
 
     // TODO: Reported as unused. Implement if needed.
-    fun setUserId(_id: String?) {
+    public fun setUserId(_id: String?) {
         this.userId = _id
         // TODO: Persist User ID
     }
@@ -73,7 +73,7 @@ class UserPreferences(context: Context) {
     var userName: String? = null
 
     // TODO: Reported as unused. Implement if needed.
-    fun setUserName(_name: String?) {
+    public fun setUserName(_name: String?) {
         this.userName = _name
         // TODO: Persist User Name
     }
@@ -82,7 +82,7 @@ class UserPreferences(context: Context) {
     var userEmail: String? = null
 
     // TODO: Reported as unused. Implement if needed.
-    fun setUserEmail(_email: String?) {
+    public fun setUserEmail(_email: String?) {
         this.userEmail = _email
         // TODO: Persist User Email
     }

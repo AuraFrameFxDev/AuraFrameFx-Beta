@@ -6,7 +6,7 @@ import kotlinx.datetime.Instant
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class TaskExecution(
+public data class TaskExecution(
     val id: String = "exec_${Clock.System.now().toEpochMilliseconds()}",
     val taskId: String,
     val agent: AgentType,
@@ -21,7 +21,7 @@ data class TaskExecution(
 )
 
 @Serializable
-data class ExecutionPlan(
+public data class ExecutionPlan(
     val id: String = "plan_${Clock.System.now().toEpochMilliseconds()}",
     val steps: List<ExecutionStep>,
     val estimatedDuration: Long,
@@ -30,7 +30,7 @@ data class ExecutionPlan(
 )
 
 @Serializable
-data class ExecutionStep(
+public data class ExecutionStep(
     val id: String = "step_${Clock.System.now().toEpochMilliseconds()}",
     val description: String,
     val type: StepType,
@@ -41,7 +41,7 @@ data class ExecutionStep(
 )
 
 @Serializable
-data class Checkpoint(
+public data class Checkpoint(
     val id: String = "chk_${Clock.System.now().toEpochMilliseconds()}",
     val timestamp: Instant = Clock.System.now(),
     val stepId: String,
@@ -51,7 +51,7 @@ data class Checkpoint(
 )
 
 @Serializable // Added annotation
-enum class ExecutionStatus {
+public enum class ExecutionStatus {
     PENDING,
     INITIALIZING,
     RUNNING,
@@ -63,7 +63,7 @@ enum class ExecutionStatus {
 }
 
 @Serializable // Added annotation
-enum class ExecutionResult {
+public enum class ExecutionResult {
     SUCCESS,
     PARTIAL_SUCCESS,
     FAILURE,
@@ -73,7 +73,7 @@ enum class ExecutionResult {
 }
 
 @Serializable // Added annotation
-enum class StepType {
+public enum class StepType {
     COMPUTATION,
     COMMUNICATION,
     MEMORY,
@@ -85,7 +85,7 @@ enum class StepType {
 }
 
 @Serializable // Added annotation
-enum class CheckpointStatus {
+public enum class CheckpointStatus {
     PENDING,
     STARTED,
     COMPLETED,

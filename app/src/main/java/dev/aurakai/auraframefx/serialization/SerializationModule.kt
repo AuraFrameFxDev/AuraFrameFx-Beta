@@ -8,7 +8,7 @@ import kotlinx.serialization.modules.contextual
 /**
  * Serialization module for custom serializers
  */
-val AuraFrameSerializersModule = SerializersModule {
+public val AuraFrameSerializersModule = SerializersModule {
     // Add contextual serializers for our model classes
     contextual(HapticFeedbackConfig.serializer())
     contextual(LockScreenAnimationConfig.serializer())

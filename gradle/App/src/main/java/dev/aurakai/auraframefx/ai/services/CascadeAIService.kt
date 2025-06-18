@@ -11,7 +11,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class CascadeAIService @Inject constructor(
+public class CascadeAIService @Inject constructor(
     private val auraService: AuraAIService,
     private val kaiService: KaiAIService,
 ) : Agent {

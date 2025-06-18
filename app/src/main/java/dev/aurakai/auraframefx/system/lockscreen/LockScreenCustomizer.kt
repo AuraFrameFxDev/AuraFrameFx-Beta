@@ -31,7 +31,7 @@ import javax.inject.Singleton
 // All data classes are moved to the model package to ensure a single source of truth.
 
 @Singleton
-class LockScreenCustomizer @Inject constructor(
+public class LockScreenCustomizer @Inject constructor(
     private val overlayManager: SystemOverlayManager, // Placeholder
     private val shapeManager: ShapeManager, // Placeholder
     private val imageManager: ImageResourceManager, // Placeholder
@@ -40,9 +40,9 @@ class LockScreenCustomizer @Inject constructor(
     private val appSharedPreferences: SharedPreferences, // Added for IPC
 ) {
     private val _currentConfig = MutableStateFlow<LockScreenConfig?>(null)
-    val currentConfig: StateFlow<LockScreenConfig?> = _currentConfig
+    public val currentConfig: StateFlow<LockScreenConfig?> = _currentConfig
 
-    companion object {
+    public companion object {
         private const val TAG = "LockScreenCustomizer"
         private const val IPC_KEY_LOCK_SCREEN = "lock_screen_config_json"
     }
@@ -54,10 +54,10 @@ class LockScreenCustomizer @Inject constructor(
      *
      * @param config The lock screen configuration to apply.
      */
-    fun applyConfig(config: LockScreenConfig) {
+    public fun applyConfig(config: LockScreenConfig) {
         _currentConfig.value = config
 
-        val configJson = JsonUtils.toJson(config)
+        public val configJson = JsonUtils.toJson(config)
         if (configJson != null) {
             appSharedPreferences.edit()
                 .putString(IPC_KEY_LOCK_SCREEN, configJson)
@@ -78,7 +78,7 @@ class LockScreenCustomizer @Inject constructor(
      * @param elementType The type of lock screen element to modify.
      * @param shape The new shape to assign to the specified element.
      */
-    fun updateElementShape(elementType: LockScreenElementType, shape: dev.aurakai.auraframefx.system.overlay.model.OverlayShape) {
+    public fun updateElementShape(elementType: LockScreenElementType, shape: dev.aurakai.auraframefx.system.overlay.model.OverlayShape) {
         // TODO: Implement logic to update element shape
     }
 
@@ -88,7 +88,7 @@ class LockScreenCustomizer @Inject constructor(
      * @param elementType The lock screen element whose animation settings will be updated.
      * @param animation The new animation configuration to apply to the element.
      */
-    fun updateElementAnimation(elementType: LockScreenElementType, animation: LockScreenAnimation) {
+    public fun updateElementAnimation(elementType: LockScreenElementType, animation: LockScreenAnimation) {
         // TODO: Implement logic to update element animation
     }
 
@@ -97,7 +97,7 @@ class LockScreenCustomizer @Inject constructor(
      *
      * @param image The image to set as the background, or null to remove the background.
      */
-    fun updateBackground(image: ImageResource?) {
+    public fun updateBackground(image: ImageResource?) {
         // TODO: Implement logic to update background
     }
 
@@ -106,7 +106,7 @@ class LockScreenCustomizer @Inject constructor(
      *
      * Restores the original lock screen configuration, removing any applied changes.
      */
-    fun resetToDefault() {
+    public fun resetToDefault() {
         // TODO: Implement logic to reset to default
     }
 }

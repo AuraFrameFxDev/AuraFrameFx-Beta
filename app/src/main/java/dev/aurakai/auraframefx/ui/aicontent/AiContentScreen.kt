@@ -38,18 +38,18 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AiContentScreen(
+public fun AiContentScreen(
     viewModel: AiContentViewModel = hiltViewModel(),
 ) {
-    val textGenerationState by viewModel.textGenerationState.collectAsStateWithLifecycle()
-    val imageDescriptionState by viewModel.imageDescriptionState.collectAsStateWithLifecycle()
+    public val textGenerationState by viewModel.textGenerationState.collectAsStateWithLifecycle()
+    public val imageDescriptionState by viewModel.imageDescriptionState.collectAsStateWithLifecycle()
 
-    val textPrompt = remember { mutableStateOf("") }
-    val imageUrl = remember { mutableStateOf("") }
-    val imageContext = remember { mutableStateOf("") }
+    public val textPrompt = remember { mutableStateOf("") }
+    public val imageUrl = remember { mutableStateOf("") }
+    public val imageContext = remember { mutableStateOf("") }
 
-    val focusManager = LocalFocusManager.current
-    val scrollState = rememberScrollState()
+    public val focusManager = LocalFocusManager.current
+    public val scrollState: rememberScrollState = rememberScrollState()
 
     Scaffold(
         topBar = {

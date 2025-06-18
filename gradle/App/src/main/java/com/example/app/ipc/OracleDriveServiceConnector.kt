@@ -13,7 +13,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.withContext
 
-class OracleDriveServiceConnector(private val context: Context) {
+public class OracleDriveServiceConnector(private val context: Context) {
     private var auraDriveService: IAuraDriveService? = null
     private val _isServiceConnected = MutableStateFlow(false)
     val isServiceConnected: StateFlow<Boolean> = _isServiceConnected.asStateFlow()
@@ -30,7 +30,7 @@ class OracleDriveServiceConnector(private val context: Context) {
         }
     }
 
-    fun bindService() {
+    public fun bindService() {
         val intent = Intent().apply {
             component = ComponentName(
                 "com.genesis.ai.app",
@@ -44,7 +44,7 @@ class OracleDriveServiceConnector(private val context: Context) {
         }
     }
 
-    fun unbindService() {
+    public fun unbindService() {
         try {
             context.unbindService(serviceConnection)
         } catch (_: Exception) {

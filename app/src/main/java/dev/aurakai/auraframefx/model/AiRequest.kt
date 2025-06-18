@@ -3,34 +3,34 @@ package dev.aurakai.auraframefx.model
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class GenerateTextRequest(
-    val prompt: String,
-    val maxTokens: Int = 500,
-    val temperature: Float = 0.7f
+public data class GenerateTextRequest(
+    public val prompt: String,
+    public val maxTokens: Int = 500,
+    public val temperature: Float = 0.7f
 )
 
 @Serializable
-data class GenerateTextResponse(
-    val text: String
+public data class GenerateTextResponse(
+    public val text: String
 )
 
 @Serializable
-data class GenerateImageDescriptionRequest(
-    val imageUrl: String,
-    val context: String? = null
+public data class GenerateImageDescriptionRequest(
+    public val imageUrl: String,
+    public val context: String? = null
 )
 
 @Serializable
-data class GenerateImageDescriptionResponse(
-    val description: String
+public data class GenerateImageDescriptionResponse(
+    public val description: String
 )
 
-data class AiRequest(
-    val query: String,
-    val context: String,
+public data class AiRequest(
+    public val query: String,
+    public val context: String,
 )
 
-data class AgentResponse(
-    val content: String,
-    val confidence: Float,
+public data class AgentResponse(
+    public val content: String,
+    public val confidence: Float,
 )

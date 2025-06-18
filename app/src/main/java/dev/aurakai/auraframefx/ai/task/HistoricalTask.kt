@@ -10,13 +10,13 @@ import java.util.Locale
  * Data class representing a historical task executed by an agent
  */
 @Serializable
-data class HistoricalTask(
-    val agentType: AgentType,
-    val description: String,
-    val timestamp: Long = System.currentTimeMillis(),
+public data class HistoricalTask(
+    public val agentType: AgentType,
+    public val description: String,
+    public val timestamp: Long = System.currentTimeMillis(),
 ) {
-    fun getFormattedTime(): String {
-        val formatter = SimpleDateFormat("HH:mm:ss", Locale.getDefault())
+    public fun getFormattedTime(): String {
+        public val formatter = SimpleDateFormat("HH:mm:ss", Locale.getDefault())
         return formatter.format(Date(timestamp))
     }
 

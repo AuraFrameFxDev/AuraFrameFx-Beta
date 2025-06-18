@@ -1,6 +1,6 @@
 package dev.aurakai.auraframefx.data.offline
 
-class OfflineDataManager {
+public class OfflineDataManager {
     // Stub implementation
 }
 

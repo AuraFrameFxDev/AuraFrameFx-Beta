@@ -31,7 +31,7 @@ public class OracleDriveServiceConnector(private val context: Context) {
     }
 
     public fun bindService() {
-        val intent = Intent().apply {
+        public val intent: Intent = Intent().apply {
             component = ComponentName(
                 "com.genesis.ai.app",
                 "com.genesis.ai.app.service.AuraDriveServiceImpl"

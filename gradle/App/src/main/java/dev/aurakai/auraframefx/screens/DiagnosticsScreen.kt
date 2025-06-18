@@ -29,7 +29,7 @@ import dev.aurakai.auraframefx.viewmodel.DiagnosticsViewModel
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun DiagnosticsScreen(viewModel: DiagnosticsViewModel = hiltViewModel()) {
+public fun DiagnosticsScreen(viewModel: DiagnosticsViewModel = hiltViewModel()) {
     val logs by viewModel.currentLogs.collectAsState()
     val systemStatus by viewModel.systemStatus.collectAsState()
     val scrollState = rememberScrollState()

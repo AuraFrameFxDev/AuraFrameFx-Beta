@@ -13,7 +13,7 @@ import dev.aurakai.auraframefx.model.agent_states.GenKitUiState
  * @param _genesisAgent Placeholder for a GenesisAgent dependency. Parameter reported as unused.
  * TODO: Define actual types for agent dependencies.
  */
-class GenKitMasterAgent(
+public class GenKitMasterAgent(
     _context: Context, // TODO: Parameter _context reported as unused. Utilize or remove.
     private val _genesisAgent: GenesisAgent?, // Changed type from Any, made private val for example
     private val _auraAgent: AuraAgent?,    // Changed type from Any, made private val for example
@@ -35,7 +35,7 @@ class GenKitMasterAgent(
      * Refreshes all relevant statuses managed by this agent.
      * TODO: Reported as unused. Implement status refresh logic.
      */
-    fun refreshAllStatuses() {
+    public fun refreshAllStatuses() {
         // Implement logic to refresh statuses from various sources or child agents.
     }
 
@@ -43,7 +43,7 @@ class GenKitMasterAgent(
      * Initiates a system optimization process.
      * TODO: Reported as unused. Implement optimization logic.
      */
-    fun initiateSystemOptimization() {
+    public fun initiateSystemOptimization() {
         // Implement logic for system optimization.
     }
 
@@ -51,7 +51,7 @@ class GenKitMasterAgent(
      * Called when the agent is no longer needed and resources should be cleared.
      * TODO: Reported as unused. Implement cleanup logic for this agent and potentially child agents.
      */
-    fun onCleared() {
+    public fun onCleared() {
         // Clear resources, shut down child agents if applicable.
     }
 }

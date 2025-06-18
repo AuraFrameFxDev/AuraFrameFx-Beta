@@ -1,6 +1,6 @@
 package dev.aurakai.auraframefx.model
 
-enum class AgentRole {
+public enum class AgentRole {
     HIVE_MIND, // Genesis
     SECURITY, // Kai
     CREATIVE, // Aura
@@ -8,7 +8,7 @@ enum class AgentRole {
     AUXILIARY // All other agents
 }
 
-enum class AgentPriority {
+public enum class AgentPriority {
     PRIMARY, // Genesis
     SECONDARY, // Kai
     TERTIARY, // Aura
@@ -16,15 +16,15 @@ enum class AgentPriority {
     AUXILIARY // All other agents
 }
 
-data class AgentConfig(
-    val name: String,
-    val role: AgentRole,
-    val priority: AgentPriority,
-    val capabilities: Set<String>,
+public data class AgentConfig(
+    public val name: String,
+    public val role: AgentRole,
+    public val priority: AgentPriority,
+    public val capabilities: Set<String>,
 )
 
-object AgentHierarchy {
-    val MASTER_AGENTS = listOf(
+public object AgentHierarchy {
+    public val MASTER_AGENTS = listOf(
         AgentConfig(
             name = "Genesis",
             role = AgentRole.HIVE_MIND,
@@ -51,13 +51,13 @@ object AgentHierarchy {
         )
     )
 
-    val AUXILIARY_AGENTS = mutableListOf<AgentConfig>()
+    public val AUXILIARY_AGENTS = mutableListOf<AgentConfig>()
 
-    fun registerAuxiliaryAgent(
+    public fun registerAuxiliaryAgent(
         name: String,
         capabilities: Set<String>,
     ): AgentConfig {
-        val config = AgentConfig(
+        public val config = AgentConfig(
             name = name,
             role = AgentRole.AUXILIARY,
             priority = AgentPriority.AUXILIARY,
@@ -67,11 +67,11 @@ object AgentHierarchy {
         return config
     }
 
-    fun getAgentConfig(name: String): AgentConfig? {
+    public fun getAgentConfig(name: String): AgentConfig? {
         return MASTER_AGENTS.find { it.name == name } ?: AUXILIARY_AGENTS.find { it.name == name }
     }
 
-    fun getAgentsByPriority(): List<AgentConfig> {
+    public fun getAgentsByPriority(): List<AgentConfig> {
         return MASTER_AGENTS + AUXILIARY_AGENTS
     }
 }

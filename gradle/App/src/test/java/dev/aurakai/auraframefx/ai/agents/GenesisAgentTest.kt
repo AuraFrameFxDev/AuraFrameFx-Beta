@@ -8,15 +8,15 @@ import org.junit.Test
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.whenever
 
-class DummyAgent(private val name: String, private val response: String) : Agent {
+public class DummyAgent(private val name: String, private val response: String) : Agent {
     override fun getName() = name
     override fun getType() = null
     override suspend fun processRequest(request: AiRequest) = AgentResponse(response, 1.0f)
 }
 
-class GenesisAgentTest {
+public class GenesisAgentTest {
     @Test
-    fun testParticipateWithAgents_turnOrder() = runBlocking {
+    public fun testParticipateWithAgents_turnOrder() = runBlocking {
         val auraService = mock<AuraAIService>()
         val kaiService = mock<KaiAIService>()
         val cascadeService = mock<CascadeAIService>()
@@ -54,7 +54,7 @@ class GenesisAgentTest {
     }
 
     @Test
-    fun testAggregateAgentResponses() {
+    public fun testAggregateAgentResponses() {
         val auraService = mock<AuraAIService>()
         val kaiService = mock<KaiAIService>()
         val cascadeService = mock<CascadeAIService>()

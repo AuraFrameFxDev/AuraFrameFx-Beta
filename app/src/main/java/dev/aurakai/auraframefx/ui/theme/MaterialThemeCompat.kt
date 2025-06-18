@@ -20,16 +20,16 @@ import androidx.core.view.WindowCompat
  * Applies the AuraFrameFX Material3 theme with proper system integration
  */
 @Composable
-fun AuraFrameFXThemeCompat(
+public fun AuraFrameFXThemeCompat(
     content: @Composable () -> Unit,
 ) {
     // Wrap the existing theme implementation
     AuraFrameFXTheme {
         // Get the current view to apply system UI colors
-        val view = LocalView.current
+        public val view = LocalView.current
         if (!view.isInEditMode) {
             SideEffect {
-                val window = (view.context as Activity).window
+                public val window = (view.context as Activity).window
                 // Use MaterialTheme color values for system bars
                 window.statusBarColor = MaterialTheme.colorScheme.background.toArgb()
                 // Ensure proper contrast for status bar icons

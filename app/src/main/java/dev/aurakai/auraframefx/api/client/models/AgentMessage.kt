@@ -30,19 +30,19 @@ import kotlinx.serialization.Contextual
  */
 @Serializable
 
-data class AgentMessage (
+public data class AgentMessage (
 
     /* The AI agent that sent the message. */
     @Contextual @SerialName(value = "sender")
-    val sender: AgentType,
+    public val sender: AgentType,
 
     /* The content of the message. */
     @SerialName(value = "message")
-    val message: kotlin.String,
+    public val message: kotlin.String,
 
     /* ISO 8601 timestamp of the message. */
     @Contextual @SerialName(value = "timestamp")
-    val timestamp: java.time.OffsetDateTime
+    public val timestamp: java.time.OffsetDateTime
 
 ) {
 

@@ -8,19 +8,19 @@ import org.junit.Test
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.whenever
 
-class DummyAgent(private val name: String, private val response: String) : Agent {
+public class DummyAgent(private val name: String, private val response: String) : Agent {
     override fun getName() = name
     override fun getType() = null
     override suspend fun processRequest(request: AiRequest) = AgentResponse(response, 1.0f)
 }
 
-class GenesisAgentTest {
+public class GenesisAgentTest {
     @Test
-    fun testParticipateWithAgents_turnOrder() = runBlocking {
-        val auraService = mock<AuraAIService>()
-        val kaiService = mock<KaiAIService>()
-        val cascadeService = mock<CascadeAIService>()
-        val dummyAgent = DummyAgent("Dummy", "ok")
+    public fun testParticipateWithAgents_turnOrder() = runBlocking {
+        public val auraService = mock<AuraAIService>()
+        public val kaiService = mock<KaiAIService>()
+        public val cascadeService = mock<CascadeAIService>()
+        public val dummyAgent = DummyAgent("Dummy", "ok")
         whenever(auraService.processRequest(org.mockito.kotlin.any())).thenReturn(
             AgentResponse(
                 "ok",
@@ -39,12 +39,12 @@ class GenesisAgentTest {
                 1.0f
             )
         )
-        val genesis = GenesisAgent(
+        public val genesis = GenesisAgent(
             auraService = auraService,
             kaiService = kaiService,
             cascadeService = cascadeService
         )
-        val responses = genesis.participateWithAgents(
+        public val responses = genesis.participateWithAgents(
             emptyMap(),
             listOf(dummyAgent),
             "test",
@@ -54,18 +54,18 @@ class GenesisAgentTest {
     }
 
     @Test
-    fun testAggregateAgentResponses() {
-        val auraService = mock<AuraAIService>()
-        val kaiService = mock<KaiAIService>()
-        val cascadeService = mock<CascadeAIService>()
-        val genesis = GenesisAgent(
+    public fun testAggregateAgentResponses() {
+        public val auraService = mock<AuraAIService>()
+        public val kaiService = mock<KaiAIService>()
+        public val cascadeService = mock<CascadeAIService>()
+        public val genesis = GenesisAgent(
             auraService = auraService,
             kaiService = kaiService,
             cascadeService = cascadeService
         )
-        val resp1 = mapOf("A" to AgentResponse("foo", 0.5f))
-        val resp2 = mapOf("A" to AgentResponse("bar", 0.9f))
-        val consensus = genesis.aggregateAgentResponses(listOf(resp1, resp2))
+        public val resp1 = mapOf("A" to AgentResponse("foo", 0.5f))
+        public val resp2 = mapOf("A" to AgentResponse("bar", 0.9f))
+        public val consensus = genesis.aggregateAgentResponses(listOf(resp1, resp2))
         assertTrue(consensus["A"]?.content == "bar")
     }
 }

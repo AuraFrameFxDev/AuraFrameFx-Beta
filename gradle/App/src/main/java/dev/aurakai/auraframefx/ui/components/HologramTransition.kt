@@ -13,7 +13,7 @@ import kotlin.math.* // Added import
 import kotlin.random.Random // Added import
 
 @Composable
-fun HologramTransition(
+public fun HologramTransition(
     visible: Boolean,
     modifier: Modifier = Modifier,
     glowColor: Color = Color(0xFF00FFCC), // Neon teal

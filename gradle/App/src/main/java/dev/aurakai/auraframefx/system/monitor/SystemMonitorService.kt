@@ -34,7 +34,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class SystemMonitorService : Service() {
+public class SystemMonitorService : Service() {
 
     @Inject
     lateinit var kaiService: KaiAIService

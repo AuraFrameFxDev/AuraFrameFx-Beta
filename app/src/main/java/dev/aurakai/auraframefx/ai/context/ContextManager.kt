@@ -13,23 +13,23 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class ContextManager @Inject constructor(
+public class ContextManager @Inject constructor(
     private val memoryManager: MemoryManager,
     private val config: AIPipelineConfig,
 ) {
     private val _activeContexts = MutableStateFlow(mapOf<String, ContextChain>())
-    val activeContexts: StateFlow<Map<String, ContextChain>> = _activeContexts
+    public val activeContexts: StateFlow<Map<String, ContextChain>> = _activeContexts
 
     private val _contextStats = MutableStateFlow(ContextStats())
-    val contextStats: StateFlow<ContextStats> = _contextStats
+    public val contextStats: StateFlow<ContextStats> = _contextStats
 
-    fun createContextChain(
+    public fun createContextChain(
         rootContext: String,
         initialContext: String,
         agent: AgentType,
         metadata: Map<String, Any> = emptyMap(),
     ): String {
-        val chain = ContextChain(
+        public val chain = ContextChain(
             rootContext = rootContext,
             currentContext = initialContext,
             contextHistory = listOf(
@@ -51,16 +51,16 @@ class ContextManager @Inject constructor(
         return chain.id
     }
 
-    fun updateContextChain(
+    public fun updateContextChain(
         chainId: String,
         newContext: String,
         agent: AgentType,
         metadata: Map<String, Any> = emptyMap(),
     ): ContextChain {
-        val chain =
+        public val chain =
             _activeContexts.value[chainId] ?: throw IllegalStateException("Context chain not found")
 
-        val updatedChain = chain.copy(
+        public val updatedChain = chain.copy(
             currentContext = newContext,
             contextHistory = chain.contextHistory + ContextNode(
                 id = "ctx_${Clock.System.now().toEpochMilliseconds()}_${chain.contextHistory.size}",
@@ -79,19 +79,19 @@ class ContextManager @Inject constructor(
         return updatedChain
     }
 
-    fun getContextChain(chainId: String): ContextChain? {
+    public fun getContextChain(chainId: String): ContextChain? {
         return _activeContexts.value[chainId]
     }
 
-    fun queryContext(query: ContextQuery): ContextChainResult {
-        val chains = _activeContexts.value.values
+    public fun queryContext(query: ContextQuery): ContextChainResult {
+        public val chains = _activeContexts.value.values
             .filter { chain ->
                 query.agentFilter.isEmpty() || query.agentFilter.contains(chain.agentContext.keys.first())
             }
             .sortedByDescending { it.lastUpdated }
             .take(config.contextChainingConfig.maxChainLength)
 
-        val relatedChains = chains
+        public val relatedChains = chains
             .filter { chain ->
                 chain.relevanceScore >= query.minRelevance
             }
@@ -105,7 +105,7 @@ class ContextManager @Inject constructor(
     }
 
     private fun updateStats() {
-        val chains = _activeContexts.value.values
+        public val chains = _activeContexts.value.values
         _contextStats.update { current ->
             current.copy(
                 totalChains = chains.size,
@@ -120,9 +120,9 @@ class ContextManager @Inject constructor(
     }
 }
 
-data class ContextStats(
-    val totalChains: Int = 0,
-    val activeChains: Int = 0,
-    val longestChain: Int = 0,
-    val lastUpdated: Instant = Clock.System.now(),
+public data class ContextStats(
+    public val totalChains: Int = 0,
+    public val activeChains: Int = 0,
+    public val longestChain: Int = 0,
+    public val lastUpdated: Instant = Clock.System.now(),
 )

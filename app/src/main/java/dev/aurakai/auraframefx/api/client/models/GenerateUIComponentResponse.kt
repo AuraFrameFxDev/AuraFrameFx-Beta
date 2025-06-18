@@ -28,15 +28,15 @@ import kotlinx.serialization.Contextual
  */
 @Serializable
 
-data class GenerateUIComponentResponse (
+public data class GenerateUIComponentResponse (
 
     /* The generated UI component code. */
     @SerialName(value = "uiCode")
-    val uiCode: kotlin.String,
+    public val uiCode: kotlin.String,
 
     /* URL to an image preview of the generated UI (optional). */
     @SerialName(value = "previewImage")
-    val previewImage: kotlin.String? = null
+    public val previewImage: kotlin.String? = null
 
 ) {
 

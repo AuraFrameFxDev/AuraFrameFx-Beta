@@ -27,11 +27,11 @@ import kotlinx.serialization.Contextual
  */
 @Serializable
 
-data class GenerateImageDescriptionResponse (
+public data class GenerateImageDescriptionResponse (
 
     /* The AI-generated image description. */
     @SerialName(value = "description")
-    val description: kotlin.String
+    public val description: kotlin.String
 
 ) {
 

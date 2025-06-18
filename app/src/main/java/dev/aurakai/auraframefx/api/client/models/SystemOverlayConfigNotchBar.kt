@@ -31,23 +31,23 @@ import kotlinx.serialization.Contextual
  */
 @Serializable
 
-data class SystemOverlayConfigNotchBar (
+public data class SystemOverlayConfigNotchBar (
 
     @SerialName(value = "enabled")
-    val enabled: kotlin.Boolean? = null,
+    public val enabled: kotlin.Boolean? = null,
 
     /* Hex color code of the notch bar. */
     @SerialName(value = "color")
-    val color: kotlin.String? = null,
+    public val color: kotlin.String? = null,
 
     @SerialName(value = "displayMode")
-    val displayMode: SystemOverlayConfigNotchBar.DisplayMode? = null,
+    public val displayMode: SystemOverlayConfigNotchBar.DisplayMode? = null,
 
     @SerialName(value = "customImageEnabled")
-    val customImageEnabled: kotlin.Boolean? = null,
+    public val customImageEnabled: kotlin.Boolean? = null,
 
     @SerialName(value = "customImageUrl")
-    val customImageUrl: kotlin.String? = null
+    public val customImageUrl: kotlin.String? = null
 
 ) : kotlin.collections.HashMap<String, kotlin.Any>() {
 
@@ -57,7 +57,7 @@ data class SystemOverlayConfigNotchBar (
      * Values: Minimal,Detailed,Hidden
      */
     @Serializable
-    enum class DisplayMode(val value: kotlin.String) {
+    public enum class DisplayMode(val value: kotlin.String) {
         @SerialName(value = "Minimal") Minimal("Minimal"),
         @SerialName(value = "Detailed") Detailed("Detailed"),
         @SerialName(value = "Hidden") Hidden("Hidden");

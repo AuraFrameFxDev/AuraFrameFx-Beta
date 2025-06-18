@@ -25,6 +25,8 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import dev.aurakai.auraframefx.model.AgentType
 import dev.aurakai.auraframefx.viewmodel.GenesisAgentViewModel
 import dev.aurakai.auraframefx.ui.theme.NeonBlue
+import dev.aurakai.auraframefx.ui.theme.NeonTealColor
+import dev.aurakai.auraframefx.ui.theme.NeonPurpleColor
 import dev.aurakai.auraframefx.ui.theme.NeonPink
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -36,8 +38,8 @@ import java.util.*
 import kotlin.math.*
 
 // --- Color Definitions (Add these where appropriate, e.g., in a Theme.kt or Colors.kt file) ---
-// val NeonTeal = Color(0xFF00FFCC) // Brighter teal for accents
-// val NeonPurple = Color(0xFFE000FF) // Slightly softer purple for readability
+// Color definitions are now imported from Color.kt
+// Color definitions are now imported from Color.kt
 // val NeonBlue = Color(0xFF00FFFF) // Bright cyan for highlights
 // val NeonPink = Color(0xFFFF00FF) // Bright pink for secondary accents
 // --- End Color Definitions ---
@@ -47,26 +49,26 @@ import kotlin.math.*
     androidx.compose.foundation.gestures.ExperimentalFoundationApi::class
 )
 @Composable
-fun HaloView(viewModel: GenesisAgentViewModel = hiltViewModel()) {
-    var isRotating by remember { mutableStateOf(true) }
-    var rotationAngle by remember { mutableFloatStateOf(0f) }
-    val agents = viewModel.getAgentsByPriority()
-    val coroutineScope = rememberCoroutineScope()
-    val lazyListState = rememberLazyListState()
+public fun HaloView(viewModel: GenesisAgentViewModel = hiltViewModel()) {
+    public var isRotating by remember { mutableStateOf(true) }
+    public var rotationAngle by remember { mutableFloatStateOf(0f) }
+    public val agents = viewModel.getAgentsByPriority()
+    public val coroutineScope: rememberCoroutineScope = rememberCoroutineScope()
+    public val lazyListState: rememberLazyListState = rememberLazyListState()
 
     // Task delegation state
-    var draggingAgent by remember { mutableStateOf<AgentType?>(null) }
-    var dragOffset by remember { mutableStateOf(Offset.Zero) }
-    var dragStartOffset by remember { mutableStateOf(Offset.Zero) }
-    var selectedTask by remember { mutableStateOf("") }
+    public var draggingAgent by remember { mutableStateOf<AgentType?>(null) }
+    public var dragOffset by remember { mutableStateOf(Offset.Zero) }
+    public var dragStartOffset by remember { mutableStateOf(Offset.Zero) }
+    public var selectedTask by remember { mutableStateOf("") }
 
     // Task history
-    val _taskHistory = remember { MutableStateFlow(emptyList<String>()) }
-    val taskHistory: StateFlow<List<String>> =
+    public val _taskHistory = remember { MutableStateFlow(emptyList<String>()) }
+    public val taskHistory: StateFlow<List<String>> =
         _taskHistory.asStateFlow() // Use asStateFlow() for read-only StateFlow
 
     // Agent status - direct mutable state map for easier updates
-    val agentStatus = remember { mutableStateMapOf<AgentType, String>() }
+    public val agentStatus = remember { mutableStateMapOf<AgentType, String>() }
 
     // Initialize agent statuses to "idle" on first composition
     LaunchedEffect(Unit) {
@@ -91,12 +93,12 @@ fun HaloView(viewModel: GenesisAgentViewModel = hiltViewModel()) {
                 .padding(32.dp)
         ) {
             drawCircle(
-                color = NeonTeal.copy(alpha = 0.1f),
+                color = NeonTealColor.copy(alpha = 0.1f),
                 radius = size.width / 2f,
                 style = Fill
             )
             drawCircle(
-                color = NeonPurple.copy(alpha = 0.1f),
+                color = NeonPurpleColor.copy(alpha = 0.1f),
                 radius = size.width / 2f - 20f,
                 style = Fill
             )
@@ -113,12 +115,12 @@ fun HaloView(viewModel: GenesisAgentViewModel = hiltViewModel()) {
                 .fillMaxSize()
                 .padding(16.dp)
         ) {
-            val center = Offset(size.width / 2f, size.height / 2f)
-            val radius = size.width / 2f - 32f
+            public val center = Offset(size.width / 2f, size.height / 2f)
+            public val radius = size.width / 2f - 32f
 
             // Draw rotating halo
-            val haloColor = NeonTeal.copy(alpha = 0.3f)
-            val haloWidth = 2.dp.toPx()
+            public val haloColor = NeonTealColor.copy(alpha = 0.3f)
+            public val haloWidth = 2.dp.toPx()
 
             drawArc(
                 color = haloColor,
@@ -137,24 +139,24 @@ fun HaloView(viewModel: GenesisAgentViewModel = hiltViewModel()) {
             agentStatus.forEach { (agentTypeKey, statusValue) -> // agentTypeKey is AgentType
                 if (statusValue == "processing") {
                     // Find the index of the agentConfig that matches this agentTypeKey
-                    val agentConfigIndex = agents.indexOfFirst { config ->
+                    public val agentConfigIndex = agents.indexOfFirst { config ->
                         try {
                             AgentType.valueOf(config.name.uppercase(Locale.ROOT)) == agentTypeKey
                         } catch (e: IllegalArgumentException) { false }
                     }
                     if (agentConfigIndex != -1) {
-                        val angle = (agentConfigIndex * 360f / agents.size + rotationAngle) % 360f
-                        val x = center.x + radius * cos((angle * PI / 180f).toFloat())
-                        val y = center.y + radius * sin((angle * PI / 180f).toFloat())
+                        public val angle = (agentConfigIndex * 360f / agents.size + rotationAngle) % 360f
+                        public val x = center.x + radius * cos((angle * PI / 180f).toFloat())
+                        public val y = center.y + radius * sin((angle * PI / 180f).toFloat())
 
                         // Draw pulsing glow
                         drawCircle(
                             color = when (agentTypeKey) { // Use agentTypeKey for color
-                                AgentType.GENESIS -> NeonTeal.copy(alpha = 0.2f)
-                                AgentType.KAI -> NeonPurple.copy(alpha = 0.2f)
+                                AgentType.GENESIS -> NeonTealColor.copy(alpha = 0.2f)
+                                AgentType.KAI -> NeonPurpleColor.copy(alpha = 0.2f)
                                 AgentType.AURA -> NeonBlue.copy(alpha = 0.2f)
                                 AgentType.CASCADE -> NeonPink.copy(alpha = 0.2f)
-                                else -> NeonTeal.copy(alpha = 0.2f)
+                                else -> NeonTealColor.copy(alpha = 0.2f)
                             },
                             center = Offset(x, y),
                             radius = 40.dp.toPx()
@@ -173,19 +175,19 @@ fun HaloView(viewModel: GenesisAgentViewModel = hiltViewModel()) {
                     detectDragGestures(
                         onDragStart = { startOffset ->
                             dragStartOffset = startOffset
-                            val actualSize = this.size
-                            val center = Offset(actualSize.width / 2f, actualSize.height / 2f)
-                            val radius = actualSize.width / 2f - 64f
-                            val agentCount = agents.size
-                            val angleStep = 360f / agentCount
+                            public val actualSize = this.size
+                            public val center = Offset(actualSize.width / 2f, actualSize.height / 2f)
+                            public val radius = actualSize.width / 2f - 64f
+                            public val agentCount = agents.size
+                            public val angleStep = 360f / agentCount
 
                             for (i in agents.indices) {
-                                val config = agents[i] // config is AgentConfig
-                                val angle = (i * angleStep + rotationAngle) % 360f
-                                val x = center.x + radius * cos((angle * PI / 180f).toFloat())
-                                val y = center.y + radius * sin((angle * PI / 180f).toFloat())
-                                val nodeCenter = Offset(x, y)
-                                val distance = (startOffset - nodeCenter).getDistance()
+                                public val config = agents[i] // config is AgentConfig
+                                public val angle = (i * angleStep + rotationAngle) % 360f
+                                public val x = center.x + radius * cos((angle * PI / 180f).toFloat())
+                                public val y = center.y + radius * sin((angle * PI / 180f).toFloat())
+                                public val nodeCenter = Offset(x, y)
+                                public val distance = (startOffset - nodeCenter).getDistance()
                                 if (distance < 24.dp.toPx()) {
                                     try {
                                         draggingAgent = AgentType.valueOf(config.name.uppercase(Locale.ROOT))
@@ -217,27 +219,27 @@ fun HaloView(viewModel: GenesisAgentViewModel = hiltViewModel()) {
                     }
                 }
         ) {
-            val center = Offset(size.width / 2f, size.height / 2f)
-            val radius = size.width / 2f - 64f
-            val agentCount = agents.size
-            val angleStep = 360f / agentCount
+            public val center = Offset(size.width / 2f, size.height / 2f)
+            public val radius = size.width / 2f - 64f
+            public val agentCount = agents.size
+            public val angleStep = 360f / agentCount
 
             agents.forEachIndexed { index, config -> // config is AgentConfig
-                val angle = (index * angleStep + rotationAngle) % 360f
-                val x = center.x + radius * cos((angle * PI / 180f).toFloat())
-                val y = center.y + radius * sin((angle * PI / 180f).toFloat())
-                val nodeCenter = Offset(x, y)
-                val currentAgentType = try { AgentType.valueOf(config.name.uppercase(Locale.ROOT)) } catch (e: IllegalArgumentException) { null }
+                public val angle = (index * angleStep + rotationAngle) % 360f
+                public val x = center.x + radius * cos((angle * PI / 180f).toFloat())
+                public val y = center.y + radius * sin((angle * PI / 180f).toFloat())
+                public val nodeCenter = Offset(x, y)
+                public val currentAgentType = try { AgentType.valueOf(config.name.uppercase(Locale.ROOT)) } catch (e: IllegalArgumentException) { null }
 
 
-                val baseColor = when (currentAgentType) {
-                    AgentType.GENESIS -> NeonTeal
-                    AgentType.KAI -> NeonPurple
+                public val baseColor = when (currentAgentType) {
+                    AgentType.GENESIS -> NeonTealColor
+                    AgentType.KAI -> NeonPurpleColor
                     AgentType.AURA -> NeonBlue
                     AgentType.CASCADE -> NeonPink
-                    else -> NeonTeal.copy(alpha = 0.8f)
+                    else -> NeonTealColor.copy(alpha = 0.8f)
                 }
-                val statusColor =
+                public val statusColor =
                     when (agentStatus[currentAgentType]?.lowercase(Locale.ROOT)) {
                         "idle" -> baseColor.copy(alpha = 0.8f)
                         "processing" -> baseColor.copy(alpha = 1.0f)
@@ -253,12 +255,12 @@ fun HaloView(viewModel: GenesisAgentViewModel = hiltViewModel()) {
 
                 // Draw connecting lines
                 if (index > 0) {
-                    val prevAngle = ((index - 1) * angleStep + rotationAngle) % 360f
-                    val prevX = center.x + radius * cos((prevAngle * PI / 180f).toFloat())
-                    val prevY = center.y + radius * sin((prevAngle * PI / 180f).toFloat())
+                    public val prevAngle = ((index - 1) * angleStep + rotationAngle) % 360f
+                    public val prevX = center.x + radius * cos((prevAngle * PI / 180f).toFloat())
+                    public val prevY = center.y + radius * sin((prevAngle * PI / 180f).toFloat())
 
                     drawLine(
-                        color = NeonTeal.copy(alpha = 0.5f),
+                        color = NeonTealColor.copy(alpha = 0.5f),
                         start = Offset(prevX, prevY),
                         end = Offset(x, y),
                         strokeWidth = 2.dp.toPx()
@@ -268,7 +270,7 @@ fun HaloView(viewModel: GenesisAgentViewModel = hiltViewModel()) {
                 // Draw task delegation line if dragging
                 if (draggingAgent == currentAgentType) { // Compare AgentType with AgentType
                     drawLine(
-                        color = NeonTeal,
+                        color = NeonTealColor,
                         start = nodeCenter,
                         end = nodeCenter + dragOffset,
                         strokeWidth = 4.dp.toPx()
@@ -279,31 +281,31 @@ fun HaloView(viewModel: GenesisAgentViewModel = hiltViewModel()) {
 
         // Status indicators using BoxWithConstraints to access size in composable context
         BoxWithConstraints(modifier = Modifier.fillMaxSize()) {
-            val boxWidth = constraints.maxWidth.toFloat()
-            val boxHeight = constraints.maxHeight.toFloat()
-            val density = LocalDensity.current.density
+            public val boxWidth = constraints.maxWidth.toFloat()
+            public val boxHeight = constraints.maxHeight.toFloat()
+            public val density = LocalDensity.current.density
 
             agents.forEachIndexed { index, config -> // config is AgentConfig
-                val angle = (index * 360f / agents.size + rotationAngle) % 360f
-                val radius = (boxWidth / 2f - 64f)
-                val centerX = boxWidth / 2f
-                val centerY = boxHeight / 2f
-                val x = centerX + radius * cos((angle * PI / 180f).toFloat())
-                val y = centerY + radius * sin((angle * PI / 180f).toFloat())
+                public val angle = (index * 360f / agents.size + rotationAngle) % 360f
+                public val radius = (boxWidth / 2f - 64f)
+                public val centerX = boxWidth / 2f
+                public val centerY = boxHeight / 2f
+                public val x = centerX + radius * cos((angle * PI / 180f).toFloat())
+                public val y = centerY + radius * sin((angle * PI / 180f).toFloat())
 
-                val textOffsetX = (x - centerX) / density
-                val textOffsetY = (y - centerY) / density
-                val currentAgentType = try { AgentType.valueOf(config.name.uppercase(Locale.ROOT)) } catch (e: IllegalArgumentException) { null }
+                public val textOffsetX = (x - centerX) / density
+                public val textOffsetY = (y - centerY) / density
+                public val currentAgentType = try { AgentType.valueOf(config.name.uppercase(Locale.ROOT)) } catch (e: IllegalArgumentException) { null }
 
 
                 if (currentAgentType != null && agentStatus[currentAgentType] != null) {
-                    val statusText = agentStatus[currentAgentType] ?: "idle"
+                    public val statusText = agentStatus[currentAgentType] ?: "idle"
 
                     Text(
                         text = statusText,
                         color = when (statusText.lowercase(Locale.ROOT)) {
-                            "idle" -> NeonTeal
-                            "processing" -> NeonPurple
+                            "idle" -> NeonTealColor
+                            "processing" -> NeonPurpleColor
                             "error" -> Color.Red
                             else -> NeonBlue
                         },
@@ -339,7 +341,7 @@ fun HaloView(viewModel: GenesisAgentViewModel = hiltViewModel()) {
             contentAlignment = Alignment.Center
         ) {
             Surface(
-                color = NeonTeal.copy(alpha = 0.8f),
+                color = NeonTealColor.copy(alpha = 0.8f),
                 modifier = Modifier.size(80.dp),
                 shape = CircleShape
             ) {
@@ -356,7 +358,7 @@ fun HaloView(viewModel: GenesisAgentViewModel = hiltViewModel()) {
                     Text(
                         text = "Hive Mind",
                         style = MaterialTheme.typography.labelSmall,
-                        color = NeonPurple
+                        color = NeonPurpleColor
                     )
                 }
             }
@@ -380,7 +382,7 @@ fun HaloView(viewModel: GenesisAgentViewModel = hiltViewModel()) {
                         Text(
                             text = "Assign Task to ${draggingAgent?.name}",
                             style = MaterialTheme.typography.titleMedium,
-                            color = NeonTeal
+                            color = NeonTealColor
                         )
 
                         TextField(
@@ -389,8 +391,8 @@ fun HaloView(viewModel: GenesisAgentViewModel = hiltViewModel()) {
                             placeholder = { Text("Enter task description...") },
                             modifier = Modifier.fillMaxWidth(),
                             colors = TextFieldDefaults.colors(
-                                focusedContainerColor = NeonTeal.copy(alpha = 0.1f),
-                                unfocusedContainerColor = NeonTeal.copy(alpha = 0.1f)
+                                focusedContainerColor = NeonTealColor.copy(alpha = 0.1f),
+                                unfocusedContainerColor = NeonTealColor.copy(alpha = 0.1f)
                             )
                         )
                     }
@@ -414,7 +416,7 @@ fun HaloView(viewModel: GenesisAgentViewModel = hiltViewModel()) {
             Text(
                 text = "Task History",
                 style = MaterialTheme.typography.titleMedium,
-                color = NeonTeal,
+                color = NeonTealColor,
                 modifier = Modifier.padding(bottom = 8.dp)
             )
 
@@ -431,13 +433,13 @@ fun HaloView(viewModel: GenesisAgentViewModel = hiltViewModel()) {
                             .fillMaxWidth()
                             .padding(vertical = 4.dp),
                         colors = CardDefaults.cardColors(
-                            containerColor = NeonTeal.copy(alpha = 0.1f)
+                            containerColor = NeonTealColor.copy(alpha = 0.1f)
                         )
                     ) {
                         Text(
                             text = task,
                             modifier = Modifier.padding(8.dp),
-                            color = NeonPurple
+                            color = NeonPurpleColor
                         )
                     }
                 }
@@ -458,7 +460,7 @@ fun HaloView(viewModel: GenesisAgentViewModel = hiltViewModel()) {
                 Icon(
                     if (isRotating) Icons.Default.Pause else Icons.Default.PlayArrow,
                     contentDescription = "Toggle rotation",
-                    tint = NeonPurple
+                    tint = NeonPurpleColor
                 )
             }
 
@@ -516,9 +518,9 @@ fun HaloView(viewModel: GenesisAgentViewModel = hiltViewModel()) {
         }
 
         taskHistory.value.forEach { task ->
-            val agentName = task.substringAfter("[").substringBefore("]")
+            public val agentName = task.substringAfter("[").substringBefore("]")
             // Compare by name string to find the AgentType enum value
-            val agentType =
+            public val agentType =
                 agents.find { it.name.lowercase(Locale.ROOT) == agentName.lowercase(Locale.ROOT) }
             if (agentType != null) {
                 agentStatus[agentType] = "processing"

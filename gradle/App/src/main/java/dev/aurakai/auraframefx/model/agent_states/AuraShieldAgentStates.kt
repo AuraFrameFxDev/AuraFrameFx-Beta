@@ -3,7 +3,7 @@ package dev.aurakai.auraframefx.model.agent_states
 // TODO: Define actual properties for these states/events.
 // TODO: Classes reported as unused or need implementation. Ensure these are utilized by AuraShieldAgent.
 
-data class SecurityContextState(
+public data class SecurityContextState(
     // Renamed to avoid clash with android.content.Context or other SecurityContext classes
     val deviceRooted: Boolean? = null,
     val selinuxMode: String? = null, // e.g., "Enforcing", "Permissive"
@@ -11,7 +11,7 @@ data class SecurityContextState(
     // Add other relevant security context properties
 )
 
-data class ActiveThreat(
+public data class ActiveThreat(
     // Singular, as it will be in a list
     val threatId: String,
     val description: String,
@@ -20,7 +20,7 @@ data class ActiveThreat(
     // Add other relevant threat properties
 )
 
-data class ScanEvent(
+public data class ScanEvent(
     val eventId: String,
     val timestamp: Long = System.currentTimeMillis(),
     val scanType: String, // e.g., "AppScan", "FileSystemScan"

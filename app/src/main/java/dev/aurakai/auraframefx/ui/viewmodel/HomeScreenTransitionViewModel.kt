@@ -13,11 +13,11 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class HomeScreenTransitionViewModel @Inject constructor(
+public class HomeScreenTransitionViewModel @Inject constructor(
     private val transitionManager: HomeScreenTransitionManager,
 ) : ViewModel() {
     private val _currentConfig = MutableStateFlow(HomeScreenTransitionConfig()) // Initialized with default
-    val currentConfig: StateFlow<HomeScreenTransitionConfig?> = _currentConfig // Kept nullable for safety, though now initialized
+    public val currentConfig: StateFlow<HomeScreenTransitionConfig?> = _currentConfig // Kept nullable for safety, though now initialized
 
     init {
         viewModelScope.launch {
@@ -27,25 +27,25 @@ class HomeScreenTransitionViewModel @Inject constructor(
         }
     }
 
-    fun updateTransitionType(type: HomeScreenTransitionType) {
+    public fun updateTransitionType(type: HomeScreenTransitionType) {
         viewModelScope.launch {
             transitionManager.updateTransitionType(type)
         }
     }
 
-    fun updateTransitionDuration(duration: Int) {
+    public fun updateTransitionDuration(duration: Int) {
         viewModelScope.launch {
             transitionManager.updateTransitionDuration(duration)
         }
     }
 
-    fun updateTransitionProperties(properties: Map<String, Any>) {
+    public fun updateTransitionProperties(properties: Map<String, Any>) {
         viewModelScope.launch {
             transitionManager.updateTransitionProperties(properties)
         }
     }
 
-    fun resetToDefault() {
+    public fun resetToDefault() {
         viewModelScope.launch {
             transitionManager.resetToDefault()
         }

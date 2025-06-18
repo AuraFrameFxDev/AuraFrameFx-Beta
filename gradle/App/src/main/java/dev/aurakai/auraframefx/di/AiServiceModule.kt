@@ -12,7 +12,7 @@ import dagger.hilt.components.SingletonComponent
 
 @Module
 @InstallIn(SingletonComponent::class)
-object AiServiceModule {
+public object AiServiceModule {
     // AuraAIService, KaiAIService, and CascadeAIService are concrete classes
     // with @Singleton and @Inject on their constructors.
     // Hilt can provide them automatically.

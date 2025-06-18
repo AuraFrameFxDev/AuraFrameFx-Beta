@@ -1,6 +1,6 @@
 package dev.aurakai.auraframefx.ui.model
 
-enum class ShapeType {
+public enum class ShapeType {
     ROUNDED_RECTANGLE,
     CIRCLE,
     HEXAGON

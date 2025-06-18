@@ -14,7 +14,7 @@ import dev.aurakai.auraframefx.xposed.hooks.LockScreenHooker
 import dev.aurakai.auraframefx.xposed.hooks.NotchBarHooker
 import dev.aurakai.auraframefx.xposed.hooks.QuickSettingsHooker
 
-class AuraXposedEntry : IXposedHookLoadPackage {
+public class AuraXposedEntry : IXposedHookLoadPackage {
     private val TAG = "AuraXposedEntry"
     companion object {
         const val MAIN_APP_PACKAGE_NAME = "dev.aurakai.auraframefx"
@@ -94,7 +94,7 @@ class AuraXposedEntry : IXposedHookLoadPackage {
                 XposedHelpers.findAndHookMethod(
                     targetClass,
                     "init",
-                    object : XC_MethodHook() {
+                    public object : XC_MethodHook() {
                         override fun afterHookedMethod(param: MethodHookParam) {
                             XposedBridge.log("[$TAG] *** SystemUI Hooked! Hello from AuraFrameFX! (Legacy) ***")
                         }
@@ -144,7 +144,7 @@ class AuraXposedEntry : IXposedHookLoadPackage {
             XposedHelpers.findAndHookMethod(
                 targetClass,
                 "isModuleActive",
-                object : XC_MethodHook() {
+                public object : XC_MethodHook() {
                     override fun beforeHookedMethod(param: MethodHookParam) {
                         param.result = true
                     }

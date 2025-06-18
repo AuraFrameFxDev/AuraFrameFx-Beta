@@ -13,7 +13,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class HomeScreenTransitionManager @Inject constructor(
+public class HomeScreenTransitionManager @Inject constructor(
     private val overlayManager: SystemOverlayManager,
     private val shapeManager: ShapeManager,
     private val imageManager: ImageResourceManager,
@@ -21,7 +21,7 @@ class HomeScreenTransitionManager @Inject constructor(
     private val overlayService: YukiHookServiceManager,
 ) {
     private val _currentConfig = MutableStateFlow(HomeScreenTransitionConfig()) // Initialize with default
-    val currentConfig: StateFlow<HomeScreenTransitionConfig?> = _currentConfig // Kept nullable for safety
+    public val currentConfig: StateFlow<HomeScreenTransitionConfig?> = _currentConfig // Kept nullable for safety
 
     private val defaultConfig = HomeScreenTransitionConfig(
         type = HomeScreenTransitionType.GLOBE_ROTATE,
@@ -44,7 +44,7 @@ class HomeScreenTransitionManager @Inject constructor(
     }
 
     private fun loadConfig() {
-        val savedConfig = prefs.getString("home_screen_transition", null)
+        public val savedConfig = prefs.getString("home_screen_transition", null)
         if (savedConfig != null) {
             // TODO: Parse saved config
             _currentConfig.value = defaultConfig
@@ -53,36 +53,36 @@ class HomeScreenTransitionManager @Inject constructor(
         }
     }
 
-    fun applyConfig(config: HomeScreenTransitionConfig) {
+    public fun applyConfig(config: HomeScreenTransitionConfig) {
         _currentConfig.value = config
         overlayService.hook {
             // TODO: Implement transition hooking
         }
     }
 
-    fun resetToDefault() {
+    public fun resetToDefault() {
         applyConfig(defaultConfig)
     }
 
-    fun updateTransitionType(type: HomeScreenTransitionType) {
-        val current = _currentConfig.value ?: return
-        val newConfig = current.copy(
+    public fun updateTransitionType(type: HomeScreenTransitionType) {
+        public val current = _currentConfig.value ?: return
+        public val newConfig = current.copy(
             type = type
         )
         applyConfig(newConfig)
     }
 
-    fun updateTransitionDuration(duration: Int) {
-        val current = _currentConfig.value ?: return
-        val newConfig = current.copy(
+    public fun updateTransitionDuration(duration: Int) {
+        public val current = _currentConfig.value ?: return
+        public val newConfig = current.copy(
             duration = duration
         )
         applyConfig(newConfig)
     }
 
-    fun updateTransitionProperties(properties: Map<String, Any>) {
-        val current = _currentConfig.value ?: return
-        val newConfig = current.copy(
+    public fun updateTransitionProperties(properties: Map<String, Any>) {
+        public val current = _currentConfig.value ?: return
+        public val newConfig = current.copy(
             properties = properties
         )
         applyConfig(newConfig)

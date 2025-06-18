@@ -19,7 +19,7 @@ import dev.aurakai.auraframefx.system.homescreen.HomeScreenTransitionType
 import dev.aurakai.auraframefx.ui.components.HologramTransition
 
 @Composable
-fun MenuScreen(
+public fun MenuScreen(
     transitionType: HomeScreenTransitionType = HomeScreenTransitionType.DIGITAL_DECONSTRUCT,
     showHologram: Boolean = true,
 ) {
@@ -69,7 +69,7 @@ fun MenuScreen(
 
 @Preview(showBackground = true)
 @Composable
-fun MenuScreenPreview() {
+public fun MenuScreenPreview() {
     MaterialTheme { // Using MaterialTheme for preview
         MenuScreen()
     }

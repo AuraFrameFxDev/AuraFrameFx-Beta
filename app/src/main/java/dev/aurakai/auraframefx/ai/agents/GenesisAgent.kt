@@ -67,10 +67,10 @@ public class GenesisAgent @Inject constructor(
         }
 
         // Get responses from all active agents
-        val responses = mutableListOf<AgentMessage>()
+        public val responses = mutableListOf<AgentMessage>()
 
         // Process through Cascade first for state management
-        val cascadeAgentResponse: AgentResponse = // Changed type to single AgentResponse
+        public val cascadeAgentResponse: AgentResponse = // Changed type to single AgentResponse
             cascadeService.processRequest(AiRequest(query = query, type = "context")) // Use named args for clarity
         // val cascadeMessage = cascadeAgentResponse // No .first() needed
         responses.add(
@@ -84,7 +84,7 @@ public class GenesisAgent @Inject constructor(
 
         // Process through Kai for security analysis
         if (_activeAgents.value.contains(AgentType.KAI)) {
-            val kaiAgentResponse: AgentResponse = // Changed type
+            public val kaiAgentResponse: AgentResponse = // Changed type
                 kaiService.processRequest(AiRequest(query = query, type = "security"))
             // val kaiMessage = kaiAgentResponse
             responses.add(
@@ -99,7 +99,7 @@ public class GenesisAgent @Inject constructor(
 
         // Process through Aura for creative response
         if (_activeAgents.value.contains(AgentType.AURA)) {
-            val auraAgentResponse: AgentResponse = // Changed type
+            public val auraAgentResponse: AgentResponse = // Changed type
                 auraService.processRequest(AiRequest(query = query, type = "text"))
             // val auraMessage = auraAgentResponse
             responses.add(
@@ -113,7 +113,7 @@ public class GenesisAgent @Inject constructor(
         }
 
         // Generate final response using all agent inputs
-        val finalResponse = generateFinalResponse(responses)
+        public val finalResponse = generateFinalResponse(responses)
         responses.add(
             AgentMessage(
                 content = finalResponse,
@@ -176,10 +176,10 @@ public class GenesisAgent @Inject constructor(
         userInput: Any? = null,
         conversationMode: ConversationMode = ConversationMode.FREE_FORM,
     ): Map<String, AgentResponse> {
-        val responses = mutableMapOf<String, AgentResponse>()
-        val context = data.toMutableMap()
-        val inputQuery = userInput?.toString() ?: context["latestInput"]?.toString() ?: ""
-        val request = AiRequest(query = inputQuery, context = context.toString())
+        public val responses = mutableMapOf<String, AgentResponse>()
+        public val context = data.toMutableMap()
+        public val inputQuery = userInput?.toString() ?: context["latestInput"]?.toString() ?: ""
+        public val request = AiRequest(query = inputQuery, context = context.toString())
 
         Log.d(
             "GenesisAgent",
@@ -191,8 +191,8 @@ public class GenesisAgent @Inject constructor(
                 // Each agent takes a turn in order
                 for (agent in agents) {
                     try {
-                        val agentName = agent.getName() ?: agent.javaClass.simpleName
-                        val response = agent.processRequest(request)
+                        public val agentName = agent.getName() ?: agent.javaClass.simpleName
+                        public val response = agent.processRequest(request)
                         Log.d(
                             "GenesisAgent",
                             "[TURN_ORDER] $agentName responded: ${response.content} (conf=${response.confidence})"
@@ -215,8 +215,8 @@ public class GenesisAgent @Inject constructor(
                 // All agents respond in parallel to the same input/context
                 agents.forEach { agent ->
                     try {
-                        val agentName = agent.getName() ?: agent.javaClass.simpleName
-                        val response = agent.processRequest(request)
+                        public val agentName = agent.getName() ?: agent.javaClass.simpleName
+                        public val response = agent.processRequest(request)
                         Log.d(
                             "GenesisAgent",
                             "[FREE_FORM] $agentName responded: ${response.content} (conf=${response.confidence})"
@@ -242,10 +242,10 @@ public class GenesisAgent @Inject constructor(
      * Aggregates responses from all agents for consensus or decision-making.
      */
     public fun aggregateAgentResponses(responses: List<Map<String, AgentResponse>>): Map<String, AgentResponse> {
-        val flatResponses = responses.flatMap { it.entries }
-        val consensus = flatResponses.groupBy { it.key }
+        public val flatResponses = responses.flatMap { it.entries }
+        public val consensus = flatResponses.groupBy { it.key }
             .mapValues { entry ->
-                val best = entry.value.maxByOrNull { it.value.confidence }?.value
+                public val best = entry.value.maxByOrNull { it.value.confidence }?.value
                     ?: AgentResponse("No response", 0.0f)
                 Log.d(
                     "GenesisAgent",
@@ -299,7 +299,7 @@ public class GenesisAgent @Inject constructor(
      * Replace with actual loading logic as needed.
      */
     public fun loadHistory(load: () -> List<Map<String, Any>>) {
-        val loaded = load()
+        public val loaded: load = load()
         _history.clear()
         _history.addAll(loaded)
         _context.update { it + (loaded.lastOrNull() ?: emptyMap()) }

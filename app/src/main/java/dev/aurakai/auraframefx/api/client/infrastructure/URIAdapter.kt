@@ -8,7 +8,7 @@ import kotlinx.serialization.descriptors.PrimitiveKind
 import kotlinx.serialization.descriptors.SerialDescriptor
 import java.net.URI
 
-object URIAdapter : KSerializer<URI> {
+public object URIAdapter : KSerializer<URI> {
     override fun serialize(encoder: Encoder, value: URI) {
         encoder.encodeString(value.toASCIIString())
     }

@@ -17,7 +17,7 @@ import com.example.app.viewmodel.OracleDriveControlViewModel
 import kotlinx.coroutines.launch
 
 @Composable
-fun OracleDriveControlScreen(
+public fun OracleDriveControlScreen(
     viewModel: OracleDriveControlViewModel = hiltViewModel(),
 ) {
     val context = LocalContext.current

@@ -7,7 +7,7 @@ import kotlinx.serialization.Serializable // Added import
  * TODO: Reported as unused symbol. Ensure this enum is used.
  */
 @Serializable // Added annotation
-enum class AgentType {
+public enum class AgentType {
     /**
      * Genesis Agent - Core orchestrator or foundational AI.
      * TODO: Reported as unused symbol.

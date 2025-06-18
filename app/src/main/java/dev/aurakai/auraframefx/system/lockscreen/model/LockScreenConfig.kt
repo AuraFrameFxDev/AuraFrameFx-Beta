@@ -5,55 +5,55 @@ import kotlinx.serialization.Serializable
 
 // Placeholder based on SystemCustomizationViewModel.kt usage
 @Serializable
-data class LockScreenConfig(
-    val clockElement: LockScreenElementConfig? = null,
-    val dateElement: LockScreenElementConfig? = null,
-    val notificationElement: LockScreenElementConfig? = null,
-    val hideClock: Boolean = false,
-    val hideDate: Boolean = false,
-    val hideNotifications: Boolean = false,
-    val customFontPath: String? = null,
+public data class LockScreenConfig(
+    public val clockElement: LockScreenElementConfig? = null,
+    public val dateElement: LockScreenElementConfig? = null,
+    public val notificationElement: LockScreenElementConfig? = null,
+    public val hideClock: Boolean = false,
+    public val hideDate: Boolean = false,
+    public val hideNotifications: Boolean = false,
+    public val customFontPath: String? = null,
     // Added based on LockScreenHooker
-    val clockConfig: ClockConfig? = null,
-    val dateConfig: DateConfig? = null,
-    val defaultElementAnimation: LockScreenAnimationConfig = LockScreenAnimationConfig(),
+    public val clockConfig: ClockConfig? = null,
+    public val dateConfig: DateConfig? = null,
+    public val defaultElementAnimation: LockScreenAnimationConfig = LockScreenAnimationConfig(),
     @Contextual val hapticFeedback: HapticFeedbackConfig = HapticFeedbackConfig() // Using the HapticFeedbackConfig from separate file
 )
 
 // Referenced in LockScreenConfig and LockScreenHooker
 @Serializable
-data class ClockConfig(
-    val customTextColorEnabled: Boolean? = null,
-    val customTextColor: String? = null,
-    val customTextSizeEnabled: Boolean? = null,
-    val customTextSizeSp: Int = 0,
-    val customFontStyle: String? = null,
-    val animation: LockScreenAnimationConfig = LockScreenAnimationConfig()
+public data class ClockConfig(
+    public val customTextColorEnabled: Boolean? = null,
+    public val customTextColor: String? = null,
+    public val customTextSizeEnabled: Boolean? = null,
+    public val customTextSizeSp: Int = 0,
+    public val customFontStyle: String? = null,
+    public val animation: LockScreenAnimationConfig = LockScreenAnimationConfig()
 )
 
 // Referenced in LockScreenConfig and LockScreenHooker
 @Serializable
-data class DateConfig(
+public data class DateConfig(
     // Assuming similar properties to ClockConfig for now if needed
-    val animation: LockScreenAnimationConfig = LockScreenAnimationConfig()
+    public val animation: LockScreenAnimationConfig = LockScreenAnimationConfig()
 )
 
 // Referenced in LockScreenConfig and LockScreenHooker
 @Serializable
-data class LockScreenAnimationConfig(
-    val type: String = "none", // e.g., "fade_in", "slide_up"
-    val durationMs: Long = 300,
-    val startDelayMs: Long = 0,
-    val interpolator: String = "linear" // e.g., "linear", "accelerate"
+public data class LockScreenAnimationConfig(
+    public val type: String = "none", // e.g., "fade_in", "slide_up"
+    public val durationMs: Long = 300,
+    public val startDelayMs: Long = 0,
+    public val interpolator: String = "linear" // e.g., "linear", "accelerate"
 )
 
 
 // Placeholder, defined based on SystemCustomizationViewModel usage context
 @Serializable
-data class LockScreenElementConfig(
-    val elementId: String,
-    val isVisible: Boolean = true,
-    val customText: String? = null,
-    val type: LockScreenElementType, // Import from LockScreenElementType.kt
-    val animation: LockScreenAnimation = LockScreenAnimation.NONE // Import from LockScreenAnimation.kt
+public data class LockScreenElementConfig(
+    public val elementId: String,
+    public val isVisible: Boolean = true,
+    public val customText: String? = null,
+    public val type: LockScreenElementType, // Import from LockScreenElementType.kt
+    public val animation: LockScreenAnimation = LockScreenAnimation.NONE // Import from LockScreenAnimation.kt
 )

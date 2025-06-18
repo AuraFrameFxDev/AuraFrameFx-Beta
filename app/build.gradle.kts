@@ -15,6 +15,41 @@ plugins {
     id("com.google.devtools.ksp") version "2.1.21-2.0.1"
 }
 
+// Add a task to fix Kotlin visibility issues
+tasks.register("fixVisibility") {
+    group = "build"
+    description = "Fixes Kotlin visibility issues for explicit API mode"
+    
+    // Define an output marker file so Gradle can properly cache the task
+    val outputMarker = file("$buildDir/tmp/fixVisibility.marker")
+    outputs.file(outputMarker)
+    
+    doLast {
+        val scriptPath = "${rootProject.projectDir}/fix-kotlin-visibility.sh"
+        
+        // Make sure the script is executable
+        exec {
+            commandLine("chmod", "+x", scriptPath)
+        }
+        
+        // Run the script on the app module
+        exec {
+            commandLine(scriptPath, projectDir.absolutePath)
+        }
+        
+        // Create marker file to indicate completion
+        outputMarker.parentFile.mkdirs()
+        outputMarker.writeText("Visibility fixing completed at ${java.time.Instant.now()}")
+        
+        println("Visibility issues fixed for ${project.name}")
+    }
+}
+
+// Run the visibility fixer before preBuild
+tasks.named("preBuild") {
+    dependsOn("fixVisibility")
+}
+
 // Repositories are configured in settings.gradle.kts
 
 // Common versions

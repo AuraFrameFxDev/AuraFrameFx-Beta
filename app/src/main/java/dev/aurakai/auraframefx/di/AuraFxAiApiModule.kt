@@ -19,14 +19,14 @@ import javax.inject.Singleton
  */
 @Module
 @InstallIn(SingletonComponent::class)
-object AuraFxAiApiModule {
+public object AuraFxAiApiModule {
 
     /**
      * Provides the JSON serializer configured for the API.
      */
     @Provides
     @Singleton
-    fun provideJson(): Json = Json {
+    public fun provideJson(): Json = Json {
         ignoreUnknownKeys = true
         coerceInputValues = true
         isLenient = true
@@ -39,9 +39,9 @@ object AuraFxAiApiModule {
     @OptIn(ExperimentalSerializationApi::class)
     @Provides
     @Singleton
-    fun provideContentApi(okHttpClient: OkHttpClient, json: Json): ContentApi {
-        val baseUrl = "https://api.auraframefx.com/v1/"
-        val contentType = "application/json".toMediaType()
+    public fun provideContentApi(okHttpClient: OkHttpClient, json: Json): ContentApi {
+        public val baseUrl = "https://api.auraframefx.com/v1/"
+        public val contentType = "application/json".toMediaType()
 
         return Retrofit.Builder()
             .baseUrl(baseUrl)
@@ -56,7 +56,7 @@ object AuraFxAiApiModule {
      */
     @Provides
     @Singleton
-    fun provideAuraFxContentApiClient(contentApi: ContentApi): AuraFxContentApiClient {
+    public fun provideAuraFxContentApiClient(contentApi: ContentApi): AuraFxContentApiClient {
         return AuraFxContentApiClient(contentApi)
     }
 }

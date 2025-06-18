@@ -33,30 +33,30 @@ import kotlinx.serialization.Contextual
  */
 @Serializable
 
-data class HistoricalTask (
+public data class HistoricalTask (
 
     /* Unique ID of the historical task. */
     @SerialName(value = "id")
-    val id: kotlin.String,
+    public val id: kotlin.String,
 
     /* When the task was executed. */
     @Contextual @SerialName(value = "timestamp")
-    val timestamp: java.time.OffsetDateTime,
+    public val timestamp: java.time.OffsetDateTime,
 
     /* The type of task. */
     @SerialName(value = "taskType")
-    val taskType: kotlin.String,
+    public val taskType: kotlin.String,
 
     /* The agent that executed the task. */
     @Contextual @SerialName(value = "agentType")
-    val agentType: AgentType,
+    public val agentType: AgentType,
 
     @SerialName(value = "status")
-    val status: HistoricalTask.Status,
+    public val status: HistoricalTask.Status,
 
     /* A brief summary of the task and its outcome. */
     @SerialName(value = "summary")
-    val summary: kotlin.String? = null
+    public val summary: kotlin.String? = null
 
 ) {
 
@@ -66,7 +66,7 @@ data class HistoricalTask (
      * Values: COMPLETED,FAILED
      */
     @Serializable
-    enum class Status(val value: kotlin.String) {
+    public enum class Status(val value: kotlin.String) {
         @SerialName(value = "COMPLETED") COMPLETED("COMPLETED"),
         @SerialName(value = "FAILED") FAILED("FAILED");
     }

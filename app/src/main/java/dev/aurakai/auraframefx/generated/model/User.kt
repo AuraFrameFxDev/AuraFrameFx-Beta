@@ -6,21 +6,21 @@ import kotlinx.serialization.Serializable
  * User model generated from OpenAPI spec
  */
 @Serializable
-data class User(
-    val id: String,
-    val username: String,
-    val email: String,
-    val preferences: UserPreferences? = null
+public data class User(
+    public val id: String,
+    public val username: String,
+    public val email: String,
+    public val preferences: UserPreferences? = null
 )
 
 @Serializable
-data class UserPreferences(
-    val themeId: String? = null,
-    val language: String? = null,
-    val notificationsEnabled: Boolean? = null
+public data class UserPreferences(
+    public val themeId: String? = null,
+    public val language: String? = null,
+    public val notificationsEnabled: Boolean? = null
 )
 
 @Serializable
-data class UserPreferencesUpdate(
-    val preferences: UserPreferences
+public data class UserPreferencesUpdate(
+    public val preferences: UserPreferences
 )

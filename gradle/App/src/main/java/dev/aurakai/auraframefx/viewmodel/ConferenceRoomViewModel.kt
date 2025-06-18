@@ -14,7 +14,7 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class ConferenceRoomViewModel @Inject constructor(
+public class ConferenceRoomViewModel @Inject constructor(
     private val auraService: dev.aurakai.auraframefx.ai.services.AuraAIService,
     private val kaiService: dev.aurakai.auraframefx.ai.services.KaiAIService,
     private val cascadeService: dev.aurakai.auraframefx.ai.services.CascadeAIService,
@@ -127,11 +127,11 @@ class ConferenceRoomViewModel @Inject constructor(
         }
     }
 
-    fun selectAgent(agent: AgentType) {
+    public fun selectAgent(agent: AgentType) {
         _selectedAgent.value = agent
     }
 
-    fun toggleRecording() {
+    public fun toggleRecording() {
         if (_isRecording.value) {
             val result = neuralWhisper.stopRecording() // stopRecording now returns a string status
             Log.d(TAG, "Stopped recording. Status: $result")
@@ -149,7 +149,7 @@ class ConferenceRoomViewModel @Inject constructor(
         }
     }
 
-    fun toggleTranscribing() {
+    public fun toggleTranscribing() {
         // For beta, link transcribing state to recording state or a separate logic if needed.
         // User's snippet implies this might be a simple toggle for now.
         _isTranscribing.update { !it } // Simple toggle

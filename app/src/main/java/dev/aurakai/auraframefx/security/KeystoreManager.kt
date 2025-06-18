@@ -14,7 +14,7 @@ import javax.crypto.NoSuchPaddingException
 import javax.crypto.SecretKey
 import javax.crypto.spec.IvParameterSpec
 
-class KeystoreManager(private val context: Context) {
+public class KeystoreManager(private val context: Context) {
 
     private companion object {
         private const val KEY_ALIAS = "AURAFRAMEFX_MAIN_ENC_KEY"
@@ -24,14 +24,14 @@ class KeystoreManager(private val context: Context) {
         private const val TAG = "KeystoreManager"
     }
 
-    fun getOrCreateSecretKey(): SecretKey? {
+    public fun getOrCreateSecretKey(): SecretKey? {
         try {
-            val keyStore = KeyStore.getInstance(ANDROID_KEYSTORE).apply { load(null) }
+            public val keyStore = KeyStore.getInstance(ANDROID_KEYSTORE).apply { load(null) }
 
             if (!keyStore.containsAlias(KEY_ALIAS)) {
-                val keyGenerator =
+                public val keyGenerator =
                     KeyGenerator.getInstance(KeyProperties.KEY_ALGORITHM_AES, ANDROID_KEYSTORE)
-                val parameterSpec = KeyGenParameterSpec.Builder(
+                public val parameterSpec = KeyGenParameterSpec.Builder(
                     KEY_ALIAS,
                     KeyProperties.PURPOSE_ENCRYPT or KeyProperties.PURPOSE_DECRYPT
                 ).apply {
@@ -60,14 +60,14 @@ class KeystoreManager(private val context: Context) {
         return null
     }
 
-    fun getEncryptionCipher(): Cipher? {
+    public fun getEncryptionCipher(): Cipher? {
         try {
-            val secretKey = getOrCreateSecretKey()
+            public val secretKey: getOrCreateSecretKey = getOrCreateSecretKey()
             if (secretKey == null) {
                 Log.e(TAG, "Failed to get or create secret key for encryption cipher.")
                 return null
             }
-            val cipher = Cipher.getInstance(AES_MODE)
+            public val cipher = Cipher.getInstance(AES_MODE)
             cipher.init(Cipher.ENCRYPT_MODE, secretKey)
             return cipher
         } catch (e: NoSuchAlgorithmException) {
@@ -82,15 +82,15 @@ class KeystoreManager(private val context: Context) {
         return null
     }
 
-    fun getDecryptionCipher(iv: ByteArray): Cipher? {
+    public fun getDecryptionCipher(iv: ByteArray): Cipher? {
         try {
-            val secretKey = getOrCreateSecretKey()
+            public val secretKey: getOrCreateSecretKey = getOrCreateSecretKey()
             if (secretKey == null) {
                 Log.e(TAG, "Failed to get or create secret key for decryption cipher.")
                 return null
             }
-            val cipher = Cipher.getInstance(AES_MODE)
-            val ivSpec = IvParameterSpec(iv)
+            public val cipher = Cipher.getInstance(AES_MODE)
+            public val ivSpec = IvParameterSpec(iv)
             cipher.init(Cipher.DECRYPT_MODE, secretKey, ivSpec)
             return cipher
         } catch (e: NoSuchAlgorithmException) {

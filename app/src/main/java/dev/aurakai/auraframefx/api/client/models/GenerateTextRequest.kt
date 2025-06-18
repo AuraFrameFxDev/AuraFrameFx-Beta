@@ -29,19 +29,19 @@ import kotlinx.serialization.Contextual
  */
 @Serializable
 
-data class GenerateTextRequest (
+public data class GenerateTextRequest (
 
     /* The text prompt for content generation. */
     @SerialName(value = "prompt")
-    val prompt: kotlin.String,
+    public val prompt: kotlin.String,
 
     /* Maximum number of tokens for the generated text. */
     @SerialName(value = "maxTokens")
-    val maxTokens: kotlin.Int? = 500,
+    public val maxTokens: kotlin.Int? = 500,
 
     /* Controls the randomness of the output. Higher values mean more random. */
     @SerialName(value = "temperature")
-    val temperature: kotlin.Float? = 0.7f
+    public val temperature: kotlin.Float? = 0.7f
 
 ) {
 

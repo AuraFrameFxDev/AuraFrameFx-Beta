@@ -18,7 +18,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class AuraFxLogger @Inject constructor(
+public class AuraFxLogger @Inject constructor(
     private val context: Context, // Injected Context
     private val kaiService: KaiAIService // Kept kaiService for now
 ) {
@@ -44,7 +44,7 @@ class AuraFxLogger @Inject constructor(
      * The file name is prefixed with the log filename prefix and suffixed with ".txt".
      */
     private fun getCurrentLogFileName(): String {
-        val dateFormat = SimpleDateFormat("yyyyMMdd", Locale.US)
+        public val dateFormat = SimpleDateFormat("yyyyMMdd", Locale.US)
         return "$LOG_FILENAME_PREFIX${dateFormat.format(Date())}.txt"
     }
 
@@ -64,12 +64,12 @@ class AuraFxLogger @Inject constructor(
         message: String,
         throwable: Throwable? = null,
     ) {
-        val timestamp = SimpleDateFormat(
+        public val timestamp = SimpleDateFormat(
             "yyyy-MM-dd HH:mm:ss.SSS",
             Locale.US
         ).format(Date()) // Changed format for better readability
-        val logPrefix = "[$timestamp][$level/$entryTag]"
-        val logEntry = if (message.lines().size > 1) {
+        public val logPrefix = "[$timestamp][$level/$entryTag]"
+        public val logEntry = if (message.lines().size > 1) {
             // Handle multi-line messages: indent subsequent lines
             message.lines().mapIndexed { index, line ->
                 if (index == 0) "$logPrefix $line" else "$logPrefix   $line"
@@ -78,12 +78,12 @@ class AuraFxLogger @Inject constructor(
             "$logPrefix $message"
         }
 
-        val fullLogEntry = if (throwable != null) {
+        public val fullLogEntry = if (throwable != null) {
             "$logEntry\n${Log.getStackTraceString(throwable)}"
         } else {
             logEntry
         }
-        val filePath = "$LOG_DIR/${getCurrentLogFileName()}"
+        public val filePath = "$LOG_DIR/${getCurrentLogFileName()}"
 
         // Log to Logcat as well for immediate visibility during development
         when (level) {
@@ -94,7 +94,7 @@ class AuraFxLogger @Inject constructor(
             "VERBOSE" -> Log.v(entryTag, message, throwable)
         }
 
-        val success =
+        public val success =
             writeToFileInternal(filePath, fullLogEntry + "\n", append = true) // Changed to internal method
         if (!success) {
             Log.e(TAG, "Failed to write log entry to file: $filePath")
@@ -112,7 +112,7 @@ class AuraFxLogger @Inject constructor(
      * @param message The message to log.
      * @param throwable Optional exception to include in the log entry.
      */
-    fun d(tag: String, message: String, throwable: Throwable? = null) =
+    public fun d(tag: String, message: String, throwable: Throwable? = null) =
         loggerScope.launch { writeLogEntry("DEBUG", tag, message, throwable) }
 
     /**
@@ -124,7 +124,7 @@ class AuraFxLogger @Inject constructor(
      * @param message The informational message to log.
      * @param throwable An optional throwable whose stack trace will be included in the log entry.
      */
-    fun i(tag: String, message: String, throwable: Throwable? = null) =
+    public fun i(tag: String, message: String, throwable: Throwable? = null) =
         loggerScope.launch { writeLogEntry("INFO", tag, message, throwable) }
 
     /**
@@ -136,7 +136,7 @@ class AuraFxLogger @Inject constructor(
      * @param message The warning message to log.
      * @param throwable An optional throwable whose stack trace will be included in the log entry.
      */
-    fun w(tag: String, message: String, throwable: Throwable? = null) =
+    public fun w(tag: String, message: String, throwable: Throwable? = null) =
         loggerScope.launch { writeLogEntry("WARN", tag, message, throwable) }
 
     /**
@@ -148,7 +148,7 @@ class AuraFxLogger @Inject constructor(
      * @param message The error message to log.
      * @param throwable An optional throwable whose stack trace will be included in the log entry.
      */
-    fun e(tag: String, message: String, throwable: Throwable? = null) =
+    public fun e(tag: String, message: String, throwable: Throwable? = null) =
         loggerScope.launch { writeLogEntry("ERROR", tag, message, throwable) }
 
     /**
@@ -158,7 +158,7 @@ class AuraFxLogger @Inject constructor(
      * @param message The message to log.
      * @param throwable Optional throwable whose stack trace will be included in the log entry.
      */
-    fun v(tag: String, message: String, throwable: Throwable? = null) =
+    public fun v(tag: String, message: String, throwable: Throwable? = null) =
         loggerScope.launch { writeLogEntry("VERBOSE", tag, message, throwable) }
 
     /**
@@ -167,9 +167,9 @@ class AuraFxLogger @Inject constructor(
      * @return A map where each key is a log filename and the value is its content. Only files matching the log filename prefix are included. The map is sorted with the newest files first.
      */
     suspend fun readAllLogs(): Map<String, String> = withContext(Dispatchers.IO) {
-        val logs = mutableMapOf<String, String>()
+        public val logs = mutableMapOf<String, String>()
         // Use injected context
-        val logDirFile = File(context.filesDir, LOG_DIR) // Changed to use injected context
+        public val logDirFile = File(context.filesDir, LOG_DIR) // Changed to use injected context
         Log.d(TAG, "Reading all logs from directory: ${logDirFile.absolutePath}")
 
         if (logDirFile.exists() && logDirFile.isDirectory) {
@@ -177,7 +177,7 @@ class AuraFxLogger @Inject constructor(
                 ?.forEach { file -> // Read newest first
                     if (file.isFile && file.name.startsWith(LOG_FILENAME_PREFIX)) {
                         Log.d(TAG, "Reading log file: ${file.name}")
-                        val content =
+                        public val content =
                             readFromFileInternal("$LOG_DIR/${file.name}") // Changed to internal method
                         if (content != null) {
                             logs[file.name] = content
@@ -201,7 +201,7 @@ class AuraFxLogger @Inject constructor(
      * @return The contents of today's log file, or an empty string if the file does not exist or cannot be read.
      */
     suspend fun readCurrentDayLogs(): String = withContext(Dispatchers.IO) {
-        val fileName = getCurrentLogFileName()
+        public val fileName: getCurrentLogFileName = getCurrentLogFileName()
         Log.d(TAG, "Reading current day logs from: $LOG_DIR/$fileName")
         return@withContext readFromFileInternal("$LOG_DIR/$fileName") ?: "" // Changed to internal method
     }
@@ -213,13 +213,13 @@ class AuraFxLogger @Inject constructor(
      */
     private suspend fun cleanupOldLogs() = withContext(Dispatchers.IO) {
         // Use injected context
-        val logDirFile = File(context.filesDir, LOG_DIR) // Changed to use injected context
+        public val logDirFile = File(context.filesDir, LOG_DIR) // Changed to use injected context
         Log.i(TAG, "Running cleanup for old logs in: ${logDirFile.absolutePath}")
 
         if (logDirFile.exists() && logDirFile.isDirectory) {
-            val cutoffTime =
+            public val cutoffTime =
                 System.currentTimeMillis() - (LOG_RETENTION_DAYS * 24 * 60 * 60 * 1000L)
-            var filesDeleted = 0
+            public var filesDeleted = 0
             logDirFile.listFiles()?.forEach { file ->
                 if (file.isFile && file.name.startsWith(LOG_FILENAME_PREFIX)) {
                     if (file.lastModified() < cutoffTime) {
@@ -243,7 +243,7 @@ class AuraFxLogger @Inject constructor(
      *
      * After calling this method, no further log entries will be processed or written.
      */
-    fun shutdown() {
+    public fun shutdown() {
         Log.d(TAG, "AuraFxLogger shutting down loggerScope.")
         loggerScope.cancel()
     }
@@ -251,7 +251,7 @@ class AuraFxLogger @Inject constructor(
     // Internal file operation methods using injected context
     private fun writeToFileInternal(filePath: String, content: String, append: Boolean): Boolean {
         return try {
-            val fullPath = File(context.filesDir, filePath)
+            public val fullPath = File(context.filesDir, filePath)
             fullPath.parentFile?.mkdirs() // Ensure directory exists
             if (append) {
                 fullPath.appendText(content)
@@ -267,7 +267,7 @@ class AuraFxLogger @Inject constructor(
 
     private fun readFromFileInternal(filePath: String): String? {
         return try {
-            val fullPath = File(context.filesDir, filePath)
+            public val fullPath = File(context.filesDir, filePath)
             if (fullPath.exists()) {
                 fullPath.readText()
             } else {

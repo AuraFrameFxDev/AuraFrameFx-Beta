@@ -5,7 +5,7 @@ import kotlinx.serialization.Serializable
 // Task data class definition removed as per instruction.
 
 @Serializable
-enum class TaskType {
+public enum class TaskType {
     TOGGLE_WIFI,
     ADJUST_BRIGHTNESS,
     OPTIMIZE_BATTERY,
@@ -19,7 +19,7 @@ enum class TaskType {
 }
 
 @Serializable
-data class TaskSchedule(
+public data class TaskSchedule(
     val type: String = "immediate", // "immediate", "at_time", "periodic", "on_event"
     val delayMs: Long = 0, // Delay before execution for "immediate" if > 0
     val intervalMs: Long? = null, // For "periodic" tasks

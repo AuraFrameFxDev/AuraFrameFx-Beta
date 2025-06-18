@@ -41,10 +41,10 @@ import dev.aurakai.auraframefx.api.client.infrastructure.ResponseType
 import dev.aurakai.auraframefx.api.client.infrastructure.Success
 import dev.aurakai.auraframefx.api.client.infrastructure.toMultiValue
 
-class AIContentApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = ApiClient.defaultClient) : ApiClient(basePath, client) {
-    companion object {
+public class AIContentApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = ApiClient.defaultClient) : ApiClient(basePath, client) {
+    public companion object {
         @JvmStatic
-        val defaultBasePath: String by lazy {
+        public val defaultBasePath: String by lazy {
             System.getProperties().getProperty(ApiClient.baseUrlKey, "https://api.auraframefx.com/v1")
         }
     }
@@ -63,19 +63,19 @@ class AIContentApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun aiGenerateImageDescriptionPost(generateImageDescriptionRequest: GenerateImageDescriptionRequest) : GenerateImageDescriptionResponse {
-        val localVarResponse = aiGenerateImageDescriptionPostWithHttpInfo(generateImageDescriptionRequest = generateImageDescriptionRequest)
+    public fun aiGenerateImageDescriptionPost(generateImageDescriptionRequest: GenerateImageDescriptionRequest) : GenerateImageDescriptionResponse {
+        public val localVarResponse = aiGenerateImageDescriptionPostWithHttpInfo(generateImageDescriptionRequest = generateImageDescriptionRequest)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as GenerateImageDescriptionResponse
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
+                public val localVarError = localVarResponse as ClientError<*>
                 throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
             }
             ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
+                public val localVarError = localVarResponse as ServerError<*>
                 throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
             }
         }
@@ -92,8 +92,8 @@ class AIContentApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun aiGenerateImageDescriptionPostWithHttpInfo(generateImageDescriptionRequest: GenerateImageDescriptionRequest) : ApiResponse<GenerateImageDescriptionResponse?> {
-        val localVariableConfig = aiGenerateImageDescriptionPostRequestConfig(generateImageDescriptionRequest = generateImageDescriptionRequest)
+    public fun aiGenerateImageDescriptionPostWithHttpInfo(generateImageDescriptionRequest: GenerateImageDescriptionRequest) : ApiResponse<GenerateImageDescriptionResponse?> {
+        public val localVariableConfig = aiGenerateImageDescriptionPostRequestConfig(generateImageDescriptionRequest = generateImageDescriptionRequest)
 
         return request<GenerateImageDescriptionRequest, GenerateImageDescriptionResponse>(
             localVariableConfig
@@ -106,10 +106,10 @@ class AIContentApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * @param generateImageDescriptionRequest 
      * @return RequestConfig
      */
-    fun aiGenerateImageDescriptionPostRequestConfig(generateImageDescriptionRequest: GenerateImageDescriptionRequest) : RequestConfig<GenerateImageDescriptionRequest> {
-        val localVariableBody = generateImageDescriptionRequest
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+    public fun aiGenerateImageDescriptionPostRequestConfig(generateImageDescriptionRequest: GenerateImageDescriptionRequest) : RequestConfig<GenerateImageDescriptionRequest> {
+        public val localVariableBody = generateImageDescriptionRequest
+        public val localVariableQuery: MultiValueMap = mutableMapOf()
+        public val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
         localVariableHeaders["Accept"] = "application/json"
 
@@ -137,19 +137,19 @@ class AIContentApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun aiGenerateTextPost(generateTextRequest: GenerateTextRequest) : GenerateTextResponse {
-        val localVarResponse = aiGenerateTextPostWithHttpInfo(generateTextRequest = generateTextRequest)
+    public fun aiGenerateTextPost(generateTextRequest: GenerateTextRequest) : GenerateTextResponse {
+        public val localVarResponse = aiGenerateTextPostWithHttpInfo(generateTextRequest = generateTextRequest)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as GenerateTextResponse
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
+                public val localVarError = localVarResponse as ClientError<*>
                 throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
             }
             ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
+                public val localVarError = localVarResponse as ServerError<*>
                 throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
             }
         }
@@ -166,8 +166,8 @@ class AIContentApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun aiGenerateTextPostWithHttpInfo(generateTextRequest: GenerateTextRequest) : ApiResponse<GenerateTextResponse?> {
-        val localVariableConfig = aiGenerateTextPostRequestConfig(generateTextRequest = generateTextRequest)
+    public fun aiGenerateTextPostWithHttpInfo(generateTextRequest: GenerateTextRequest) : ApiResponse<GenerateTextResponse?> {
+        public val localVariableConfig = aiGenerateTextPostRequestConfig(generateTextRequest = generateTextRequest)
 
         return request<GenerateTextRequest, GenerateTextResponse>(
             localVariableConfig
@@ -180,10 +180,10 @@ class AIContentApi(basePath: kotlin.String = defaultBasePath, client: Call.Facto
      * @param generateTextRequest 
      * @return RequestConfig
      */
-    fun aiGenerateTextPostRequestConfig(generateTextRequest: GenerateTextRequest) : RequestConfig<GenerateTextRequest> {
-        val localVariableBody = generateTextRequest
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+    public fun aiGenerateTextPostRequestConfig(generateTextRequest: GenerateTextRequest) : RequestConfig<GenerateTextRequest> {
+        public val localVariableBody = generateTextRequest
+        public val localVariableQuery: MultiValueMap = mutableMapOf()
+        public val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
         localVariableHeaders["Accept"] = "application/json"
 

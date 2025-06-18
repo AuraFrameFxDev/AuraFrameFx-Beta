@@ -1,6 +1,6 @@
 package dev.aurakai.auraframefx.ui.model
 
-enum class ImageType {
+public enum class ImageType {
     DEFAULT,
     CUSTOM
 }

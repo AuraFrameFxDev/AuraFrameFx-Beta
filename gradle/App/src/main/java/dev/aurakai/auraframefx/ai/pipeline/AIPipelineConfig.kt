@@ -2,7 +2,7 @@ package dev.aurakai.auraframefx.ai.pipeline
 
 import dev.aurakai.auraframefx.model.AgentType
 
-data class AIPipelineConfig(
+public data class AIPipelineConfig(
     val maxRetries: Int = 3,
     val timeoutSeconds: Int = 30,
     val contextWindowSize: Int = 5,
@@ -17,13 +17,13 @@ data class AIPipelineConfig(
     val contextChainingConfig: ContextChainingConfig = ContextChainingConfig(),
 )
 
-data class MemoryRetrievalConfig(
+public data class MemoryRetrievalConfig(
     val maxContextLength: Int = 2000,
     val similarityThreshold: Float = 0.75f,
     val maxRetrievedItems: Int = 5,
 )
 
-data class ContextChainingConfig(
+public data class ContextChainingConfig(
     val maxChainLength: Int = 10,
     val relevanceThreshold: Float = 0.6f,
     val decayRate: Float = 0.9f,

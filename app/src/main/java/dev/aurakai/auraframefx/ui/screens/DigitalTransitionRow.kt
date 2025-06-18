@@ -10,7 +10,7 @@ import androidx.compose.ui.Modifier
 import dev.aurakai.auraframefx.system.homescreen.HomeScreenTransitionType
 
 @Composable
-fun DigitalTransitionRow(
+public fun DigitalTransitionRow(
     currentType: HomeScreenTransitionType,
     onTypeSelected: (HomeScreenTransitionType) -> Unit,
 ) {

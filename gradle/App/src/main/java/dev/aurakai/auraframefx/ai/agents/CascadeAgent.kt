@@ -22,7 +22,7 @@ import javax.inject.Singleton
  * Contributors: Please keep Cascade's logic focused on agent collaboration, state management, and bridging creative and security domains.
  */
 @Singleton
-class CascadeAgent @Inject constructor(
+public class CascadeAgent @Inject constructor(
     private val auraAgent: AuraAgent, // Now using the actual AuraAgent type
     private val kaiAgent: KaiAgent,   // Now using the actual KaiAgent type
 ) {

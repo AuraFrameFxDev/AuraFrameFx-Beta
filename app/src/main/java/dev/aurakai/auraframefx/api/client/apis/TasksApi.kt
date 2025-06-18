@@ -39,10 +39,10 @@ import dev.aurakai.auraframefx.api.client.infrastructure.ResponseType
 import dev.aurakai.auraframefx.api.client.infrastructure.Success
 import dev.aurakai.auraframefx.api.client.infrastructure.toMultiValue
 
-class TasksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = ApiClient.defaultClient) : ApiClient(basePath, client) {
-    companion object {
+public class TasksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = ApiClient.defaultClient) : ApiClient(basePath, client) {
+    public companion object {
         @JvmStatic
-        val defaultBasePath: String by lazy {
+        public val defaultBasePath: String by lazy {
             System.getProperties().getProperty(ApiClient.baseUrlKey, "https://api.auraframefx.com/v1")
         }
     }
@@ -61,19 +61,19 @@ class TasksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun tasksSchedulePost(taskScheduleRequest: TaskScheduleRequest) : TaskStatus {
-        val localVarResponse = tasksSchedulePostWithHttpInfo(taskScheduleRequest = taskScheduleRequest)
+    public fun tasksSchedulePost(taskScheduleRequest: TaskScheduleRequest) : TaskStatus {
+        public val localVarResponse = tasksSchedulePostWithHttpInfo(taskScheduleRequest = taskScheduleRequest)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as TaskStatus
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
+                public val localVarError = localVarResponse as ClientError<*>
                 throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
             }
             ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
+                public val localVarError = localVarResponse as ServerError<*>
                 throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
             }
         }
@@ -90,8 +90,8 @@ class TasksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun tasksSchedulePostWithHttpInfo(taskScheduleRequest: TaskScheduleRequest) : ApiResponse<TaskStatus?> {
-        val localVariableConfig = tasksSchedulePostRequestConfig(taskScheduleRequest = taskScheduleRequest)
+    public fun tasksSchedulePostWithHttpInfo(taskScheduleRequest: TaskScheduleRequest) : ApiResponse<TaskStatus?> {
+        public val localVariableConfig = tasksSchedulePostRequestConfig(taskScheduleRequest = taskScheduleRequest)
 
         return request<TaskScheduleRequest, TaskStatus>(
             localVariableConfig
@@ -104,10 +104,10 @@ class TasksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @param taskScheduleRequest 
      * @return RequestConfig
      */
-    fun tasksSchedulePostRequestConfig(taskScheduleRequest: TaskScheduleRequest) : RequestConfig<TaskScheduleRequest> {
-        val localVariableBody = taskScheduleRequest
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+    public fun tasksSchedulePostRequestConfig(taskScheduleRequest: TaskScheduleRequest) : RequestConfig<TaskScheduleRequest> {
+        public val localVariableBody = taskScheduleRequest
+        public val localVariableQuery: MultiValueMap = mutableMapOf()
+        public val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"
         localVariableHeaders["Accept"] = "application/json"
 
@@ -135,19 +135,19 @@ class TasksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun tasksTaskIdGet(taskId: kotlin.String) : TaskStatus {
-        val localVarResponse = tasksTaskIdGetWithHttpInfo(taskId = taskId)
+    public fun tasksTaskIdGet(taskId: kotlin.String) : TaskStatus {
+        public val localVarResponse = tasksTaskIdGetWithHttpInfo(taskId = taskId)
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as TaskStatus
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
+                public val localVarError = localVarResponse as ClientError<*>
                 throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
             }
             ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
+                public val localVarError = localVarResponse as ServerError<*>
                 throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
             }
         }
@@ -164,8 +164,8 @@ class TasksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun tasksTaskIdGetWithHttpInfo(taskId: kotlin.String) : ApiResponse<TaskStatus?> {
-        val localVariableConfig = tasksTaskIdGetRequestConfig(taskId = taskId)
+    public fun tasksTaskIdGetWithHttpInfo(taskId: kotlin.String) : ApiResponse<TaskStatus?> {
+        public val localVariableConfig = tasksTaskIdGetRequestConfig(taskId = taskId)
 
         return request<Unit, TaskStatus>(
             localVariableConfig
@@ -178,10 +178,10 @@ class TasksApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
      * @param taskId ID of the task to check
      * @return RequestConfig
      */
-    fun tasksTaskIdGetRequestConfig(taskId: kotlin.String) : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+    public fun tasksTaskIdGetRequestConfig(taskId: kotlin.String) : RequestConfig<Unit> {
+        public val localVariableBody = null
+        public val localVariableQuery: MultiValueMap = mutableMapOf()
+        public val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Accept"] = "application/json"
 
         return RequestConfig(

@@ -6,15 +6,15 @@ import kotlinx.serialization.Serializable
  * Theme model generated from OpenAPI spec
  */
 @Serializable
-data class Theme(
-    val id: String,
-    val name: String,
-    val primaryColor: String,
-    val secondaryColor: String,
-    val isDefault: Boolean
+public data class Theme(
+    public val id: String,
+    public val name: String,
+    public val primaryColor: String,
+    public val secondaryColor: String,
+    public val isDefault: Boolean
 )
 
 @Serializable
-data class ThemeApplyRequest(
-    val themeId: String
+public data class ThemeApplyRequest(
+    public val themeId: String
 )

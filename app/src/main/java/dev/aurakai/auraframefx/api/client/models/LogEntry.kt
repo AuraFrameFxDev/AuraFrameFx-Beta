@@ -30,19 +30,19 @@ import kotlinx.serialization.Contextual
  */
 @Serializable
 
-data class LogEntry (
+public data class LogEntry (
 
     @Contextual @SerialName(value = "timestamp")
-    val timestamp: java.time.OffsetDateTime,
+    public val timestamp: java.time.OffsetDateTime,
 
     @SerialName(value = "level")
-    val level: LogEntry.Level,
+    public val level: LogEntry.Level,
 
     @SerialName(value = "tag")
-    val tag: kotlin.String,
+    public val tag: kotlin.String,
 
     @SerialName(value = "message")
-    val message: kotlin.String
+    public val message: kotlin.String
 
 ) {
 
@@ -52,7 +52,7 @@ data class LogEntry (
      * Values: DEBUG,INFO,WARN,ERROR
      */
     @Serializable
-    enum class Level(val value: kotlin.String) {
+    public enum class Level(val value: kotlin.String) {
         @SerialName(value = "DEBUG") DEBUG("DEBUG"),
         @SerialName(value = "INFO") INFO("INFO"),
         @SerialName(value = "WARN") WARN("WARN"),

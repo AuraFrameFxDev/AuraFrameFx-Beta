@@ -29,7 +29,7 @@ import javax.inject.Singleton
  * This class is tied to the KAI agent persona and handles all security-related operations.
  */
 @Singleton
-class SecurityContext @Inject constructor(
+public class SecurityContext @Inject constructor(
     @ApplicationContext private val context: Context,
     private val keystoreManager: KeystoreManager, // Added KeystoreManager
 ) {
@@ -65,7 +65,7 @@ class SecurityContext @Inject constructor(
     /**
      * Start monitoring for security threats in the background
      */
-    fun startThreatDetection() {
+    public fun startThreatDetection() {
         if (_threatDetectionActive.value) return
 
         _threatDetectionActive.value = true
@@ -91,14 +91,14 @@ class SecurityContext @Inject constructor(
         }
     }
 
-    fun stopThreatDetection() {
+    public fun stopThreatDetection() {
         _threatDetectionActive.value = false
     }
 
     /**
      * Check if the app has the specified permission
      */
-    fun hasPermission(permission: String): Boolean {
+    public fun hasPermission(permission: String): Boolean {
         return ContextCompat.checkSelfPermission(
             context,
             permission
@@ -108,7 +108,7 @@ class SecurityContext @Inject constructor(
     /**
      * Update the current state of all permissions relevant to the app
      */
-    fun updatePermissionsState() {
+    public fun updatePermissionsState() {
         val permissionsToCheck = listOf(
             android.Manifest.permission.RECORD_AUDIO,
             android.Manifest.permission.CAMERA,
@@ -126,7 +126,7 @@ class SecurityContext @Inject constructor(
     /**
      * Initialize the encryption subsystem using Keystore.
      */
-    fun initializeEncryption(): Boolean {
+    public fun initializeEncryption(): Boolean {
         Log.d(TAG, "Initializing encryption using KeystoreManager.")
         val secretKey = keystoreManager.getOrCreateSecretKey()
         return if (secretKey != null) {
@@ -152,7 +152,7 @@ class SecurityContext @Inject constructor(
     /**
      * Encrypt sensitive data using Keystore.
      */
-    fun encrypt(data: String): EncryptedData? {
+    public fun encrypt(data: String): EncryptedData? {
         if (_encryptionStatus.value != EncryptionStatus.ACTIVE) {
             Log.w(TAG, "Encryption not initialized. Attempting to initialize.")
             if (!initializeEncryption()) {
@@ -204,7 +204,7 @@ class SecurityContext @Inject constructor(
     /**
      * Decrypt previously encrypted data using Keystore.
      */
-    fun decrypt(encryptedData: EncryptedData): String? {
+    public fun decrypt(encryptedData: EncryptedData): String? {
         if (_encryptionStatus.value != EncryptionStatus.ACTIVE) {
             Log.w(TAG, "Encryption not initialized. Attempting to initialize for decryption.")
             if (!initializeEncryption()) {
@@ -245,7 +245,7 @@ class SecurityContext @Inject constructor(
     /**
      * Share a secure context with another agent
      */
-    fun shareSecureContextWith(agentType: AgentType, context: String): SharedSecureContext {
+    public fun shareSecureContextWith(agentType: AgentType, context: String): SharedSecureContext {
         val secureId = generateSecureId()
         val timestamp = System.currentTimeMillis()
 
@@ -262,7 +262,7 @@ class SecurityContext @Inject constructor(
     /**
      * Verify the integrity of the application
      */
-    fun verifyApplicationIntegrity(): ApplicationIntegrity {
+    public fun verifyApplicationIntegrity(): ApplicationIntegrity {
         try {
             // Get the app's package info
             val packageInfo = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
@@ -369,7 +369,7 @@ class SecurityContext @Inject constructor(
     /**
      * Log a security event
      */
-    fun logSecurityEvent(event: SecurityEvent) {
+    public fun logSecurityEvent(event: SecurityEvent) {
         scope.launch {
             Log.d(TAG, "Security event logged: " + Json.encodeToString(SecurityEvent.serializer(), event))
             // In a real implementation, this would store events securely
@@ -381,7 +381,7 @@ class SecurityContext @Inject constructor(
  * Represents the current security state
  */
 @Serializable
-data class SecurityState(
+public data class SecurityState(
     val detectedThreats: List<SecurityThreat> = emptyList(),
     val threatLevel: ThreatLevel = ThreatLevel.UNKNOWN,
     val lastScanTime: Long = 0,
@@ -393,7 +393,7 @@ data class SecurityState(
  * Represents a security threat detected by KAI
  */
 @Serializable
-data class SecurityThreat(
+public data class SecurityThreat(
     val id: String,
     val type: ThreatType,
     val severity: ThreatSeverity,
@@ -404,7 +404,7 @@ data class SecurityThreat(
 /**
  * Types of security threats
  */
-enum class ThreatType {
+public enum class ThreatType {
     MALWARE,
     NETWORK_VULNERABILITY,
     PERMISSION_ABUSE,
@@ -415,7 +415,7 @@ enum class ThreatType {
 /**
  * Severity levels for security threats
  */
-enum class ThreatSeverity {
+public enum class ThreatSeverity {
     LOW,
     MEDIUM,
     HIGH,
@@ -425,7 +425,7 @@ enum class ThreatSeverity {
 /**
  * Overall threat levels for the system
  */
-enum class ThreatLevel {
+public enum class ThreatLevel {
     SAFE,
     LOW,
     MODERATE,
@@ -437,7 +437,7 @@ enum class ThreatLevel {
 /**
  * Status of the encryption subsystem
  */
-enum class EncryptionStatus {
+public enum class EncryptionStatus {
     NOT_INITIALIZED,
     ACTIVE,
     DISABLED,
@@ -448,7 +448,7 @@ enum class EncryptionStatus {
  * Data class for encrypted information
  */
 @Serializable
-data class EncryptedData(
+public data class EncryptedData(
     val data: ByteArray,
     // val salt: ByteArray, // Removed salt field
     val iv: ByteArray,
@@ -484,7 +484,7 @@ data class EncryptedData(
  * Data class for application integrity information
  */
 @Serializable
-data class ApplicationIntegrity(
+public data class ApplicationIntegrity(
     val verified: Boolean,
     val appVersion: String,
     val signatureHash: String,
@@ -497,7 +497,7 @@ data class ApplicationIntegrity(
  * Data class for security events to be logged
  */
 @Serializable
-data class SecurityEvent(
+public data class SecurityEvent(
     val id: String = java.util.UUID.randomUUID().toString(),
     val type: SecurityEventType,
     val timestamp: Long = System.currentTimeMillis(),
@@ -508,7 +508,7 @@ data class SecurityEvent(
 /**
  * Types of security events
  */
-enum class SecurityEventType {
+public enum class SecurityEventType {
     PERMISSION_CHANGE,
     THREAT_DETECTED,
     ENCRYPTION_EVENT,
@@ -519,7 +519,7 @@ enum class SecurityEventType {
 /**
  * Severity levels for security events
  */
-enum class EventSeverity {
+public enum class EventSeverity {
     INFO,
     WARNING,
     ERROR,
@@ -530,7 +530,7 @@ enum class EventSeverity {
  * Data class for secure context sharing between agents
  */
 @Serializable
-data class SharedSecureContext(
+public data class SharedSecureContext(
     val id: String,
     val originatingAgent: AgentType,
     val targetAgent: AgentType,

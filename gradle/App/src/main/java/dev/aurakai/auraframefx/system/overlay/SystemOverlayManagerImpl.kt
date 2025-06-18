@@ -15,7 +15,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class SystemOverlayManagerImpl @Inject constructor(
+public class SystemOverlayManagerImpl @Inject constructor(
     private val prefs: YukiHookModulePrefs,
     private val overlayService: YukiHookServiceManager,
     private val auraService: AuraAIService,
@@ -168,7 +168,7 @@ class SystemOverlayManagerImpl @Inject constructor(
     }
 
     /*
-    fun generateOverlayFromDescription(description: String): SystemOverlayConfig {
+    public fun generateOverlayFromDescription(description: String): SystemOverlayConfig {
         // This method is problematic as AuraAIService (Agent) doesn't have transformDevice
         // Commenting out for now to resolve immediate build-breaking issues.
         // TODO: Re-evaluate how to achieve this functionality with the Agent interface.

@@ -8,7 +8,7 @@ import kotlinx.serialization.descriptors.PrimitiveKind
 import kotlinx.serialization.descriptors.SerialDescriptor
 import java.net.URL
 
-object URLAdapter : KSerializer<URL> {
+public object URLAdapter : KSerializer<URL> {
     override fun serialize(encoder: Encoder, value: URL) {
         encoder.encodeString(value.toExternalForm())
     }

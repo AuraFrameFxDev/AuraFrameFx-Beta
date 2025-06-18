@@ -11,7 +11,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class CascadeAIService @Inject constructor(
+public class CascadeAIService @Inject constructor(
     private val auraService: AuraAIService,
     private val kaiService: KaiAIService,
 ) : Agent {
@@ -58,8 +58,8 @@ class CascadeAIService @Inject constructor(
     private suspend fun processContextRequestFlow(request: AiRequest): Flow<AgentResponse> {
         // Coordinate with Aura and Kai
         // Assuming auraService.processRequestFlow and kaiService.processRequestFlow exist and return Flow<AgentResponse>
-        val auraResponse = auraService.processRequestFlow(request).first()
-        val kaiResponse = kaiService.processRequestFlow(request).first() // Assuming KaiAIService also has processRequestFlow
+        public val auraResponse = auraService.processRequestFlow(request).first()
+        public val kaiResponse = kaiService.processRequestFlow(request).first() // Assuming KaiAIService also has processRequestFlow
 
         return flow {
             emit(

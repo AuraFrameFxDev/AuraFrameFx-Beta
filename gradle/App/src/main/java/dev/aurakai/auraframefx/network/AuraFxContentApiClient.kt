@@ -11,7 +11,7 @@ import javax.inject.Singleton
  * Provides clean methods to access text and image description generation capabilities.
  */
 @Singleton
-class AuraFxContentApiClient @Inject constructor(
+public class AuraFxContentApiClient @Inject constructor(
     private val contentApi: ContentApi,
 ) {
     /**

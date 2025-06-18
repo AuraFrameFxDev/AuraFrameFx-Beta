@@ -28,11 +28,11 @@ import kotlinx.serialization.Contextual
  */
 @Serializable
 
-data class ConferenceRoomJoinRequest (
+public data class ConferenceRoomJoinRequest (
 
     /* The AI agent joining the room. */
     @Contextual @SerialName(value = "agentType")
-    val agentType: AgentType
+    public val agentType: AgentType
 
 ) {
 

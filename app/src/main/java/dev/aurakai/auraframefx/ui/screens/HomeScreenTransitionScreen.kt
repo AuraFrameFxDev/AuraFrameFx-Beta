@@ -18,10 +18,10 @@ import java.util.Locale
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeScreenTransitionScreen(
+public fun HomeScreenTransitionScreen(
     viewModel: HomeScreenTransitionViewModel = hiltViewModel(),
 ) {
-    val currentConfig by viewModel.currentConfig.collectAsState()
+    public val currentConfig by viewModel.currentConfig.collectAsState()
 
     Scaffold(
         topBar = {
@@ -133,7 +133,7 @@ fun HomeScreenTransitionScreen(
 }
 
 @Composable
-fun TransitionTypePicker(
+public fun TransitionTypePicker(
     currentType: HomeScreenTransitionType,
     onTypeSelected: (HomeScreenTransitionType) -> Unit,
 ) {
@@ -218,7 +218,7 @@ fun TransitionTypePicker(
 }
 
 @Composable
-fun DurationSlider(
+public fun DurationSlider(
     currentDuration: Int,
     onDurationChanged: (Int) -> Unit,
 ) {
@@ -245,7 +245,7 @@ fun DurationSlider(
 }
 
 @Composable
-fun TransitionPropertiesEditor(
+public fun TransitionPropertiesEditor(
     currentProperties: Map<String, Any>,
     onPropertiesChanged: (Map<String, Any>) -> Unit,
 ) {
@@ -326,7 +326,7 @@ fun TransitionPropertiesEditor(
 }
 
 @Composable
-fun PropertySlider(
+public fun PropertySlider(
     label: String,
     value: Float,
     onValueChange: (Float) -> Unit,
@@ -354,7 +354,7 @@ fun PropertySlider(
 }
 
 @Composable
-fun BasicTransitionRow(
+public fun BasicTransitionRow(
     currentType: HomeScreenTransitionType,
     onTypeSelected: (HomeScreenTransitionType) -> Unit,
 ) {
@@ -386,7 +386,7 @@ fun BasicTransitionRow(
 }
 
 @Composable
-fun CardStackTransitionRow(
+public fun CardStackTransitionRow(
     currentType: HomeScreenTransitionType,
     onTypeSelected: (HomeScreenTransitionType) -> Unit,
 ) {
@@ -418,7 +418,7 @@ fun CardStackTransitionRow(
 }
 
 @Composable
-fun ThreeDTransitionRow(
+public fun ThreeDTransitionRow(
     currentType: HomeScreenTransitionType,
     onTypeSelected: (HomeScreenTransitionType) -> Unit,
 ) {
@@ -450,7 +450,7 @@ fun ThreeDTransitionRow(
 }
 
 @Composable
-fun GlobeTransitionRow(
+public fun GlobeTransitionRow(
     currentType: HomeScreenTransitionType,
     onTypeSelected: (HomeScreenTransitionType) -> Unit,
 ) {
@@ -482,7 +482,7 @@ fun GlobeTransitionRow(
 }
 
 @Composable
-fun FanTransitionRow(
+public fun FanTransitionRow(
     currentType: HomeScreenTransitionType,
     onTypeSelected: (HomeScreenTransitionType) -> Unit,
 ) {
@@ -514,7 +514,7 @@ fun FanTransitionRow(
 }
 
 @Composable
-fun SpreadTransitionRow(
+public fun SpreadTransitionRow(
     currentType: HomeScreenTransitionType,
     onTypeSelected: (HomeScreenTransitionType) -> Unit,
 ) {
@@ -546,7 +546,7 @@ fun SpreadTransitionRow(
 }
 
 @Composable
-fun TransitionButton(
+public fun TransitionButton(
     label: String,
     isSelected: Boolean,
     onClick: () -> Unit,

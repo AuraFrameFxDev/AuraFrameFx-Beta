@@ -7,13 +7,13 @@ import kotlinx.serialization.Contextual
  * Error response models generated from OpenAPI spec
  */
 @Serializable
-data class ErrorResponse(
-    val error: ErrorDetail
+public data class ErrorResponse(
+    public val error: ErrorDetail
 )
 
 @Serializable
-data class ErrorDetail(
-    val code: String,
-    val message: String,
+public data class ErrorDetail(
+    public val code: String,
+    public val message: String,
     @Contextual val details: Map<String, Any>? = null
 )

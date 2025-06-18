@@ -15,7 +15,7 @@ import javax.inject.Singleton
  */
 @Module
 @InstallIn(SingletonComponent::class)
-object KaiModule {
+public object KaiModule {
 
     /**
      * Provides KaiController.
@@ -25,7 +25,7 @@ object KaiModule {
      */
     @Provides
     @Singleton
-    fun provideKaiController(
+    public fun provideKaiController(
         // @ApplicationContext _context: Context // Example if context is needed by KaiController
     ): KaiController? { // Returning KaiController? to allow null placeholder
         // TODO: If KaiController takes dependencies, provide them here.

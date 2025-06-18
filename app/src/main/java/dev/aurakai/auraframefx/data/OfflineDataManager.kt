@@ -9,10 +9,10 @@ import javax.inject.Singleton
 
 // TODO: Implement offline data management logic
 @Singleton
-class OfflineDataManager @Inject constructor(
+public class OfflineDataManager @Inject constructor(
     @ApplicationContext private val context: Context
 ) {
-    fun exampleMethod() {
+    public fun exampleMethod() {
         // Placeholder for actual offline data logic
         println("OfflineDataManager example method called with context: ${context.packageName}")
     }
@@ -22,7 +22,7 @@ class OfflineDataManager @Inject constructor(
      *
      * @return The loaded offline data, or null if no data is available.
      */
-    fun loadCriticalOfflineData(): Any? {
+    public fun loadCriticalOfflineData(): Any? {
         // Replace with actual data loading logic
         println("Attempting to load critical offline data...")
         return null // Placeholder
@@ -35,7 +35,7 @@ class OfflineDataManager @Inject constructor(
      *
      * @param data The critical data to be saved.
      */
-    fun saveCriticalOfflineData(data: Any) {
+    public fun saveCriticalOfflineData(data: Any) {
         // Replace with actual data saving logic
         println("Attempting to save critical offline data: $data")
     }

@@ -13,7 +13,7 @@ import kotlin.time.Duration
 import kotlin.time.Duration.Companion.seconds
 
 @Singleton
-class MemoryManager @Inject constructor(
+public class MemoryManager @Inject constructor(
     private val config: AIPipelineConfig,
 ) {
     private val memoryStore = ConcurrentHashMap<String, MemoryItem>()
@@ -23,14 +23,14 @@ class MemoryManager @Inject constructor(
     private val _memoryStats = MutableStateFlow(MemoryStats())
     val memoryStats: StateFlow<MemoryStats> = _memoryStats
 
-    fun storeMemory(item: MemoryItem): String {
+    public fun storeMemory(item: MemoryItem): String {
         memoryStore[item.id] = item
         updateStats()
         updateRecentAccess(item.id)
         return item.id
     }
 
-    fun retrieveMemory(query: MemoryQuery): MemoryRetrievalResult {
+    public fun retrieveMemory(query: MemoryQuery): MemoryRetrievalResult {
         val items = memoryStore.values
             .filter { item ->
                 // Apply filters
@@ -46,7 +46,7 @@ class MemoryManager @Inject constructor(
         )
     }
 
-    fun getContextWindow(task: String): List<MemoryItem> {
+    public fun getContextWindow(task: String): List<MemoryItem> {
         val recentItems = memoryStore.values
             .filter {
                 it.timestamp > Clock.System.now().minus(config.contextChainingConfig.maxChainLength.seconds)
@@ -57,7 +57,7 @@ class MemoryManager @Inject constructor(
         return recentItems
     }
 
-    fun getMemoryStats(): MemoryStats {
+    public fun getMemoryStats(): MemoryStats {
         return _memoryStats.value
     }
 
@@ -88,7 +88,7 @@ class MemoryManager @Inject constructor(
     }
 }
 
-data class MemoryStats(
+public data class MemoryStats(
     val totalItems: Int = 0,
     val recentItems: Int = 0,
     val memorySize: Int = 0,
