@@ -8,8 +8,23 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import dev.aurakai.auraframefx.ui.theme.Color
+import androidx.compose.ui.graphics.Color // Use Compose Color
+import dev.aurakai.auraframefx.system.overlay.model.OverlayShape
+import dev.aurakai.auraframefx.system.quicksettings.model.QuickSettingsConfig
+import dev.aurakai.auraframefx.system.lockscreen.model.LockScreenConfig
+import dev.aurakai.auraframefx.ui.model.ImageResource
+import dev.aurakai.auraframefx.system.quicksettings.model.QuickSettingsAnimation
+import dev.aurakai.auraframefx.system.lockscreen.model.LockScreenAnimation
+import dev.aurakai.auraframefx.system.lockscreen.model.LockScreenElementType
+import dev.aurakai.auraframefx.system.quicksettings.model.QuickSettingsTileConfig
+import dev.aurakai.auraframefx.system.lockscreen.model.LockScreenElementConfig
+import dev.aurakai.auraframefx.ui.viewmodel.SystemCustomizationViewModel
 
+/**
+ * Displays the main system customization screen for adjusting Quick Settings and Lock Screen appearance.
+ *
+ * Presents sections for customizing tile and element shapes, animations, and background images, with options to reset all settings to defaults.
+ */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SystemCustomizationScreen(
@@ -327,6 +342,12 @@ fun ShapePicker(
     // TODO: Implement shape picker UI
 }
 
+/**
+ * Displays a UI component for selecting a Quick Settings animation.
+ *
+ * @param currentAnimation The currently selected animation.
+ * @param onAnimationSelected Callback invoked when a new animation is selected.
+ */
 @Composable
 fun AnimationPicker(
     currentAnimation: QuickSettingsAnimation,
@@ -335,6 +356,26 @@ fun AnimationPicker(
     // TODO: Implement animation picker UI
 }
 
+/**
+ * Displays a UI component for selecting a lock screen animation.
+ *
+ * @param currentAnimation The currently selected lock screen animation.
+ * @param onAnimationSelected Callback invoked when a new animation is selected.
+ */
+@Composable
+fun AnimationPicker(
+    currentAnimation: LockScreenAnimation,
+    onAnimationSelected: (LockScreenAnimation) -> Unit,
+) {
+    // TODO: Implement animation picker UI
+}
+
+/**
+ * Displays a UI component for selecting or changing the background image.
+ *
+ * @param currentImage The currently selected image resource, or null if none is selected.
+ * @param onImageSelected Callback invoked when a new image is selected or the selection is cleared.
+ */
 @Composable
 fun ImagePicker(
     currentImage: ImageResource?,

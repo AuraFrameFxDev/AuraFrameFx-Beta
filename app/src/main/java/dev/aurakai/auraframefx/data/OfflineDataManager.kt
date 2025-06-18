@@ -1,5 +1,7 @@
 package dev.aurakai.auraframefx.data
 
+import javax.inject.Inject
+import javax.inject.Singleton
 import android.content.Context
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
@@ -26,4 +28,5 @@ class OfflineDataManager @Inject constructor(
         // Replace with actual data saving logic
         println("Attempting to save critical offline data: $data")
     }
+
 }

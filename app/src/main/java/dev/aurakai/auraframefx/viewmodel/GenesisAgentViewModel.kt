@@ -2,6 +2,7 @@ package dev.aurakai.auraframefx.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.aurakai.auraframefx.ai.agents.GenesisAgent
 import dev.aurakai.auraframefx.ai.task.HistoricalTask
 import dev.aurakai.auraframefx.model.AgentConfig
@@ -17,7 +18,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 // import javax.inject.Singleton // ViewModels should use @HiltViewModel
 
-// @Singleton // Replaced with @HiltViewModel (implicitly, if this were a Hilt ViewModel)
+@HiltViewModel
 class GenesisAgentViewModel @Inject constructor(
     private val genesisAgent: GenesisAgent,
 ) : ViewModel() {
@@ -106,6 +107,14 @@ class GenesisAgentViewModel @Inject constructor(
         return genesisAgent.getAgentsByPriority()
     }
 
+    /**
+     * Initiates asynchronous processing of a query by the GenesisAgent.
+     *
+     * The function launches the query processing in the background and immediately returns an empty list, as results are not available synchronously.
+     *
+     * @param query The query string to be processed.
+     * @return An empty list, since query processing is performed asynchronously.
+     */
     fun processQuery(query: String): List<AgentConfig> {
         viewModelScope.launch {
             genesisAgent.processQuery(query)
@@ -113,3 +122,35 @@ class GenesisAgentViewModel @Inject constructor(
         return emptyList() // Return empty list since processing is async
     }
 }
+// Note: This ViewModel is designed to be used with Hilt for dependency injection.
+// If you're not using Hilt, you can remove the @Inject annotation and manually instantiate it
+// in your activity or fragment. The ViewModel should be scoped to the lifecycle of the activity
+// or fragment that uses it, typically using ViewModelProvider.Factory or HiltViewModelFactory
+// if you're using Hilt.
+// Ensure you have the necessary dependencies for ViewModel and Hilt in your build.gradle file:
+// implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1
+// implementation "androidx.hilt:hilt-lifecycle-viewmodel:1.0.0"
+// kapt "androidx.hilt:hilt-compiler:1.0.0"
+// implementation "com.google.dagger:hilt-android:2.28-alpha"
+// kapt "com.google.dagger:hilt-android-compiler:2.28-alpha"
+// Also, ensure you have the necessary imports for ViewModel, StateFlow, and other components used in this ViewModel.
+// If you're using Hilt, annotate this class with @HiltViewModel and use @Inject constructor for dependencies.
+// If you're not using Hilt, you can remove the @Inject annotation and manually instantiate it
+// in your activity or fragment. The ViewModel should be scoped to the lifecycle of the activity
+// or fragment that uses it, typically using ViewModelProvider.Factory or ViewModelProvider.NewInstance
+// if you're using ViewModelProvider directly.
+// Ensure you have the necessary dependencies for ViewModel and StateFlow in your build.gradle file:
+// implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1
+// implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.2
+// implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.
+// Also, ensure you have the necessary imports for ViewModel, StateFlow, and other components
+// used in this ViewModel.
+// If you're using Hilt, annotate this class with @HiltViewModel and use @Inject constructor for dependencies.
+// If you're not using Hilt, you can remove the @Inject annotation and manually instantiate it
+// in your activity or fragment. The ViewModel should be scoped to the lifecycle of the activity
+// or fragment that uses it, typically using ViewModelProvider.Factory or ViewModelProvider.NewInstance
+// if you're using ViewModelProvider directly.
+// Ensure you have the necessary dependencies for ViewModel and StateFlow in your build.gradle file:
+// implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1"
+// implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.2"
+// implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.2"

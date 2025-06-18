@@ -1,6 +1,14 @@
 // Content for AuraFrameFx-Master/app/src/main/java/dev/aurakai/auraframefx/system/lockscreen/LockScreenCustomizer.kt
 package dev.aurakai.auraframefx.system.lockscreen
 
+// Import canonical models
+import dev.aurakai.auraframefx.system.lockscreen.model.LockScreenAnimation
+import dev.aurakai.auraframefx.system.lockscreen.model.LockScreenElementConfig
+import dev.aurakai.auraframefx.system.lockscreen.model.LockScreenConfig
+import dev.aurakai.auraframefx.system.lockscreen.model.HapticFeedbackConfig
+import dev.aurakai.auraframefx.system.lockscreen.model.LockScreenElementType
+import dev.aurakai.auraframefx.ui.model.ImageResource
+
 // Placeholders for other dependencies - ensure these align with actual project structure if they exist
 // Using the same placeholders as QuickSettingsCustomizer for consistency in this example
 import android.content.SharedPreferences
@@ -20,86 +28,7 @@ import javax.inject.Singleton
 // --- Placeholder Data Classes for Lock Screen Configuration ---
 // User needs to ensure these are @Serializable and align with actual data structures.
 
-@Serializable
-data class LockScreenLayout(val elementPositions: Map<String, String> = emptyMap()) // e.g., "clock" to "top_center"
-
-// Updated LockScreenClockConfig to include all assumed fields and new animation field
-@Serializable
-data class LockScreenClockConfig(
-    val style: String = "digital",
-    val showSeconds: Boolean = false,
-    val customTextColorEnabled: Boolean? = false,
-    val customTextColor: String? = null,
-    val customTextSizeEnabled: Boolean? = false,
-    val customTextSizeSp: Int = 0,
-    val customFontStyle: String? = null,
-    val animation: LockScreenAnimation = LockScreenAnimation(), // ADD THIS
-)
-
-// Updated LockScreenDateConfig to include new animation field
-@Serializable
-data class LockScreenDateConfig(
-    val format: String = "EEE, MMM d",
-    val showYear: Boolean = true,
-    val animation: LockScreenAnimation = LockScreenAnimation(), // ADD THIS
-)
-
-@Serializable
-data class LockScreenWeatherConfig(
-    val showIcon: Boolean = true,
-    val showTemperature: Boolean = true,
-    val units: String = "Celsius",
-)
-
-@Serializable
-data class LockScreenBackgroundConfig(
-    val type: String = "image",
-    val source: String = "default_wallpaper.jpg",
-    val blur: Float = 0.1f,
-)
-
-@Serializable
-data class LockScreenElementConfig(
-    val elementId: String,
-    val isVisible: Boolean = true,
-    val customText: String? = null,
-)
-
-// Replacing the old LockScreenAnimation with the new detailed one
-@Serializable
-data class LockScreenAnimation(
-    val type: String = "none", // e.g., "fade_in", "slide_up", "pulsate"
-    val durationMs: Long = 300,
-    val startDelayMs: Long = 0,
-    val interpolator: String = "accelerate_decelerate",
-    // TODO: Add properties for specific animation types
-)
-
-// Added HapticFeedbackConfig definition
-@Serializable
-data class HapticFeedbackConfig(
-    // Duplicated definition for now, consider moving to common if not already.
-    val enabled: Boolean = false,
-    val effect: String = "click",
-    val intensity: Int = 50,
-)
-
-// Modified LockScreenConfig to include new fields and reflect hooker assumptions
-@Serializable
-data class LockScreenConfig(
-    val lockScreenMessage: String = "Hello Aura",
-    val showClock: Boolean = true, // Assuming this controls overall clock visibility
-    val clockConfig: LockScreenClockConfig? = LockScreenClockConfig(),
-    val dateConfig: LockScreenDateConfig? = LockScreenDateConfig(),
-    val hideDate: Boolean? = false, // From previous hooker assumptions
-    val defaultElementAnimation: LockScreenAnimation = LockScreenAnimation(),
-    val hapticFeedback: HapticFeedbackConfig = HapticFeedbackConfig(), // ADD THIS
-    // Preserve other potential fields if they existed, or add as needed from hooker assumptions
-    val layout: LockScreenLayout? = null,
-    val backgroundConfig: LockScreenBackgroundConfig? = null,
-    val weatherConfig: LockScreenWeatherConfig? = null,
-    val elements: List<LockScreenElementConfig>? = emptyList(),
-)
+// All data classes are moved to the model package to ensure a single source of truth.
 
 @Singleton
 class LockScreenCustomizer @Inject constructor(
@@ -118,6 +47,13 @@ class LockScreenCustomizer @Inject constructor(
         private const val IPC_KEY_LOCK_SCREEN = "lock_screen_config_json"
     }
 
+    /**
+     * Applies the provided lock screen configuration and propagates it to the system.
+     *
+     * Updates the current configuration state, serializes the configuration to JSON, and stores it in shared preferences for inter-process communication. Triggers the overlay service to apply the configuration.
+     *
+     * @param config The lock screen configuration to apply.
+     */
     fun applyConfig(config: LockScreenConfig) {
         _currentConfig.value = config
 
@@ -135,5 +71,74 @@ class LockScreenCustomizer @Inject constructor(
             // TODO: Implement lock screen hooking
         }
     }
-    // Add other methods if they were part of the original class definition
+
+    /**
+     * Updates the shape of a specified lock screen element.
+     *
+     * @param elementType The type of lock screen element to update.
+     * @param shape The new shape to apply to the element.
+     */
+    fun updateElementShape(elementType: LockScreenElementType, shape: dev.aurakai.auraframefx.system.overlay.model.OverlayShape) {
+        // TODO: Implement logic to update element shape
+    }
+
+    /**
+     * Updates the animation of a specified lock screen element.
+     *
+     * @param elementType The type of lock screen element to update.
+     * @param animation The animation configuration to apply to the element.
+     */
+    fun updateElementAnimation(elementType: LockScreenElementType, animation: LockScreenAnimation) {
+        // TODO: Implement logic to update element animation
+    }
+
+    /**
+     * Updates the lock screen background image.
+     *
+     * @param image The new background image to set, or null to remove the background.
+     */
+    fun updateBackground(image: ImageResource?) {
+        // TODO: Implement logic to update background
+    }
+
+    /**
+     * Resets the lock screen configuration to its default settings.
+     *
+     * This method is intended to restore all lock screen customization options to their original defaults.
+     */
+    fun resetToDefault() {
+        // TODO: Implement logic to reset to default
+    }
 }
+// For detailed implementation guidelines and best practices, refer to the documentation:
+// docs/LockScreenCustomizer.md
+// and best practices for Android development
+// Ensure to handle any potential changes in the underlying lock screen implementation
+// or system APIs that may affect the customizer's functionality
+// Ensure to keep the customizer updated with any new features or changes in the lock screen system
+// and ensure compatibility with future versions of the Aura framework
+// Ensure to handle any potential conflicts with other customizers or system components
+// that may affect the lock screen customization
+// Ensure to provide clear documentation and usage examples for developers
+// who may want to use or extend the LockScreenCustomizer in their applications
+// Ensure to follow the project's coding standards and guidelines for consistency
+// and maintainability across the codebase
+// Ensure to handle any potential localization or internationalization needs
+// for the lock screen customization, including text and date formats
+// Ensure to consider accessibility features and ensure the lock screen customization
+// is usable by all users, including those with disabilities
+// Ensure to handle any potential security implications of the lock screen customization
+// and ensure sensitive information is handled appropriately
+// Ensure to test the customizer on different devices and Android versions
+// to ensure compatibility and performance across the ecosystem
+// Ensure to keep the customizer modular and extensible
+// to allow for future enhancements and customizations
+// Ensure to handle any potential user preferences or settings
+// that may affect the lock screen customization
+// and ensure a smooth user experience
+// Ensure to provide clear error handling and logging
+// to help diagnose any issues that may arise during the customization process
+// Ensure to keep the customizer's dependencies minimal
+// and ensure it does not introduce unnecessary complexity or bloat
+// to the overall system
+// Ensure to follow the project's architecture and design patterns

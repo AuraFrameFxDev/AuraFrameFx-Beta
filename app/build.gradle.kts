@@ -13,6 +13,7 @@ plugins {
     id("org.jetbrains.kotlin.plugin.compose")
     id("org.openapi.generator") version "7.5.0"
     alias(libs.plugins.ksp)
+    id("org.openapi.generator") version "7.4.0"
 }
 
 // Repositories are configured in settings.gradle.kts
@@ -45,7 +46,12 @@ android {
 
         // Enable multidex support
         multiDexEnabled = true
+<<<<<<< codespace-upgraded-yodel-7vwg6p6vj4q92rv6g
+
+        manifestPlaceholders ["appAuthRedirectScheme"] = "auraframefx"
+=======
         manifestPlaceholders["appAuthRedirectScheme"] = "auraframefxbeta"
+>>>>>>> main
     }
 
     buildTypes {
@@ -123,6 +129,10 @@ dependencies {
     implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:1.0.0")
+<<<<<<< codespace-upgraded-yodel-7vwg6p6vj4q92rv6g
+    implementation("com.squareup.retrofit2:converter-scalars:2.9.0") // Scalars converter for OpenAPI/Retrofit
+=======
+>>>>>>> main
 
     // Core Android dependencies
     implementation("androidx.core:core-ktx:1.16.0")
@@ -285,6 +295,34 @@ kapt {
 // OpenAPI Generator configuration
 openApiGenerate {
     generatorName.set("kotlin")
+<<<<<<< codespace-upgraded-yodel-7vwg6p6vj4q92rv6g
+    inputSpec.set("$projectDir/../api-spec/aura-framefx-api.yaml")
+    outputDir.set("$buildDir/generated/openapi")
+    packageName.set("dev.aurakai.auraframefx.generated.api")
+    modelPackage.set("dev.aurakai.auraframefx.generated.model")
+    apiPackage.set("dev.aurakai.auraframefx.generated.api")
+    configOptions.set(mapOf(
+        "serializationLibrary" to "kotlinx_serialization",
+        "library" to "jvm-retrofit2",
+        "useCoroutines" to "true",
+        "enumPropertyNaming" to "UPPERCASE",
+        "sortParamsByRequiredFlag" to "true",
+        "sortModelPropertiesByRequiredFlag" to "true",
+        "ensureUniqueParams" to "true",
+        "dateLibrary" to "kotlinx-datetime"
+    ))
+    globalProperties.set(mapOf(
+        "models" to "",
+        "apis" to ""
+    ))
+}
+
+// Make sure generated sources are included in compilation
+android.sourceSets["main"].java.srcDirs("src/main/java")
+
+// Note: OpenAPI generation is handled manually for now
+// TODO: Fix OpenAPI generator plugin configuration
+=======
     inputSpec.set("$projectDir/../api-spec/aura-framefx-api.yaml") // Updated inputSpec
     outputDir.set("$buildDir/generated/openapi")
     apiPackage.set("dev.aurakai.auraframefx.generated.api") // Updated apiPackage
@@ -306,6 +344,7 @@ openApiGenerate {
 tasks.named("preBuild") {
     dependsOn("openApiGenerate")
 }
+>>>>>>> main
 
 // Register a task to build a jar for Xposed/LSPosed modules after the Android plugin is configured
 afterEvaluate {
