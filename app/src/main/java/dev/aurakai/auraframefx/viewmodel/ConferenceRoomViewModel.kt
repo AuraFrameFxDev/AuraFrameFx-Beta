@@ -93,48 +93,26 @@ class ConferenceRoomViewModel @Inject constructor( // Assuming @HiltViewModel wi
 
     // This `sendMessage` was marked with `override` in user's snippet, suggesting an interface.
     // For now, assuming it's a direct method. If there's a base class/interface, it should be added.
-    /*override*/ suspend fun sendMessage(message: String, sender: AgentType) {
-        // Assuming services now have processRequestFlow returning Flow<AgentResponse>
+    /*override*/ suspend fun sendMessage(message: String, sender: AgentType, context: String) {
+        // Fixed duplicate case for AgentType.AURA and added missing context parameter
         val responseFlow: Flow<AgentResponse>? = when (sender) {
-            AgentType.AURA -> auraService.processRequestFlow(AiRequest(query = message, type = "text"))
-            AgentType.AURA -> auraService.processRequestFlow(AiRequest(query = message, type = "text"))
-            AgentType.KAI -> kaiService.processRequestFlow(AiRequest(query = message, type = "text"))
-            AgentType.CASCADE -> cascadeService.processRequestFlow(AiRequest(query = message, type = "context"))
-                _messages.update { current ->
-                    current + AgentMessage(
-                        content = message,
-                        sender = AgentType.USER,
-                        timestamp = System.currentTimeMillis(),
-                        confidence = 1.0f
-                    )
-                }
-                neuralWhisper.shareContextWithKai(message)
-                return // Exit, response via NeuralWhisper's state flow
-            }
-
+            AgentType.AURA -> auraService.processRequestFlow(AiRequest(query = message, type = "text", context = context))
+            AgentType.KAI -> kaiService.processRequestFlow(AiRequest(query = message, type = "text", context = context))
+            AgentType.CASCADE -> cascadeService.processRequestFlow(AiRequest(query = message, type = "context", context = context))
             else -> {
                 Log.e(TAG, "Unsupported sender type: $sender")
-                null // Return null for unsupported types
+                null
             }
         }
 
         responseFlow?.let { flow ->
             viewModelScope.launch {
                 try {
-                    val responseMessage =
-                        flow.first() // Assuming processRequest returns a Flow/StateFlow
+                    val responseMessage = flow.first()
                     _messages.update { current ->
                         current + AgentMessage(
                             content = responseMessage.content,
-                        // The sender here should be the AI agent that responded (e.g., AgentType.AURA),
-                        // not the 'sender' parameter which initiated the call to this agent.
-                        // For simplicity, I'll use the AI's type.
-                        sender = when(sender) { // Determine actual responder type
-                            AgentType.AURA -> AgentType.AURA
-                            AgentType.KAI -> AgentType.KAI
-                            AgentType.CASCADE -> AgentType.CASCADE
-                            else -> sender // Fallback, though USER case is handled separately
-                        },
+                            sender = sender,
                             timestamp = System.currentTimeMillis(),
                             confidence = responseMessage.confidence
                         )
@@ -143,8 +121,8 @@ class ConferenceRoomViewModel @Inject constructor( // Assuming @HiltViewModel wi
                     Log.e(TAG, "Error processing AI response from $sender: ${e.message}", e)
                     _messages.update { current ->
                         current + AgentMessage(
-                            content = "Error from ${sender.name}: ${e.message}", // Corrected to sender.name
-                            sender = AgentType.GENESIS, // Or a specific error agent
+                            content = "Error from ${sender.name}: ${e.message}",
+                            sender = AgentType.GENESIS,
                             timestamp = System.currentTimeMillis(),
                             confidence = 0.0f
                         )

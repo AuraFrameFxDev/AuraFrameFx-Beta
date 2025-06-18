@@ -1,5 +1,6 @@
 package dev.aurakai.auraframefx.system.lockscreen.model
 
+import kotlinx.serialization.Contextual
 import kotlinx.serialization.Serializable
 
 // Placeholder based on SystemCustomizationViewModel.kt usage
@@ -16,7 +17,7 @@ data class LockScreenConfig(
     val clockConfig: ClockConfig? = null,
     val dateConfig: DateConfig? = null,
     val defaultElementAnimation: LockScreenAnimationConfig = LockScreenAnimationConfig(),
-    val hapticFeedback: HapticFeedbackConfig = HapticFeedbackConfig() // Assuming similar HapticFeedbackConfig
+    @Contextual val hapticFeedback: HapticFeedbackConfig = HapticFeedbackConfig() // Using the HapticFeedbackConfig from separate file
 )
 
 // Referenced in LockScreenConfig and LockScreenHooker
@@ -35,15 +36,6 @@ data class ClockConfig(
 data class DateConfig(
     // Assuming similar properties to ClockConfig for now if needed
     val animation: LockScreenAnimationConfig = LockScreenAnimationConfig()
-)
-
-
-// Assuming similar HapticFeedbackConfig as in QuickSettings
-@Serializable
-data class HapticFeedbackConfig(
-    val enabled: Boolean? = false,
-    val effect: String = "click",
-    val intensity: Int = 50
 )
 
 // Referenced in LockScreenConfig and LockScreenHooker

@@ -1,13 +1,12 @@
 package dev.aurakai.auraframefx.xposed
 
 import de.robv.android.xposed.IXposedHookLoadPackage
-import de.robv.android.xposed.IXposedHookLoadPackage
 import de.robv.android.xposed.XC_MethodHook
 import de.robv.android.xposed.XposedBridge
 import de.robv.android.xposed.XposedHelpers
 import de.robv.android.xposed.XSharedPreferences // Added import
 import de.robv.android.xposed.callbacks.XC_LoadPackage // Added import
-import dev.aurakai.auraframefx.system.lockscreen.LockScreenConfig
+import dev.aurakai.auraframefx.system.lockscreen.model.LockScreenConfig
 import dev.aurakai.auraframefx.system.overlay.SystemOverlayConfig
 import dev.aurakai.auraframefx.system.quicksettings.model.QuickSettingsConfig
 import dev.aurakai.auraframefx.utils.JsonUtils
