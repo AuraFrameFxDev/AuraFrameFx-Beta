@@ -45,6 +45,13 @@ class QuickSettingsCustomizer @Inject constructor(
         private const val IPC_KEY_QUICK_SETTINGS = "quick_settings_config_json"
     }
 
+    /**
+     * Applies the provided quick settings configuration and updates the shared preferences for IPC.
+     *
+     * Updates the current configuration state, serializes the configuration to JSON, and stores it in shared preferences for inter-process communication. Triggers the overlay service hook for further processing.
+     *
+     * @param config The new quick settings configuration to apply.
+     */
     fun applyConfig(config: QuickSettingsConfig) {
         _currentConfig.value = config
 
@@ -63,18 +70,40 @@ class QuickSettingsCustomizer @Inject constructor(
         }
     }
 
+    /**
+     * Updates the shape of a quick settings tile identified by the given tile ID.
+     *
+     * @param tileId The unique identifier of the tile to update.
+     * @param shape The new shape to apply to the tile.
+     */
     fun updateTileShape(tileId: String, shape: OverlayShape) {
         // TODO: Implement logic to update tile shape
     }
 
+    /**
+     * Updates the animation of a specific quick settings tile.
+     *
+     * @param tileId The identifier of the tile to update.
+     * @param animation The new animation configuration to apply to the tile.
+     */
     fun updateTileAnimation(tileId: String, animation: QuickSettingsAnimation) {
         // TODO: Implement logic to update tile animation
     }
 
+    /**
+     * Updates the background image of the quick settings interface.
+     *
+     * @param image The new background image to apply, or null to remove the background.
+     */
     fun updateBackground(image: ImageResource?) {
         // TODO: Implement logic to update background
     }
 
+    /**
+     * Resets the quick settings configuration to its default values.
+     *
+     * This method is intended to restore all quick settings customizations to their original defaults.
+     */
     fun resetToDefault() {
         // TODO: Implement logic to reset to default
     }
