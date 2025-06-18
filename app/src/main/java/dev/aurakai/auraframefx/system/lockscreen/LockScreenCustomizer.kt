@@ -110,25 +110,8 @@ class LockScreenCustomizer @Inject constructor(
         // TODO: Implement logic to reset to default
     }
 }
-// Ensure to handle serialization/deserialization properly in the actual implementation
-// This includes using the JsonUtils or any other serialization library as needed
-// Ensure to handle IPC properly, including reading the config back when needed
-// This class should be used in conjunction with the actual lock screen implementation
-// and should be tested to ensure it applies the configurations correctly
-// Ensure to handle any potential exceptions or errors during serialization/deserialization
-// and IPC operations to avoid crashes or data loss
-// Ensure to test the integration with the actual lock screen system
-// and verify that the configurations are applied as expected
-// Ensure to document the expected structure of LockScreenConfig and its related classes
-// for future maintainability and clarity
-// Ensure to follow best practices for Android development, including using coroutines
-
-// and proper lifecycle management for the customizer
-// Ensure to handle any potential memory leaks or performance issues
-// by using appropriate scopes and lifecycle-aware components
-// Ensure to test the customizer thoroughly with different configurations
-// and edge cases to ensure robustness and reliability
-// Ensure to keep the code clean and maintainable, following Kotlin coding conventions
+// For detailed implementation guidelines and best practices, refer to the documentation:
+// docs/LockScreenCustomizer.md
 // and best practices for Android development
 // Ensure to handle any potential changes in the underlying lock screen implementation
 // or system APIs that may affect the customizer's functionality
