@@ -51,6 +51,8 @@ class LockScreenCustomizer @Inject constructor(
      * Applies the provided lock screen configuration and makes it available system-wide.
      *
      * Updates the current configuration state, serializes the configuration to JSON, stores it in shared preferences for inter-process communication, and initiates the overlay service to apply the new configuration.
+
+
      *
      * @param config The lock screen configuration to apply.
      */
@@ -74,19 +76,20 @@ class LockScreenCustomizer @Inject constructor(
 
     /**
      * Updates the shape of the specified lock screen element.
-     *
-     * @param elementType The type of lock screen element to update.
-     * @param shape The new shape to apply to the element.
+
+     * @param elementType The lock screen element whose shape will be updated.
+     * @param shape The shape to apply to the specified element.
      */
     fun updateElementShape(elementType: LockScreenElementType, shape: dev.aurakai.auraframefx.system.overlay.model.OverlayShape) {
         // TODO: Implement logic to update element shape
     }
 
     /**
-     * Updates the animation settings for a specified lock screen element.
+* Updates the animation settings for a specified lock screen element.
      *
      * @param elementType The type of lock screen element to update.
      * @param animation The animation configuration to apply.
+
      */
     fun updateElementAnimation(elementType: LockScreenElementType, animation: LockScreenAnimation) {
         // TODO: Implement logic to update element animation
@@ -96,6 +99,7 @@ class LockScreenCustomizer @Inject constructor(
      * Sets or clears the lock screen background image.
      *
      * @param image The image to set as the background, or null to remove the current background.
+
      */
     fun updateBackground(image: ImageResource?) {
         // TODO: Implement logic to update background
@@ -105,6 +109,7 @@ class LockScreenCustomizer @Inject constructor(
      * Resets the lock screen configuration to its default state.
      *
      * Reverts all customizations, restoring the original lock screen settings.
+
      */
     fun resetToDefault() {
         // TODO: Implement logic to reset to default

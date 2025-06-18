@@ -113,6 +113,7 @@ class GenesisAgentViewModel @Inject constructor(
      * Retrieves all agent configurations sorted by priority.
      *
      * @return A list of agent configurations ordered from highest to lowest priority.
+
      */
     fun getAgentsByPriority(): List<AgentConfig> {
         return genesisAgent.getAgentsByPriority()
@@ -125,6 +126,7 @@ class GenesisAgentViewModel @Inject constructor(
      *
      * @param query The query string to be processed.
      * @return An empty list, as query results are handled asynchronously.
+
      */
     fun processQuery(query: String): List<AgentConfig> {
         viewModelScope.launch {
