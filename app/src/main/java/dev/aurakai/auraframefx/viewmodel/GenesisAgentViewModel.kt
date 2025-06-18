@@ -107,6 +107,14 @@ class GenesisAgentViewModel @Inject constructor(
         return genesisAgent.getAgentsByPriority()
     }
 
+    /**
+     * Initiates asynchronous processing of a query by the GenesisAgent.
+     *
+     * The function launches the query processing in the background and immediately returns an empty list, as results are not available synchronously.
+     *
+     * @param query The query string to be processed.
+     * @return An empty list, since query processing is performed asynchronously.
+     */
     fun processQuery(query: String): List<AgentConfig> {
         viewModelScope.launch {
             genesisAgent.processQuery(query)

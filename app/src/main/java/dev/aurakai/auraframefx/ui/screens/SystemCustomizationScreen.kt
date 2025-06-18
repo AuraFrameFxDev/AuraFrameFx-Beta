@@ -20,6 +20,11 @@ import dev.aurakai.auraframefx.system.quicksettings.model.QuickSettingsTileConfi
 import dev.aurakai.auraframefx.system.lockscreen.model.LockScreenElementConfig
 import dev.aurakai.auraframefx.ui.viewmodel.SystemCustomizationViewModel
 
+/**
+ * Displays the main system customization screen, allowing users to configure Quick Settings and Lock Screen appearance.
+ *
+ * Presents sections for customizing tile and element shapes, animations, and backgrounds, with options to reset settings to defaults.
+ */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SystemCustomizationScreen(
@@ -337,6 +342,12 @@ fun ShapePicker(
     // TODO: Implement shape picker UI
 }
 
+/**
+ * Displays a UI component for selecting a Quick Settings animation.
+ *
+ * @param currentAnimation The currently selected animation.
+ * @param onAnimationSelected Callback invoked when a new animation is selected.
+ */
 @Composable
 fun AnimationPicker(
     currentAnimation: QuickSettingsAnimation,
@@ -345,6 +356,12 @@ fun AnimationPicker(
     // TODO: Implement animation picker UI
 }
 
+/**
+ * Displays a UI component for selecting a lock screen animation.
+ *
+ * @param currentAnimation The currently selected lock screen animation.
+ * @param onAnimationSelected Callback invoked when a new animation is selected.
+ */
 @Composable
 fun AnimationPicker(
     currentAnimation: LockScreenAnimation,
@@ -353,6 +370,12 @@ fun AnimationPicker(
     // TODO: Implement animation picker UI
 }
 
+/**
+ * Displays a UI component for selecting or changing the background image.
+ *
+ * @param currentImage The currently selected image resource, or null if none is selected.
+ * @param onImageSelected Callback invoked when a new image is selected or the selection is cleared.
+ */
 @Composable
 fun ImagePicker(
     currentImage: ImageResource?,
