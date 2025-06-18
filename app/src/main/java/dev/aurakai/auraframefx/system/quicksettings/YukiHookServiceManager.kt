@@ -6,9 +6,9 @@ import javax.inject.Singleton
 @Singleton
 class YukiHookServiceManager @Inject constructor() {
     /**
-     * Registers a hook operation to be executed.
+     * Registers a hook operation for future execution.
      *
-     * @param param The lambda function representing the hook logic to be invoked.
+     * @param param Lambda containing the hook logic to be registered.
      */
     fun hook(param: () -> Unit) {
         // TODO: Implement hook logic
