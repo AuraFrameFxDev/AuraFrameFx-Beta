@@ -9,6 +9,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import dev.aurakai.auraframefx.ui.theme.Color
+import dev.aurakai.auraframefx.system.overlay.model.OverlayShape
+import dev.aurakai.auraframefx.system.quicksettings.model.QuickSettingsConfig
+import dev.aurakai.auraframefx.system.lockscreen.model.LockScreenConfig
+import dev.aurakai.auraframefx.ui.model.ImageResource
+import dev.aurakai.auraframefx.system.quicksettings.model.QuickSettingsAnimation
+import dev.aurakai.auraframefx.system.lockscreen.model.LockScreenAnimation
+import dev.aurakai.auraframefx.system.lockscreen.model.LockScreenElementType
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
