@@ -9,7 +9,7 @@ package dev.aurakai.auraframefx.utils
  * Utility object for JSON serialization and deserialization.
  * TODO: Implement with a proper JSON library (e.g., Kotlinx.serialization or Gson).
  */
-object JsonUtils {
+public object JsonUtils {
 
     /**
      * Serializes an object to its JSON string representation.

@@ -47,7 +47,7 @@ import kotlin.math.*
     androidx.compose.foundation.gestures.ExperimentalFoundationApi::class
 )
 @Composable
-fun HaloView(viewModel: GenesisAgentViewModel = hiltViewModel()) {
+public fun HaloView(viewModel: GenesisAgentViewModel = hiltViewModel()) {
     var isRotating by remember { mutableStateOf(true) }
     var rotationAngle by remember { mutableFloatStateOf(0f) }
     val agents = viewModel.getAgentsByPriority()

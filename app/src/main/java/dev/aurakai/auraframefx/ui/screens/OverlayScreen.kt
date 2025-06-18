@@ -14,7 +14,7 @@ import androidx.compose.ui.unit.dp
 // import androidx.compose.ui.tooling.preview.Preview
 
 @Composable
-fun OverlayContent(modifier: Modifier = Modifier) { // Renamed
+public fun OverlayContent(modifier: Modifier = Modifier) { // Renamed
     // TODO: Implement actual overlay content
     Box(modifier = modifier.padding(16.dp)) {
         Text("Overlay Content Area")
@@ -22,7 +22,7 @@ fun OverlayContent(modifier: Modifier = Modifier) { // Renamed
 }
 
 @Composable
-fun OverlayControlPanel(modifier: Modifier = Modifier, onDismiss: () -> Unit) { // Renamed
+public fun OverlayControlPanel(modifier: Modifier = Modifier, onDismiss: () -> Unit) { // Renamed
     // TODO: Implement actual overlay control panel
     Column(modifier = modifier.padding(16.dp), horizontalAlignment = Alignment.CenterHorizontally) {
         Text("Overlay Controls")
@@ -33,7 +33,7 @@ fun OverlayControlPanel(modifier: Modifier = Modifier, onDismiss: () -> Unit) { 
 }
 
 @Composable
-fun OverlayScreen() { // Renamed from OverlayScreen
+public fun OverlayScreen() { // Renamed from OverlayScreen
     // TODO: Implement the actual Overlay Screen UI, potentially combining content and controls
     Box(
         modifier = Modifier.fillMaxSize(),

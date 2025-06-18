@@ -11,36 +11,36 @@ import dev.aurakai.auraframefx.ui.theme.AppStrings
 /**
  * Navigation destinations for the app
  */
-sealed class NavDestination(
+public sealed class NavDestination(
     val route: String,
     val title: String,
     val icon: ImageVector? = null,
 ) {
-    object Home : NavDestination(
+    public object Home : NavDestination(
         route = "home",
         title = AppStrings.NAV_HOME,
         icon = Icons.Default.Home
     )
 
-    object AiChat : NavDestination(
+    public object AiChat : NavDestination(
         route = "ai_chat",
         title = AppStrings.NAV_AI_CHAT,
         icon = Icons.Default.Chat
     )
 
-    object Profile : NavDestination(
+    public object Profile : NavDestination(
         route = "profile",
         title = AppStrings.NAV_PROFILE,
         icon = Icons.Default.Person
     )
 
-    object Settings : NavDestination(
+    public object Settings : NavDestination(
         route = "settings",
         title = AppStrings.NAV_SETTINGS,
         icon = Icons.Default.Settings
     )
 
-    object OracleDriveControl : NavDestination(
+    public object OracleDriveControl : NavDestination(
         route = "oracle_drive_control",
         title = "OracleDrive Control", // You may want to localize this
         icon = null // Optionally add an icon

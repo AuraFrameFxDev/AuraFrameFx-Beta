@@ -20,7 +20,7 @@ import androidx.compose.ui.unit.dp
 import dev.aurakai.auraframefx.R // Corrected import
 
 @Composable
-fun StatusCard(statusText: String, modifier: Modifier = Modifier) {
+public fun StatusCard(statusText: String, modifier: Modifier = Modifier) {
     Card(
         modifier = modifier.fillMaxWidth(),
         elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
@@ -34,7 +34,7 @@ fun StatusCard(statusText: String, modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun FeatureCard(title: String, description: String, modifier: Modifier = Modifier) {
+public fun FeatureCard(title: String, description: String, modifier: Modifier = Modifier) {
     Card(
         modifier = modifier.fillMaxWidth(),
         elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
@@ -48,7 +48,7 @@ fun FeatureCard(title: String, description: String, modifier: Modifier = Modifie
 }
 
 @Composable
-fun AiFeaturesScreen() {
+public fun AiFeaturesScreen() {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -79,7 +79,7 @@ fun AiFeaturesScreen() {
 
 @Preview(showBackground = true)
 @Composable
-fun AiFeaturesScreenPreview() {
+public fun AiFeaturesScreenPreview() {
     MaterialTheme { // Using MaterialTheme for preview
         AiFeaturesScreen()
     }

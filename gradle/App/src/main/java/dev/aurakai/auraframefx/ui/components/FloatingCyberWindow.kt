@@ -31,7 +31,7 @@ import kotlin.math.*
  * Based on the reference designs that show transparent panels with neon borders and hexagonal elements
  */
 @Composable
-fun FloatingCyberWindow(
+public fun FloatingCyberWindow(
     modifier: Modifier = Modifier,
     title: String? = null,
     cornerStyle: CornerStyle = CornerStyle.Hex,
@@ -208,7 +208,7 @@ fun FloatingCyberWindow(
  * Special text component for cyberpunk UI with digital glitch effects
  */
 @Composable
-fun CyberpunkText(
+public fun CyberpunkText(
     text: String,
     modifier: Modifier = Modifier,
     color: CyberpunkTextColor = CyberpunkTextColor.Primary,
@@ -294,19 +294,19 @@ fun CyberpunkText(
     }
 }
 
-enum class CornerStyle {
+public enum class CornerStyle {
     Hex,
     Angled,
     Rounded
 }
 
-enum class BackgroundStyle {
+public enum class BackgroundStyle {
     Transparent,
     HexGrid,
     DigitalLandscape
 }
 
-enum class CyberpunkTextColor {
+public enum class CyberpunkTextColor {
     Primary,
     Secondary,
     Accent,
@@ -314,7 +314,7 @@ enum class CyberpunkTextColor {
     White
 }
 
-enum class CyberpunkTextStyle {
+public enum class CyberpunkTextStyle {
     Header,
     Title,
     Body,
@@ -326,7 +326,7 @@ enum class CyberpunkTextStyle {
  * A floating menu item in cyberpunk style based on the reference images
  */
 @Composable
-fun CyberMenuItem(
+public fun CyberMenuItem(
     text: String,
     modifier: Modifier = Modifier,
     isSelected: Boolean = false,

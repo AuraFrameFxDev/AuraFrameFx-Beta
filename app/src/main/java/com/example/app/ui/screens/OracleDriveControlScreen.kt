@@ -16,21 +16,26 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.app.viewmodel.OracleDriveControlViewModel
 import kotlinx.coroutines.launch
 
+/**
+ * Displays a UI screen for controlling and monitoring the Oracle Drive service.
+ *
+ * Provides controls to refresh service status, view diagnostics logs, and enable or disable modules by package name. The screen reflects real-time connection status and displays error messages for failed operations.
+ */
 @Composable
-fun OracleDriveControlScreen(
+public fun OracleDriveControlScreen(
     viewModel: OracleDriveControlViewModel = hiltViewModel(),
 ) {
-    val context = LocalContext.current
-    val isConnected by viewModel.isServiceConnected.collectAsState()
-    val status by viewModel.status.collectAsState()
-    val detailedStatus by viewModel.detailedStatus.collectAsState()
-    val diagnosticsLog by viewModel.diagnosticsLog.collectAsState()
-    var packageName by remember { mutableStateOf(TextFieldValue("")) }
-    var enableModule by remember { mutableStateOf(true) }
-    var isLoading by remember { mutableStateOf(false) }
-    var errorMessage by remember { mutableStateOf<String?>(null) }
-    val logScrollState = rememberScrollState()
-    val viewModelScope = rememberCoroutineScope()
+    public val context = LocalContext.current
+    public val isConnected by viewModel.isServiceConnected.collectAsState()
+    public val status by viewModel.status.collectAsState()
+    public val detailedStatus by viewModel.detailedStatus.collectAsState()
+    public val diagnosticsLog by viewModel.diagnosticsLog.collectAsState()
+    public var packageName by remember { mutableStateOf(TextFieldValue("")) }
+    public var enableModule by remember { mutableStateOf(true) }
+    public var isLoading by remember { mutableStateOf(false) }
+    public var errorMessage by remember { mutableStateOf<String?>(null) }
+    public val logScrollState: rememberScrollState = rememberScrollState()
+    public val viewModelScope: rememberCoroutineScope = rememberCoroutineScope()
 
     LaunchedEffect(Unit) {
         viewModel.bindService()

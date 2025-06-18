@@ -14,17 +14,17 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class CascadeDebugViewModel @Inject constructor(
+public class CascadeDebugViewModel @Inject constructor(
     private val cascadeAgent: CascadeAgent,
 ) {
-    val visionState: StateFlow<VisionState> = cascadeAgent.visionState
-    val processingState: StateFlow<ProcessingState> = cascadeAgent.processingState
+    public val visionState: StateFlow<VisionState> = cascadeAgent.visionState
+    public val processingState: StateFlow<ProcessingState> = cascadeAgent.processingState
 
-    fun updateVisionState(newState: VisionState) {
+    public fun updateVisionState(newState: VisionState) {
         cascadeAgent.updateVisionState(newState)
     }
 
-    fun updateProcessingState(newState: ProcessingState) {
+    public fun updateProcessingState(newState: ProcessingState) {
         cascadeAgent.updateProcessingState(newState)
     }
 }
@@ -36,15 +36,15 @@ class CascadeDebugViewModel @Inject constructor(
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CascadeZOrderPlayground(
+public fun CascadeZOrderPlayground(
     viewModel: CascadeDebugViewModel = androidx.hilt.navigation.compose.hiltViewModel(),
 ) {
-    var newVisionState by remember { mutableStateOf(VisionState()) }
-    var newProcessingState by remember { mutableStateOf(ProcessingState()) }
+    public var newVisionState by remember { mutableStateOf(VisionState()) }
+    public var newProcessingState by remember { mutableStateOf(ProcessingState()) }
 
     // Collect StateFlow values safely using collectAsState()
-    val visionState by viewModel.visionState.collectAsState()
-    val processingState by viewModel.processingState.collectAsState()
+    public val visionState by viewModel.visionState.collectAsState()
+    public val processingState by viewModel.processingState.collectAsState()
 
     Column(
         modifier = Modifier
@@ -185,7 +185,7 @@ fun CascadeZOrderPlayground(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 @Preview(showBackground = true)
-fun CascadeZOrderPlaygroundPreview() {
+public fun CascadeZOrderPlaygroundPreview() {
     MaterialTheme {
         CascadeZOrderPlayground()
     }

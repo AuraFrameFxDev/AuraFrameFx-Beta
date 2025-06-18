@@ -3,56 +3,67 @@ package dev.aurakai.auraframefx.system.quicksettings.model
 import dev.aurakai.auraframefx.system.overlay.model.OverlayShape // Assuming we use the existing OverlayShape
 
 // Placeholder based on SystemCustomizationViewModel.kt usage
-data class QuickSettingsConfig(
-    val tileShape: OverlayShape? = null, // Example: Use the existing OverlayShape model
-    val animationType: QuickSettingsAnimation = QuickSettingsAnimation.FADE,
-    val hideLabels: Boolean = false,
+public data class QuickSettingsConfig(
+    public val tileShape: OverlayShape? = null, // Example: Use the existing OverlayShape model
+    public val animationType: QuickSettingsAnimation = QuickSettingsAnimation.FADE,
+    public val hideLabels: Boolean = false,
     // Add other relevant fields based on SystemCustomizationViewModel operations
-    val tiles: List<QuickSettingsTileConfig>? = null, // Added from QuickSettingsHooker
-    val headerBackgroundConfig: HeaderBackgroundConfig? = null, // Added from QuickSettingsHooker
-    val defaultHapticFeedback: HapticFeedbackConfig = HapticFeedbackConfig(), // Added from QuickSettingsHooker
-    val tileAnimationDefault: QuickSettingsTileAnimation? = null // Added from QuickSettingsHooker
+    public val tiles: List<QuickSettingsTileConfig>? = null, // Added from QuickSettingsHooker
+    public val headerBackgroundConfig: HeaderBackgroundConfig? = null, // Added from QuickSettingsHooker
+    public val defaultHapticFeedback: HapticFeedbackConfig = HapticFeedbackConfig(), // Added from QuickSettingsHooker
+    public val tileAnimationDefault: QuickSettingsTileAnimation? = null, // Added from QuickSettingsHooker
+    // --- Added for Xposed hooks ---
+    public val hideTileLabels: Boolean? = null,
+    public val customTextColorEnabled: Boolean? = null,
+    public val customTextColor: String? = null,
+    public val hideTileIcons: Boolean? = null,
+    public val hideFooterButtons: Boolean? = null
 )
 
 // Referenced in QuickSettingsConfig and QuickSettingsHooker
-data class QuickSettingsTileConfig(
-    val tileId: String,
-    val iconTintEnabled: Boolean? = null,
-    val iconTintColor: String? = null,
-    val customShapeEnabled: Boolean? = null,
-    val shape: OverlayShape = OverlayShape(id="default", shapeType="rounded_rectangle"), // Default shape
-    val customBackgroundColorEnabled: Boolean? = null,
-    val customBackgroundColor: String? = null,
-    val animation: QuickSettingsTileAnimation? = null,
-    val hapticFeedback: HapticFeedbackConfig = HapticFeedbackConfig()
+public data class QuickSettingsTileConfig(
+    public val tileId: String,
+    public val iconTintEnabled: Boolean? = null,
+    public val iconTintColor: String? = null,
+    public val customShapeEnabled: Boolean? = null,
+    public val shape: OverlayShape = OverlayShape(id="default", shapeType="rounded_rectangle"), // Default shape
+    public val customBackgroundColorEnabled: Boolean? = null,
+    public val customBackgroundColor: String? = null,
+    public val animation: QuickSettingsTileAnimation? = null,
+    public val hapticFeedback: HapticFeedbackConfig = HapticFeedbackConfig(),
+    // --- Added for Xposed hooks ---
+    public val customTextColorEnabled: Boolean? = null,
+    public val customTextColor: String? = null,
+    public val hideTileLabels: Boolean? = null,
+    public val hideTileIcons: Boolean? = null
 )
 
 // Referenced in QuickSettingsConfig and QuickSettingsHooker
-data class HeaderBackgroundConfig(
-    val customImageBackgroundEnabled: Boolean? = null,
-    val imagePath: String? = null,
-    val customBackgroundColorEnabled: Boolean? = null,
-    val customBackgroundColor: String? = null,
-    val customOverallTintEnabled: Boolean? = null,
-    val customOverallTint: String? = null
+public data class HeaderBackgroundConfig(
+    public val customImageBackgroundEnabled: Boolean? = null,
+    public val imagePath: String? = null,
+    public val customBackgroundColorEnabled: Boolean? = null,
+    public val customBackgroundColor: String? = null,
+    public val customOverallTintEnabled: Boolean? = null,
+    public val customOverallTint: String? = null
 )
 
 // Referenced in QuickSettingsConfig and QuickSettingsHooker
-data class HapticFeedbackConfig(
-    val enabled: Boolean? = false,
-    val effect: String = "click", // Default effect
-    val intensity: Int = 50 // Default intensity (e.g., percentage)
+public data class HapticFeedbackConfig(
+    public val enabled: Boolean? = false,
+    public val effect: String = "click", // Default effect
+    public val intensity: Int = 50 // Default intensity (e.g., percentage)
 )
 
 // Referenced in QuickSettingsConfig and QuickSettingsHooker
-data class QuickSettingsTileAnimation(
-    val type: String = "none", // e.g., "fade_in", "slide_up", "none"
-    val durationMs: Long = 300,
-    val startDelayMs: Long = 0,
-    val interpolator: String = "linear" // e.g., "linear", "accelerate", "decelerate"
+public data class QuickSettingsTileAnimation(
+    public val type: String = "none", // e.g., "fade_in", "slide_up", "none"
+    public val durationMs: Long = 300,
+    public val startDelayMs: Long = 0,
+    public val interpolator: String = "linear" // e.g., "linear", "accelerate", "decelerate"
 )
 
-enum class QuickSettingsAnimation {
+public enum class QuickSettingsAnimation {
     FADE,
     SLIDE,
     POP

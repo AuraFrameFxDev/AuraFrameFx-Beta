@@ -3,12 +3,12 @@ package dev.aurakai.auraframefx.ai.task
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class TaskResult(
-    val taskId: String,
-    val status: TaskStatus,
-    val message: String? = null,
-    val timestamp: Long = System.currentTimeMillis(),
-    val durationMs: Long? = null, // How long the task took
+public data class TaskResult(
+    public val taskId: String,
+    public val status: TaskStatus,
+    public val message: String? = null,
+    public val timestamp: Long = System.currentTimeMillis(),
+    public val durationMs: Long? = null, // How long the task took
 )
 
 // Removed local TaskStatus enum.

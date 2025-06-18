@@ -18,7 +18,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class AuraFxLogger @Inject constructor(
+public class AuraFxLogger @Inject constructor(
     private val context: Context, // Injected Context
     private val kaiService: KaiAIService // Kept kaiService for now
 ) {
@@ -112,7 +112,7 @@ class AuraFxLogger @Inject constructor(
      * @param message The message to log.
      * @param throwable Optional exception to include in the log entry.
      */
-    fun d(tag: String, message: String, throwable: Throwable? = null) =
+    public fun d(tag: String, message: String, throwable: Throwable? = null) =
         loggerScope.launch { writeLogEntry("DEBUG", tag, message, throwable) }
 
     /**
@@ -124,7 +124,7 @@ class AuraFxLogger @Inject constructor(
      * @param message The informational message to log.
      * @param throwable An optional throwable whose stack trace will be included in the log entry.
      */
-    fun i(tag: String, message: String, throwable: Throwable? = null) =
+    public fun i(tag: String, message: String, throwable: Throwable? = null) =
         loggerScope.launch { writeLogEntry("INFO", tag, message, throwable) }
 
     /**
@@ -136,7 +136,7 @@ class AuraFxLogger @Inject constructor(
      * @param message The warning message to log.
      * @param throwable An optional throwable whose stack trace will be included in the log entry.
      */
-    fun w(tag: String, message: String, throwable: Throwable? = null) =
+    public fun w(tag: String, message: String, throwable: Throwable? = null) =
         loggerScope.launch { writeLogEntry("WARN", tag, message, throwable) }
 
     /**
@@ -148,7 +148,7 @@ class AuraFxLogger @Inject constructor(
      * @param message The error message to log.
      * @param throwable An optional throwable whose stack trace will be included in the log entry.
      */
-    fun e(tag: String, message: String, throwable: Throwable? = null) =
+    public fun e(tag: String, message: String, throwable: Throwable? = null) =
         loggerScope.launch { writeLogEntry("ERROR", tag, message, throwable) }
 
     /**
@@ -158,7 +158,7 @@ class AuraFxLogger @Inject constructor(
      * @param message The message to log.
      * @param throwable Optional throwable whose stack trace will be included in the log entry.
      */
-    fun v(tag: String, message: String, throwable: Throwable? = null) =
+    public fun v(tag: String, message: String, throwable: Throwable? = null) =
         loggerScope.launch { writeLogEntry("VERBOSE", tag, message, throwable) }
 
     /**
@@ -243,7 +243,7 @@ class AuraFxLogger @Inject constructor(
      *
      * After calling this method, no further log entries will be processed or written.
      */
-    fun shutdown() {
+    public fun shutdown() {
         Log.d(TAG, "AuraFxLogger shutting down loggerScope.")
         loggerScope.cancel()
     }

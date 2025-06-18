@@ -30,23 +30,23 @@ import kotlinx.serialization.Contextual
  */
 @Serializable
 
-data class SystemMetrics (
+public data class SystemMetrics (
 
     /* Current battery charge level in percentage. */
     @SerialName(value = "batteryLevel")
-    val batteryLevel: kotlin.Int,
+    public val batteryLevel: kotlin.Int,
 
     /* Indicates if the device is currently charging. */
     @SerialName(value = "isCharging")
-    val isCharging: kotlin.Boolean,
+    public val isCharging: kotlin.Boolean,
 
     /* Current network connectivity status (e.g., \"CONNECTED_WIFI\", \"CONNECTED_MOBILE\", \"DISCONNECTED\"). */
     @SerialName(value = "networkStatus")
-    val networkStatus: kotlin.String,
+    public val networkStatus: kotlin.String,
 
     /* Timestamp of the last metric update. */
     @Contextual @SerialName(value = "lastUpdated")
-    val lastUpdated: java.time.OffsetDateTime
+    public val lastUpdated: java.time.OffsetDateTime
 
 ) {
 

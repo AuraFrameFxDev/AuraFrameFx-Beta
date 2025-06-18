@@ -31,23 +31,23 @@ import kotlinx.serialization.Contextual
  */
 @Serializable
 
-data class ConferenceRoom (
+public data class ConferenceRoom (
 
     /* Unique identifier for the conference room. */
     @Contextual @SerialName(value = "id")
-    val id: java.util.UUID,
+    public val id: java.util.UUID,
 
     /* Name of the conference room. */
     @SerialName(value = "name")
-    val name: kotlin.String,
+    public val name: kotlin.String,
 
     /* The AI agent acting as the orchestrator. */
     @Contextual @SerialName(value = "orchestrator")
-    val orchestrator: AgentType,
+    public val orchestrator: AgentType,
 
     /* List of AI agents currently in the room. */
     @SerialName(value = "activeAgents")
-    val activeAgents: kotlin.collections.List<@Contextual AgentType>
+    public val activeAgents: kotlin.collections.List<@Contextual AgentType>
 
 ) {
 

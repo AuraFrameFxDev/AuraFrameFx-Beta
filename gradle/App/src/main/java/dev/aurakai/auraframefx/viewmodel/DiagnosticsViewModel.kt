@@ -20,7 +20,7 @@ import java.util.Locale
 import javax.inject.Inject
 
 @HiltViewModel
-class DiagnosticsViewModel @Inject constructor(
+public class DiagnosticsViewModel @Inject constructor(
     private val auraFxLogger: AuraFxLogger,
     private val cloudStatusMonitor: CloudStatusMonitor,
     private val offlineDataManager: OfflineDataManager,
@@ -104,7 +104,7 @@ class DiagnosticsViewModel @Inject constructor(
      *
      * If no logs are available, sets a placeholder message. In case of an error, updates the log state with an error message.
      */
-    fun refreshLogs() {
+    public fun refreshLogs() {
         viewModelScope.launch {
             try {
                 val logsContent = auraFxLogger.readCurrentDayLogs()
@@ -118,7 +118,7 @@ class DiagnosticsViewModel @Inject constructor(
     }
 
     // Example placeholder diagnostics method
-    fun runBasicDiagnostics(): String {
+    public fun runBasicDiagnostics(): String {
         // Replace with real diagnostics logic as needed
         return "Diagnostics check: All systems nominal."
     }

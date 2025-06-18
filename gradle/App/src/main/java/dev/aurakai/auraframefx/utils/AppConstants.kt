@@ -5,7 +5,7 @@ import androidx.compose.ui.unit.dp
 /**
  * Application-wide constants for AuraFrameFx
  */
-object AppConstants {
+public object AppConstants {
     // Animation constants
     const val ROTATION_DELAY_MILLIS = 16L // ~60 FPS
     const val TASK_PROCESSING_DELAY_MILLIS = 5000L // 5 seconds

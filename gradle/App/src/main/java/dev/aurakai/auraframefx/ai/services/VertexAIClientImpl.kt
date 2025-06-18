@@ -8,7 +8,7 @@ import okhttp3.Request
 import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 
-class VertexAIClientImpl {
+public class VertexAIClientImpl {
     private val client = OkHttpClient()
 
     suspend fun sendRequest(payload: String, endpoint: String, apiKey: String): String? =

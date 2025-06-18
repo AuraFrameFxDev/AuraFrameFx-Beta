@@ -6,7 +6,7 @@ import kotlinx.datetime.Instant
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class MemoryItem(
+public data class MemoryItem(
     val id: String = "mem_${Clock.System.now().toEpochMilliseconds()}",
     val content: String,
     val timestamp: Instant = Clock.System.now(),
@@ -18,7 +18,7 @@ data class MemoryItem(
 )
 
 @Serializable
-data class MemoryQuery(
+public data class MemoryQuery(
     val query: String,
     val context: String? = null,
     val maxResults: Int = 5,
@@ -29,7 +29,7 @@ data class MemoryQuery(
 )
 
 @Serializable
-data class MemoryRetrievalResult(
+public data class MemoryRetrievalResult(
     val items: List<MemoryItem>,
     val total: Int,
     val query: MemoryQuery,

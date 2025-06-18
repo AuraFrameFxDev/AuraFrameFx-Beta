@@ -14,7 +14,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class AIPipelineProcessor @Inject constructor(
+public class AIPipelineProcessor @Inject constructor(
     private val genesisAgent: GenesisAgent,
     private val auraService: AuraAIService,
     private val kaiService: KaiAIService,
@@ -141,9 +141,9 @@ class AIPipelineProcessor @Inject constructor(
     }
 }
 
-sealed class PipelineState {
-    object Idle : PipelineState()
-    data class Processing(val task: String) : PipelineState()
-    data class Completed(val task: String) : PipelineState()
-    data class Error(val message: String) : PipelineState()
+public sealed class PipelineState {
+    public object Idle : PipelineState()
+    public data class Processing(val task: String) : PipelineState()
+    public data class Completed(val task: String) : PipelineState()
+    public data class Error(val message: String) : PipelineState()
 }

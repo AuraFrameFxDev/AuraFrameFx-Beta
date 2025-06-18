@@ -10,7 +10,7 @@ import androidx.compose.ui.Modifier
 // import androidx.compose.ui.tooling.preview.Preview
 
 @Composable
-fun PlaceholderScreen() { // Renamed to placeholderScreen
+public fun PlaceholderScreen() { // Renamed to placeholderScreen
     // TODO: Implement the actual Placeholder Screen UI or replace with specific screen
     Box(
         modifier = Modifier.fillMaxSize(),

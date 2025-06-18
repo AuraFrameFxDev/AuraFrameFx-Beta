@@ -14,10 +14,10 @@ import javax.inject.Singleton
 // User needs to ensure these are @Serializable and align with actual data structures.
 
 @Serializable
-data class QuickSettingsLayout(val columns: Int = 4, val rows: Int = 2)
+public data class QuickSettingsLayout(val columns: Int = 4, val rows: Int = 2)
 
 @Serializable
-data class QuickSettingsPadding(
+public data class QuickSettingsPadding(
     val top: Int = 0,
     val bottom: Int = 0,
     val start: Int = 0,
@@ -25,7 +25,7 @@ data class QuickSettingsPadding(
 )
 
 @Serializable
-data class QuickSettingsTileConfig(
+public data class QuickSettingsTileConfig(
     val tileId: String = "default_tile", // Assuming existing field
     val label: String = "Default", // Assuming existing field
     val icon: String? = null, // Assuming existing field
@@ -41,17 +41,17 @@ data class QuickSettingsTileConfig(
 )
 
 @Serializable
-data class QuickSettingsHeaderConfig(val showDate: Boolean = true, val showTime: Boolean = true)
+public data class QuickSettingsHeaderConfig(val showDate: Boolean = true, val showTime: Boolean = true)
 
 @Serializable
-data class QuickSettingsBackgroundConfig(
+public data class QuickSettingsBackgroundConfig(
     val color: String = "#000000",
     val blurIntensity: Float = 0.0f,
 )
 
 // Replacing the old QuickSettingsAnimation with the new detailed one
 @Serializable
-data class QuickSettingsAnimation(
+public data class QuickSettingsAnimation(
     val type: String = "none", // e.g., "fade_in", "scale_in", "rotate"
     val durationMs: Long = 300,
     val startDelayMs: Long = 0,
@@ -61,7 +61,7 @@ data class QuickSettingsAnimation(
 
 // Added HapticFeedbackConfig definition
 @Serializable
-data class HapticFeedbackConfig(
+public data class HapticFeedbackConfig(
     val enabled: Boolean = false,
     val effect: String = "click", // e.g., "click", "double_click", "heavy_click", "tick", "none"
     val intensity: Int = 50, // Scale of 0-100, or a device-specific value
@@ -70,7 +70,7 @@ data class HapticFeedbackConfig(
 
 // Existing Placeholder Data Class - Modified
 @Serializable
-data class QuickSettingsConfig(
+public data class QuickSettingsConfig(
     val settingName: String = "DefaultQS",
     val enabled: Boolean = true,
     val tiles: List<QuickSettingsTileConfig>? = emptyList(),
@@ -85,17 +85,17 @@ data class QuickSettingsConfig(
 )
 
 // --- Placeholder Dependencies (User needs to ensure these exist or replace with actuals) ---
-interface SystemOverlayManager
-interface ShapeManager
-interface ImageResourceManager
-interface YukiHookModulePrefs // Assuming this is an interface or a class
-interface YukiHookServiceManager { // Assuming this is an interface or a class
-    fun hook(block: () -> Unit) {} // Placeholder
+public interface SystemOverlayManager
+public interface ShapeManager
+public interface ImageResourceManager
+public interface YukiHookModulePrefs // Assuming this is an interface or a class
+public interface YukiHookServiceManager { // Assuming this is an interface or a class
+    public fun hook(block: () -> Unit) {} // Placeholder
 }
 
 
 @Singleton
-class QuickSettingsCustomizer @Inject constructor(
+public class QuickSettingsCustomizer @Inject constructor(
     private val overlayManager: SystemOverlayManager, // Placeholder
     private val shapeManager: ShapeManager, // Placeholder
     private val imageManager: ImageResourceManager, // Placeholder
@@ -111,7 +111,7 @@ class QuickSettingsCustomizer @Inject constructor(
         private const val IPC_KEY_QUICK_SETTINGS = "quick_settings_config_json"
     }
 
-    fun applyConfig(config: QuickSettingsConfig) {
+    public fun applyConfig(config: QuickSettingsConfig) {
         _currentConfig.value = config
 
         val configJson = JsonUtils.toJson(config)

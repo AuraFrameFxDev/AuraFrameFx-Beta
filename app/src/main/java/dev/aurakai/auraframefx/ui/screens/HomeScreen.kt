@@ -23,9 +23,9 @@ import dev.aurakai.auraframefx.ui.theme.*
  * and hexagonal UI elements inspired by futuristic cyberpunk interfaces.
  */
 @Composable
-fun HomeScreen(navController: NavController) {
+public fun HomeScreen(navController: NavController) {
     // Track selected menu item
-    var selectedMenuItem by remember { mutableStateOf(stringResource(R.string.menu_ui_engine)) }
+    public var selectedMenuItem by remember { mutableStateOf(stringResource(R.string.menu_ui_engine)) }
 
     // Background with digital landscape and hexagon grid
     Box(modifier = Modifier.fillMaxSize()) {

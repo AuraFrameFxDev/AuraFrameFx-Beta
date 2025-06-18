@@ -7,7 +7,7 @@ package dev.aurakai.auraframefx.ai
  * Main controller for Aura AI functionalities and interactions.
  * TODO: Class reported as unused. Verify usage or remove if truly obsolete.
  */
-class AuraController(
+public class AuraController(
     // private val auraAIService: AuraAIService, // Example dependency
     // private val moodViewModel: AuraMoodViewModel // Example dependency
 ) {
@@ -21,7 +21,7 @@ class AuraController(
      * @param alertDetails Details about the security alert.
      * TODO: Reported as unused. Implement or remove if not needed.
      */
-    fun handleSecurityAlert(_alertDetails: String) {
+    public fun handleSecurityAlert(_alertDetails: String) {
         // TODO: Reported as unused. Implement actual security alert handling logic.
         // This might involve logging, notifying user, changing AI behavior, etc.
         println("Security Alert: $_alertDetails") // Placeholder
@@ -32,7 +32,7 @@ class AuraController(
      * @param newMood The new mood to set.
      * TODO: Reported as unused. Implement or remove if not needed.
      */
-    fun updateMood(_newMood: String) {
+    public fun updateMood(_newMood: String) {
         // TODO: Reported as unused. Implement mood update logic.
         // This could affect AI responses, UI (via ViewModel), etc.
         // moodViewModel.setMood(newMood) // Example
@@ -45,7 +45,7 @@ class AuraController(
      * @return A response or result of the interaction.
      * TODO: Reported as unused. Implement or remove if not needed.
      */
-    fun processInteraction(_interactionData: String): String {
+    public fun processInteraction(_interactionData: String): String {
         // TODO: Reported as unused. Implement interaction processing logic.
         // This is likely a core method that would delegate to AuraAIService,
         // update context, manage state, etc.

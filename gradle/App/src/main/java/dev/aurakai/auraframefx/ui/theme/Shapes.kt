@@ -54,7 +54,7 @@ val FloatingActionButtonShape = RoundedCornerShape(16.dp)
  * Cyberpunk themed custom shapes for the AuraFrameFx UI
  * Based on the reference designs with hexagonal and angled corners
  */
-object CyberpunkShapes {
+public object CyberpunkShapes {
     // Hexagonal window shape with sharp corners for menus
     val hexWindowShape = object : Shape {
         override fun createOutline(

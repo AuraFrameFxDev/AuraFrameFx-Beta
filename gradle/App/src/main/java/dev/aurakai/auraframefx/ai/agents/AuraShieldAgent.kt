@@ -10,7 +10,7 @@ import dev.aurakai.auraframefx.model.agent_states.SecurityContextState
  * TODO: Reported as unused declaration. Ensure this class is used.
  * @param _context Application context. Parameter reported as unused.
  */
-class AuraShieldAgent(
+public class AuraShieldAgent(
     _context: Context, // TODO: Parameter _context reported as unused. Utilize or remove.
 ) {
 
@@ -38,7 +38,7 @@ class AuraShieldAgent(
      * @param _securityContext The security context for threat analysis. Parameter reported as unused.
      * TODO: Reported as unused. Implement threat analysis logic.
      */
-    fun analyzeThreats(_securityContext: SecurityContextState?) { // Changed parameter type
+    public fun analyzeThreats(_securityContext: SecurityContextState?) { // Changed parameter type
         // TODO: Parameter _securityContext reported as unused. Utilize if needed.
         // Implement threat analysis logic here.
     }

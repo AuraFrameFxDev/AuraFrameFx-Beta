@@ -23,14 +23,14 @@ import dev.aurakai.auraframefx.system.quicksettings.model.HapticFeedbackConfig
 import java.io.File
 
 
-class QuickSettingsHooker(
+public class QuickSettingsHooker(
     private val classLoader: ClassLoader,
     private val config: QuickSettingsConfig,
 ) {
     private val TAG = "QuickSettingsHooker"
     private val shapeManager: ShapeManager by lazy { ShapeManager() } // New
 
-    fun applyQuickSettingsHooks() {
+    public fun applyQuickSettingsHooks() {
         XposedBridge.log("[$TAG] Applying Quick Settings Hooks with config: $config")
 
         // --- QS Tile Modification ---
@@ -43,7 +43,7 @@ class QuickSettingsHooker(
             XposedHelpers.findAndHookMethod(
                 qsTileViewClass,
                 "onFinishInflate",
-                object : XC_MethodHook() {
+                public object : XC_MethodHook() {
                     override fun afterHookedMethod(param: MethodHookParam) {
                         val qsTileView = param.thisObject as View
                         val tileId = getTileSpec(qsTileView)
@@ -158,7 +158,7 @@ class QuickSettingsHooker(
             XposedHelpers.findAndHookMethod(
                 qsTileViewClass,
                 "performClick",
-                object : XC_MethodHook() {
+                public object : XC_MethodHook() {
                     override fun beforeHookedMethod(param: MethodHookParam) {
                         val qsTileView = param.thisObject as View
                         val tileId = getTileSpec(qsTileView)
@@ -188,7 +188,7 @@ class QuickSettingsHooker(
             XposedHelpers.findAndHookMethod(
                 qsPanelHeaderClass,
                 "onFinishInflate",
-                object : XC_MethodHook() {
+                public object : XC_MethodHook() {
                     override fun afterHookedMethod(param: MethodHookParam) {
                         val qsHeaderView = param.thisObject as View
                         XposedBridge.log("[$TAG] Hooked QuickStatusBarHeader.onFinishInflate.")

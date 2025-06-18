@@ -4,7 +4,7 @@ import kotlinx.serialization.Serializable
 
 // --- New Data Class Definition ---
 @Serializable
-data class SystemMonitoringConfig(
+public data class SystemMonitoringConfig(
     val enabled: Boolean = false,
     val batteryThresholdLow: Int = 20, // Percentage
     val batteryOptimizationEnabled: Boolean = false,
@@ -18,7 +18,7 @@ data class SystemMonitoringConfig(
 // These should be fleshed out or replaced by actual definitions if they exist elsewhere.
 
 @Serializable
-data class OfflineAIConfig(
+public data class OfflineAIConfig(
     val defaultAuraResponses: Map<String, String> = emptyMap(),
     val defaultKaiResponses: Map<String, String> = emptyMap(), // Added based on KaiAIService logic
     val lastSyncTimestamp: Long = 0L,
@@ -26,27 +26,27 @@ data class OfflineAIConfig(
 )
 
 @Serializable
-data class OfflineUserPreferences(
+public data class OfflineUserPreferences(
     val theme: String = "system_default",
     val preferredUnits: String = "metric",
     // Add other user preferences
 )
 
 @Serializable
-data class OfflineConversationHistory(
+public data class OfflineConversationHistory(
     val messages: List<String> = emptyList(), // Simplified, could be List<AgentMessagePlaceholder>
     // Add other history-related fields
 )
 
 @Serializable
-data class OfflineUIConfigs(
+public data class OfflineUIConfigs(
     val showTooltips: Boolean = true,
     val compactMode: Boolean = false,
     // Add other UI configuration settings
 )
 
 @Serializable
-data class ContextualMemory(
+public data class ContextualMemory(
     val lastUpdateTimestamp: Long = 0,
     val keyInsights: Map<String, String> = emptyMap(), // Key-value pairs for learned facts
     val userPreferencesDerived: Map<String, String> = emptyMap(), // E.g., "favorite_color": "neon blue"
@@ -58,7 +58,7 @@ data class ContextualMemory(
 
 // --- CriticalOfflineData definition including the new SystemMonitoringConfig ---
 @Serializable
-data class CriticalOfflineData(
+public data class CriticalOfflineData(
     val lastFullSyncTimestamp: Long = 0,
     val aiConfig: OfflineAIConfig = OfflineAIConfig(),
     val userPreferences: OfflineUserPreferences = OfflineUserPreferences(),

@@ -19,7 +19,7 @@ import dev.aurakai.auraframefx.viewmodel.ConferenceRoomViewModel
 
 // Placeholder for Header - User should define this Composable
 @Composable
-fun Header(selectedAgent: String, onAgentSelected: (String) -> Unit) {
+public fun Header(selectedAgent: String, onAgentSelected: (String) -> Unit) {
     // Simplified placeholder
     Row(verticalAlignment = Alignment.CenterVertically) {
         Text("Selected Agent: $selectedAgent", modifier = Modifier.padding(8.dp))
@@ -32,14 +32,14 @@ fun Header(selectedAgent: String, onAgentSelected: (String) -> Unit) {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ConferenceRoomScreen(
+public fun ConferenceRoomScreen(
     viewModel: ConferenceRoomViewModel = hiltViewModel(),
 ) {
-    var selectedAgent by remember { mutableStateOf("Aura") } // Local state for agent selection UI
-    val isRecording by viewModel.isRecording.collectAsState()
-    val isTranscribing by viewModel.isTranscribing.collectAsState()
-    val messages by viewModel.messages.collectAsState()
-    var messageText by remember { mutableStateOf("") }
+    public var selectedAgent by remember { mutableStateOf("Aura") } // Local state for agent selection UI
+    public val isRecording by viewModel.isRecording.collectAsState()
+    public val isTranscribing by viewModel.isTranscribing.collectAsState()
+    public val messages by viewModel.messages.collectAsState()
+    public var messageText by remember { mutableStateOf("") }
 
     Column(
         modifier = Modifier
@@ -76,7 +76,7 @@ fun ConferenceRoomScreen(
             reverseLayout = true
         ) {
             items(messages.reversed().size) { index ->
-                val message: AgentMessage = messages.reversed()[index]
+                public val message: AgentMessage = messages.reversed()[index]
                 Text(
                     text = "[${message.sender}] ${message.content}",
                     color = NeonBlue, // Ensure only one NeonBlue import/definition
@@ -110,7 +110,7 @@ fun ConferenceRoomScreen(
                     if (messageText.isNotBlank()) {
                         // Launch a coroutine for the suspend function using viewModelScope
                         viewModel.viewModelScope.launch {
-                            viewModel.sendMessage(messageText, AgentType.USER)
+                            viewModel.sendMessage(messageText, AgentType.USER, "user_conversation")
                             messageText = ""
                         }
                     }

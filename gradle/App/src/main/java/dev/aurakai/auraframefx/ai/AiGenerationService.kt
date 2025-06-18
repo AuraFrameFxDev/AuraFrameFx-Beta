@@ -9,7 +9,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import kotlin.Result // Explicit import for Result
 
-class AiGenerationService(
+public class AiGenerationService(
     private val api: ContentApi,
 ) {
     suspend fun generateText(

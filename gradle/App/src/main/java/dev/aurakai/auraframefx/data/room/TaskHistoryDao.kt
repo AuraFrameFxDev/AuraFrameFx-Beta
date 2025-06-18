@@ -7,10 +7,10 @@ import androidx.room.Query
 import kotlinx.coroutines.flow.Flow
 
 @Dao
-interface TaskHistoryDao {
+public interface TaskHistoryDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertTask(task: TaskHistoryEntity)
 
     @Query("SELECT * FROM task_history ORDER BY timestamp DESC")
-    fun getAllTasks(): Flow<List<TaskHistoryEntity>>
+    public fun getAllTasks(): Flow<List<TaskHistoryEntity>>
 }

@@ -30,23 +30,23 @@ import kotlinx.serialization.Contextual
  */
 @Serializable
 
-data class OAuthSuccess (
+public data class OAuthSuccess (
 
     /* The access token for API calls. */
     @SerialName(value = "accessToken")
-    val accessToken: kotlin.String,
+    public val accessToken: kotlin.String,
 
     /* Type of the token (e.g., \"Bearer\"). */
     @SerialName(value = "tokenType")
-    val tokenType: kotlin.String,
+    public val tokenType: kotlin.String,
 
     /* Time in seconds until the access token expires. */
     @SerialName(value = "expiresIn")
-    val expiresIn: kotlin.Int,
+    public val expiresIn: kotlin.Int,
 
     /* Token to refresh the access token (if applicable). */
     @SerialName(value = "refreshToken")
-    val refreshToken: kotlin.String? = null
+    public val refreshToken: kotlin.String? = null
 
 ) {
 

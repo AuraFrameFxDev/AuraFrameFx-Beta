@@ -3,7 +3,7 @@ package dev.aurakai.auraframefx.system.quicksettings.model
 import dev.aurakai.auraframefx.system.overlay.model.OverlayShape // Assuming we use the existing OverlayShape
 
 // Placeholder based on SystemCustomizationViewModel.kt usage
-data class QuickSettingsConfig(
+public data class QuickSettingsConfig(
     val tileShape: OverlayShape? = null, // Example: Use the existing OverlayShape model
     val animationType: QuickSettingsAnimation = QuickSettingsAnimation.FADE,
     val hideLabels: Boolean = false,
@@ -21,7 +21,7 @@ data class QuickSettingsConfig(
 )
 
 // Referenced in QuickSettingsConfig and QuickSettingsHooker
-data class QuickSettingsTileConfig(
+public data class QuickSettingsTileConfig(
     val tileId: String,
     val iconTintEnabled: Boolean? = null,
     val iconTintColor: String? = null,
@@ -34,7 +34,7 @@ data class QuickSettingsTileConfig(
 )
 
 // Referenced in QuickSettingsConfig and QuickSettingsHooker
-data class HeaderBackgroundConfig(
+public data class HeaderBackgroundConfig(
     val customImageBackgroundEnabled: Boolean? = null,
     val imagePath: String? = null,
     val customBackgroundColorEnabled: Boolean? = null,
@@ -44,21 +44,21 @@ data class HeaderBackgroundConfig(
 )
 
 // Referenced in QuickSettingsConfig and QuickSettingsHooker
-data class HapticFeedbackConfig(
+public data class HapticFeedbackConfig(
     val enabled: Boolean? = false,
     val effect: String = "click", // Default effect
     val intensity: Int = 50 // Default intensity (e.g., percentage)
 )
 
 // Referenced in QuickSettingsConfig and QuickSettingsHooker
-data class QuickSettingsTileAnimation(
+public data class QuickSettingsTileAnimation(
     val type: String = "none", // e.g., "fade_in", "slide_up", "none"
     val durationMs: Long = 300,
     val startDelayMs: Long = 0,
     val interpolator: String = "linear" // e.g., "linear", "accelerate", "decelerate"
 )
 
-enum class QuickSettingsAnimation {
+public enum class QuickSettingsAnimation {
     FADE,
     SLIDE,
     POP

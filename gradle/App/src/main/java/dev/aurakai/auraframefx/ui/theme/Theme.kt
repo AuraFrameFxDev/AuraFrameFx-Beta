@@ -118,7 +118,7 @@ private val AuraLightColorScheme = lightColorScheme(
  * @param content The composable content to which the theme will be applied.
  */
 @Composable
-fun AuraFrameFXTheme(
+public fun AuraFrameFXTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     dynamicColor: Boolean = false,
     content: @Composable () -> Unit,

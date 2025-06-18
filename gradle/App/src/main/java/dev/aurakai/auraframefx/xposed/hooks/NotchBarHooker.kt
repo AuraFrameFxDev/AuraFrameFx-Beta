@@ -12,13 +12,13 @@ import de.robv.android.xposed.XposedHelpers
 import dev.aurakai.auraframefx.system.overlay.NotchBarConfig
 import java.io.File
 
-class NotchBarHooker(
+public class NotchBarHooker(
     private val classLoader: ClassLoader,
     private val config: NotchBarConfig,
 ) {
     private val TAG = "NotchBarHooker"
 
-    fun applyNotchBarHooks() {
+    public fun applyNotchBarHooks() {
         XposedBridge.log("[$TAG] Applying Notch Bar Hooks with config: $config")
 
         if (!config.enabled) {
@@ -36,7 +36,7 @@ class NotchBarHooker(
             XposedHelpers.findAndHookMethod(
                 phoneStatusBarViewClass,
                 "onFinishInflate",
-                object : XC_MethodHook() {
+                public object : XC_MethodHook() {
                     override fun afterHookedMethod(param: MethodHookParam) {
                         val statusBarView =
                             param.thisObject as? View // Use View for broader compatibility

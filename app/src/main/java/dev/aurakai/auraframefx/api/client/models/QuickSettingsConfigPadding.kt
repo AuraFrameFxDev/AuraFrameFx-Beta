@@ -29,16 +29,16 @@ import kotlinx.serialization.Contextual
  */
 @Serializable
 
-data class QuickSettingsConfigPadding (
+public data class QuickSettingsConfigPadding (
 
     @SerialName(value = "top")
-    val top: kotlin.Int? = null,
+    public val top: kotlin.Int? = null,
 
     @SerialName(value = "bottom")
-    val bottom: kotlin.Int? = null,
+    public val bottom: kotlin.Int? = null,
 
     @SerialName(value = "horizontal")
-    val horizontal: kotlin.Int? = null
+    public val horizontal: kotlin.Int? = null
 
 ) {
 

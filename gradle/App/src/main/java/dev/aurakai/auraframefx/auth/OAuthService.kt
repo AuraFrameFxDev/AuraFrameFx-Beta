@@ -9,7 +9,7 @@ import android.content.Intent
  * Service to handle OAuth 2.0 authentication flows.
  * TODO: Reported as unused declaration. Implement and integrate for authentication.
  */
-class OAuthService(
+public class OAuthService(
     // private val context: android.content.Context, // Example if needed
     // private val googleSignInClient: GoogleSignInClient // Example dependency
 ) {
@@ -27,7 +27,7 @@ class OAuthService(
      * @return An Intent to start the sign-in flow.
      * TODO: Reported as unused. Implement to return actual sign-in Intent.
      */
-    fun getSignInIntent(): Intent? {
+    public fun getSignInIntent(): Intent? {
         // TODO: Implement logic to create and return a sign-in Intent for a provider (e.g., Google).
         // return googleSignInClient.signInIntent
         return null // Placeholder
@@ -39,7 +39,7 @@ class OAuthService(
      * @return A Task or result object indicating success or failure. Type 'Any?' is a placeholder.
      * TODO: Reported as unused. Implement result handling.
      */
-    fun handleSignInResult(_data: Intent?): Any? { // Using Any? as placeholder for Task<GoogleSignInAccount>
+    public fun handleSignInResult(_data: Intent?): Any? { // Using Any? as placeholder for Task<GoogleSignInAccount>
         // TODO: Parameter _data reported as unused. Utilize to process sign-in result.
         // Example:
         // try {
@@ -59,7 +59,7 @@ class OAuthService(
      * @return A Task or result object indicating success or failure. Type 'Any?' is a placeholder.
      * TODO: Reported as unused. Implement sign-out logic.
      */
-    fun signOut(): Any? { // Using Any? as placeholder for Task<Void>
+    public fun signOut(): Any? { // Using Any? as placeholder for Task<Void>
         // TODO: Implement sign-out logic for the provider.
         // return googleSignInClient.signOut()
         return null // Placeholder
@@ -70,7 +70,7 @@ class OAuthService(
      * @return A Task or result object indicating success or failure. Type 'Any?' is a placeholder.
      * TODO: Reported as unused. Implement revoke access logic.
      */
-    fun revokeAccess(): Any? { // Using Any? as placeholder for Task<Void>
+    public fun revokeAccess(): Any? { // Using Any? as placeholder for Task<Void>
         // TODO: Implement revoke access logic for the provider.
         // return googleSignInClient.revokeAccess()
         return null // Placeholder

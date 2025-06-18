@@ -7,7 +7,11 @@ import android.graphics.PorterDuff
 import android.graphics.PorterDuffColorFilter
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
-import android.graphics.drawable.GradientDrawable
+import android.graphi            if (shapeConfig.strokeWidthPx != null && shapeConfig.strokeWidthPx > 0f && shapeConfig.strokeColor != null) {
+                try {
+                    drawable.setStroke(
+                        shapeConfig.strokeWidthPx.toInt().coerceAtLeast(0),
+                        shapeConfig.strokeColor.toArgb())awable.GradientDrawable
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -15,25 +19,25 @@ import android.widget.TextView
 import de.robv.android.xposed.XC_MethodHook
 import de.robv.android.xposed.XposedBridge
 import de.robv.android.xposed.XposedHelpers
-import dev.aurakai.auraframefx.system.overlay.OverlayShape
+import dev.aurakai.auraframefx.system.overlay.model.OverlayShape
 import dev.aurakai.auraframefx.system.overlay.ShapeManager
 import dev.aurakai.auraframefx.system.quicksettings.model.QuickSettingsConfig
 import java.io.File
 
 
-class QuickSettingsHooker(
+public class QuickSettingsHooker(
     private val classLoader: ClassLoader,
     private val config: QuickSettingsConfig,
 ) {
     private val TAG = "QuickSettingsHooker"
     private val shapeManager: ShapeManager by lazy { ShapeManager() } // New
 
-    fun applyQuickSettingsHooks() {
+    public fun applyQuickSettingsHooks() {
         XposedBridge.log("[$TAG] Applying Quick Settings Hooks with config: $config")
 
         // --- QS Tile Modification ---
         try {
-            val qsTileViewClass = XposedHelpers.findClass(
+            public val qsTileViewClass = XposedHelpers.findClass(
                 "com.android.systemui.qs.tileimpl.QSTileView",
                 classLoader
             )
@@ -41,16 +45,16 @@ class QuickSettingsHooker(
             XposedHelpers.findAndHookMethod(
                 qsTileViewClass,
                 "onFinishInflate",
-                object : XC_MethodHook() {
+                public object : XC_MethodHook() {
                     override fun afterHookedMethod(param: MethodHookParam) {
-                        val qsTileView = param.thisObject as View
-                        val tileId = getTileSpec(qsTileView)
+                        public val qsTileView = param.thisObject as View
+                        public val tileId = getTileSpec(qsTileView)
                         XposedBridge.log("[$TAG] Hooked QSTileView.onFinishInflate for tile: $tileId")
 
-                        val tileConfig = config.tiles?.find { it.tileId == tileId }
+                        public val tileConfig = config.tiles?.find { it.tileId == tileId }
 
                         // Label Handling
-                        val labelTextView = findViewByClass(qsTileView, TextView::class.java)
+                        public val labelTextView = findViewByClass(qsTileView, TextView::class.java)
                         if (labelTextView != null) {
                             if (config.hideTileLabels == true) {
                                 labelTextView.visibility = View.GONE
@@ -70,7 +74,7 @@ class QuickSettingsHooker(
                         }
 
                         // Icon Handling
-                        val iconImageView = findViewByClass(qsTileView, ImageView::class.java)
+                        public val iconImageView = findViewByClass(qsTileView, ImageView::class.java)
                         if (iconImageView != null) {
                             if (config.hideTileIcons == true) { // Assuming new config field
                                 iconImageView.visibility = View.GONE
@@ -96,9 +100,9 @@ class QuickSettingsHooker(
 
                         // Tile Background & Shape Logic
                         if (tileConfig?.customShapeEnabled == true) {
-                            val shapeConfig = tileConfig.shape
-                            XposedBridge.log("[$TAG] Attempting to apply custom shape to tile $tileId: ${shapeConfig.type}")
-                            val customBackgroundDrawable =
+                            public val shapeConfig = tileConfig.shape
+                            XposedBridge.log("[$TAG] Attempting to apply custom shape to tile $tileId: ${shapeConfig.shapeType}")
+                            public val customBackgroundDrawable =
                                 createCustomShapeDrawable(qsTileView, shapeConfig)
                             if (customBackgroundDrawable != null) {
                                 qsTileView.background = customBackgroundDrawable
@@ -132,15 +136,15 @@ class QuickSettingsHooker(
 
                         // Animation Logic
                         // Assuming QuickSettingsConfig has tileAnimationDefault and QuickSettingsTileConfig has animation
-                        val animationConfigToApply =
+                        public val animationConfigToApply =
                             tileConfig?.animation ?: config.tileAnimationDefault
 
                         if (animationConfigToApply != null && animationConfigToApply.type != "none" && animationConfigToApply.durationMs > 0) {
                             XposedBridge.log("[$TAG] Applying animation for tile $tileId: Type=${animationConfigToApply.type}, Duration=${animationConfigToApply.durationMs}ms")
                             applyAnimation(qsTileView, animationConfigToApply)
                         } else {
-                            val type = animationConfigToApply?.type ?: "null_config"
-                            val duration = animationConfigToApply?.durationMs ?: 0
+                            public val type = animationConfigToApply?.type ?: "null_config"
+                            public val duration = animationConfigToApply?.durationMs ?: 0
                             XposedBridge.log("[$TAG] No animation or zero duration for tile $tileId. Type: $type, Duration: ${duration}ms")
                             // Ensure view is in a default state if no animation
                             qsTileView.alpha = 1f
@@ -156,17 +160,17 @@ class QuickSettingsHooker(
             XposedHelpers.findAndHookMethod(
                 qsTileViewClass,
                 "performClick",
-                object : XC_MethodHook() {
+                public object : XC_MethodHook() {
                     override fun beforeHookedMethod(param: MethodHookParam) {
-                        val qsTileView = param.thisObject as View
-                        val tileId = getTileSpec(qsTileView)
-                        val hapticConfigToApply =
+                        public val qsTileView = param.thisObject as View
+                        public val tileId = getTileSpec(qsTileView)
+                        public val hapticConfigToApply =
                             config.tiles?.find { it.tileId == tileId }?.hapticFeedback
                                 ?: config.defaultHapticFeedback
 
                         if (hapticConfigToApply.enabled == true) {
                             XposedBridge.log("[$TAG] Applying haptic feedback for tile $tileId click.")
-                            applyHapticFeedback(qsTileView.context, hapticConfigToApply)
+                            applyHapticFeedback(qsTileView, hapticConfigToApply)
                         }
                     }
                 }
@@ -179,26 +183,26 @@ class QuickSettingsHooker(
 
         // --- QS Panel Layout/Header Modification ---
         try {
-            val qsPanelHeaderClass = XposedHelpers.findClass(
+            public val qsPanelHeaderClass = XposedHelpers.findClass(
                 "com.android.systemui.qs.QuickStatusBarHeader",
                 classLoader
             )
             XposedHelpers.findAndHookMethod(
                 qsPanelHeaderClass,
                 "onFinishInflate",
-                object : XC_MethodHook() {
+                public object : XC_MethodHook() {
                     override fun afterHookedMethod(param: MethodHookParam) {
-                        val qsHeaderView = param.thisObject as View
+                        public val qsHeaderView = param.thisObject as View
                         XposedBridge.log("[$TAG] Hooked QuickStatusBarHeader.onFinishInflate.")
 
-                        var imageBackgroundApplied = false
+                        public var imageBackgroundApplied = false
                         if (config.headerBackgroundConfig?.customImageBackgroundEnabled == true && !config.headerBackgroundConfig?.imagePath.isNullOrEmpty()) {
-                            val imagePath = config.headerBackgroundConfig!!.imagePath!!
+                            public val imagePath = config.headerBackgroundConfig!!.imagePath!!
                             XposedBridge.log("[$TAG] Attempting to load custom image background from: $imagePath")
-                            val imageBitmap = loadImageFromFile(imagePath)
+                            public val imageBitmap = loadImageFromFile(imagePath)
                             if (imageBitmap != null) {
                                 try {
-                                    val drawable =
+                                    public val drawable =
                                         BitmapDrawable(qsHeaderView.resources, imageBitmap)
                                     qsHeaderView.background = drawable
                                     imageBackgroundApplied = true
@@ -214,7 +218,7 @@ class QuickSettingsHooker(
 
                         if (!imageBackgroundApplied) {
                             if (config.headerBackgroundConfig?.customBackgroundColorEnabled == true && !config.headerBackgroundConfig?.customBackgroundColor.isNullOrEmpty()) {
-                                val bgColor =
+                                public val bgColor =
                                     config.headerBackgroundConfig!!.customBackgroundColor!!
                                 try {
                                     qsHeaderView.setBackgroundColor(Color.parseColor(bgColor))
@@ -232,9 +236,9 @@ class QuickSettingsHooker(
 
                         // NEW: Apply overall tint to header if no custom image AND tint is enabled
                         if (!imageBackgroundApplied && config.headerBackgroundConfig?.customOverallTintEnabled == true && !config.headerBackgroundConfig?.customOverallTint.isNullOrEmpty()) {
-                            val tintColorStr = config.headerBackgroundConfig!!.customOverallTint!!
+                            public val tintColorStr = config.headerBackgroundConfig!!.customOverallTint!!
                             try {
-                                val color = Color.parseColor(tintColorStr)
+                                public val color = Color.parseColor(tintColorStr)
                                 // Note: setTint might not work on all backgrounds.
                                 // If qsHeaderView.background is null (cleared above), this won't work.
                                 // It's better to ensure there's a color background first, or use a ColorDrawable.
@@ -254,7 +258,7 @@ class QuickSettingsHooker(
 
                         if (config.hideFooterButtons == true) {
                             try {
-                                val footer =
+                                public val footer =
                                     XposedHelpers.callMethod(qsHeaderView, "getQSFooter") as? View
                                 footer?.visibility = View.GONE
                                 XposedBridge.log("[$TAG] Hidden QS footer buttons.")
@@ -274,7 +278,7 @@ class QuickSettingsHooker(
 
     private fun loadImageFromFile(filePath: String): Bitmap? {
         return try {
-            val file = File(filePath)
+            public val file = File(filePath)
             if (file.exists()) {
                 BitmapFactory.decodeFile(file.absolutePath)
             } else {
@@ -295,8 +299,8 @@ class QuickSettingsHooker(
         }
         if (parent is ViewGroup) {
             for (i in 0 until parent.childCount) {
-                val child = parent.getChildAt(i)
-                val found = findViewByClass(child, clazz)
+                public val child = parent.getChildAt(i)
+                public val found = findViewByClass(child, clazz)
                 if (found != null) return found
             }
         }
@@ -305,7 +309,7 @@ class QuickSettingsHooker(
 
     private fun getTileSpec(qsTileView: View): String {
         return try {
-            val qsTile = XposedHelpers.getObjectField(qsTileView, "mTile")
+            public val qsTile = XposedHelpers.getObjectField(qsTileView, "mTile")
             XposedHelpers.callMethod(qsTile, "getTileSpec") as String
         } catch (e: Throwable) {
             XposedBridge.log("[$TAG] Failed to get tile spec for view ${qsTileView.id}: ${e.message}")
@@ -314,29 +318,31 @@ class QuickSettingsHooker(
     }
 
     private fun createCustomShapeDrawable(view: View, shapeConfig: OverlayShape): Drawable? {
-        val drawable = GradientDrawable()
+        public val drawable: GradientDrawable = GradientDrawable()
 
         try {
-            if (!shapeConfig.fillColor.isNullOrEmpty()) {
-                drawable.setColor(Color.parseColor(shapeConfig.fillColor))
+            if (shapeConfig.fillColor?.isNotEmpty() == true) {
+                drawable.setColor(shapeConfig.fillColor?.toArgb() ?: Color.TRANSPARENT)
             } else {
                 drawable.setColor(Color.TRANSPARENT)
             }
 
-            if (shapeConfig.type.equals("rounded_rectangle", ignoreCase = true)) {
+            if (shapeConfig.shapeType.equals("rounded_rectangle", ignoreCase = true)) {
+            if (shapeConfig.cornerRadius != null) {
                 drawable.cornerRadius = shapeConfig.cornerRadius.coerceAtLeast(0f)
-            } else if (shapeConfig.type.equals("circle", ignoreCase = true)) {
+            }
+            } else if (shapeConfig.shapeType.equals("circle", ignoreCase = true)) {
                 drawable.shape = GradientDrawable.OVAL
-            } else if (shapeConfig.type.equals("rectangle", ignoreCase = true)) {
+            } else if (shapeConfig.shapeType.equals("rectangle", ignoreCase = true)) {
                 drawable.shape = GradientDrawable.RECTANGLE
-            } else if (shapeConfig.type.equals("hexagon", ignoreCase = true)) {
+            } else if (shapeConfig.shapeType.equals("hexagon", ignoreCase = true)) {
                 XposedBridge.log("[$TAG] Warning: 'hexagon' shape type not fully supported by simple GradientDrawable for tile background. Requires a custom Drawable class using ShapeManager.createShapePath. Defaulting shape for now.")
             }
 
-            if (shapeConfig.strokeWidthPx > 0f && !shapeConfig.strokeColor.isNullOrEmpty()) {
+            if ((shapeConfig.strokeWidthPx ?: 0f) > 0f && shapeConfig.strokeColor?.isNotEmpty() == true) {
                 try {
                     drawable.setStroke(
-                        shapeConfig.strokeWidthPx.toInt().coerceAtLeast(0),
+                        (shapeConfig.strokeWidthPx ?: 0f).toInt().coerceAtLeast(0),
                         Color.parseColor(shapeConfig.strokeColor)
                     )
                 } catch (e: IllegalArgumentException) {
@@ -354,5 +360,17 @@ class QuickSettingsHooker(
             XposedBridge.log(e)
             return null
         }
+    }
+
+    private fun applyHapticFeedback(view: View, tileConfig: dev.aurakai.auraframefx.system.quicksettings.model.QuickSettingsTileConfig) {
+        // Implement haptic feedback for quick settings tiles
+        // This is just a stub - fill in with actual implementation as needed
+        XposedBridge.log("[$TAG] Applied haptic feedback for tile: ${tileConfig.tileId}")
+    }
+
+    private fun applyAnimation(view: View, tileConfig: dev.aurakai.auraframefx.system.quicksettings.model.QuickSettingsTileConfig) {
+        // Implement animation for quick settings tiles
+        // This is just a stub - fill in with actual implementation as needed
+        XposedBridge.log("[$TAG] Applied animation for tile: ${tileConfig.tileId}")
     }
 }

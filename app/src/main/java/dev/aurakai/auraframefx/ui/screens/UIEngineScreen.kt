@@ -10,7 +10,7 @@ import androidx.compose.ui.Modifier
 // import androidx.compose.ui.tooling.preview.Preview
 
 @Composable
-fun UiEngineScreen() { // Renamed to uiEngineScreen
+public fun UiEngineScreen() { // Renamed to uiEngineScreen
     // TODO: Implement the actual UI Engine Screen, possibly for dynamic UI rendering or previews
     Box(
         modifier = Modifier.fillMaxSize(),

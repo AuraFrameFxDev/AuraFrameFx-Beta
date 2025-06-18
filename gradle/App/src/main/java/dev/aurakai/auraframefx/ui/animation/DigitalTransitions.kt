@@ -23,7 +23,7 @@ import kotlin.random.Random
  * Custom Digital Transitions inspired by cyberpunk aesthetics
  * These transitions create a "digitalization" effect for screen changes
  */
-object DigitalTransitions {
+public object DigitalTransitions {
 
     /**
      * Creates a Navigation Animation to materialize content with a digital effect
@@ -62,7 +62,7 @@ object DigitalTransitions {
      * Applies a digital pixelation effect modifier to a composable
      * Creates a dissolving/materializing effect using digital particles
      */
-    fun Modifier.digitalPixelEffect(
+    public fun Modifier.digitalPixelEffect(
         visible: Boolean = true,
         pixelsCount: Int = 400,
         colors: List<Color> = listOf(NeonBlue, NeonPink, NeonCyan),
@@ -125,7 +125,7 @@ object DigitalTransitions {
     /**
      * Applies a scanning line effect similar to old CRT monitors
      */
-    fun Modifier.digitalScanlineEffect(visible: Boolean = true) = composed {
+    public fun Modifier.digitalScanlineEffect(visible: Boolean = true) = composed {
         var offsetY by remember { mutableFloatStateOf(0f) }
         val infiniteTransition = rememberInfiniteTransition(label = "scanline")
         val scanlinePosition by infiniteTransition.animateFloat(
@@ -164,7 +164,7 @@ object DigitalTransitions {
      * Applies an edge glow effect around a composable
      * Creates a cyberpunk-style glowing border
      */
-    fun Modifier.cyberEdgeGlow(
+    public fun Modifier.cyberEdgeGlow(
         visible: Boolean = true,
         primaryColor: Color = NeonCyan,
         secondaryColor: Color = NeonPink,
@@ -284,7 +284,7 @@ object DigitalTransitions {
      * Digital glitch effect that randomly displaces small portions of the UI
      */
     @Composable
-    fun Modifier.digitalGlitchEffect(visible: Boolean = true): Modifier {
+    public fun Modifier.digitalGlitchEffect(visible: Boolean = true): Modifier {
         if (!visible) return this
 
         val infiniteTransition = rememberInfiniteTransition(label = "glitch")

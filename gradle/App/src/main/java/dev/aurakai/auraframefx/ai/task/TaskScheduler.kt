@@ -12,7 +12,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class TaskScheduler @Inject constructor(
+public class TaskScheduler @Inject constructor(
     private val errorHandler: ErrorHandler,
     private val config: AIPipelineConfig,
 ) {
@@ -26,7 +26,7 @@ class TaskScheduler @Inject constructor(
     private val _activeTasks = mutableMapOf<String, Task>()
     private val _completedTasks = mutableMapOf<String, Task>()
 
-    fun createTask(
+    public fun createTask(
         content: String,
         context: String,
         priority: TaskPriority = TaskPriority.NORMAL,
@@ -130,7 +130,7 @@ class TaskScheduler @Inject constructor(
         }
     }
 
-    fun updateTaskStatus(taskId: String, status: TaskStatus) {
+    public fun updateTaskStatus(taskId: String, status: TaskStatus) {
         val task = _tasks.value[taskId] ?: return
         val updatedTask = task.copy(status = status)
 
@@ -187,7 +187,7 @@ class TaskScheduler @Inject constructor(
     }
 }
 
-data class TaskStats(
+public data class TaskStats(
     val totalTasks: Int = 0,
     val activeTasks: Int = 0,
     val completedTasks: Int = 0,

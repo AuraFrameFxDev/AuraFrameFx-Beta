@@ -25,11 +25,11 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import dev.aurakai.auraframefx.R
 
-val pixelifySans = FontFamily(
+public val pixelifySans = FontFamily(
     Font(R.font.pixelifysans_medium, FontWeight.Medium)
 )
 
-val AppTypography = Typography(
+public val AppTypography = Typography(
     displayLarge = TextStyle(
         fontFamily = pixelifySans,
         fontWeight = FontWeight.Medium,
@@ -114,7 +114,7 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 
-val AppTypography = Typography(
+public val AppTypography = Typography(
     headlineSmall = TextStyle(
         fontFamily = FontFamily.Monospace, // Example: A cyberpunk-style monospace font
         fontWeight = FontWeight.Normal,

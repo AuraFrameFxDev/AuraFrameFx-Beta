@@ -21,11 +21,11 @@ import javax.inject.Singleton
 // User needs to ensure these are @Serializable and align with actual data structures.
 
 @Serializable
-data class LockScreenLayout(val elementPositions: Map<String, String> = emptyMap()) // e.g., "clock" to "top_center"
+public data class LockScreenLayout(val elementPositions: Map<String, String> = emptyMap()) // e.g., "clock" to "top_center"
 
 // Updated LockScreenClockConfig to include all assumed fields and new animation field
 @Serializable
-data class LockScreenClockConfig(
+public data class LockScreenClockConfig(
     val style: String = "digital",
     val showSeconds: Boolean = false,
     val customTextColorEnabled: Boolean? = false,
@@ -38,28 +38,28 @@ data class LockScreenClockConfig(
 
 // Updated LockScreenDateConfig to include new animation field
 @Serializable
-data class LockScreenDateConfig(
+public data class LockScreenDateConfig(
     val format: String = "EEE, MMM d",
     val showYear: Boolean = true,
     val animation: LockScreenAnimation = LockScreenAnimation(), // ADD THIS
 )
 
 @Serializable
-data class LockScreenWeatherConfig(
+public data class LockScreenWeatherConfig(
     val showIcon: Boolean = true,
     val showTemperature: Boolean = true,
     val units: String = "Celsius",
 )
 
 @Serializable
-data class LockScreenBackgroundConfig(
+public data class LockScreenBackgroundConfig(
     val type: String = "image",
     val source: String = "default_wallpaper.jpg",
     val blur: Float = 0.1f,
 )
 
 @Serializable
-data class LockScreenElementConfig(
+public data class LockScreenElementConfig(
     val elementId: String,
     val isVisible: Boolean = true,
     val customText: String? = null,
@@ -67,7 +67,7 @@ data class LockScreenElementConfig(
 
 // Replacing the old LockScreenAnimation with the new detailed one
 @Serializable
-data class LockScreenAnimation(
+public data class LockScreenAnimation(
     val type: String = "none", // e.g., "fade_in", "slide_up", "pulsate"
     val durationMs: Long = 300,
     val startDelayMs: Long = 0,
@@ -77,7 +77,7 @@ data class LockScreenAnimation(
 
 // Added HapticFeedbackConfig definition
 @Serializable
-data class HapticFeedbackConfig(
+public data class HapticFeedbackConfig(
     // Duplicated definition for now, consider moving to common if not already.
     val enabled: Boolean = false,
     val effect: String = "click",
@@ -86,7 +86,7 @@ data class HapticFeedbackConfig(
 
 // Modified LockScreenConfig to include new fields and reflect hooker assumptions
 @Serializable
-data class LockScreenConfig(
+public data class LockScreenConfig(
     val lockScreenMessage: String = "Hello Aura",
     val showClock: Boolean = true, // Assuming this controls overall clock visibility
     val clockConfig: LockScreenClockConfig? = LockScreenClockConfig(),
@@ -102,7 +102,7 @@ data class LockScreenConfig(
 )
 
 @Singleton
-class LockScreenCustomizer @Inject constructor(
+public class LockScreenCustomizer @Inject constructor(
     private val overlayManager: SystemOverlayManager, // Placeholder
     private val shapeManager: ShapeManager, // Placeholder
     private val imageManager: ImageResourceManager, // Placeholder
@@ -118,7 +118,7 @@ class LockScreenCustomizer @Inject constructor(
         private const val IPC_KEY_LOCK_SCREEN = "lock_screen_config_json"
     }
 
-    fun applyConfig(config: LockScreenConfig) {
+    public fun applyConfig(config: LockScreenConfig) {
         _currentConfig.value = config
 
         val configJson = JsonUtils.toJson(config)

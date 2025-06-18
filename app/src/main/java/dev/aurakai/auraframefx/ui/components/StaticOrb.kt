@@ -17,7 +17,7 @@ import dev.aurakai.auraframefx.ui.theme.NeonBlue // Added import
 import dev.aurakai.auraframefx.ui.theme.NeonPink // Added import
 
 @Composable
-fun StaticOrb(
+public fun StaticOrb(
     modifier: Modifier = Modifier,
     color: Color = Color.Gray,
     text: String = "Orb",
@@ -47,6 +47,6 @@ fun StaticOrb(
 
 @Preview(showBackground = true)
 @Composable
-fun StaticOrbPreview() { // Renamed
+public fun StaticOrbPreview() { // Renamed
     StaticOrb(color = Color.Magenta, text = "Static")
 }

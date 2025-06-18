@@ -29,19 +29,19 @@ import kotlinx.serialization.Contextual
  */
 @Serializable
 
-data class BackupRequest (
+public data class BackupRequest (
 
     /* Where to store the backup (e.g., \"cloud\", \"local_sd_card\", \"oracle_drive\"). */
     @SerialName(value = "targetLocation")
-    val targetLocation: kotlin.String,
+    public val targetLocation: kotlin.String,
 
     /* Whether to include system logs in the backup. */
     @SerialName(value = "includeLogs")
-    val includeLogs: kotlin.Boolean? = false,
+    public val includeLogs: kotlin.Boolean? = false,
 
     /* Whether to include user preferences in the backup. */
     @SerialName(value = "includePreferences")
-    val includePreferences: kotlin.Boolean? = true
+    public val includePreferences: kotlin.Boolean? = true
 
 ) {
 

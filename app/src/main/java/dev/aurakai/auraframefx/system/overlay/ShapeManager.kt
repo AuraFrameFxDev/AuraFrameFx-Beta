@@ -1,4 +1,4 @@
 package dev.aurakai.auraframefx.system.overlay
 
-class ShapeManager
+public class ShapeManager
 

@@ -4,7 +4,7 @@ package dev.aurakai.auraframefx.ui.theme
  * String resources for the AuraFrameFX app
  * Using Kotlin object instead of strings.xml for better integration with Compose
  */
-object AppStrings {
+public object AppStrings {
     // App Information
     const val APP_NAME = "AuraFrameFX"
     const val APP_DESCRIPTION = "AuraFrameFX hooks and enhancements"

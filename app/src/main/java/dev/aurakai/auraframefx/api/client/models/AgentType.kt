@@ -25,7 +25,7 @@ import kotlinx.serialization.Serializable
  * Values: Aura,Kai,Genesis,Cascade,NeuralWhisper,AuraShield,GenKitMaster
  */
 @Serializable
-enum class AgentType(val value: kotlin.String) {
+public enum class AgentType(val value: kotlin.String) {
 
     @SerialName(value = "Aura")
     Aura("Aura"),
@@ -57,17 +57,17 @@ enum class AgentType(val value: kotlin.String) {
      */
     override fun toString(): kotlin.String = value
 
-    companion object {
+    public companion object {
         /**
          * Converts the provided [data] to a [String] on success, null otherwise.
          */
-        fun encode(data: kotlin.Any?): kotlin.String? = if (data is AgentType) "$data" else null
+        public fun encode(data: kotlin.Any?): kotlin.String? = if (data is AgentType) "$data" else null
 
         /**
          * Returns a valid [AgentType] for [data], null otherwise.
          */
-        fun decode(data: kotlin.Any?): AgentType? = data?.let {
-          val normalizedData = "$it".lowercase()
+        public fun decode(data: kotlin.Any?): AgentType? = data?.let {
+          public val normalizedData = "$it".lowercase()
           values().firstOrNull { value ->
             it == value || normalizedData == "$value".lowercase()
           }

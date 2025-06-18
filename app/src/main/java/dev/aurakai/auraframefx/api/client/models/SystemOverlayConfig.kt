@@ -30,18 +30,18 @@ import kotlinx.serialization.Contextual
  */
 @Serializable
 
-data class SystemOverlayConfig (
+public data class SystemOverlayConfig (
 
     /* The name of the currently active UI theme. */
     @SerialName(value = "activeThemeName")
-    val activeThemeName: kotlin.String? = null,
+    public val activeThemeName: kotlin.String? = null,
 
     /* Current UI network display mode (e.g., \"Full\", \"Minimal\", \"Hidden\"). */
     @SerialName(value = "uiNetworkMode")
-    val uiNetworkMode: kotlin.String? = null,
+    public val uiNetworkMode: kotlin.String? = null,
 
     @Contextual @SerialName(value = "notchBar")
-    val notchBar: SystemOverlayConfigNotchBar? = null
+    public val notchBar: SystemOverlayConfigNotchBar? = null
 
 ) : kotlin.collections.HashMap<String, kotlin.Any>() {
 

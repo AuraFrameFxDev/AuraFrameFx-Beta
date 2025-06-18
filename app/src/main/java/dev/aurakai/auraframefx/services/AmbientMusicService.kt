@@ -7,7 +7,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class AmbientMusicService @Inject constructor() : Service() {
+public class AmbientMusicService @Inject constructor() : Service() {
     // TODO: If this service has dependencies to be injected, add them to the constructor.
 
     override fun onBind(_intent: Intent?): IBinder? { // intent -> _intent
@@ -33,37 +33,37 @@ class AmbientMusicService @Inject constructor() : Service() {
     }
 
     // Example methods that might be relevant for a music service
-    fun pause() {
+    public fun pause() {
         // TODO: Implement pause logic. Reported as unused. Implement or remove.
     }
 
-    fun resume() {
+    public fun resume() {
         // TODO: Implement resume logic. Reported as unused. Implement or remove.
     }
 
-    fun setVolume(_volume: Float) {
+    public fun setVolume(_volume: Float) {
         // TODO: Reported as unused. Implement or remove.
     }
 
-    fun setShuffling(_isShuffling: Boolean) {
+    public fun setShuffling(_isShuffling: Boolean) {
         // TODO: Reported as unused. Implement or remove.
     }
 
-    fun getCurrentTrack(): Any? { // Return type Any? as placeholder
+    public fun getCurrentTrack(): Any? { // Return type Any? as placeholder
         // TODO: Reported as unused. Implement or remove.
         return null
     }
 
-    fun getTrackHistory(): List<Any> { // Return type List<Any> as placeholder
+    public fun getTrackHistory(): List<Any> { // Return type List<Any> as placeholder
         // TODO: Reported as unused. Implement or remove.
         return emptyList()
     }
 
-    fun skipToNextTrack() {
+    public fun skipToNextTrack() {
         // TODO: Reported as unused. Implement or remove.
     }
 
-    fun skipToPreviousTrack() {
+    public fun skipToPreviousTrack() {
         // TODO: Reported as unused. Implement or remove.
     }
 }

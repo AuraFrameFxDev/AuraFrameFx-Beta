@@ -19,6 +19,7 @@ import dev.aurakai.auraframefx.ai.memory.MemoryManager
 import dev.aurakai.auraframefx.ai.services.KaiAIService
 import dev.aurakai.auraframefx.ai.task.TaskScheduler
 import dev.aurakai.auraframefx.ai.task.execution.TaskExecutionManager
+import dev.aurakai.auraframefx.data.OfflineDataManager
 import dev.aurakai.auraframefx.data.SecurePreferences
 import dev.aurakai.auraframefx.data.OfflineDataManager // Added import
 import dev.aurakai.auraframefx.data.logging.AuraFxLogger
@@ -33,7 +34,7 @@ import javax.inject.Singleton
  */
 @Module
 @InstallIn(SingletonComponent::class)
-object AppModule {
+public object AppModule {
 
     /**
      * Provides the application context.
@@ -42,7 +43,7 @@ object AppModule {
      */
     @Provides
     @Singleton
-    fun provideApplicationContext(application: Application): Context {
+    public fun provideApplicationContext(application: Application): Context {
         // Hilt provides Application, so no underscore needed for 'application' parameter itself.
         return application.applicationContext
     }
@@ -54,7 +55,7 @@ object AppModule {
      */
     @Provides
     @Singleton
-    fun provideSharedPreferences(@ApplicationContext context: Context): SharedPreferences {
+    public fun provideSharedPreferences(@ApplicationContext context: Context): SharedPreferences {
         // Using MODE_PRIVATE instead of MODE_WORLD_READABLE for security
         return context.getSharedPreferences("aura_fx_prefs", Context.MODE_PRIVATE)
     }
@@ -66,7 +67,7 @@ object AppModule {
      */
     @Provides
     @Singleton
-    fun provideSecurePreferences(@ApplicationContext context: Context): SecurePreferences {
+    public fun provideSecurePreferences(@ApplicationContext context: Context): SecurePreferences {
         // TODO: Parameter context was reported as _context and unused (Hilt will provide it).
         // Renamed to context from _context for clarity in usage.
         return SecurePreferences(context)
@@ -78,7 +79,7 @@ object AppModule {
      */
     @Provides
     @Singleton
-    fun provideAIConfig(): AIConfig {
+    public fun provideAIConfig(): AIConfig {
         // TODO: Load actual config values from a secure source or build config.
         return AIConfig(
             modelName = "gemini-pro",
@@ -93,7 +94,7 @@ object AppModule {
      */
     @Provides
     @Singleton
-    fun provideAIConfigFactory(): Any? { // Using Any as AIConfigFactory type placeholder
+    public fun provideAIConfigFactory(): Any? { // Using Any as AIConfigFactory type placeholder
         // TODO: Define AIConfigFactory class and return an instance.
         return null
     }
@@ -107,7 +108,7 @@ object AppModule {
      */
     @Provides
     @Singleton
-    fun provideAuraAIService(
+    public fun provideAuraAIService(
         // AuraAIService has @Inject constructor(), so Hilt can provide its dependencies if they are available.
         // If AuraAIService truly has no constructor args as per its refactor, this becomes:
     ): AuraAIService = AuraAIService()
@@ -120,7 +121,7 @@ object AppModule {
      */
     @Provides
     @Singleton
-    fun provideKaiAIService(
+    public fun provideKaiAIService(
         taskScheduler: TaskScheduler,
         taskExecutionManager: TaskExecutionManager,
         memoryManager: MemoryManager,
@@ -148,7 +149,7 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun provideKeystoreManager(@ApplicationContext context: Context): KeystoreManager {
+    public fun provideKeystoreManager(@ApplicationContext context: Context): KeystoreManager {
         return KeystoreManager(context)
     }
     // SecurityContext is annotated with @Inject constructor and @Singleton,
@@ -157,13 +158,13 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideCloudStatusMonitor(@ApplicationContext context: Context): CloudStatusMonitor {
+    public fun provideCloudStatusMonitor(@ApplicationContext context: Context): CloudStatusMonitor {
         return CloudStatusMonitor(context)
     }
 
     @Provides
     @Singleton
-    fun provideOfflineDataManager(@ApplicationContext context: Context): OfflineDataManager {
+    public fun provideOfflineDataManager(@ApplicationContext context: Context): OfflineDataManager {
         return OfflineDataManager(context)
     }
 
@@ -176,7 +177,7 @@ object AppModule {
      */
     @Provides
     @Singleton
-    fun provideTaskExecutionManager(
+    public fun provideTaskExecutionManager(
         @ApplicationContext context: Context,
         kaiService: KaiAIService,
         auraFxLogger: AuraFxLogger,
@@ -192,7 +193,7 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideTaskScheduler(
+    public fun provideTaskScheduler(
         errorHandler: ErrorHandler, // Corrected parameter
         config: AIConfig // Corrected parameter
     ): TaskScheduler {
@@ -206,7 +207,7 @@ object AppModule {
      */
     @Provides
     @Singleton
-    fun provideShapeManager(): ShapeManager {
+    public fun provideShapeManager(): ShapeManager {
         return ShapeManager()
     }
 
@@ -217,7 +218,7 @@ object AppModule {
      */
     @Provides
     @Singleton
-    fun provideAuraFxLogger(
+    public fun provideAuraFxLogger(
         @ApplicationContext context: Context, // Added missing context
         kaiService: KaiAIService
     ): AuraFxLogger {
@@ -231,7 +232,7 @@ object AppModule {
      */
     @Provides
     @Singleton
-    fun provideErrorHandler(
+    public fun provideErrorHandler(
         contextManager: ContextManager, // Corrected parameter
         config: AIConfig // Corrected parameter
     ): ErrorHandler {
@@ -243,7 +244,7 @@ object AppModule {
      */
     @Provides
     @Singleton
-    fun provideOracleDriveServiceConnector(@ApplicationContext context: Context): com.example.app.ipc.OracleDriveServiceConnector {
+    public fun provideOracleDriveServiceConnector(@ApplicationContext context: Context): com.example.app.ipc.OracleDriveServiceConnector {
         return com.example.app.ipc.OracleDriveServiceConnector(context)
     }
 }

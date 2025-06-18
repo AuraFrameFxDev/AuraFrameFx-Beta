@@ -12,13 +12,13 @@ import de.robv.android.xposed.XposedHelpers
 import dev.aurakai.auraframefx.system.overlay.NotchBarConfig
 import java.io.File
 
-class NotchBarHooker(
+public class NotchBarHooker(
     private val classLoader: ClassLoader,
     private val config: NotchBarConfig,
 ) {
     private val TAG = "NotchBarHooker"
 
-    fun applyNotchBarHooks() {
+    public fun applyNotchBarHooks() {
         XposedBridge.log("[$TAG] Applying Notch Bar Hooks with config: $config")
 
         if (!config.enabled) {
@@ -28,7 +28,7 @@ class NotchBarHooker(
 
         try {
             // Target class is speculative and device-dependent
-            val phoneStatusBarViewClass = XposedHelpers.findClass(
+            public val phoneStatusBarViewClass = XposedHelpers.findClass(
                 "com.android.systemui.statusbar.phone.PhoneStatusBarView",
                 classLoader
             )
@@ -36,22 +36,22 @@ class NotchBarHooker(
             XposedHelpers.findAndHookMethod(
                 phoneStatusBarViewClass,
                 "onFinishInflate",
-                object : XC_MethodHook() {
+                public object : XC_MethodHook() {
                     override fun afterHookedMethod(param: MethodHookParam) {
-                        val statusBarView =
+                        public val statusBarView =
                             param.thisObject as? View // Use View for broader compatibility
                         if (statusBarView != null) {
                             XposedBridge.log("[$TAG] Hooked PhoneStatusBarView.onFinishInflate.")
 
-                            var imageBackgroundApplied = false
+                            public var imageBackgroundApplied = false
                             if (config.customImageBackgroundEnabled && !config.imagePath.isNullOrEmpty()) {
-                                val imagePath =
+                                public val imagePath =
                                     config.imagePath!! // Safe due to isNullOrEmpty check
                                 XposedBridge.log("[$TAG] Attempting to load custom image background for Notch Bar from: $imagePath")
-                                val imageBitmap = loadImageFromFile(imagePath)
+                                public val imageBitmap = loadImageFromFile(imagePath)
                                 if (imageBitmap != null) {
                                     try {
-                                        val drawable =
+                                        public val drawable =
                                             BitmapDrawable(statusBarView.resources, imageBitmap)
                                         statusBarView.background = drawable
                                         imageBackgroundApplied = true
@@ -67,7 +67,7 @@ class NotchBarHooker(
 
                             // Apply background color only if image was not applied or not enabled/specified
                             if (!imageBackgroundApplied && config.customBackgroundColorEnabled && !config.customBackgroundColor.isNullOrEmpty()) {
-                                val bgColor =
+                                public val bgColor =
                                     config.customBackgroundColor!! // Safe due to isNullOrEmpty check
                                 try {
                                     statusBarView.setBackgroundColor(Color.parseColor(bgColor))
@@ -100,7 +100,7 @@ class NotchBarHooker(
 
                             // --- NEW: Apply Margins ---
                             try {
-                                val layoutParams = statusBarView.layoutParams
+                                public val layoutParams = statusBarView.layoutParams
                                 if (layoutParams is ViewGroup.MarginLayoutParams) {
                                     layoutParams.setMargins(
                                         config.marginStartPx,
@@ -139,7 +139,7 @@ class NotchBarHooker(
 
     private fun loadImageFromFile(filePath: String): Bitmap? {
         return try {
-            val file = File(filePath)
+            public val file = File(filePath)
             if (file.exists()) {
                 BitmapFactory.decodeFile(file.absolutePath)
             } else {

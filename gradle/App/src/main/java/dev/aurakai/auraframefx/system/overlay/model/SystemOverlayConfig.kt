@@ -1,7 +1,7 @@
 package dev.aurakai.auraframefx.system.overlay.model
 
 // Basic placeholder. This would aggregate all other configurations.
-data class SystemOverlayConfig(
+public data class SystemOverlayConfig(
     val version: Int = 1,
     val theme: OverlayTheme,
     val elements: List<OverlayElement>,

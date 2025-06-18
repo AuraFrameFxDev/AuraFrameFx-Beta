@@ -6,7 +6,7 @@ import kotlinx.datetime.Instant
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class Task(
+public data class Task(
     val id: String = "task_${Clock.System.now().toEpochMilliseconds()}",
     val timestamp: Instant = Clock.System.now(),
     val priority: TaskPriority = TaskPriority.NORMAL,
@@ -24,7 +24,7 @@ data class Task(
 )
 
 @Serializable
-data class TaskDependency(
+public data class TaskDependency(
     val taskId: String,
     val dependencyId: String,
     val type: DependencyType,
@@ -33,7 +33,7 @@ data class TaskDependency(
 )
 
 @Serializable
-data class TaskPriority(
+public data class TaskPriority(
     val value: Float,
     val reason: String,
     val metadata: Map<String, String> = emptyMap(),
@@ -48,7 +48,7 @@ data class TaskPriority(
 }
 
 @Serializable
-data class TaskUrgency(
+public data class TaskUrgency(
     val value: Float,
     val reason: String,
     val metadata: Map<String, String> = emptyMap(),
@@ -64,7 +64,7 @@ data class TaskUrgency(
 }
 
 @Serializable
-data class TaskImportance(
+public data class TaskImportance(
     val value: Float,
     val reason: String,
     val metadata: Map<String, String> = emptyMap(),
@@ -80,7 +80,7 @@ data class TaskImportance(
 }
 
 @Serializable // Added annotation
-enum class TaskStatus {
+public enum class TaskStatus {
     PENDING,
     IN_PROGRESS,
     COMPLETED,
@@ -91,7 +91,7 @@ enum class TaskStatus {
 }
 
 @Serializable // Added annotation
-enum class DependencyType {
+public enum class DependencyType {
     BLOCKING,
     SEQUENTIAL,
     PARALLEL,

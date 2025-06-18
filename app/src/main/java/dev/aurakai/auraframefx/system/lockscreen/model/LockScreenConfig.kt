@@ -1,70 +1,59 @@
 package dev.aurakai.auraframefx.system.lockscreen.model
 
+import kotlinx.serialization.Contextual
+import kotlinx.serialization.Serializable
+
 // Placeholder based on SystemCustomizationViewModel.kt usage
-data class LockScreenConfig(
-    val clockElement: LockScreenElementConfig? = null,
-    val dateElement: LockScreenElementConfig? = null,
-    val notificationElement: LockScreenElementConfig? = null,
-    val hideClock: Boolean = false,
-    val hideDate: Boolean = false,
-    val hideNotifications: Boolean = false,
-    val customFontPath: String? = null,
+@Serializable
+public data class LockScreenConfig(
+    public val clockElement: LockScreenElementConfig? = null,
+    public val dateElement: LockScreenElementConfig? = null,
+    public val notificationElement: LockScreenElementConfig? = null,
+    public val hideClock: Boolean = false,
+    public val hideDate: Boolean = false,
+    public val hideNotifications: Boolean = false,
+    public val customFontPath: String? = null,
     // Added based on LockScreenHooker
-    val clockConfig: ClockConfig? = null,
-    val dateConfig: DateConfig? = null,
-    val defaultElementAnimation: LockScreenAnimationConfig = LockScreenAnimationConfig(),
-    val hapticFeedback: HapticFeedbackConfig = HapticFeedbackConfig() // Assuming similar HapticFeedbackConfig
+    public val clockConfig: ClockConfig? = null,
+    public val dateConfig: DateConfig? = null,
+    public val defaultElementAnimation: LockScreenAnimationConfig = LockScreenAnimationConfig(),
+    @Contextual val hapticFeedback: HapticFeedbackConfig = HapticFeedbackConfig() // Using the HapticFeedbackConfig from separate file
 )
 
 // Referenced in LockScreenConfig and LockScreenHooker
-data class ClockConfig(
-    val customTextColorEnabled: Boolean? = null,
-    val customTextColor: String? = null,
-    val customTextSizeEnabled: Boolean? = null,
-    val customTextSizeSp: Int = 0,
-    val customFontStyle: String? = null,
-    val animation: LockScreenAnimationConfig = LockScreenAnimationConfig()
+@Serializable
+public data class ClockConfig(
+    public val customTextColorEnabled: Boolean? = null,
+    public val customTextColor: String? = null,
+    public val customTextSizeEnabled: Boolean? = null,
+    public val customTextSizeSp: Int = 0,
+    public val customFontStyle: String? = null,
+    public val animation: LockScreenAnimationConfig = LockScreenAnimationConfig()
 )
 
 // Referenced in LockScreenConfig and LockScreenHooker
-data class DateConfig(
+@Serializable
+public data class DateConfig(
     // Assuming similar properties to ClockConfig for now if needed
-    val animation: LockScreenAnimationConfig = LockScreenAnimationConfig()
-)
-
-
-// Assuming similar HapticFeedbackConfig as in QuickSettings
-data class HapticFeedbackConfig(
-    val enabled: Boolean? = false,
-    val effect: String = "click",
-    val intensity: Int = 50
+    public val animation: LockScreenAnimationConfig = LockScreenAnimationConfig()
 )
 
 // Referenced in LockScreenConfig and LockScreenHooker
-data class LockScreenAnimationConfig(
-    val type: String = "none", // e.g., "fade_in", "slide_up"
-    val durationMs: Long = 300,
-    val startDelayMs: Long = 0,
-    val interpolator: String = "linear" // e.g., "linear", "accelerate"
+@Serializable
+public data class LockScreenAnimationConfig(
+    public val type: String = "none", // e.g., "fade_in", "slide_up"
+    public val durationMs: Long = 300,
+    public val startDelayMs: Long = 0,
+    public val interpolator: String = "linear" // e.g., "linear", "accelerate"
 )
 
 
 // Placeholder, defined based on SystemCustomizationViewModel usage context
-data class LockScreenElementConfig(
-    val type: LockScreenElementType,
-    val animation: LockScreenAnimation // Assuming this LockScreenAnimation is an enum
+@Serializable
+public data class LockScreenElementConfig(
+    public val elementId: String,
+    public val isVisible: Boolean = true,
+    public val customText: String? = null,
+    public val type: LockScreenElementType, // Import from LockScreenElementType.kt
+    public val animation: LockScreenAnimation = LockScreenAnimation.NONE // Import from LockScreenAnimation.kt
 )
-
-enum class LockScreenElementType {
-    CLOCK,
-    DATE,
-    NOTIFICATIONS
-    // Add other element types as needed
-}
-
-enum class LockScreenAnimation { // As used by LockScreenElementConfig
-    FADE_IN,
-    SLIDE_UP,
-    NONE
-    // Add other animation types as needed
-}

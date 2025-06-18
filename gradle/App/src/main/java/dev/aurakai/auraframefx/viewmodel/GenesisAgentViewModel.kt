@@ -18,7 +18,7 @@ import javax.inject.Inject
 // import javax.inject.Singleton // ViewModels should use @HiltViewModel
 
 // @Singleton // Replaced with @HiltViewModel (implicitly, if this were a Hilt ViewModel)
-class GenesisAgentViewModel @Inject constructor(
+public class GenesisAgentViewModel @Inject constructor(
     private val genesisAgent: GenesisAgent,
 ) : ViewModel() {
 
@@ -43,23 +43,23 @@ class GenesisAgentViewModel @Inject constructor(
         _agents.value = genesisAgent.getAgentsByPriority()
     }
 
-    fun toggleRotation() {
+    public fun toggleRotation() {
         _isRotating.value = !_isRotating.value
     }
 
-    fun toggleAgent(agent: AgentType) {
+    public fun toggleAgent(agent: AgentType) {
         viewModelScope.launch {
             genesisAgent.toggleAgent(agent)
         }
     }
 
-    fun updateAgentStatus(agent: AgentType, status: String) {
+    public fun updateAgentStatus(agent: AgentType, status: String) {
         val currentStatuses = _agentStatus.value.toMutableMap()
         currentStatuses[agent] = status
         _agentStatus.value = currentStatuses
     }
 
-    fun assignTaskToAgent(agent: AgentType, taskDescription: String) {
+    public fun assignTaskToAgent(agent: AgentType, taskDescription: String) {
         viewModelScope.launch {
             try {
                 // Update status to processing
@@ -80,33 +80,33 @@ class GenesisAgentViewModel @Inject constructor(
         }
     }
 
-    fun addTaskToHistory(agent: AgentType, description: String) {
+    public fun addTaskToHistory(agent: AgentType, description: String) {
         val newTask = HistoricalTask(agent, description)
         val updatedHistory = _taskHistory.value.toMutableList()
         updatedHistory.add(0, newTask) // Add to the beginning for most recent first
         _taskHistory.value = updatedHistory
     }
 
-    fun clearTaskHistory() {
+    public fun clearTaskHistory() {
         _taskHistory.value = emptyList()
     }
 
-    fun registerAuxiliaryAgent(
+    public fun registerAuxiliaryAgent(
         name: String,
         capabilities: Set<String>,
     ): AgentConfig {
         return genesisAgent.registerAuxiliaryAgent(name, capabilities)
     }
 
-    fun getAgentConfig(name: String): AgentConfig? {
+    public fun getAgentConfig(name: String): AgentConfig? {
         return genesisAgent.getAgentConfig(name)
     }
 
-    fun getAgentsByPriority(): List<AgentConfig> {
+    public fun getAgentsByPriority(): List<AgentConfig> {
         return genesisAgent.getAgentsByPriority()
     }
 
-    fun processQuery(query: String): List<AgentConfig> {
+    public fun processQuery(query: String): List<AgentConfig> {
         viewModelScope.launch {
             genesisAgent.processQuery(query)
         }

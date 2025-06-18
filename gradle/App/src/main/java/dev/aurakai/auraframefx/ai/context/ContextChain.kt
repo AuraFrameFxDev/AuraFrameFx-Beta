@@ -7,7 +7,7 @@ import kotlinx.datetime.Instant
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class ContextChain(
+public data class ContextChain(
     val id: String = "ctx_${Clock.System.now().toEpochMilliseconds()}",
     val rootContext: String,
     val currentContext: String,
@@ -21,7 +21,7 @@ data class ContextChain(
 )
 
 @Serializable
-data class ContextNode(
+public data class ContextNode(
     val id: String,
     val content: String,
     val timestamp: Instant = Clock.System.now(),
@@ -32,7 +32,7 @@ data class ContextNode(
 )
 
 @Serializable
-data class ContextQuery(
+public data class ContextQuery(
     val query: String,
     val context: String? = null,
     val maxChainLength: Int = 10,
@@ -43,7 +43,7 @@ data class ContextQuery(
 )
 
 @Serializable
-data class ContextChainResult(
+public data class ContextChainResult(
     val chain: ContextChain,
     val relatedChains: List<ContextChain>,
     val query: ContextQuery,

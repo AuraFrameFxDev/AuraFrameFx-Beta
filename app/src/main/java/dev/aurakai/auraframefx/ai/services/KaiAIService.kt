@@ -16,7 +16,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class KaiAIService @Inject constructor(
+public class KaiAIService @Inject constructor(
     private val taskScheduler: TaskScheduler,
     private val taskExecutionManager: TaskExecutionManager,
     private val memoryManager: MemoryManager,

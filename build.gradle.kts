@@ -5,7 +5,7 @@ buildscript {
     }
     dependencies {
         classpath("com.android.tools.build:gradle:8.10.1")
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${libs.versions.kotlin.get()}")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.24") // Hardcoded version
         classpath("com.google.dagger:hilt-android-gradle-plugin:2.56.2")
         classpath("com.google.gms:google-services:4.4.2")
         classpath("com.google.firebase:firebase-crashlytics-gradle:3.0.4")
@@ -16,17 +16,38 @@ buildscript {
 
 plugins {
     id("com.android.application") version "8.10.1" apply false
-    alias(libs.plugins.kotlin.android) apply false
-    alias(libs.plugins.kotlin.compose) apply true
-    alias(libs.plugins.hilt.android) apply false
-    alias(libs.plugins.ksp) apply false
+    id("org.jetbrains.kotlin.android") version "1.9.24" apply false // Hardcoded version
+    id("org.jetbrains.kotlin.plugin.compose") version "1.9.24" apply true // Hardcoded version
+    id("com.google.dagger.hilt.android") version "2.56.2" apply false
+    id("com.google.devtools.ksp") version "1.9.24-1.0.20" apply false // Example hardcoded version
     id("com.google.gms.google-services") version "4.4.2" apply false
     id("com.google.firebase.crashlytics") version "3.0.4" apply false
     id("com.google.firebase.firebase-perf") version "1.4.2" apply false
-    alias(libs.plugins.kotlin.serialization) apply false
     id("androidx.navigation.safeargs.kotlin") version "2.9.0" apply false
     id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin") version "2.0.1" apply false
     id("org.openapi.generator") version "7.5.0" apply false
+}
+
+// Custom task to fix Kotlin visibility issues
+tasks.register("fixKotlinVisibility") {
+    group = "build"
+    description = "Fixes Kotlin visibility issues for explicit API mode"
+    
+    doLast {
+        val scriptPath = "${rootProject.projectDir}/fix-kotlin-visibility.sh"
+        
+        // Make sure the script is executable
+        exec {
+            commandLine("chmod", "+x", scriptPath)
+        }
+        
+        // Run the script
+        exec {
+            commandLine(scriptPath)
+        }
+        
+        println("Kotlin visibility fixing completed")
+    }
 }
 
 subprojects {

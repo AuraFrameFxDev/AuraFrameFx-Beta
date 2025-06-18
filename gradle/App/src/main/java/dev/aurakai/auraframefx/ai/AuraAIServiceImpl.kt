@@ -10,7 +10,7 @@ import javax.inject.Singleton
  * TODO: Class reported as unused or needs full implementation of its methods.
  */
 @Singleton
-class AuraAIServiceImpl @Inject constructor(
+public class AuraAIServiceImpl @Inject constructor(
     private val taskScheduler: dev.aurakai.auraframefx.ai.task.TaskScheduler,
     private val taskExecutionManager: dev.aurakai.auraframefx.ai.task.execution.TaskExecutionManager,
     private val memoryManager: dev.aurakai.auraframefx.ai.memory.MemoryManager,

@@ -30,23 +30,23 @@ import kotlinx.serialization.Contextual
  */
 @Serializable
 
-data class SecurityState (
+public data class SecurityState (
 
     /* Indicates if real-time threat detection is active. */
     @SerialName(value = "threatDetectionActive")
-    val threatDetectionActive: kotlin.Boolean,
+    public val threatDetectionActive: kotlin.Boolean,
 
     /* Current state of key Android permissions where each key is a permission name and the value is a boolean indicating if it's granted (true) or denied (false). */
     @SerialName(value = "permissionsState")
-    val permissionsState: kotlin.collections.Map<kotlin.String, kotlin.Boolean>,
+    public val permissionsState: kotlin.collections.Map<kotlin.String, kotlin.Boolean>,
 
     /* List of currently detected security threats. */
     @SerialName(value = "activeThreats")
-    val activeThreats: kotlin.collections.List<kotlin.String>? = null,
+    public val activeThreats: kotlin.collections.List<kotlin.String>? = null,
 
     /* Timestamp of the last security scan. */
     @Contextual @SerialName(value = "lastScanTime")
-    val lastScanTime: java.time.OffsetDateTime? = null
+    public val lastScanTime: java.time.OffsetDateTime? = null
 
 ) {
 

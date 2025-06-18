@@ -12,7 +12,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class ErrorHandler @Inject constructor(
+public class ErrorHandler @Inject constructor(
     private val contextManager: ContextManager,
     private val config: AIPipelineConfig,
 ) {
@@ -22,7 +22,7 @@ class ErrorHandler @Inject constructor(
     private val _errorStats = MutableStateFlow(ErrorStats())
     val errorStats: StateFlow<ErrorStats> = _errorStats
 
-    fun handleError(
+    public fun handleError(
         error: Throwable,
         agent: AgentType,
         context: String,
@@ -162,7 +162,7 @@ class ErrorHandler @Inject constructor(
     }
 }
 
-data class ErrorStats(
+public data class ErrorStats(
     val totalErrors: Int = 0,
     val activeErrors: Int = 0,
     val lastError: AIError? = null,
@@ -170,12 +170,12 @@ data class ErrorStats(
     val lastUpdated: Instant = Clock.System.now(),
 )
 
-class ProcessingException(message: String? = null) : Exception(message)
+public class ProcessingException(message: String? = null) : Exception(message)
 
-class MemoryException(message: String? = null) : Exception(message)
+public class MemoryException(message: String? = null) : Exception(message)
 
-class ContextException(message: String? = null) : Exception(message)
+public class ContextException(message: String? = null) : Exception(message)
 
-class NetworkException(message: String? = null) : Exception(message)
+public class NetworkException(message: String? = null) : Exception(message)
 
-class TimeoutException(message: String? = null) : Exception(message)
+public class TimeoutException(message: String? = null) : Exception(message)

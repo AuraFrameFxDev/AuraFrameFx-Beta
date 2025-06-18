@@ -16,7 +16,7 @@ import javax.inject.Singleton
  */
 @Module
 @InstallIn(SingletonComponent::class)
-object WorkerModule {
+public object WorkerModule {
 
     /**
      * Provides HiltWorkerFactory.
@@ -26,7 +26,7 @@ object WorkerModule {
      */
     @Provides
     @Singleton
-    fun provideHiltWorkerFactory(
+    public fun provideHiltWorkerFactory(
         // workerFactoryEntryPoint: WorkerFactoryEntryPoint // Example, if using custom entry point
         // For basic HiltWorkerFactory, it might not need explicit parameters here if Hilt handles it.
         // The error "unused _workerFactoryEntryPoint" might stem from a specific older setup.

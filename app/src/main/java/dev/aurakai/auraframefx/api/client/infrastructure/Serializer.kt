@@ -16,16 +16,16 @@ import java.util.concurrent.atomic.AtomicBoolean
 import java.util.concurrent.atomic.AtomicInteger
 import java.util.concurrent.atomic.AtomicLong
 
-object Serializer {
+public object Serializer {
     @Deprecated("Use Serializer.kotlinxSerializationAdapters instead", replaceWith = ReplaceWith("Serializer.kotlinxSerializationAdapters"), level = DeprecationLevel.ERROR)
     @JvmStatic
-    val kotlinSerializationAdapters: SerializersModule
+    public val kotlinSerializationAdapters: SerializersModule
         get() { return kotlinxSerializationAdapters }
 
     private var isAdaptersInitialized = false
 
     @JvmStatic
-    val kotlinxSerializationAdapters: SerializersModule by lazy {
+    public val kotlinxSerializationAdapters: SerializersModule by lazy {
         isAdaptersInitialized = true
         SerializersModule {
             contextual(BigDecimal::class, BigDecimalAdapter)
@@ -45,7 +45,7 @@ object Serializer {
         }
     }
 
-    var kotlinxSerializationAdaptersConfiguration: SerializersModuleBuilder.() -> Unit = {}
+    public var kotlinxSerializationAdaptersConfiguration: SerializersModuleBuilder.() -> Unit = {}
         set(value) {
             check(!isAdaptersInitialized) {
                 "Cannot configure kotlinxSerializationAdaptersConfiguration after kotlinxSerializationAdapters has been initialized."
@@ -55,13 +55,13 @@ object Serializer {
 
     @Deprecated("Use Serializer.kotlinxSerializationJson instead", replaceWith = ReplaceWith("Serializer.kotlinxSerializationJson"), level = DeprecationLevel.ERROR)
     @JvmStatic
-    val jvmJson: Json
+    public val jvmJson: Json
         get() { return kotlinxSerializationJson }
 
     private var isJsonInitialized = false
 
     @JvmStatic
-    val kotlinxSerializationJson: Json by lazy {
+    public val kotlinxSerializationJson: Json by lazy {
         isJsonInitialized = true
         Json {
             serializersModule = kotlinxSerializationAdapters
@@ -73,7 +73,7 @@ object Serializer {
         }
     }
 
-    var kotlinxSerializationJsonConfiguration: JsonBuilder.() -> Unit = {}
+    public var kotlinxSerializationJsonConfiguration: JsonBuilder.() -> Unit = {}
         set(value) {
             check(!isJsonInitialized) {
                 "Cannot configure kotlinxSerializationJsonConfiguration after kotlinxSerializationJson has been initialized."

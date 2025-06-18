@@ -8,7 +8,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class XposedBridgeService @Inject constructor(
+public class XposedBridgeService @Inject constructor(
     // Example dependency injection (add real dependencies as needed)
     // private val someDependency: SomeType
 ) : Service() {

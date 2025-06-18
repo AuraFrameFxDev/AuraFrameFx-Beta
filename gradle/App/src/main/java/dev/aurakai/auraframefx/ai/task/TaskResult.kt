@@ -3,7 +3,7 @@ package dev.aurakai.auraframefx.ai.task
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class TaskResult(
+public data class TaskResult(
     val taskId: String,
     val status: TaskStatus,
     val message: String? = null,

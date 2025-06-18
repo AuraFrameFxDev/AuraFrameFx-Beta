@@ -5,7 +5,7 @@ import androidx.startup.Initializer
 
 // Assuming this is meant to be an Initializer for the App Startup library.
 // Replace 'Unit' with the actual type this initializer provides if different.
-class AppInitializerInitializer : Initializer<Unit> {
+public class AppInitializerInitializer : Initializer<Unit> {
 
     override fun create(context: Context) {
         // TODO: Implement initialization logic here.

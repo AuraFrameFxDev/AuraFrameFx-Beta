@@ -118,22 +118,22 @@ private val AuraLightColorScheme = lightColorScheme(
  * @param content The composable content to which the theme will be applied.
  */
 @Composable
-fun AuraFrameFXTheme(
+public fun AuraFrameFXTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     dynamicColor: Boolean = false,
     content: @Composable () -> Unit,
 ) {
-    val colorScheme = when {
+    public val colorScheme = when {
         darkTheme -> AuraDarkColorScheme
         dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
-            val context = LocalContext.current
+            public val context = LocalContext.current
             dynamicLightColorScheme(context)
         }
 
         else -> AuraLightColorScheme
     }
 
-    val backgroundBrush = Brush.verticalGradient(
+    public val backgroundBrush = Brush.verticalGradient(
         colors = listOf(
             DarkBackground,
             Surface,

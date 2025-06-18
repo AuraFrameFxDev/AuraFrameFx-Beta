@@ -6,7 +6,7 @@ import dev.aurakai.auraframefx.ai.VertexAIConfig
 /**
  * Utility object for Vertex AI operations.
  */
-object VertexAIUtils {
+public object VertexAIUtils {
 
     private const val TAG = "VertexAIUtils"
 
@@ -16,7 +16,7 @@ object VertexAIUtils {
      * @return A [VertexAIConfig] object.
      * TODO: Reported as unused. Implement or remove if not needed.
      */
-    fun createVertexAIConfig(apiKey: String? = null): VertexAIConfig {
+    public fun createVertexAIConfig(apiKey: String? = null): VertexAIConfig {
         // TODO: Reported as unused. Implement actual config creation or remove.
         Log.d(TAG, "createVertexAIConfig called. API Key present: ${apiKey != null}")
         return VertexAIConfig(apiKey = apiKey)
@@ -27,7 +27,7 @@ object VertexAIUtils {
      * @param error The error object or message.
      * TODO: Reported as unused. Implement or remove if not needed.
      */
-    fun handleErrors(_error: Any?) {
+    public fun handleErrors(_error: Any?) {
         // TODO: Reported as unused. Implement actual error handling (e.g., logging, user feedback).
         Log.e(TAG, "Handling error: ${_error?.toString() ?: "Unknown error"}")
     }
@@ -39,7 +39,7 @@ object VertexAIUtils {
      * @param throwable Optional throwable for stack trace.
      * TODO: Reported as unused. Implement or remove if not needed.
      */
-    fun logErrors(_tag: String = TAG, _message: String, _throwable: Throwable? = null) {
+    public fun logErrors(_tag: String = TAG, _message: String, _throwable: Throwable? = null) {
         // TODO: Reported as unused. Implement actual logging.
         if (_throwable != null) {
             Log.e(_tag, _message, _throwable)
@@ -54,7 +54,7 @@ object VertexAIUtils {
      * @return True if valid, false otherwise.
      * TODO: Reported as unused. Implement or remove if not needed.
      */
-    fun validate(_config: VertexAIConfig?): Boolean {
+    public fun validate(_config: VertexAIConfig?): Boolean {
         // TODO: Reported as unused. Implement actual validation logic.
         val isValid =
             _config != null && _config.projectId.isNotBlank() && _config.region?.isNotBlank() == true // Safe call for nullable region

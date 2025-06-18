@@ -4,7 +4,7 @@ import androidx.compose.ui.graphics.Color
 
 // Basic placeholder
 // This would define properties for a shape, e.g., type (rectangle, circle, path), colors, corners, etc.
-data class OverlayShape(
+public data class OverlayShape(
     val id: String, // Added id as Impl uses it as map key
     val shapeType: String, // e.g., "rounded_rectangle", "circle", "hexagon"
     val fillColor: Color? = null,
@@ -16,7 +16,7 @@ data class OverlayShape(
 )
 
 // Copied from previous theme files, assuming it's related
-data class OverlayShadow(
+public data class OverlayShadow(
     val offsetX: Float = 0f,
     val offsetY: Float = 0f,
     val blurRadius: Float = 0f,

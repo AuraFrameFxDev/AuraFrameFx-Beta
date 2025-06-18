@@ -14,7 +14,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class ContextManager @Inject constructor(
+public class ContextManager @Inject constructor(
     private val memoryManager: MemoryManager,
     private val config: AIPipelineConfig,
 ) {
@@ -24,7 +24,7 @@ class ContextManager @Inject constructor(
     private val _contextStats = MutableStateFlow(ContextStats())
     val contextStats: StateFlow<ContextStats> = _contextStats
 
-    fun createContextChain(
+    public fun createContextChain(
         rootContext: String,
         initialContext: String,
         agent: AgentType,
@@ -52,7 +52,7 @@ class ContextManager @Inject constructor(
         return chain.id
     }
 
-    fun updateContextChain(
+    public fun updateContextChain(
         chainId: String,
         newContext: String,
         agent: AgentType,
@@ -80,11 +80,11 @@ class ContextManager @Inject constructor(
         return updatedChain
     }
 
-    fun getContextChain(chainId: String): ContextChain? {
+    public fun getContextChain(chainId: String): ContextChain? {
         return _activeContexts.value[chainId]
     }
 
-    fun queryContext(query: ContextQuery): ContextChainResult {
+    public fun queryContext(query: ContextQuery): ContextChainResult {
         val chains = _activeContexts.value.values
             .filter { chain ->
                 query.agentFilter.isEmpty() || query.agentFilter.contains(chain.agentContext.keys.first())
@@ -121,7 +121,7 @@ class ContextManager @Inject constructor(
     }
 }
 
-data class ContextStats(
+public data class ContextStats(
     val totalChains: Int = 0,
     val activeChains: Int = 0,
     val longestChain: Int = 0,

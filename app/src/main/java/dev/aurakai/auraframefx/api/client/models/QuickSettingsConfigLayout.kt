@@ -28,13 +28,13 @@ import kotlinx.serialization.Contextual
  */
 @Serializable
 
-data class QuickSettingsConfigLayout (
+public data class QuickSettingsConfigLayout (
 
     @SerialName(value = "columns")
-    val columns: kotlin.Int? = null,
+    public val columns: kotlin.Int? = null,
 
     @SerialName(value = "rows")
-    val rows: kotlin.Int? = null
+    public val rows: kotlin.Int? = null
 
 ) {
 

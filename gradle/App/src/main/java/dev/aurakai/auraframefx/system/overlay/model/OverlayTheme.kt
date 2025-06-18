@@ -4,7 +4,7 @@ import androidx.compose.ui.graphics.Color // Assuming colors will be Compose Col
 
 // Basic placeholder. The Impl used theme.colors, theme.fonts, theme.shapes
 // These would be maps or lists of more specific types.
-data class OverlayTheme(
+public data class OverlayTheme(
     val name: String,
     val colors: Map<String, Color>? = null, // e.g., "primary" to Color(0xFFFFFFFF)
     val fonts: Map<String, String>? = null,   // e.g., "body" to "font_family_name"

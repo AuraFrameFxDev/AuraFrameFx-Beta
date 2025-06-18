@@ -28,13 +28,13 @@ import kotlinx.serialization.Contextual
  */
 @Serializable
 
-data class LockScreenConfigHapticFeedback (
+public data class LockScreenConfigHapticFeedback (
 
     @SerialName(value = "enabled")
-    val enabled: kotlin.Boolean? = null,
+    public val enabled: kotlin.Boolean? = null,
 
     @SerialName(value = "intensity")
-    val intensity: kotlin.Int? = null
+    public val intensity: kotlin.Int? = null
 
 ) : kotlin.collections.HashMap<String, kotlin.Any>() {
 

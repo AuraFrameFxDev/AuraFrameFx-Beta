@@ -19,7 +19,7 @@ import dev.aurakai.auraframefx.viewmodel.ConferenceRoomViewModel
 
 // Placeholder for Header - User should define this Composable
 @Composable
-fun Header(selectedAgent: String, onAgentSelected: (String) -> Unit) {
+public fun Header(selectedAgent: String, onAgentSelected: (String) -> Unit) {
     // Simplified placeholder
     Row(verticalAlignment = Alignment.CenterVertically) {
         Text("Selected Agent: $selectedAgent", modifier = Modifier.padding(8.dp))
@@ -32,7 +32,7 @@ fun Header(selectedAgent: String, onAgentSelected: (String) -> Unit) {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ConferenceRoomScreen(
+public fun ConferenceRoomScreen(
     viewModel: ConferenceRoomViewModel = hiltViewModel(),
 ) {
     var selectedAgent by remember { mutableStateOf("Aura") } // Local state for agent selection UI

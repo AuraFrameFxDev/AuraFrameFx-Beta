@@ -8,14 +8,14 @@ import dev.aurakai.auraframefx.ui.aicontent.AiContentScreen
 /**
  * Navigation constants for AI content features
  */
-object AiContentDestinations {
+public object AiContentDestinations {
     const val AI_CONTENT_ROUTE = "ai_content"
 }
 
 /**
  * Extension function to add AI content related navigation to NavGraphBuilder
  */
-fun NavGraphBuilder.aiContentNavigation() {
+public fun NavGraphBuilder.aiContentNavigation() {
     composable(route = AiContentDestinations.AI_CONTENT_ROUTE) {
         AiContentScreen()
     }
@@ -24,6 +24,6 @@ fun NavGraphBuilder.aiContentNavigation() {
 /**
  * Extension function for NavController to navigate to the AI content screen
  */
-fun NavController.navigateToAiContent() {
+public fun NavController.navigateToAiContent() {
     navigate(AiContentDestinations.AI_CONTENT_ROUTE)
 }

@@ -7,10 +7,10 @@ import androidx.room.Query
 import kotlinx.coroutines.flow.Flow
 
 @Dao
-interface AgentMemoryDao {
+public interface AgentMemoryDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertMemory(memory: AgentMemoryEntity)
 
     @Query("SELECT * FROM agent_memory WHERE agentType = :agentType ORDER BY timestamp DESC")
-    fun getMemoriesForAgent(agentType: String): Flow<List<AgentMemoryEntity>>
+    public fun getMemoriesForAgent(agentType: String): Flow<List<AgentMemoryEntity>>
 }

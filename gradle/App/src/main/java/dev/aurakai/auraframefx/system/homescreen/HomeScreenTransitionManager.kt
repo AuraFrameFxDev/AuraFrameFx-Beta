@@ -13,7 +13,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class HomeScreenTransitionManager @Inject constructor(
+public class HomeScreenTransitionManager @Inject constructor(
     private val overlayManager: SystemOverlayManager,
     private val shapeManager: ShapeManager,
     private val imageManager: ImageResourceManager,
@@ -53,18 +53,18 @@ class HomeScreenTransitionManager @Inject constructor(
         }
     }
 
-    fun applyConfig(config: HomeScreenTransitionConfig) {
+    public fun applyConfig(config: HomeScreenTransitionConfig) {
         _currentConfig.value = config
         overlayService.hook {
             // TODO: Implement transition hooking
         }
     }
 
-    fun resetToDefault() {
+    public fun resetToDefault() {
         applyConfig(defaultConfig)
     }
 
-    fun updateTransitionType(type: HomeScreenTransitionType) {
+    public fun updateTransitionType(type: HomeScreenTransitionType) {
         val current = _currentConfig.value ?: return
         val newConfig = current.copy(
             type = type
@@ -72,7 +72,7 @@ class HomeScreenTransitionManager @Inject constructor(
         applyConfig(newConfig)
     }
 
-    fun updateTransitionDuration(duration: Int) {
+    public fun updateTransitionDuration(duration: Int) {
         val current = _currentConfig.value ?: return
         val newConfig = current.copy(
             duration = duration
@@ -80,7 +80,7 @@ class HomeScreenTransitionManager @Inject constructor(
         applyConfig(newConfig)
     }
 
-    fun updateTransitionProperties(properties: Map<String, Any>) {
+    public fun updateTransitionProperties(properties: Map<String, Any>) {
         val current = _currentConfig.value ?: return
         val newConfig = current.copy(
             properties = properties

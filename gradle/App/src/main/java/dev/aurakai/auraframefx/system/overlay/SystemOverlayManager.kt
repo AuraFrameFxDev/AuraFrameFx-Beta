@@ -9,14 +9,14 @@ import dev.aurakai.auraframefx.system.overlay.model.OverlayShape // Assuming thi
 import dev.aurakai.auraframefx.system.overlay.model.SystemOverlayConfig
 
 
-interface SystemOverlayManager {
-    fun applyTheme(theme: OverlayTheme)
-    fun applyElement(element: OverlayElement)
-    fun applyAnimation(animation: OverlayAnimation)
-    fun applyTransition(transition: OverlayTransition)
-    fun applyShape(shape: OverlayShape) // Changed from OverlayShapeConfig to OverlayShape based on Impl
-    fun applyConfig(config: SystemOverlayConfig)
-    fun removeElement(elementId: String)
-    fun clearAll()
+public interface SystemOverlayManager {
+    public fun applyTheme(theme: OverlayTheme)
+    public fun applyElement(element: OverlayElement)
+    public fun applyAnimation(animation: OverlayAnimation)
+    public fun applyTransition(transition: OverlayTransition)
+    public fun applyShape(shape: OverlayShape) // Changed from OverlayShapeConfig to OverlayShape based on Impl
+    public fun applyConfig(config: SystemOverlayConfig)
+    public fun removeElement(elementId: String)
+    public fun clearAll()
     // fun generateOverlayFromDescription(description: String): SystemOverlayConfig // Still commented out
 }

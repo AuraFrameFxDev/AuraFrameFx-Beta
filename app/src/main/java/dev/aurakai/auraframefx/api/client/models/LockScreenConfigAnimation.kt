@@ -28,14 +28,14 @@ import kotlinx.serialization.Contextual
  */
 @Serializable
 
-data class LockScreenConfigAnimation (
+public data class LockScreenConfigAnimation (
 
     @SerialName(value = "enabled")
-    val enabled: kotlin.Boolean? = null,
+    public val enabled: kotlin.Boolean? = null,
 
     /* Type of animation effect to apply */
     @SerialName(value = "animationType")
-    val animationType: LockScreenConfigAnimation.AnimationType? = null
+    public val animationType: LockScreenConfigAnimation.AnimationType? = null
 
 ) : kotlin.collections.HashMap<String, kotlin.Any>() {
 
@@ -45,7 +45,7 @@ data class LockScreenConfigAnimation (
      * Values: Fade,Slide,Zoom
      */
     @Serializable
-    enum class AnimationType(val value: kotlin.String) {
+    public enum class AnimationType(val value: kotlin.String) {
         @SerialName(value = "Fade") Fade("Fade"),
         @SerialName(value = "Slide") Slide("Slide"),
         @SerialName(value = "Zoom") Zoom("Zoom");

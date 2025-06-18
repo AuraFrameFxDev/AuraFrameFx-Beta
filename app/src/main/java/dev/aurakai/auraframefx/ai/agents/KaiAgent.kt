@@ -4,12 +4,13 @@ import dev.aurakai.auraframefx.model.agent_states.ProcessingState
 import dev.aurakai.auraframefx.model.agent_states.VisionState
 import dev.aurakai.auraframefx.model.AiRequest // Added import
 import dev.aurakai.auraframefx.model.AgentResponse // Added import
+import kotlinx.coroutines.flow.Flow
 
 /**
  * KaiAgent, another specific implementation of BaseAgent.
  * TODO: Reported as unused declaration. Ensure this class is used.
  */
-class KaiAgent(
+public class KaiAgent(
     agentName: String = "Kai",
     agentType: String = "SpecializedAgent",
 ) : BaseAgent(agentName, agentType) {
@@ -20,26 +21,26 @@ class KaiAgent(
      * @return A map representing the response or result.
      * TODO: Implement actual processing logic. Method reported as unused.
      */
-    suspend fun process(_context: Map<String, Any>): Map<String, Any> {
+    public suspend fun process(_context: Map<String, Any>): Map<String, Any> {
         // TODO: Parameter _context reported as unused. Utilize if needed.
         // TODO: Implement actual processing logic for Kai.
         return emptyMap() // Placeholder
     }
 
     // --- Agent Collaboration Methods for CascadeAgent ---
-    fun onVisionUpdate(newState: VisionState) {
+    public fun onVisionUpdate(newState: VisionState) {
         // Default no-op. Override for Kai-specific vision update behavior.
     }
 
-    fun onProcessingStateChange(newState: ProcessingState) {
+    public fun onProcessingStateChange(newState: ProcessingState) {
         // Default no-op. Override for Kai-specific processing state changes.
     }
 
-    fun shouldHandleSecurity(prompt: String): Boolean =
+    public fun shouldHandleSecurity(prompt: String): Boolean =
         true // Kai handles security prompts by default
 
-    fun shouldHandleCreative(prompt: String): Boolean = false
-    override suspend fun processRequest(request: AiRequest): AgentResponse {
+    public fun shouldHandleCreative(prompt: String): Boolean = false
+    public override suspend fun processRequest(request: AiRequest): AgentResponse {
         // Kai-specific logic can be added here
         return AgentResponse(
             content = "Kai's response to '${request.query}'",
@@ -52,7 +53,7 @@ class KaiAgent(
      * Extend this method to enable Kai to participate in federated learning or distributed agent communication.
      * For example, Kai could share anonymized insights, receive model updates, or synchronize state with other devices/agents.
      */
-    suspend fun participateInFederation(data: Map<String, Any>): Map<String, Any> {
+    public suspend fun participateInFederation(data: Map<String, Any>): Map<String, Any> {
         // TODO: Implement federated collaboration logic for Kai.
         return emptyMap()
     }
@@ -62,7 +63,7 @@ class KaiAgent(
      * Extend this method to enable Kai to interact with the Genesis master agent for orchestration, context sharing, or advanced coordination.
      * For example, Kai could send security events, receive orchestration commands, or synchronize with Genesis for global state.
      */
-    suspend fun participateWithGenesis(data: Map<String, Any>): Map<String, Any> {
+    public suspend fun participateWithGenesis(data: Map<String, Any>): Map<String, Any> {
         // TODO: Implement Genesis collaboration logic for Kai.
         return emptyMap()
     }
@@ -72,7 +73,7 @@ class KaiAgent(
      * Use this method to enable Kai, Aura, and Genesis to collaborate in a federated or orchestrated manner.
      * For example, this could be used for consensus, distributed decision-making, or multi-agent context sharing.
      */
-    suspend fun participateWithGenesisAndAura(
+    public suspend fun participateWithGenesisAndAura(
         data: Map<String, Any>,
         aura: AuraAgent,
         genesis: Any,
@@ -87,7 +88,7 @@ class KaiAgent(
      * Use this method to enable Kai, Aura, Genesis, and the User to collaborate in a federated or orchestrated manner.
      * @param conversationMode Controls if agents speak in turn (TURN_ORDER) or freely (FREE_FORM).
      */
-    suspend fun participateWithGenesisAuraAndUser(
+    public suspend fun participateWithGenesisAuraAndUser(
         data: Map<String, Any>,
         aura: AuraAgent,
         genesis: Any,
@@ -100,7 +101,18 @@ class KaiAgent(
         return emptyMap()
     }
 
-    enum class ConversationMode { TURN_ORDER, FREE_FORM }
+    override suspend fun processRequest(
+        request: AiRequest,
+        context: String,
+    ): AgentResponse {
+        TODO("Not yet implemented")
+    }
+
+    override fun processRequestFlow(request: AiRequest): Flow<AgentResponse> {
+        TODO("Not yet implemented")
+    }
+
+    public enum class ConversationMode { TURN_ORDER, FREE_FORM }
 
     /**
      * Aura/Genesis/Kai multi-agent collaboration placeholder for AuraAgent and GenesisAgent.

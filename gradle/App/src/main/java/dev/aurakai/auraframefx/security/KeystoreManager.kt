@@ -14,7 +14,7 @@ import javax.crypto.NoSuchPaddingException
 import javax.crypto.SecretKey
 import javax.crypto.spec.IvParameterSpec
 
-class KeystoreManager(private val context: Context) {
+public class KeystoreManager(private val context: Context) {
 
     private companion object {
         private const val KEY_ALIAS = "AURAFRAMEFX_MAIN_ENC_KEY"
@@ -24,7 +24,7 @@ class KeystoreManager(private val context: Context) {
         private const val TAG = "KeystoreManager"
     }
 
-    fun getOrCreateSecretKey(): SecretKey? {
+    public fun getOrCreateSecretKey(): SecretKey? {
         try {
             val keyStore = KeyStore.getInstance(ANDROID_KEYSTORE).apply { load(null) }
 
@@ -60,7 +60,7 @@ class KeystoreManager(private val context: Context) {
         return null
     }
 
-    fun getEncryptionCipher(): Cipher? {
+    public fun getEncryptionCipher(): Cipher? {
         try {
             val secretKey = getOrCreateSecretKey()
             if (secretKey == null) {
@@ -82,7 +82,7 @@ class KeystoreManager(private val context: Context) {
         return null
     }
 
-    fun getDecryptionCipher(iv: ByteArray): Cipher? {
+    public fun getDecryptionCipher(iv: ByteArray): Cipher? {
         try {
             val secretKey = getOrCreateSecretKey()
             if (secretKey == null) {

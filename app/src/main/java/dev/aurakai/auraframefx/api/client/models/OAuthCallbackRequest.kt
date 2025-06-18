@@ -28,15 +28,15 @@ import kotlinx.serialization.Contextual
  */
 @Serializable
 
-data class OAuthCallbackRequest (
+public data class OAuthCallbackRequest (
 
     /* The authorization code received from the OAuth provider. */
     @SerialName(value = "code")
-    val code: kotlin.String,
+    public val code: kotlin.String,
 
     /* The state parameter to prevent CSRF attacks. */
     @SerialName(value = "state")
-    val state: kotlin.String? = null
+    public val state: kotlin.String? = null
 
 ) {
 

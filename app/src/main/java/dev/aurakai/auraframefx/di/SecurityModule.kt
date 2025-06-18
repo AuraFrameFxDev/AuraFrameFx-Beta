@@ -12,15 +12,15 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object SecurityModule {
+public object SecurityModule {
     @Provides
     @Singleton
-    fun provideKeystoreManager(@ApplicationContext context: Context): KeystoreManager =
+    public fun provideKeystoreManager(@ApplicationContext context: Context): KeystoreManager =
         KeystoreManager(context)
 
     @Provides
     @Singleton
-    fun provideSecurityContext(
+    public fun provideSecurityContext(
         @ApplicationContext context: Context,
         keystoreManager: KeystoreManager,
     ): SecurityContext = SecurityContext(context, keystoreManager)

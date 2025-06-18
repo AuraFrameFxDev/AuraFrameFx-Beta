@@ -33,7 +33,7 @@ import dev.aurakai.auraframefx.ui.theme.AppDimensions
  * Each setting maintains its own toggle state locally within the screen.
  */
 @Composable
-fun SettingsScreen() {
+public fun SettingsScreen() {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -51,7 +51,7 @@ fun SettingsScreen() {
             title = stringResource(R.string.theme),
             description = stringResource(R.string.dark_mode)
         ) {
-            var darkThemeEnabled by remember { mutableStateOf(true) }
+            public var darkThemeEnabled by remember { mutableStateOf(true) }
             Switch(
                 checked = darkThemeEnabled,
                 onCheckedChange = { darkThemeEnabled = it }
@@ -64,7 +64,7 @@ fun SettingsScreen() {
             title = stringResource(R.string.notifications),
             description = stringResource(R.string.enable_notifications)
         ) {
-            var notificationsEnabled by remember { mutableStateOf(true) }
+            public var notificationsEnabled by remember { mutableStateOf(true) }
             Switch(
                 checked = notificationsEnabled,
                 onCheckedChange = { notificationsEnabled = it }
@@ -77,7 +77,7 @@ fun SettingsScreen() {
             title = stringResource(R.string.privacy),
             description = stringResource(R.string.private_account)
         ) {
-            var privacyEnabled by remember { mutableStateOf(false) }
+            public var privacyEnabled by remember { mutableStateOf(false) }
             Switch(
                 checked = privacyEnabled,
                 onCheckedChange = { privacyEnabled = it }

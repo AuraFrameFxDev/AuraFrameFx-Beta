@@ -16,7 +16,7 @@ import javax.inject.Singleton
  */
 @Module
 @InstallIn(SingletonComponent::class)
-object VertexAIModule {
+public object VertexAIModule {
 
     /**
      * Provides VertexAIConfig.
@@ -24,7 +24,7 @@ object VertexAIModule {
      */
     @Provides
     @Singleton
-    fun provideVertexAIConfig(): VertexAIConfig {
+    public fun provideVertexAIConfig(): VertexAIConfig {
         // TODO: Load actual config values from a secure source or build config.
         return VertexAIConfig(
             endpoint = "generativelanguage.googleapis.com",
@@ -41,7 +41,7 @@ object VertexAIModule {
      */
     @Provides
     @Singleton
-    fun provideVertexAIClient(impl: VertexAIClientImpl): VertexAIClient {
+    public fun provideVertexAIClient(impl: VertexAIClientImpl): VertexAIClient {
         return impl
     }
 
@@ -51,7 +51,7 @@ object VertexAIModule {
      */
     @Provides
     @Singleton
-    fun provideVertexAIManager(): Any? {
+    public fun provideVertexAIManager(): Any? {
         // TODO: Define VertexAIManager class and return an instance.
         return null
     }

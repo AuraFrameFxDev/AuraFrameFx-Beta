@@ -38,10 +38,10 @@ import dev.aurakai.auraframefx.api.client.infrastructure.ResponseType
 import dev.aurakai.auraframefx.api.client.infrastructure.Success
 import dev.aurakai.auraframefx.api.client.infrastructure.toMultiValue
 
-class AIAgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = ApiClient.defaultClient) : ApiClient(basePath, client) {
-    companion object {
+public class AIAgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = ApiClient.defaultClient) : ApiClient(basePath, client) {
+    public companion object {
         @JvmStatic
-        val defaultBasePath: String by lazy {
+        public val defaultBasePath: String by lazy {
             System.getProperties().getProperty(ApiClient.baseUrlKey, "https://api.auraframefx.com/v1")
         }
     }
@@ -59,19 +59,19 @@ class AIAgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun agentsStatusGet() : kotlin.collections.List<AgentStatus> {
-        val localVarResponse = agentsStatusGetWithHttpInfo()
+    public fun agentsStatusGet() : kotlin.collections.List<AgentStatus> {
+        public val localVarResponse: agentsStatusGetWithHttpInfo = agentsStatusGetWithHttpInfo()
 
         return when (localVarResponse.responseType) {
             ResponseType.Success -> (localVarResponse as Success<*>).data as kotlin.collections.List<AgentStatus>
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
+                public val localVarError = localVarResponse as ClientError<*>
                 throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
             }
             ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
+                public val localVarError = localVarResponse as ServerError<*>
                 throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
             }
         }
@@ -87,8 +87,8 @@ class AIAgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun agentsStatusGetWithHttpInfo() : ApiResponse<kotlin.collections.List<AgentStatus>?> {
-        val localVariableConfig = agentsStatusGetRequestConfig()
+    public fun agentsStatusGetWithHttpInfo() : ApiResponse<kotlin.collections.List<AgentStatus>?> {
+        public val localVariableConfig: agentsStatusGetRequestConfig = agentsStatusGetRequestConfig()
 
         return request<Unit, kotlin.collections.List<AgentStatus>>(
             localVariableConfig
@@ -100,10 +100,10 @@ class AIAgentsApi(basePath: kotlin.String = defaultBasePath, client: Call.Factor
      *
      * @return RequestConfig
      */
-    fun agentsStatusGetRequestConfig() : RequestConfig<Unit> {
-        val localVariableBody = null
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+    public fun agentsStatusGetRequestConfig() : RequestConfig<Unit> {
+        public val localVariableBody = null
+        public val localVariableQuery: MultiValueMap = mutableMapOf()
+        public val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Accept"] = "application/json"
 
         return RequestConfig(

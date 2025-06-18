@@ -10,7 +10,7 @@ import javax.inject.Singleton
  * @param _config The Vertex AI configuration.
  */
 @Singleton
-class VertexAIClientImpl @Inject constructor(
+public class VertexAIClientImpl @Inject constructor(
     private val _config: VertexAIConfig?, // TODO: Make non-null if provideVertexAIConfig ensures it
 ) : VertexAIClient {
 

@@ -11,7 +11,7 @@ import dev.aurakai.auraframefx.data.network.CloudStatusMonitor
 import java.io.File
 import javax.inject.Inject
 
-class AuraAIServiceImpl @Inject constructor(
+public class AuraAIServiceImpl @Inject constructor(
     private val taskScheduler: TaskScheduler,
     private val taskExecutionManager: TaskExecutionManager,
     private val memoryManager: MemoryManager,

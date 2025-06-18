@@ -12,7 +12,7 @@ import androidx.compose.ui.Modifier
  * Defines the navigation graph for the application.
  */
 @Composable
-fun AuraNavHost(
+public fun AuraNavHost(
     // Renamed from AuraNavHost to auraNavHost
     // navController: NavHostController,
     modifier: Modifier = Modifier,

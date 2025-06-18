@@ -9,7 +9,7 @@ import dev.aurakai.auraframefx.model.AgentResponse // Added import
  * KaiAgent, another specific implementation of BaseAgent.
  * TODO: Reported as unused declaration. Ensure this class is used.
  */
-class KaiAgent(
+public class KaiAgent(
     agentName: String = "Kai",
     agentType: String = "SpecializedAgent",
 ) : BaseAgent(agentName, agentType) {
@@ -27,18 +27,18 @@ class KaiAgent(
     }
 
     // --- Agent Collaboration Methods for CascadeAgent ---
-    fun onVisionUpdate(newState: VisionState) {
+    public fun onVisionUpdate(newState: VisionState) {
         // Default no-op. Override for Kai-specific vision update behavior.
     }
 
-    fun onProcessingStateChange(newState: ProcessingState) {
+    public fun onProcessingStateChange(newState: ProcessingState) {
         // Default no-op. Override for Kai-specific processing state changes.
     }
 
-    fun shouldHandleSecurity(prompt: String): Boolean =
+    public fun shouldHandleSecurity(prompt: String): Boolean =
         true // Kai handles security prompts by default
 
-    fun shouldHandleCreative(prompt: String): Boolean = false
+    public fun shouldHandleCreative(prompt: String): Boolean = false
     override suspend fun processRequest(request: AiRequest): AgentResponse {
         // Kai-specific logic can be added here
         return AgentResponse(
@@ -100,7 +100,7 @@ class KaiAgent(
         return emptyMap()
     }
 
-    enum class ConversationMode { TURN_ORDER, FREE_FORM }
+    public enum class ConversationMode { TURN_ORDER, FREE_FORM }
 
     /**
      * Aura/Genesis/Kai multi-agent collaboration placeholder for AuraAgent and GenesisAgent.
