@@ -46,9 +46,10 @@ class QuickSettingsCustomizer @Inject constructor(
     }
 
     /**
-     * Applies a new quick settings configuration and persists it for inter-process communication.
+     * Applies and persists a new quick settings configuration for inter-process communication.
      *
-     * Updates the current configuration state, serializes it to JSON, and stores it in shared preferences for IPC. Also triggers the overlay service hook for further processing.
+     * Updates the current configuration state, serializes it to JSON, stores it in shared preferences for IPC, and triggers the overlay service hook for further processing.
+
      *
      * @param config The quick settings configuration to apply.
      */
@@ -71,7 +72,8 @@ class QuickSettingsCustomizer @Inject constructor(
     }
 
     /**
-     * Updates the shape of the specified quick settings tile.
+     * Updates the shape of a specific quick settings tile.
+
      *
      * @param tileId The unique identifier of the tile to modify.
      * @param shape The shape to assign to the tile.
@@ -81,28 +83,31 @@ class QuickSettingsCustomizer @Inject constructor(
     }
 
     /**
-     * Updates the animation configuration for a specific quick settings tile.
+     * Updates the animation settings for a specific quick settings tile.
      *
-     * @param tileId The unique identifier of the tile to modify.
-     * @param animation The animation settings to apply to the tile.
+     * @param tileId The unique identifier of the tile to update.
+     * @param animation The animation configuration to apply.
+
      */
     fun updateTileAnimation(tileId: String, animation: QuickSettingsAnimation) {
         // TODO: Implement logic to update tile animation
     }
 
     /**
-     * Sets or removes the background image for the quick settings interface.
+     * Sets or clears the background image for the quick settings interface.
      *
-     * @param image The image to set as the background, or null to clear the background.
+     * @param image The image to use as the background, or null to remove the current background.
+
      */
     fun updateBackground(image: ImageResource?) {
         // TODO: Implement logic to update background
     }
 
     /**
-     * Resets the quick settings configuration to its default state.
+     * Resets all quick settings customizations to their default values.
      *
-     * Intended to restore all quick settings customizations to their original default values.
+     * Intended to restore the quick settings configuration to its original state.
+
      */
     fun resetToDefault() {
         // TODO: Implement logic to reset to default

@@ -48,9 +48,11 @@ class LockScreenCustomizer @Inject constructor(
     }
 
     /**
-     * Applies a new lock screen configuration and propagates it system-wide.
+     * Applies the provided lock screen configuration and makes it available system-wide.
      *
-     * Updates the current configuration state, serializes it to JSON, stores it in shared preferences for inter-process communication, and triggers the overlay service to apply the configuration.
+     * Updates the current configuration state, serializes the configuration to JSON, stores it in shared preferences for inter-process communication, and initiates the overlay service to apply the new configuration.
+
+
      *
      * @param config The lock screen configuration to apply.
      */
@@ -73,8 +75,8 @@ class LockScreenCustomizer @Inject constructor(
     }
 
     /**
-     * Updates the shape of a specific lock screen element.
-     *
+     * Updates the shape of the specified lock screen element.
+
      * @param elementType The lock screen element whose shape will be updated.
      * @param shape The shape to apply to the specified element.
      */
@@ -83,35 +85,55 @@ class LockScreenCustomizer @Inject constructor(
     }
 
     /**
-     * Updates the animation configuration for a specific lock screen element.
+* Updates the animation settings for a specified lock screen element.
      *
-     * @param elementType The lock screen element whose animation will be updated.
-     * @param animation The animation settings to apply to the element.
+     * @param elementType The type of lock screen element to update.
+     * @param animation The animation configuration to apply.
+
      */
     fun updateElementAnimation(elementType: LockScreenElementType, animation: LockScreenAnimation) {
         // TODO: Implement logic to update element animation
     }
 
     /**
-     * Sets or removes the lock screen background image.
+     * Sets or clears the lock screen background image.
      *
-     * @param image The image to use as the new background, or null to clear the background.
+     * @param image The image to set as the background, or null to remove the current background.
+
      */
     fun updateBackground(image: ImageResource?) {
         // TODO: Implement logic to update background
     }
 
     /**
-     * Restores the lock screen configuration to its default settings.
+     * Resets the lock screen configuration to its default state.
      *
-     * Intended to revert all customizations and return the lock screen to its original state.
+     * Reverts all customizations, restoring the original lock screen settings.
+
      */
     fun resetToDefault() {
         // TODO: Implement logic to reset to default
     }
 }
-// For detailed implementation guidelines and best practices, refer to the documentation:
-// docs/LockScreenCustomizer.md
+// Ensure to handle serialization/deserialization properly in the actual implementation
+// This includes using the JsonUtils or any other serialization library as needed
+// Ensure to handle IPC properly, including reading the config back when needed
+// This class should be used in conjunction with the actual lock screen implementation
+// and should be tested to ensure it applies the configurations correctly
+// Ensure to handle any potential exceptions or errors during serialization/deserialization
+// and IPC operations to avoid crashes or data loss
+// Ensure to test the integration with the actual lock screen system
+// and verify that the configurations are applied as expected
+// Ensure to document the expected structure of LockScreenConfig and its related classes
+// for future maintainability and clarity
+// Ensure to follow best practices for Android development, including using coroutines
+
+// and proper lifecycle management for the customizer
+// Ensure to handle any potential memory leaks or performance issues
+// by using appropriate scopes and lifecycle-aware components
+// Ensure to test the customizer thoroughly with different configurations
+// and edge cases to ensure robustness and reliability
+// Ensure to keep the code clean and maintainable, following Kotlin coding conventions
 // and best practices for Android development
 // Ensure to handle any potential changes in the underlying lock screen implementation
 // or system APIs that may affect the customizer's functionality

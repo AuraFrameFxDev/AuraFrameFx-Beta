@@ -30,6 +30,12 @@ import dev.aurakai.auraframefx.ui.viewmodel.SystemCustomizationViewModel
  *
  * Presents sections for customizing tile and element shapes, animations, and backgrounds, with options to reset settings to defaults.
  */
+/**
+ * Displays the main UI for customizing system Quick Settings and Lock Screen appearance.
+ *
+ * Presents sections for adjusting tile and element shapes, animations, and background images. Provides options to reset all settings to their default values.
+ */
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SystemCustomizationScreen(
@@ -308,6 +314,14 @@ fun ElementCustomization(
     }
 }
 
+/**
+ * Displays a card UI for customizing the background image.
+ *
+ * Shows the current background image and allows the user to select or clear it using an image picker.
+ *
+ * @param background The currently selected background image, or null if none is set.
+ * @param onChange Callback invoked when the background image is changed or cleared.
+ */
 @Composable
 fun BackgroundCustomization(
     background: ImageResource?,
@@ -340,10 +354,13 @@ fun BackgroundCustomization(
 }
 
 /**
- * Displays a UI component for selecting an overlay shape.
+ * Displays a picker for selecting an overlay shape.
+ *
+ * Presents available overlay shape options and invokes the callback when a new shape is chosen.
  *
  * @param currentShape The currently selected overlay shape.
- * @param onShapeSelected Callback invoked when a new shape is selected.
+ * @param onShapeSelected Called with the selected shape when the user makes a selection.
+
  */
 @Composable
 fun ShapePicker(
@@ -356,8 +373,9 @@ fun ShapePicker(
 /**
  * Displays a picker for selecting a Quick Settings animation.
  *
- * @param currentAnimation The animation currently selected for Quick Settings.
- * @param onAnimationSelected Called when a different animation is chosen.
+ * @param currentAnimation The currently selected Quick Settings animation.
+ * @param onAnimationSelected Callback invoked when a new animation is selected.
+
  */
 @Composable
 fun AnimationPicker(
@@ -382,10 +400,13 @@ fun AnimationPicker(
 }
 
 /**
- * Displays a UI component for selecting or clearing the background image.
+ * Displays a UI component for selecting or clearing a background image.
  *
- * @param currentImage The currently selected image resource, or null if no image is selected.
- * @param onImageSelected Called when the user selects a new image or clears the current selection.
+ * Presents the current image if available and allows the user to choose a new image or remove the existing one.
+ *
+ * @param currentImage The currently selected image resource, or null if no image is set.
+ * @param onImageSelected Invoked when the user selects a new image or clears the selection.
+
  */
 @Composable
 fun ImagePicker(

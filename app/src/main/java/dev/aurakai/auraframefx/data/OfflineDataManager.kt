@@ -24,6 +24,13 @@ class OfflineDataManager @Inject constructor(
         return null // Placeholder
     }
 
+    /**
+     * Saves critical offline data.
+     *
+     * This is a placeholder method; actual data saving logic should be implemented.
+     *
+     * @param data The data to be saved.
+     */
     fun saveCriticalOfflineData(data: Any) {
         // Replace with actual data saving logic
         println("Attempting to save critical offline data: $data")
