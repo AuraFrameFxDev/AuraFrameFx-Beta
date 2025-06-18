@@ -82,11 +82,7 @@ class DiagnosticsViewModel @Inject constructor(
                             if (ts == 0L) "N/A" else SimpleDateFormat(
                                 "yyyy-MM-dd HH:mm:ss",
                                 Locale.US
-<<<<<<< codespace-upgraded-yodel-7vwg6p6vj4q92rv6g
-                            ).format(Date(it))
-=======
                             ).format(Date(ts))
->>>>>>> main
                         } ?: "N/A"
                     )
                     // Add more status items as needed
@@ -132,6 +128,7 @@ class DiagnosticsViewModel @Inject constructor(
     // - Filter logs by level or tag
     // - Clear logs (with confirmation)
     // - Trigger a manual cloud reachability check via cloudStatusMonitor.checkActualInternetReachability()
+}
     // - Display more detailed config from offlineDataManager.loadCriticalOfflineData()
 
 // Note: This ViewModel is designed to be used with Hilt for dependency injection.

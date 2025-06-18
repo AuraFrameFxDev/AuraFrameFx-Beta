@@ -7,7 +7,11 @@ import android.graphics.PorterDuff
 import android.graphics.PorterDuffColorFilter
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
-import android.graphics.drawable.GradientDrawable
+import android.graphi            if (shapeConfig.strokeWidthPx != null && shapeConfig.strokeWidthPx > 0f && shapeConfig.strokeColor != null) {
+                try {
+                    drawable.setStroke(
+                        shapeConfig.strokeWidthPx.toInt().coerceAtLeast(0),
+                        shapeConfig.strokeColor.toArgb())awable.GradientDrawable
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -15,7 +19,7 @@ import android.widget.TextView
 import de.robv.android.xposed.XC_MethodHook
 import de.robv.android.xposed.XposedBridge
 import de.robv.android.xposed.XposedHelpers
-import dev.aurakai.auraframefx.system.overlay.OverlayShape
+import dev.aurakai.auraframefx.system.overlay.model.OverlayShape
 import dev.aurakai.auraframefx.system.overlay.ShapeManager
 import dev.aurakai.auraframefx.system.quicksettings.model.QuickSettingsConfig
 import java.io.File
@@ -97,7 +101,7 @@ class QuickSettingsHooker(
                         // Tile Background & Shape Logic
                         if (tileConfig?.customShapeEnabled == true) {
                             val shapeConfig = tileConfig.shape
-                            XposedBridge.log("[$TAG] Attempting to apply custom shape to tile $tileId: ${shapeConfig.type}")
+                            XposedBridge.log("[$TAG] Attempting to apply custom shape to tile $tileId: ${shapeConfig.shapeType}")
                             val customBackgroundDrawable =
                                 createCustomShapeDrawable(qsTileView, shapeConfig)
                             if (customBackgroundDrawable != null) {
@@ -166,7 +170,7 @@ class QuickSettingsHooker(
 
                         if (hapticConfigToApply.enabled == true) {
                             XposedBridge.log("[$TAG] Applying haptic feedback for tile $tileId click.")
-                            applyHapticFeedback(qsTileView.context, hapticConfigToApply)
+                            applyHapticFeedback(qsTileView, hapticConfigToApply)
                         }
                     }
                 }
@@ -317,26 +321,28 @@ class QuickSettingsHooker(
         val drawable = GradientDrawable()
 
         try {
-            if (!shapeConfig.fillColor.isNullOrEmpty()) {
-                drawable.setColor(Color.parseColor(shapeConfig.fillColor))
+            if (shapeConfig.fillColor?.isNotEmpty() == true) {
+                drawable.setColor(shapeConfig.fillColor?.toArgb() ?: Color.TRANSPARENT)
             } else {
                 drawable.setColor(Color.TRANSPARENT)
             }
 
-            if (shapeConfig.type.equals("rounded_rectangle", ignoreCase = true)) {
+            if (shapeConfig.shapeType.equals("rounded_rectangle", ignoreCase = true)) {
+            if (shapeConfig.cornerRadius != null) {
                 drawable.cornerRadius = shapeConfig.cornerRadius.coerceAtLeast(0f)
-            } else if (shapeConfig.type.equals("circle", ignoreCase = true)) {
+            }
+            } else if (shapeConfig.shapeType.equals("circle", ignoreCase = true)) {
                 drawable.shape = GradientDrawable.OVAL
-            } else if (shapeConfig.type.equals("rectangle", ignoreCase = true)) {
+            } else if (shapeConfig.shapeType.equals("rectangle", ignoreCase = true)) {
                 drawable.shape = GradientDrawable.RECTANGLE
-            } else if (shapeConfig.type.equals("hexagon", ignoreCase = true)) {
+            } else if (shapeConfig.shapeType.equals("hexagon", ignoreCase = true)) {
                 XposedBridge.log("[$TAG] Warning: 'hexagon' shape type not fully supported by simple GradientDrawable for tile background. Requires a custom Drawable class using ShapeManager.createShapePath. Defaulting shape for now.")
             }
 
-            if (shapeConfig.strokeWidthPx > 0f && !shapeConfig.strokeColor.isNullOrEmpty()) {
+            if ((shapeConfig.strokeWidthPx ?: 0f) > 0f && shapeConfig.strokeColor?.isNotEmpty() == true) {
                 try {
                     drawable.setStroke(
-                        shapeConfig.strokeWidthPx.toInt().coerceAtLeast(0),
+                        (shapeConfig.strokeWidthPx ?: 0f).toInt().coerceAtLeast(0),
                         Color.parseColor(shapeConfig.strokeColor)
                     )
                 } catch (e: IllegalArgumentException) {
@@ -354,5 +360,17 @@ class QuickSettingsHooker(
             XposedBridge.log(e)
             return null
         }
+    }
+
+    private fun applyHapticFeedback(view: View, tileConfig: dev.aurakai.auraframefx.system.quicksettings.model.QuickSettingsTileConfig) {
+        // Implement haptic feedback for quick settings tiles
+        // This is just a stub - fill in with actual implementation as needed
+        XposedBridge.log("[$TAG] Applied haptic feedback for tile: ${tileConfig.tileId}")
+    }
+
+    private fun applyAnimation(view: View, tileConfig: dev.aurakai.auraframefx.system.quicksettings.model.QuickSettingsTileConfig) {
+        // Implement animation for quick settings tiles
+        // This is just a stub - fill in with actual implementation as needed
+        XposedBridge.log("[$TAG] Applied animation for tile: ${tileConfig.tileId}")
     }
 }

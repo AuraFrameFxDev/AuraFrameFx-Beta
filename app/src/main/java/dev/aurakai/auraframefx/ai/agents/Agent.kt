@@ -1,23 +1,35 @@
 package dev.aurakai.auraframefx.ai.agents
 
+import dev.aurakai.auraframefx.generated.model.AgentType
 import dev.aurakai.auraframefx.model.AgentResponse
-import dev.aurakai.auraframefx.model.AgentType
 import dev.aurakai.auraframefx.model.AiRequest
+import kotlinx.coroutines.flow.Flow
 
 /**
  * Interface representing an AI agent.
- * TODO: Reported as unused declaration. Ensure this interface is implemented and used.
  */
 interface Agent {
 
     /**
      * Returns the name of the agent.
-     * TODO: Reported as unused.
      */
     fun getName(): String?
 
     /**
      * Returns the type or model of the agent.
+     */
+    fun getType(): AgentType
+    
+    /**
+     * Process a request and return a response
+     */
+    suspend fun processRequest(request: AiRequest, context: String): AgentResponse
+    
+    /**
+     * Process a request and return a flow of responses
+     */
+    fun processRequestFlow(request: AiRequest): Flow<AgentResponse>
+}
      * TODO: Reported as unused.
      */
     fun getType(): AgentType?
