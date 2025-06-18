@@ -8,8 +8,39 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import dev.aurakai.auraframefx.ui.theme.Color
+import androidx.compose.ui.graphics.Color // Use Compose Color
+import dev.aurakai.auraframefx.system.overlay.model.OverlayShape
+import dev.aurakai.auraframefx.system.quicksettings.model.QuickSettingsConfig
+import dev.aurakai.auraframefx.system.lockscreen.model.LockScreenConfig
+import dev.aurakai.auraframefx.ui.model.ImageResource
+import dev.aurakai.auraframefx.system.quicksettings.model.QuickSettingsAnimation
+import dev.aurakai.auraframefx.system.lockscreen.model.LockScreenAnimation
+import dev.aurakai.auraframefx.system.lockscreen.model.LockScreenElementType
+import dev.aurakai.auraframefx.system.quicksettings.model.QuickSettingsTileConfig
+import dev.aurakai.auraframefx.system.lockscreen.model.LockScreenElementConfig
+import dev.aurakai.auraframefx.ui.viewmodel.SystemCustomizationViewModel
 
+/**
+ * Displays the main system customization screen for adjusting Quick Settings and Lock Screen appearance.
+ *
+ * Presents sections for customizing tile and element shapes, animations, and background images, with options to reset all settings to defaults.
+ */
+/**
+ * Displays the main system customization screen for adjusting Quick Settings and Lock Screen appearance.
+ *
+ * Presents sections for customizing tile and element shapes, animations, and backgrounds, with options to reset settings to defaults.
+ */
+/**
+ * Displays the main UI for customizing system Quick Settings and Lock Screen appearance.
+ *
+ * Presents sections for adjusting tile and element shapes, animations, and background images. Provides options to reset all settings to their default values.
+ */
+
+/**
+ * Displays the main screen for customizing system Quick Settings and Lock Screen appearance.
+ *
+ * Presents sections for adjusting tile and element shapes, animations, and background images. Includes a top app bar and a floating action button to reset all settings to their default values.
+ */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SystemCustomizationScreen(
@@ -242,6 +273,16 @@ fun TileCustomization(
     }
 }
 
+/**
+ * Displays a card for customizing a single lock screen element's shape and animation.
+ *
+ * Presents the element's type, allows selection of its overlay shape via a shape picker,
+ * and enables choosing an animation for the element.
+ *
+ * @param element The configuration for the lock screen element being customized.
+ * @param onShapeChange Callback invoked when a new shape is selected for the element.
+ * @param onAnimationChange Callback invoked when a new animation is selected for the element.
+ */
 @Composable
 fun ElementCustomization(
     element: LockScreenElementConfig,
@@ -288,6 +329,14 @@ fun ElementCustomization(
     }
 }
 
+/**
+ * Displays a card for customizing the background image, allowing selection or removal.
+ *
+ * Shows the current background image and provides an interface for the user to select a new image or clear the existing one.
+ *
+ * @param background The currently selected background image, or null if no image is set.
+ * @param onChange Invoked when the background image is changed or cleared.
+ */
 @Composable
 fun BackgroundCustomization(
     background: ImageResource?,
@@ -319,6 +368,14 @@ fun BackgroundCustomization(
     }
 }
 
+/**
+ * Displays a UI component for selecting an overlay shape.
+ *
+ * Shows available overlay shape options and calls the provided callback when the user selects a new shape.
+ *
+ * @param currentShape The currently selected overlay shape.
+ * @param onShapeSelected Callback invoked with the newly selected shape.
+ */
 @Composable
 fun ShapePicker(
     currentShape: OverlayShape,
@@ -327,6 +384,12 @@ fun ShapePicker(
     // TODO: Implement shape picker UI
 }
 
+/**
+ * Displays a UI component for selecting a Quick Settings animation.
+ *
+ * @param currentAnimation The animation currently applied to Quick Settings tiles.
+ * @param onAnimationSelected Invoked when the user selects a different animation.
+ */
 @Composable
 fun AnimationPicker(
     currentAnimation: QuickSettingsAnimation,
@@ -335,6 +398,28 @@ fun AnimationPicker(
     // TODO: Implement animation picker UI
 }
 
+/**
+ * Displays a UI component for selecting a lock screen animation.
+ *
+ * @param currentAnimation The animation currently applied to the lock screen element.
+ * @param onAnimationSelected Callback invoked when a new animation is selected.
+ */
+@Composable
+fun AnimationPicker(
+    currentAnimation: LockScreenAnimation,
+    onAnimationSelected: (LockScreenAnimation) -> Unit,
+) {
+    // TODO: Implement animation picker UI
+}
+
+/**
+ * Displays a UI for selecting or clearing a background image.
+ *
+ * Shows the current image if set, and provides options to choose a new image or remove the existing one.
+ *
+ * @param currentImage The currently selected image resource, or null if none is set.
+ * @param onImageSelected Callback invoked when the user selects a new image or clears the selection.
+ */
 @Composable
 fun ImagePicker(
     currentImage: ImageResource?,

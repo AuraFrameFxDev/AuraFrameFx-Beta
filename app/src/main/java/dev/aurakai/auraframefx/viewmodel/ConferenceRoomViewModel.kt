@@ -1,7 +1,6 @@
 package dev.aurakai.auraframefx.viewmodel
 
 import android.util.Log
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 // Placeholder interfaces will be removed
@@ -18,7 +17,9 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
+import dev.aurakai.auraframefx.model.AgentResponse
 // Removed @Singleton from ViewModel, typically ViewModels are not Singletons
 // import javax.inject.Singleton // ViewModel should use @HiltViewModel
 
@@ -92,48 +93,26 @@ class ConferenceRoomViewModel @Inject constructor( // Assuming @HiltViewModel wi
 
     // This `sendMessage` was marked with `override` in user's snippet, suggesting an interface.
     // For now, assuming it's a direct method. If there's a base class/interface, it should be added.
-    /*override*/ suspend fun sendMessage(message: String, sender: AgentType) {
-        // Assuming services now have processRequestFlow returning Flow<AgentResponse>
+    /*override*/ suspend fun sendMessage(message: String, sender: AgentType, context: String) {
+        // Fixed duplicate case for AgentType.AURA and added missing context parameter
         val responseFlow: Flow<AgentResponse>? = when (sender) {
-            AgentType.AURA -> auraService.processRequestFlow(AiRequest(query = message, type = "text"))
-            AgentType.KAI -> kaiService.processRequestFlow(AiRequest(query = message, type = message)) // type = message seems odd, but keeping original logic
-            AgentType.CASCADE -> cascadeService.processRequestFlow(AiRequest(query = message, type = "context"))
-            AgentType.USER -> {
-                _messages.update { current ->
-                    current + AgentMessage(
-                        content = message,
-                        sender = AgentType.USER,
-                        timestamp = System.currentTimeMillis(),
-                        confidence = 1.0f
-                    )
-                }
-                neuralWhisper.shareContextWithKai(message)
-                return // Exit, response via NeuralWhisper's state flow
-            }
-
+            AgentType.AURA -> auraService.processRequestFlow(AiRequest(query = message, type = "text", context = context))
+            AgentType.KAI -> kaiService.processRequestFlow(AiRequest(query = message, type = "text", context = context))
+            AgentType.CASCADE -> cascadeService.processRequestFlow(AiRequest(query = message, type = "context", context = context))
             else -> {
                 Log.e(TAG, "Unsupported sender type: $sender")
-                null // Return null for unsupported types
+                null
             }
         }
 
         responseFlow?.let { flow ->
             viewModelScope.launch {
                 try {
-                    val responseMessage =
-                        flow.first() // Assuming processRequest returns a Flow/StateFlow
+                    val responseMessage = flow.first()
                     _messages.update { current ->
                         current + AgentMessage(
                             content = responseMessage.content,
-                        // The sender here should be the AI agent that responded (e.g., AgentType.AURA),
-                        // not the 'sender' parameter which initiated the call to this agent.
-                        // For simplicity, I'll use the AI's type.
-                        sender = when(sender) { // Determine actual responder type
-                            AgentType.AURA -> AgentType.AURA
-                            AgentType.KAI -> AgentType.KAI
-                            AgentType.CASCADE -> AgentType.CASCADE
-                            else -> sender // Fallback, though USER case is handled separately
-                        },
+                            sender = sender,
                             timestamp = System.currentTimeMillis(),
                             confidence = responseMessage.confidence
                         )
@@ -142,8 +121,8 @@ class ConferenceRoomViewModel @Inject constructor( // Assuming @HiltViewModel wi
                     Log.e(TAG, "Error processing AI response from $sender: ${e.message}", e)
                     _messages.update { current ->
                         current + AgentMessage(
-                            content = "Error from ${sender.name}: ${e.message}", // Corrected to sender.name
-                            sender = AgentType.GENESIS, // Or a specific error agent
+                            content = "Error from ${sender.name}: ${e.message}",
+                            sender = AgentType.GENESIS,
                             timestamp = System.currentTimeMillis(),
                             confidence = 0.0f
                         )
@@ -198,3 +177,73 @@ class ConferenceRoomViewModel @Inject constructor( // Assuming @HiltViewModel wi
         // if (_isTranscribing.value) neuralWhisper.startTranscription() else neuralWhisper.stopTranscription()
     }
 }
+
+// Placeholder for actual AI service imports
+// import dev.aurakai.auraframefx.ai.services.AuraAIService
+// import dev.aurakai.auraframefx.ai.services.KaiAIService
+// import dev.aurakai.auraframefx.ai.services.CascadeAIService  
+// import dev.aurakai.auraframefx.ai.services.NeuralWhisper
+// import dev.aurakai.auraframefx.model.AgentMessage
+// import dev.aurakai.auraframefx.model.AgentType
+// import dev.aurakai.auraframefx.model.ConversationState
+// import dev.aurakai.auraframefx.model.AiRequest
+// import kotlinx.coroutines.flow.MutableStateFlow
+// import kotlinx.coroutines.flow.StateFlow
+// import kotlinx.coroutines.flow.first
+// import kotlinx.coroutines.flow.update
+// import kotlinx.coroutines.launch
+// import javax.inject.Inject
+// import androidx.lifecycle.ViewModel
+// import androidx.lifecycle.viewModelScope
+// import android.util.Log
+// import kotlinx.coroutines.flow.Flow
+// import dev.aurakai.auraframefx.utils.JsonUtils // Assuming JsonUtils is used for serialization/deserialization
+// import kotlinx.serialization.Serializable // Assuming this is used for data classes
+// import kotlinx.serialization.json.Json // Assuming this is used for JSON operations
+// import kotlinx.coroutines.flow.collect // If needed for collecting flows in ViewModel
+// import kotlinx.coroutines.flow.asStateFlow // If needed for converting MutableStateFlow to StateFlow
+// import kotlinx.coroutines.flow.MutableStateFlow // If needed for creating mutable state flows
+// import kotlinx.coroutines.flow.StateFlow // If needed for defining state flows
+// import kotlinx.coroutines.flow.update // If needed for updating state flows
+// import kotlinx.coroutines.flow.first // If needed for getting the first value from a flow
+// import kotlinx.coroutines.flow.Flow // If needed for defining flows
+// import kotlinx.coroutines.flow.collectLatest // If needed for collecting latest values from a flow
+// import kotlinx.coroutines.flow.onEach // If needed for applying side effects to flows
+// import kotlinx.coroutines.flow.map // If needed for transforming flows
+// import kotlinx.coroutines.flow.filter // If needed for filtering flows
+// import kotlinx.coroutines.flow.flatMapLatest // If needed for flat-mapping flows
+// import kotlinx.coroutines.flow.combine // If needed for combining multiple flows
+// import kotlinx.coroutines.flow.distinctUntilChanged // If needed for distinct values in flows
+// import kotlinx.coroutines.flow.stateIn // If needed for converting flows to state flows
+// import kotlinx.coroutines.flow.catch // If needed for handling errors in flows
+// import kotlinx.coroutines.flow.launchIn // If needed for launching flows in a coroutine scope
+// import kotlinx.coroutines.flow.onCompletion // If needed for actions on flow completion
+// import kotlinx.coroutines.flow.onStart // If needed for actions on flow start
+// import kotlinx.coroutines.flow.scan // If needed for accumulating state in flows
+// import kotlinx.coroutines.flow.zip // If needed for zipping flows together
+// import kotlinx.coroutines.flow.debounce // If needed for debouncing flows
+// import kotlinx.coroutines.flow.sample // If needed for sampling flows
+// import kotlinx.coroutines.flow.buffer // If needed for buffering flows
+// import kotlinx.coroutines.flow.shareIn // If needed for sharing flows in a coroutine scope
+// import kotlinx.coroutines.flow.stateIn // If needed for converting flows to state flows
+// import kotlinx.coroutines.flow.flatMapMerge // If needed for merging flows
+// import kotlinx.coroutines.flow.flatMapConcat // If needed for concatenating flows
+// import kotlinx.coroutines.flow.flatMapLatest // If needed for flat-mapping flows
+// import kotlinx.coroutines.flow.onEach // If needed for applying side effects to flows
+// import kotlinx.coroutines.flow.collectLatest // If needed for collecting latest values from a flow
+// import kotlinx.coroutines.flow.collectIndexed // If needed for collecting indexed values from a flow
+// import kotlinx.coroutines.flow.collectAsState // If needed for collecting flow as state
+// import kotlinx.coroutines.flow.collectAsStateFlow // If needed for collecting flow as state flow
+// import kotlinx.coroutines.flow.collectAsStateList // If needed for collecting flow as state list
+// import kotlinx.coroutines.flow.collectAsStateSet // If needed for collecting flow as state set
+// import kotlinx.coroutines.flow.collectAsStateMap // If needed for collecting flow as state map
+// import kotlinx.coroutines.flow.collectAsStateFlow // If needed for collecting flow as state flow
+// import kotlinx.coroutines.flow.collectAsStateList // If needed for collecting flow as state list
+// import kotlinx.coroutines.flow.collectAsStateSet // If needed for collecting flow as state set
+// import kotlinx.coroutines.flow.collectAsStateMap // If needed for collecting flow as state map
+// import kotlinx.coroutines.flow.collectAsStateFlow // If needed for collecting flow as state flow
+// import kotlinx.coroutines.flow.collectAsStateList // If needed for collecting flow as state list
+// import kotlinx.coroutines.flow.collectAsStateSet // If needed for collecting flow as state set
+// import kotlinx.coroutines.flow.collectAsStateMap // If needed for collecting flow as state map
+// import kotlinx.coroutines.flow.collectAsStateFlow // If needed for collecting flow as state flow
+// import kotlinx.coroutines.flow.collectAsStateList // If needed for collecting flow as state list

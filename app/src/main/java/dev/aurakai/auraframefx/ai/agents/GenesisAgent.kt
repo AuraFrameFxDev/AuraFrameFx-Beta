@@ -19,25 +19,25 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class GenesisAgent @Inject constructor(
+public class GenesisAgent @Inject constructor(
     private val auraService: AuraAIService,
     private val kaiService: KaiAIService,
     private val cascadeService: CascadeAIService,
 ) {
     private val _state = MutableStateFlow("pending_initialization")
-    val state: StateFlow<String> = _state
+    public val state: StateFlow<String> = _state
 
     private val _context = MutableStateFlow(mapOf<String, Any>())
-    val context: StateFlow<Map<String, Any>> = _context
+    public val context: StateFlow<Map<String, Any>> = _context
 
     private val _activeAgents = MutableStateFlow(setOf<AgentType>())
-    val activeAgents: StateFlow<Set<AgentType>> = _activeAgents
+    public val activeAgents: StateFlow<Set<AgentType>> = _activeAgents
 
     private val _agentRegistry = mutableMapOf<String, Agent>()
-    val agentRegistry: Map<String, Agent> get() = _agentRegistry
+    public val agentRegistry: Map<String, Agent> get() = _agentRegistry
 
     private val _history = mutableListOf<Map<String, Any>>()
-    val history: List<Map<String, Any>> get() = _history
+    public val history: List<Map<String, Any>> get() = _history
 
     init {
         initializeAgents()
@@ -55,7 +55,7 @@ class GenesisAgent @Inject constructor(
         }
     }
 
-    suspend fun processQuery(query: String): List<AgentMessage> {
+    public suspend fun processQuery(query: String): List<AgentMessage> {
         _state.update { "processing_query: $query" }
 
         // Update context with new query
@@ -127,18 +127,18 @@ class GenesisAgent @Inject constructor(
         return responses
     }
 
-    private fun generateFinalResponse(responses: List<AgentMessage>): String {
+    public fun generateFinalResponse(responses: List<AgentMessage>): String {
         // TODO: Implement sophisticated response generation
         // This will use context chaining and agent coordination
         return "[Genesis] ${responses.joinToString("\n") { it.content }}"
     }
 
-    private fun calculateConfidence(responses: List<AgentMessage>): Float {
+    public fun calculateConfidence(responses: List<AgentMessage>): Float {
         // Calculate confidence based on all agent responses
         return responses.map { it.confidence }.average().toFloat().coerceIn(0.0f, 1.0f)
     }
 
-    fun toggleAgent(agent: AgentType) {
+    public fun toggleAgent(agent: AgentType) {
         _activeAgents.update { current ->
             if (current.contains(agent)) {
                 current - agent
@@ -148,18 +148,18 @@ class GenesisAgent @Inject constructor(
         }
     }
 
-    fun registerAuxiliaryAgent(
+    public fun registerAuxiliaryAgent(
         name: String,
         capabilities: Set<String>,
     ): AgentConfig {
         return AgentHierarchy.registerAuxiliaryAgent(name, capabilities)
     }
 
-    fun getAgentConfig(name: String): AgentConfig? {
+    public fun getAgentConfig(name: String): AgentConfig? {
         return AgentHierarchy.getAgentConfig(name)
     }
 
-    fun getAgentsByPriority(): List<AgentConfig> {
+    public fun getAgentsByPriority(): List<AgentConfig> {
         return AgentHierarchy.getAgentsByPriority()
     }
 
@@ -170,7 +170,7 @@ class GenesisAgent @Inject constructor(
      * @param userInput User input or context
      * @param conversationMode Controls if agents speak in turn (TURN_ORDER) or freely (FREE_FORM)
      */
-    suspend fun participateWithAgents(
+    public suspend fun participateWithAgents(
         data: Map<String, Any>,
         agents: List<Agent>,
         userInput: Any? = null,
@@ -241,7 +241,7 @@ class GenesisAgent @Inject constructor(
     /**
      * Aggregates responses from all agents for consensus or decision-making.
      */
-    fun aggregateAgentResponses(responses: List<Map<String, AgentResponse>>): Map<String, AgentResponse> {
+    public fun aggregateAgentResponses(responses: List<Map<String, AgentResponse>>): Map<String, AgentResponse> {
         val flatResponses = responses.flatMap { it.entries }
         val consensus = flatResponses.groupBy { it.key }
             .mapValues { entry ->
@@ -259,28 +259,28 @@ class GenesisAgent @Inject constructor(
     /**
      * Broadcasts context/memory to all agents for distributed state sharing.
      */
-    fun broadcastContext(context: Map<String, Any>, agents: List<Agent>) {
+    public fun broadcastContext(context: Map<String, Any>, agents: List<Agent>) {
         // Example: call a setContext method if available (not implemented in Agent interface)
         // This is a placeholder for distributed memory sharing
         // agents.forEach { it.setContext(context) }
     }
 
-    fun registerAgent(name: String, agent: Agent) {
+    public fun registerAgent(name: String, agent: Agent) {
         _agentRegistry[name] = agent
         Log.d("GenesisAgent", "Registered agent: $name")
     }
 
-    fun deregisterAgent(name: String) {
+    public fun deregisterAgent(name: String) {
         _agentRegistry.remove(name)
         Log.d("GenesisAgent", "Deregistered agent: $name")
     }
 
-    fun clearHistory() {
+    public fun clearHistory() {
         _history.clear()
         Log.d("GenesisAgent", "Cleared conversation history")
     }
 
-    fun addToHistory(entry: Map<String, Any>) {
+    public fun addToHistory(entry: Map<String, Any>) {
         _history.add(entry)
         Log.d("GenesisAgent", "Added to history: $entry")
     }
@@ -290,7 +290,7 @@ class GenesisAgent @Inject constructor(
      * Persists the current conversation history to a storage provider (stub).
      * Replace with actual persistence (e.g., file, database) as needed.
      */
-    fun saveHistory(persist: (List<Map<String, Any>>) -> Unit) {
+    public fun saveHistory(persist: (List<Map<String, Any>>) -> Unit) {
         persist(_history)
     }
 
@@ -298,7 +298,7 @@ class GenesisAgent @Inject constructor(
      * Loads conversation history from a storage provider (stub).
      * Replace with actual loading logic as needed.
      */
-    fun loadHistory(load: () -> List<Map<String, Any>>) {
+    public fun loadHistory(load: () -> List<Map<String, Any>>) {
         val loaded = load()
         _history.clear()
         _history.addAll(loaded)
@@ -309,7 +309,7 @@ class GenesisAgent @Inject constructor(
      * Shares the current context with all registered agents that support context sharing.
      * Agents must implement setContext if they want to receive context.
      */
-    fun shareContextWithAgents() {
+    public fun shareContextWithAgents() {
         agentRegistry.values.forEach { agent ->
             if (agent is ContextAwareAgent) {
                 agent.setContext(_context.value)
@@ -321,7 +321,7 @@ class GenesisAgent @Inject constructor(
     /**
      * Registers a new agent at runtime. If an agent with the same name exists, it is replaced.
      */
-    fun registerDynamicAgent(name: String, agent: Agent) {
+    public fun registerDynamicAgent(name: String, agent: Agent) {
         _agentRegistry[name] = agent
         Log.d("GenesisAgent", "Dynamically registered agent: $name")
     }
@@ -329,10 +329,10 @@ class GenesisAgent @Inject constructor(
     /**
      * Deregisters an agent by name at runtime.
      */
-    fun deregisterDynamicAgent(name: String) {
+    public fun deregisterDynamicAgent(name: String) {
         _agentRegistry.remove(name)
         Log.d("GenesisAgent", "Dynamically deregistered agent: $name")
     }
 
-    enum class ConversationMode { TURN_ORDER, FREE_FORM }
+    public enum class ConversationMode { TURN_ORDER, FREE_FORM }
 }

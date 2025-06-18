@@ -11,7 +11,13 @@ data class QuickSettingsConfig(
     val tiles: List<QuickSettingsTileConfig>? = null, // Added from QuickSettingsHooker
     val headerBackgroundConfig: HeaderBackgroundConfig? = null, // Added from QuickSettingsHooker
     val defaultHapticFeedback: HapticFeedbackConfig = HapticFeedbackConfig(), // Added from QuickSettingsHooker
-    val tileAnimationDefault: QuickSettingsTileAnimation? = null // Added from QuickSettingsHooker
+    val tileAnimationDefault: QuickSettingsTileAnimation? = null, // Added from QuickSettingsHooker
+    // --- Added for Xposed hooks ---
+    val hideTileLabels: Boolean? = null,
+    val customTextColorEnabled: Boolean? = null,
+    val customTextColor: String? = null,
+    val hideTileIcons: Boolean? = null,
+    val hideFooterButtons: Boolean? = null
 )
 
 // Referenced in QuickSettingsConfig and QuickSettingsHooker
@@ -24,7 +30,12 @@ data class QuickSettingsTileConfig(
     val customBackgroundColorEnabled: Boolean? = null,
     val customBackgroundColor: String? = null,
     val animation: QuickSettingsTileAnimation? = null,
-    val hapticFeedback: HapticFeedbackConfig = HapticFeedbackConfig()
+    val hapticFeedback: HapticFeedbackConfig = HapticFeedbackConfig(),
+    // --- Added for Xposed hooks ---
+    val customTextColorEnabled: Boolean? = null,
+    val customTextColor: String? = null,
+    val hideTileLabels: Boolean? = null,
+    val hideTileIcons: Boolean? = null
 )
 
 // Referenced in QuickSettingsConfig and QuickSettingsHooker

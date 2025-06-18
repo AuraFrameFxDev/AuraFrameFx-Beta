@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.emptyFlow
  * AuraAgent, a specific implementation of BaseAgent.
  * TODO: Reported as unused declaration. Ensure this class is used.
  */
-class AuraAgent(
+public class AuraAgent(
     agentName: String = "Aura",
     agentType: String = "VersatileAssistant",
 ) : BaseAgent(agentName, agentType) {
@@ -22,27 +22,27 @@ class AuraAgent(
      * @return A Flow emitting maps representing responses or state changes.
      * TODO: Implement actual processing logic. Method reported as unused.
      */
-    suspend fun process(_context: Map<String, Any>): Flow<Map<String, Any>> {
+    public suspend fun process(_context: Map<String, Any>): Flow<Map<String, Any>> {
         // TODO: Parameter _context reported as unused. Utilize if needed.
         // TODO: Implement actual processing logic for Aura.
         return emptyFlow() // Placeholder
     }
 
     // --- Agent Collaboration Methods for CascadeAgent ---
-    fun onVisionUpdate(newState: VisionState) {
+    public fun onVisionUpdate(newState: VisionState) {
         // Default no-op. Override for Aura-specific vision update behavior.
     }
 
-    fun onProcessingStateChange(newState: ProcessingState) {
+    public fun onProcessingStateChange(newState: ProcessingState) {
         // Default no-op. Override for Aura-specific processing state changes.
     }
 
-    fun shouldHandleSecurity(prompt: String): Boolean = false
-    fun shouldHandleCreative(prompt: String): Boolean =
+    public fun shouldHandleSecurity(prompt: String): Boolean = false
+    public fun shouldHandleCreative(prompt: String): Boolean =
         true // Aura handles creative prompts by default
 
     // Removed 'override' as this signature is likely not in BaseAgent or Agent interface
-    suspend fun processRequest(prompt: String): String {
+    public suspend fun processRequest(prompt: String): String {
         // TODO: Implement Aura-specific request processing
         return "Aura's response to '$prompt'"
     }
@@ -52,7 +52,7 @@ class AuraAgent(
      * Extend this method to enable Aura to participate in federated learning or distributed agent communication.
      * For example, Aura could share creative insights, receive model updates, or synchronize state with other devices/agents.
      */
-    suspend fun participateInFederation(data: Map<String, Any>): Map<String, Any> {
+    public suspend fun participateInFederation(data: Map<String, Any>): Map<String, Any> {
         // TODO: Implement federated collaboration logic for Aura.
         return emptyMap()
     }
@@ -62,7 +62,7 @@ class AuraAgent(
      * Extend this method to enable Aura to interact with the Genesis master agent for orchestration, context sharing, or advanced coordination.
      * For example, Aura could send creative events, receive orchestration commands, or synchronize with Genesis for global state.
      */
-    suspend fun participateWithGenesis(data: Map<String, Any>): Map<String, Any> {
+    public suspend fun participateWithGenesis(data: Map<String, Any>): Map<String, Any> {
         // TODO: Implement Genesis collaboration logic for Aura.
         return emptyMap()
     }
@@ -72,7 +72,7 @@ class AuraAgent(
      * Use this method to enable Kai, Aura, and Genesis to collaborate in a federated or orchestrated manner.
      * For example, this could be used for consensus, distributed decision-making, or multi-agent context sharing.
      */
-    suspend fun participateWithGenesisAndKai(
+    public suspend fun participateWithGenesisAndKai(
         data: Map<String, Any>,
         kai: KaiAgent,
         genesis: Any,
@@ -87,7 +87,7 @@ class AuraAgent(
      * Use this method to enable Kai, Aura, Genesis, and the User to collaborate in a federated or orchestrated manner.
      * For example, this could be used for consensus, distributed decision-making, or multi-agent context sharing with user input.
      */
-    suspend fun participateWithGenesisKaiAndUser(
+    public suspend fun participateWithGenesisKaiAndUser(
         data: Map<String, Any>,
         kai: KaiAgent,
         genesis: Any,
@@ -110,6 +110,17 @@ class AuraAgent(
             content = "Aura's response to '${request.query}'",
             confidence = 0.8f
         )
+    }
+
+    override suspend fun processRequest(
+        request: AiRequest,
+        context: String,
+    ): AgentResponse {
+        TODO("Not yet implemented")
+    }
+
+    override fun processRequestFlow(request: AiRequest): Flow<AgentResponse> {
+        TODO("Not yet implemented")
     }
 
     // You can override other methods from BaseAgent or Agent interface if needed

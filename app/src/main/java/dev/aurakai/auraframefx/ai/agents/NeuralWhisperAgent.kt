@@ -10,7 +10,7 @@ import dev.aurakai.auraframefx.model.agent_states.LearningEvent
  * TODO: Reported as unused declaration. Ensure this class is used.
  * @param _context Application context. Parameter reported as unused.
  */
-class NeuralWhisperAgent(
+public class NeuralWhisperAgent(
     _context: Context,
 ) {
 
@@ -18,7 +18,7 @@ class NeuralWhisperAgent(
      * List of active contexts.
      * TODO: Reported as unused. Define proper type and implement usage.
      */
-    val activeContexts: List<ActiveContext> = emptyList()
+    public val activeContexts: List<ActiveContext> = emptyList()
 
     /**
      * Chain of contexts.
@@ -30,14 +30,14 @@ class NeuralWhisperAgent(
      * History of learning experiences.
      * TODO: Reported as unused. Define proper type and implement usage.
      */
-    val learningHistory: List<LearningEvent> = emptyList()
+    public val learningHistory: List<LearningEvent> = emptyList()
 
     /**
      * Analyzes patterns in data or context.
      * @param _chain The context chain data to analyze. Parameter reported as unused.
      * TODO: Reported as unused. Implement pattern analysis logic.
      */
-    fun analyzePatterns(_chain: List<ContextChainEvent>) {
+    public fun analyzePatterns(_chain: List<ContextChainEvent>) {
         // TODO: Parameter _chain reported as unused. Utilize if needed.
         // Implement analysis logic.
     }
@@ -47,7 +47,7 @@ class NeuralWhisperAgent(
      * @return The context chain.
      * TODO: Reported as unused. Implement or ensure usage.
      */
-    fun getContextChain(): List<ContextChainEvent> {
+    public fun getContextChain(): List<ContextChainEvent> {
         return contextChain.toList()
     }
 
@@ -56,7 +56,7 @@ class NeuralWhisperAgent(
      * @param _event The learning event. Parameter reported as unused.
      * TODO: Reported as unused. Implement learning logic.
      */
-    fun learnFromExperience(_event: LearningEvent) {
+    public fun learnFromExperience(_event: LearningEvent) {
         // TODO: Parameter _event reported as unused. Utilize if needed.
         // (this.learningHistory as? MutableList)?.add(_event) // Example if mutable
     }
@@ -65,7 +65,7 @@ class NeuralWhisperAgent(
      * Called when the agent is no longer needed and resources should be cleared.
      * TODO: Reported as unused. Implement cleanup logic.
      */
-    fun onCleared() {
+    public fun onCleared() {
         contextChain.clear()
         // Clear other resources if any
     }

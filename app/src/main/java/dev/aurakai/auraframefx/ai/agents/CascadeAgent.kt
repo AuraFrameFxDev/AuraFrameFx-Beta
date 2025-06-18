@@ -22,35 +22,35 @@ import javax.inject.Singleton
  * Contributors: Please keep Cascade's logic focused on agent collaboration, state management, and bridging creative and security domains.
  */
 @Singleton
-class CascadeAgent @Inject constructor(
+public class CascadeAgent @Inject constructor(
     private val auraAgent: AuraAgent, // Now using the actual AuraAgent type
     private val kaiAgent: KaiAgent,   // Now using the actual KaiAgent type
 ) {
     private val _visionState = MutableStateFlow(VisionState())
-    val visionState: StateFlow<VisionState> = _visionState.asStateFlow()
+    public val visionState: StateFlow<VisionState> = _visionState.asStateFlow()
 
     private val _processingState = MutableStateFlow(ProcessingState())
-    val processingState: StateFlow<ProcessingState> = _processingState.asStateFlow()
+    public val processingState: StateFlow<ProcessingState> = _processingState.asStateFlow()
 
     // Add stubs for agent collaboration methods expected by CascadeAgent
     // These should be implemented in AuraAgent and KaiAgent as well
-    open fun onVisionUpdate(newState: VisionState) {
+    public fun onVisionUpdate(newState: VisionState) {
         // Default no-op. Override in AuraAgent/KaiAgent for custom behavior.
     }
 
-    open fun onProcessingStateChange(newState: ProcessingState) {
+    public fun onProcessingStateChange(newState: ProcessingState) {
         // Default no-op. Override in AuraAgent/KaiAgent for custom behavior.
     }
 
-    open fun shouldHandleSecurity(prompt: String): Boolean = false
-    open fun shouldHandleCreative(prompt: String): Boolean = false
-    open suspend fun processRequest(prompt: String): String = ""
+    public fun shouldHandleSecurity(prompt: String): Boolean = false
+    public fun shouldHandleCreative(prompt: String): Boolean = false
+    public fun processRequest(prompt: String): String = ""
 
     /**
      * Updates the vision state with new data.
      * @param newState The new vision state to set.
      */
-    suspend fun updateVisionState(newState: VisionState) {
+    public fun updateVisionState(newState: VisionState) {
         _visionState.update { newState }
         // TODO: Notify Aura and Kai of vision changes if methods exist
         // Example: auraAgent.onVisionUpdate(newState)
@@ -61,7 +61,7 @@ class CascadeAgent @Inject constructor(
      * Updates the processing state.
      * @param newState The new processing state.
      */
-    suspend fun updateProcessingState(newState: ProcessingState) {
+    public fun updateProcessingState(newState: ProcessingState) {
         _processingState.update { newState }
         // TODO: Notify Aura and Kai of processing state changes if methods exist
         // Example: auraAgent.onProcessingStateChange(newState)

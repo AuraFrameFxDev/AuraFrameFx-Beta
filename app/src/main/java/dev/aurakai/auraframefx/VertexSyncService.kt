@@ -7,7 +7,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class VertexSyncService @Inject constructor(
+public class VertexSyncService @Inject constructor(
     // Example dependency injection (add real dependencies as needed)
     // private val syncManager: SyncManager
 ) : Service() {

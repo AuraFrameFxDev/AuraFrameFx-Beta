@@ -12,37 +12,7 @@ plugins {
     id("com.google.firebase.firebase-perf")
     id("org.jetbrains.kotlin.plugin.compose")
     id("org.openapi.generator") version "7.5.0"
-    alias(libs.plugins.ksp)
-}
-
-// OpenAPI Generator configuration
-openApiGenerate {
-    generatorName.set("kotlin")
-    inputSpec.set("$projectDir/src/main/openapi.yml")
-    outputDir.set("$buildDir/generated/openapi")
-    apiPackage.set("dev.aurakai.auraframefx.api.generated.api")
-    invokerPackage.set("dev.aurakai.auraframefx.api.generated.invoker")
-    modelPackage.set("dev.aurakai.auraframefx.api.generated.model")
-    
-    // Kotlin-specific configuration
-    configOptions.set(mapOf(
-        "dateLibrary" to "java8",
-        "serializationLibrary" to "kotlinx_serialization",
-        "library" to "jvm-retrofit2",
-        "useCoroutines" to "true",
-        "enumPropertyNaming" to "UPPERCASE"
-    ))
-    
-    // Additional properties
-    additionalProperties.set(mapOf(
-        "useCoroutines" to "true",
-        "serializationLibrary" to "kotlinx_serialization"
-    ))
-}
-
-// Add generated sources to the main source set
-sourceSets.main {
-    java.srcDirs("$buildDir/generated/openapi/src/main/kotlin")
+    id("com.google.devtools.ksp") version "2.1.21-2.0.1"
 }
 
 // Repositories are configured in settings.gradle.kts
@@ -75,6 +45,8 @@ android {
 
         // Enable multidex support
         multiDexEnabled = true
+
+        manifestPlaceholders["appAuthRedirectScheme"] = "auraframefx"
     }
 
     buildTypes {
@@ -97,7 +69,7 @@ android {
     sourceSets {
         getByName("main") {
             manifest.srcFile("src/main/AndroidManifest.xml")
-            java.srcDirs("src/main/java")
+            java.srcDirs(file("src/main/java"), layout.buildDirectory.dir("generated/openapi/src/main/kotlin").get().asFile)
             res.srcDirs("src/main/res")
             aidl.srcDirs("src/main/aidl")
             assets.srcDirs("src/main/assets")
@@ -143,6 +115,20 @@ android {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
+
+    // Configure sourceSets to exclude duplicate generated models
+    // Configure to exclude duplicate model files - using manual approach instead
+    tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
+        compilerOptions {
+            // Add the path to exclude in freeCompilerArgs
+            freeCompilerArgs.addAll(
+                listOf(
+                    "-Xexplicit-api=strict",
+                    "-Xno-source=/dev/aurakai/auraframefx/generated/model"
+                )
+            )
+        }
+    }
 }
 
 dependencies {
@@ -152,6 +138,7 @@ dependencies {
     implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:1.0.0")
+    implementation("com.squareup.retrofit2:converter-scalars:2.9.0") // Scalars converter for OpenAPI/Retrofit
 
     // Core Android dependencies
     implementation("androidx.core:core-ktx:1.16.0")
@@ -159,6 +146,16 @@ dependencies {
     implementation("com.google.android.material:material:1.12.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleVersion")
     implementation("androidx.activity:activity-compose:1.10.1")
+
+    // Security (MasterKeys)
+    implementation("androidx.security:security-crypto-ktx:1.1.0-alpha06")
+
+    // AppAuth (OAuth utilities)
+    implementation("net.openid:appauth:0.11.1")
+    // Apache Oltu (OAuth 2.0 client, for generated code compatibility)
+    implementation("org.apache.oltu.oauth2:org.apache.oltu.oauth2.client:1.0.2") {
+        exclude(group = "org.apache.oltu.oauth2", module = "org.apache.oltu.oauth2.common")
+    }
 
     // Compose
     implementation(platform("androidx.compose:compose-bom:$composeBomVersion"))
@@ -304,33 +301,25 @@ kapt {
 // OpenAPI Generator configuration
 openApiGenerate {
     generatorName.set("kotlin")
-    inputSpec.set("$projectDir/src/main/openapi.yml")
-    outputDir.set("$buildDir/generated/openapi")
-    apiPackage.set("dev.aurakai.auraframefx.api")
-    invokerPackage.set("dev.aurakai.auraframefx.invoker")
-    modelPackage.set("dev.aurakai.auraframefx.model")
+    inputSpec.set("$projectDir/../api-spec/aura-framefx-api.yaml")
+    outputDir.set(layout.buildDirectory.dir("generated/openapi").get().asFile.absolutePath)
+    apiPackage.set("dev.aurakai.auraframefx.generated.api") // Updated apiPackage
+    invokerPackage.set("dev.aurakai.auraframefx.generated.invoker") // Updated invokerPackage
+    modelPackage.set("dev.aurakai.auraframefx.generated.model") // Updated modelPackage
     configOptions.set(
         mapOf(
             "dateLibrary" to "java8",
-            "collectionType" to "list",
+            "collectionType" to "list", // Preserved from original
             "useCoroutines" to "true",
             "enumPropertyNaming" to "UPPERCASE",
-            "serializationLibrary" to "kotlinx_serialization"
+            "serializationLibrary" to "kotlinx_serialization",
+            "library" to "jvm-retrofit2" // Added library option
         )
     )
 }
 
-// Add generated sources to the main source set
-sourceSets {
-    main {
-        java {
-            srcDirs("$buildDir/generated/openapi/src/main/kotlin")
-        }
-    }
-}
-
 // Ensure the openApiGenerate task runs before compilation
-tasks.named("compileKotlin") {
+tasks.named("preBuild") {
     dependsOn("openApiGenerate")
 }
 

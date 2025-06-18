@@ -10,7 +10,7 @@ import javax.inject.Singleton
  * @param _config The Vertex AI configuration.
  */
 @Singleton
-class VertexAIClientImpl @Inject constructor(
+public class VertexAIClientImpl @Inject constructor(
     private val _config: VertexAIConfig?, // TODO: Make non-null if provideVertexAIConfig ensures it
 ) : VertexAIClient {
 
@@ -26,7 +26,7 @@ class VertexAIClientImpl @Inject constructor(
         }
     }
 
-    override suspend fun generateContent(prompt: String): String? {
+    public override suspend fun generateContent(prompt: String): String? {
         // TODO: Implement actual content generation.
         // Handle cases where model might be null if Hilt can't provide it.
         println("VertexAIClientImpl.generateContent called with prompt: $prompt")

@@ -110,7 +110,7 @@ fun ConferenceRoomScreen(
                     if (messageText.isNotBlank()) {
                         // Launch a coroutine for the suspend function using viewModelScope
                         viewModel.viewModelScope.launch {
-                            viewModel.sendMessage(messageText, AgentType.USER)
+                            viewModel.sendMessage(messageText, AgentType.USER, "user_conversation")
                             messageText = ""
                         }
                     }

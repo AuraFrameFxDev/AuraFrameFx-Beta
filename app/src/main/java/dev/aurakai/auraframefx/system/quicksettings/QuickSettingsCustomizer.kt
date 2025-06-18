@@ -2,87 +2,21 @@ package dev.aurakai.auraframefx.system.quicksettings
 
 import android.content.SharedPreferences
 import android.util.Log
-import dev.aurakai.auraframefx.system.overlay.OverlayShape
+import dev.aurakai.auraframefx.system.overlay.model.OverlayShape
 import dev.aurakai.auraframefx.utils.JsonUtils
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.serialization.Serializable
 import javax.inject.Inject
 import javax.inject.Singleton
+import dev.aurakai.auraframefx.system.quicksettings.model.QuickSettingsConfig
+import dev.aurakai.auraframefx.system.quicksettings.model.QuickSettingsTileConfig
+import dev.aurakai.auraframefx.system.quicksettings.model.QuickSettingsAnimation
+import dev.aurakai.auraframefx.system.quicksettings.model.HapticFeedbackConfig
+import dev.aurakai.auraframefx.ui.model.ImageResource
 
 // --- Placeholder Data Classes for Quick Settings Configuration ---
-// User needs to ensure these are @Serializable and align with actual data structures.
-
-@Serializable
-data class QuickSettingsLayout(val columns: Int = 4, val rows: Int = 2)
-
-@Serializable
-data class QuickSettingsPadding(
-    val top: Int = 0,
-    val bottom: Int = 0,
-    val start: Int = 0,
-    val end: Int = 0,
-)
-
-@Serializable
-data class QuickSettingsTileConfig(
-    val tileId: String = "default_tile", // Assuming existing field
-    val label: String = "Default", // Assuming existing field
-    val icon: String? = null, // Assuming existing field
-    // Assuming other fields like customBackgroundColorEnabled etc. might be here from other definitions
-    val customBackgroundColorEnabled: Boolean? = false, // Retaining assumed field
-    val customBackgroundColor: String? = null, // Retaining assumed field
-    val iconTintEnabled: Boolean? = false, // Retaining assumed field
-    val iconTintColor: String? = null, // Retaining assumed field
-    val animation: QuickSettingsAnimation = QuickSettingsAnimation(),
-    val hapticFeedback: HapticFeedbackConfig = HapticFeedbackConfig(),
-    val customShapeEnabled: Boolean = false, // NEW
-    val shape: OverlayShape = OverlayShape(), // NEW
-)
-
-@Serializable
-data class QuickSettingsHeaderConfig(val showDate: Boolean = true, val showTime: Boolean = true)
-
-@Serializable
-data class QuickSettingsBackgroundConfig(
-    val color: String = "#000000",
-    val blurIntensity: Float = 0.0f,
-)
-
-// Replacing the old QuickSettingsAnimation with the new detailed one
-@Serializable
-data class QuickSettingsAnimation(
-    val type: String = "none", // e.g., "fade_in", "scale_in", "rotate"
-    val durationMs: Long = 300,
-    val startDelayMs: Long = 0,
-    val interpolator: String = "accelerate_decelerate", // e.g., "linear", "accelerate", "decelerate"
-    // TODO: Add properties for specific animation types (e.g., translationX, rotation angle)
-)
-
-// Added HapticFeedbackConfig definition
-@Serializable
-data class HapticFeedbackConfig(
-    val enabled: Boolean = false,
-    val effect: String = "click", // e.g., "click", "double_click", "heavy_click", "tick", "none"
-    val intensity: Int = 50, // Scale of 0-100, or a device-specific value
-    // TODO: Add properties for more granular control
-)
-
-// Existing Placeholder Data Class - Modified
-@Serializable
-data class QuickSettingsConfig(
-    val settingName: String = "DefaultQS",
-    val enabled: Boolean = true,
-    val tiles: List<QuickSettingsTileConfig>? = emptyList(),
-    val customTextColorEnabled: Boolean? = false,
-    val customTextColor: String? = null,
-    val hideTileLabels: Boolean? = false,
-    val hideTileIcons: Boolean? = false,
-    val hideFooterButtons: Boolean? = false,
-    val headerBackgroundConfig: QuickSettingsHeaderConfig? = null,
-    val tileAnimationDefault: QuickSettingsAnimation = QuickSettingsAnimation(),
-    val defaultHapticFeedback: HapticFeedbackConfig = HapticFeedbackConfig(), // ADD THIS
-)
+// All data classes are moved to the model package to ensure a single source of truth.
 
 // --- Placeholder Dependencies (User needs to ensure these exist or replace with actuals) ---
 interface SystemOverlayManager
@@ -111,6 +45,13 @@ class QuickSettingsCustomizer @Inject constructor(
         private const val IPC_KEY_QUICK_SETTINGS = "quick_settings_config_json"
     }
 
+    /**
+     * Applies and persists a new quick settings configuration for inter-process communication.
+     *
+     * Updates the current configuration state, serializes it to JSON, stores it in shared preferences for IPC, and triggers the overlay service hook for further processing.
+     *
+     * @param config The quick settings configuration to apply.
+     */
     fun applyConfig(config: QuickSettingsConfig) {
         _currentConfig.value = config
 
@@ -128,5 +69,42 @@ class QuickSettingsCustomizer @Inject constructor(
             // TODO: Implement quick settings hooking
         }
     }
-    // Add other methods if they were part of the original class definition
+
+    /**
+     * Updates the shape of the specified quick settings tile.
+     *
+     * @param tileId The unique identifier of the tile to update.
+     * @param shape The new shape to apply to the tile.
+     */
+    fun updateTileShape(tileId: String, shape: OverlayShape) {
+        // TODO: Implement logic to update tile shape
+    }
+
+    /**
+     * Updates the animation configuration for a specific quick settings tile.
+     *
+     * @param tileId The unique identifier of the tile to update.
+     * @param animation The animation settings to apply to the tile.
+     */
+    fun updateTileAnimation(tileId: String, animation: QuickSettingsAnimation) {
+        // TODO: Implement logic to update tile animation
+    }
+
+    /**
+     * Sets or removes the background image for the quick settings interface.
+     *
+     * @param image The image to set as the background, or null to clear the background.
+     */
+    fun updateBackground(image: ImageResource?) {
+        // TODO: Implement logic to update background
+    }
+
+    /**
+     * Resets all quick settings customizations to their default values.
+     *
+     * Intended to restore the quick settings interface to its original configuration.
+     */
+    fun resetToDefault() {
+        // TODO: Implement logic to reset to default
+    }
 }

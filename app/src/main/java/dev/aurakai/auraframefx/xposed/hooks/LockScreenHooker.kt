@@ -20,9 +20,9 @@ import android.widget.TextView
 import de.robv.android.xposed.XC_MethodHook
 import de.robv.android.xposed.XposedBridge
 import de.robv.android.xposed.XposedHelpers
-import dev.aurakai.auraframefx.system.lockscreen.HapticFeedbackConfig
-import dev.aurakai.auraframefx.system.lockscreen.LockScreenAnimation
-import dev.aurakai.auraframefx.system.lockscreen.LockScreenConfig
+import dev.aurakai.auraframefx.system.lockscreen.model.HapticFeedbackConfig
+import dev.aurakai.auraframefx.system.lockscreen.model.LockScreenAnimationConfig
+import dev.aurakai.auraframefx.system.lockscreen.model.LockScreenConfig
 
 class LockScreenHooker(
     private val classLoader: ClassLoader,
@@ -278,14 +278,14 @@ class LockScreenHooker(
                 val vibrationEffect: VibrationEffect
                 // minSdkVersion is 31, so API >= 26 (O) is always true
                 if (true) {
-                    if (hapticConfig.effect.lowercase() == "click" && hapticConfig.intensity != 50) {
+                    if (hapticConfig.effect.lowercase() == "click" && hapticConfig.intensity.toFloat() != 50f) {
                         val scaledAmplitude =
                             (hapticConfig.intensity / 100f * 255f).toInt().coerceIn(1, 255)
                         vibrationEffect = VibrationEffect.createOneShot(10, scaledAmplitude)
                         XposedBridge.log("[$TAG] Applying custom 'click' with intensity (amplitude ${scaledAmplitude}).")
                     } else {
                         vibrationEffect = VibrationEffect.createPredefined(effectId)
-                        if (hapticConfig.intensity != 50 && hapticConfig.effect.lowercase() != "click") {
+                        if (hapticConfig.intensity.toFloat() != 50f && hapticConfig.effect.lowercase() != "click") {
                             XposedBridge.log("[$TAG] Note: Custom intensity (${hapticConfig.intensity}) for predefined effect '${hapticConfig.effect}' may not be fully supported on all devices/APIs. Using predefined effect.")
                         }
                     }
@@ -311,7 +311,7 @@ class LockScreenHooker(
         }
     }
 
-    private fun applyAnimation(view: View, animationConfig: LockScreenAnimation) {
+    private fun applyAnimation(view: View, animationConfig: LockScreenAnimationConfig) {
         val animatorSet = AnimatorSet()
         val animators = mutableListOf<Animator>()
 

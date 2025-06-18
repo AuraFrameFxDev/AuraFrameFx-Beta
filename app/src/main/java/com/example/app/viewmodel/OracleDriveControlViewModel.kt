@@ -11,29 +11,29 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class OracleDriveControlViewModel @Inject constructor(
+public class OracleDriveControlViewModel @Inject constructor(
     private val oracleDriveServiceConnector: OracleDriveServiceConnector,
 ) : ViewModel() {
     private val _status = MutableStateFlow<String?>(null)
-    val status: StateFlow<String?> = _status.asStateFlow()
+    public val status: StateFlow<String?> = _status.asStateFlow()
 
     private val _detailedStatus = MutableStateFlow<String?>(null)
-    val detailedStatus: StateFlow<String?> = _detailedStatus.asStateFlow()
+    public val detailedStatus: StateFlow<String?> = _detailedStatus.asStateFlow()
 
     private val _diagnosticsLog = MutableStateFlow<String?>(null)
-    val diagnosticsLog: StateFlow<String?> = _diagnosticsLog.asStateFlow()
+    public val diagnosticsLog: StateFlow<String?> = _diagnosticsLog.asStateFlow()
 
-    val isServiceConnected: StateFlow<Boolean> = oracleDriveServiceConnector.isServiceConnected
+    public val isServiceConnected: StateFlow<Boolean> = oracleDriveServiceConnector.isServiceConnected
 
-    fun bindService() {
+    public fun bindService() {
         oracleDriveServiceConnector.bindService()
     }
 
-    fun unbindService() {
+    public fun unbindService() {
         oracleDriveServiceConnector.unbindService()
     }
 
-    fun refreshStatus() {
+    public fun refreshStatus() {
         viewModelScope.launch {
             _status.value = oracleDriveServiceConnector.getStatusFromOracleDrive()
             _detailedStatus.value = oracleDriveServiceConnector.getDetailedInternalStatus()
@@ -41,7 +41,7 @@ class OracleDriveControlViewModel @Inject constructor(
         }
     }
 
-    fun toggleModule(packageName: String, enable: Boolean) {
+    public fun toggleModule(packageName: String, enable: Boolean) {
         viewModelScope.launch {
             oracleDriveServiceConnector.toggleModuleOnOracleDrive(packageName, enable)
             refreshStatus()

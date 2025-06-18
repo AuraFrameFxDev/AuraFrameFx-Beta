@@ -13,10 +13,10 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.withContext
 
-class OracleDriveServiceConnector(private val context: Context) {
+public class OracleDriveServiceConnector(private val context: Context) {
     private var auraDriveService: IAuraDriveService? = null
     private val _isServiceConnected = MutableStateFlow(false)
-    val isServiceConnected: StateFlow<Boolean> = _isServiceConnected.asStateFlow()
+    public val isServiceConnected: StateFlow<Boolean> = _isServiceConnected.asStateFlow()
 
     private val serviceConnection = object : ServiceConnection {
         override fun onServiceConnected(name: ComponentName?, service: IBinder?) {
@@ -30,7 +30,7 @@ class OracleDriveServiceConnector(private val context: Context) {
         }
     }
 
-    fun bindService() {
+    public fun bindService() {
         val intent = Intent().apply {
             component = ComponentName(
                 "com.genesis.ai.app",
@@ -44,7 +44,7 @@ class OracleDriveServiceConnector(private val context: Context) {
         }
     }
 
-    fun unbindService() {
+    public fun unbindService() {
         try {
             context.unbindService(serviceConnection)
         } catch (_: Exception) {
@@ -53,7 +53,7 @@ class OracleDriveServiceConnector(private val context: Context) {
         _isServiceConnected.value = false
     }
 
-    suspend fun getStatusFromOracleDrive(): String? = withContext(Dispatchers.IO) {
+    public suspend fun getStatusFromOracleDrive(): String? = withContext(Dispatchers.IO) {
         try {
             auraDriveService?.getOracleDriveStatus()
         } catch (e: RemoteException) {
@@ -61,7 +61,7 @@ class OracleDriveServiceConnector(private val context: Context) {
         }
     }
 
-    suspend fun toggleModuleOnOracleDrive(packageName: String, enable: Boolean): String? =
+    public suspend fun toggleModuleOnOracleDrive(packageName: String, enable: Boolean): String? =
         withContext(Dispatchers.IO) {
             try {
                 auraDriveService?.toggleLSPosedModule(packageName, enable)
@@ -70,7 +70,7 @@ class OracleDriveServiceConnector(private val context: Context) {
             }
         }
 
-    suspend fun getDetailedInternalStatus(): String? = withContext(Dispatchers.IO) {
+    public suspend fun getDetailedInternalStatus(): String? = withContext(Dispatchers.IO) {
         try {
             auraDriveService?.getDetailedInternalStatus()
         } catch (e: RemoteException) {
@@ -78,7 +78,7 @@ class OracleDriveServiceConnector(private val context: Context) {
         }
     }
 
-    suspend fun getInternalDiagnosticsLog(): String? = withContext(Dispatchers.IO) {
+    public suspend fun getInternalDiagnosticsLog(): String? = withContext(Dispatchers.IO) {
         try {
             auraDriveService?.getInternalDiagnosticsLog()
         } catch (e: RemoteException) {
