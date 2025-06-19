@@ -27,7 +27,7 @@ jobs:
           cache: 'gradle'
       
       - name: Set org.gradle.java.home
-      mm  run: echo "org.gradle.java.home=$JAVA_HOME" >> gradle.properties
+        run: echo "org.gradle.java.home=$JAVA_HOME" >> gradle.properties
 
       - name: Setup Android SDK
         uses: android-actions/setup-android@v3
@@ -55,4 +55,3 @@ jobs:
         with:
           name: app-debug
           path: app/build/outputs/apk/debug/*.apk
-         
