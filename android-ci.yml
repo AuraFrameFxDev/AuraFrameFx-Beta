@@ -9,6 +9,11 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    - name: Set org.gradle.java.home
+  run: echo 
+
+"org.gradle.java.home=$JAVA_HOME=gradle.properties
+
 
     steps:
       - uses: actions/checkout@v3
