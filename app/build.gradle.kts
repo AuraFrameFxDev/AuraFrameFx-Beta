@@ -1,3 +1,5 @@
+import java.time.Instant
+
 val kotlinVersion = "2.1.21"
 val composeBomVersion = "2024.06.00" // Corrected Compose BOM version
 plugins {
@@ -21,25 +23,25 @@ tasks.register("fixVisibility") {
     description = "Fixes Kotlin visibility issues for explicit API mode"
     
     // Define an output marker file so Gradle can properly cache the task
-    val outputMarker = file("$buildDir/tmp/fixVisibility.marker")
+    val outputMarker = layout.buildDirectory.file("tmp/fixVisibility.marker")
     outputs.file(outputMarker)
     
     doLast {
         val scriptPath = "${rootProject.projectDir}/fix-kotlin-visibility.sh"
         
         // Make sure the script is executable
-        exec {
+        providers.exec {
             commandLine("chmod", "+x", scriptPath)
         }
         
         // Run the script on the app module
-        exec {
+        providers.exec {
             commandLine(scriptPath, projectDir.absolutePath)
         }
         
         // Create marker file to indicate completion
-        outputMarker.parentFile.mkdirs()
-        outputMarker.writeText("Visibility fixing completed at ${java.time.Instant.now()}")
+        outputMarker.get().asFile.parentFile.mkdirs()
+        outputMarker.get().asFile.writeText("Visibility fixing completed at ${Instant.now()}")
         
         println("Visibility issues fixed for ${project.name}")
     }

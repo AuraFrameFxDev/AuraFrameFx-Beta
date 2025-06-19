@@ -5,7 +5,7 @@ buildscript {
     }
     dependencies {
         classpath("com.android.tools.build:gradle:8.10.1")
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.24") // Hardcoded version
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:2.1.21")
         classpath("com.google.dagger:hilt-android-gradle-plugin:2.56.2")
         classpath("com.google.gms:google-services:4.4.2")
         classpath("com.google.firebase:firebase-crashlytics-gradle:3.0.4")
@@ -16,10 +16,10 @@ buildscript {
 
 plugins {
     id("com.android.application") version "8.10.1" apply false
-    id("org.jetbrains.kotlin.android") version "1.9.24" apply false // Hardcoded version
-    id("org.jetbrains.kotlin.plugin.compose") version "1.9.24" apply true // Hardcoded version
+    id("org.jetbrains.kotlin.android") version "2.1.21" apply false
+    id("org.jetbrains.kotlin.plugin.compose") version "2.1.21" apply true
     id("com.google.dagger.hilt.android") version "2.56.2" apply false
-    id("com.google.devtools.ksp") version "1.9.24-1.0.20" apply false // Example hardcoded version
+    id("com.google.devtools.ksp") version "2.1.21-2.0.1" apply false
     id("com.google.gms.google-services") version "4.4.2" apply false
     id("com.google.firebase.crashlytics") version "3.0.4" apply false
     id("com.google.firebase.firebase-perf") version "1.4.2" apply false
@@ -37,12 +37,12 @@ tasks.register("fixKotlinVisibility") {
         val scriptPath = "${rootProject.projectDir}/fix-kotlin-visibility.sh"
         
         // Make sure the script is executable
-        exec {
+        providers.exec {
             commandLine("chmod", "+x", scriptPath)
         }
         
         // Run the script
-        exec {
+        providers.exec {
             commandLine(scriptPath)
         }
         

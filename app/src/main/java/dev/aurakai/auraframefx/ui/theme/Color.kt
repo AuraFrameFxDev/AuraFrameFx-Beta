@@ -3,16 +3,12 @@ package dev.aurakai.auraframefx.ui.theme
 import androidx.compose.ui.graphics.Color
 
 // Primary Colors - Enhanced Neon Palette
-public val NeonTealColor: Color = Color(0xFF00FFCC) // Brighter teal for accents
-public val NeonPurpleColor: Color = Color(0xFFE000FF) // Slightly softer purple for readability
+public val NeonTealColorColor: Color = Color(0xFF00FFCC) // Brighter teal for accents
+public val NeonPurpleColorColor: Color = Color(0xFFE000FF) // Slightly softer purple for readability
 public val NeonBlue: Color = Color(0xFF00FFFF) // Bright cyan for highlights
 public val NeonPink: Color = Color(0xFFFF00FF) // Bright pink for secondary accents
-public val NeonRedColor: Color = Color(0xFFFF0000)   // Bright neon red
-
-public val NeonCyanColor: Color = Color(0xFF00FFFF) // Alias for NeonBlue for backwards compatibility  
-public val NeonGreenColor: Color = Color(0xFF00FF00) // Bright green
-public val NeonYellowColor: Color = Color(0xFFFFFF00) // Bright yellow
-public val NeonRedColor: Color = Color(0xFFFF0000) // Bright red
+public val NeonCyanColorColor: Color = Color(0xFF00FFFF) // Alias for NeonBlue for backwards compatibility  
+public val NeonYellowColorColor: Color = Color(0xFFFFFF00) // Bright yellow
 
 // Background Colors - Deep Cyberpunk Noir
 public val DarkBackground: Color = Color(0xFF000000) // Pure black for depth

@@ -9,12 +9,12 @@ tasks.register("fixKotlinVisibility") {
         val scriptPath = "${rootProject.projectDir}/fix-kotlin-visibility.sh"
         
         // Make sure the script is executable
-        exec {
+        providers.exec {
             commandLine("chmod", "+x", scriptPath)
         }
         
         // Run the script
-        exec {
+        providers.exec {
             commandLine(scriptPath)
         }
         
