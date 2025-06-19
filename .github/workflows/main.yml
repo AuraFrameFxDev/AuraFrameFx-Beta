@@ -25,6 +25,9 @@ jobs:
           distribution: 'temurin'
           java-version: '21'
           cache: 'gradle'
+      
+      - name: Set org.gradle.java.home
+      mm  run: echo "org.gradle.java.home=$JAVA_HOME" >> gradle.properties
 
       - name: Setup Android SDK
         uses: android-actions/setup-android@v3
