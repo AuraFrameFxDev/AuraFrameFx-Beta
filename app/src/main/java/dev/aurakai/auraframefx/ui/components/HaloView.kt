@@ -48,6 +48,11 @@ import kotlin.math.*
 // val NeonPink = Color(0xFFFF00FF) // Bright pink for secondary accents
 // --- End Color Definitions ---
 
+/**
+ * Displays an interactive, animated halo of agents with drag-and-drop task assignment, real-time status tracking, and task history.
+ *
+ * Visually arranges agents in a rotating circular halo with neon-themed effects. Supports assigning tasks to agents via drag-and-drop or tapping the central node, and displays agent statuses and a scrollable task history. Includes controls for halo rotation and task history management. Agent statuses update asynchronously to simulate task processing.
+ */
 @OptIn(
     ExperimentalMaterial3Api::class,
     androidx.compose.foundation.gestures.ExperimentalFoundationApi::class

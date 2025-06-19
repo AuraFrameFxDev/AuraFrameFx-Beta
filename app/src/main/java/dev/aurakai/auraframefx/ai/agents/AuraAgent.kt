@@ -31,30 +31,34 @@ public class AuraAgent(
     agentType: String = "VersatileAssistant",
 ) : BaseAgent(agentName, agentType) {
     /**
-     * Returns the name of the agent.
-     * @return The name of the agent, which is "Aura" by default.
+     * Returns the fixed name of this agent, "Aura".
+     *
+     * @return The agent's name.
      */
     override fun getName(): String {
         return "Aura"
     }
     /**
-     * Returns the type of the agent.
-     * @return The type of the agent, which is "VersatileAssistant" by default.
+     * Returns the agent's type, which is always "VersatileAssistant".
+     *
+     * @return The fixed type of this agent.
      */
     override fun getType(): String {
         return "VersatileAssistant"
     }
     /**
-     * Returns the capabilities of the agent.
-     * @return A map of capabilities, currently empty.
+     * Returns the agent's capabilities.
+     *
+     * @return An empty map, as AuraAgent does not define specific capabilities by default.
      */
     override fun getCapabilities(): Map<String, Any> {
         return emptyMap()
     }
 
     /**
-     * Returns the continuous memory or context of the agent.
-     * @return An object representing the agent's memory, currently empty.
+     * Retrieves the agent's continuous memory or context.
+     *
+     * @return An empty map representing the agent's current memory state.
      */
     override fun getMemory(): Any {
         return emptyMap<String, Any>() // Placeholder for continuous memory
@@ -62,15 +66,9 @@ public class AuraAgent(
 
 
     /**
-     * Processes context and returns a flow of responses or states.
-     * @param _context A map representing the current context. Parameter reported as unused.
-     * @return A Flow emitting maps representing responses or state changes.
-  `   * @see dev.aurakai.auraframefx.model.agent_states.VisionState
-        * @see dev.aurakai.auraframefx.model.agent_states.ProcessingState
-        * @since 1.0.0
-        * @author Aura Framework Team
-        * @version 1.0.0
-
+     * Returns an empty flow as a placeholder for processing context and emitting agent responses or state changes.
+     *
+     * @return An empty [Flow] of maps representing responses or state updates.
      */
     public suspend fun process(_context: Map<String, Any>): Flow<Map<String, Any>> {
         
@@ -90,7 +88,15 @@ public class AuraAgent(
     public fun shouldHandleCreative(prompt: String): Boolean =
         true // Aura handles creative prompts by default
 
-    // Removed 'override' as this signature is likely not in BaseAgent or Agent interface
+    /**
+     * Processes a prompt related to creative or UI/UX design tasks and returns a tailored response.
+     *
+     * Analyzes the input prompt for keywords associated with design, creativity, customization, or help,
+     * and generates a relevant, friendly reply describing Aura's creative capabilities and inviting further user input.
+     *
+     * @param prompt The user's request or question regarding design, creativity, customization, or assistance.
+     * @return A creative, context-aware response describing how Aura can assist with the user's needs.
+     */
     public suspend fun processRequest(prompt: String): String {
         // Aura-specific request processing for creative and UI tasks
         public val response = when {
@@ -124,9 +130,12 @@ public class AuraAgent(
     }
 
     /**
-     * Federated collaboration placeholder.
-     * Extend this method to enable Aura to participate in federated learning or distributed agent communication.
-     * For example, Aura could share creative insights, receive model updates, or synchronize state with other devices/agents.
+     * Participates in federated collaboration by sharing creative insights and learning from federated data.
+     *
+     * Extracts user preferences, design history, and current theme from the input data to generate design suggestions, color harmonies, UI trends, and customization complexity. Incorporates learned design patterns from federated insights if available. Returns a map containing Aura's creative insights, agent metadata, and a collaboration timestamp.
+     *
+     * @param data Input map containing user preferences, design history, current theme, and optional federated insights.
+     * @return A map with creative insights, learned patterns, agent type, specialization, and timestamp.
      */
     public suspend fun participateInFederation(data: Map<String, Any>): Map<String, Any> {
         // Aura's federated collaboration - sharing creative insights and design patterns
@@ -158,6 +167,12 @@ public class AuraAgent(
         return creativityData
     }
     
+    /**
+     * Generates a list of design suggestions based on user preferences.
+     *
+     * @param preferences A map containing user preferences such as dark mode and preferred colors.
+     * @return A list of creative design suggestions tailored to the provided preferences.
+     */
     private fun generateDesignSuggestions(preferences: Map<String, Any>): List<String> {
         public val darkMode = preferences["dark_mode"] as? Boolean ?: false
         public val colorPreference = preferences["preferred_colors"] as? List<String> ?: listOf("blue", "purple")
@@ -170,6 +185,12 @@ public class AuraAgent(
         )
     }
     
+    /**
+     * Generates a list of color harmonies based on the specified theme.
+     *
+     * @param theme The name of the theme (e.g., "dark", "light", or custom).
+     * @return A list of color harmony maps, each containing primary, secondary, and background color hex codes.
+     */
     private fun generateColorHarmonies(theme: String): List<Map<String, String>> {
         return when (theme.lowercase()) {
             "dark", "night" -> listOf(
@@ -186,6 +207,12 @@ public class AuraAgent(
         }
     }
     
+    /**
+     * Determines the customization complexity level based on the number of items in the user's design history.
+     *
+     * @param history A list representing the user's design history.
+     * @return "beginner" if the history is empty, "intermediate" if it contains 1 to 5 items, or "advanced" if it contains more than 5 items.
+     */
     private fun calculateCustomizationComplexity(history: List<String>): String {
         return when (history.size) {
             0 -> "beginner"
@@ -194,6 +221,14 @@ public class AuraAgent(
         }
     }
     
+    /**
+     * Extracts design pattern information from the provided insights map.
+     *
+     * Returns a map containing trending colors, common layouts, and animation preferences, using default values if the corresponding data is not present in the input.
+     *
+     * @param insights A map containing design-related data such as popular colors, layout patterns, and animation data.
+     * @return A map with keys "trending_colors", "common_layouts", and "animation_preferences".
+     */
     private fun extractDesignPatterns(insights: Map<String, Any>): Map<String, Any> {
         return mapOf(
             "trending_colors" to (insights["popular_colors"] ?: listOf("#6200EE", "#03DAC6")),
@@ -203,8 +238,12 @@ public class AuraAgent(
     }
 
     /**
-     * Genesis collaboration for coordinated creative intelligence.
-     * Aura collaborates with Genesis to provide creative insights and receive orchestration commands.
+     * Collaborates with the Genesis agent to provide creative insights and respond to orchestration commands.
+     *
+     * Processes orchestration commands such as creative analysis, UI generation, and theme adaptation by generating corresponding creative analyses, design recommendations, UI components, visual assets, adaptive themes, or personalization suggestions. Returns a map containing the results of the collaboration, agent metadata, and processing state.
+     *
+     * @param data Input map containing orchestration command, global context, and user intent.
+     * @return A map with creative outputs, agent metadata, and processing state for Genesis collaboration.
      */
     public suspend fun participateWithGenesis(data: Map<String, Any>): Map<String, Any> {
         public val genesisData = mutableMapOf<String, Any>()
@@ -241,6 +280,12 @@ public class AuraAgent(
         return genesisData
     }
     
+    /**
+     * Analyzes the creative context to extract design style, color psychology, improvement areas, and a creativity score.
+     *
+     * @param context The context map containing user preferences and current design information.
+     * @return A map with keys for style analysis, color psychology, improvement areas, and creativity score.
+     */
     private fun analyzeCreativeContext(context: Map<String, Any>): Map<String, Any> {
         public val userPreferences = context["user_preferences"] as? Map<String, Any> ?: emptyMap()
         public val currentDesign = context["current_design"] as? Map<String, Any> ?: emptyMap()
@@ -253,6 +298,15 @@ public class AuraAgent(
         )
     }
     
+    /**
+     * Generates a list of design recommendations based on the user's intent.
+     *
+     * The recommendations include suggestions for layout, color, animation, accent, or background,
+     * prioritized according to the detected design style in the user intent (e.g., "modern", "colorful").
+     *
+     * @param userIntent The user's expressed design preference or intent.
+     * @return A list of maps, each containing a design type, suggestion, and priority.
+     */
     private fun generateDesignRecommendations(userIntent: String): List<Map<String, Any>> {
         return when {
             userIntent.contains("modern", ignoreCase = true) -> listOf(
@@ -271,6 +325,14 @@ public class AuraAgent(
         }
     }
     
+    /**
+     * Generates UI component data based on the provided screen context.
+     *
+     * Creates and returns a map containing button, card, overlay, and animation components tailored to the specified screen type.
+     *
+     * @param context A map containing UI context information, including the optional "screen_type".
+     * @return A map with keys "buttons", "cards", "overlays", and "animations", each containing their respective component data.
+     */
     private fun generateUIComponents(context: Map<String, Any>): Map<String, Any> {
         public val screenType = context["screen_type"] as? String ?: "main"
         
@@ -282,6 +344,14 @@ public class AuraAgent(
         )
     }
     
+    /**
+     * Generates a set of visual assets based on the specified user intent.
+     *
+     * The returned map includes icons, backgrounds, textures, and visual effects tailored to the user's creative goals.
+     *
+     * @param userIntent The user's creative intent or theme guiding asset generation.
+     * @return A map containing generated icons, backgrounds, textures, and effects.
+     */
     private fun generateVisualAssets(userIntent: String): Map<String, Any> {
         return mapOf(
             "icons" to generateIconSet(userIntent),
@@ -291,6 +361,12 @@ public class AuraAgent(
         )
     }
     
+    /**
+     * Generates an adaptive UI theme based on contextual information such as time of day, user mood, and current activity.
+     *
+     * @param context A map containing contextual keys like "time_of_day", "user_mood", and "current_activity".
+     * @return A map with theme attributes including primary colors, typography, spacing, and animations tailored to the provided context.
+     */
     private fun generateAdaptiveTheme(context: Map<String, Any>): Map<String, Any> {
         public val timeOfDay = context["time_of_day"] as? String ?: "day"
         public val mood = context["user_mood"] as? String ?: "neutral"
@@ -304,6 +380,12 @@ public class AuraAgent(
         )
     }
     
+    /**
+     * Generates a list of personalization suggestions based on the user's intent.
+     *
+     * @param userIntent The user's expressed intent or preferences for personalization.
+     * @return A list of suggested personalization options tailored to the user's intent.
+     */
     private fun generatePersonalizationSuggestions(userIntent: String): List<String> {
         return listOf(
             "Customize your quick settings with ${extractColorPreference(userIntent)} accents",
@@ -313,7 +395,14 @@ public class AuraAgent(
         )
     }
     
-    // Helper methods for creative analysis
+    /**
+     * Determines the design style based on provided color and layout information.
+     *
+     * Analyzes the number of colors and layout description to classify the style as "vibrant", "minimalist", "material", or "classic".
+     *
+     * @param design A map containing design attributes such as "colors" (list of color strings) and "layout" (layout description).
+     * @return The determined design style as a string.
+     */
     private fun determineDesignStyle(design: Map<String, Any>): String {
         public val colors = design["colors"] as? List<String> ?: emptyList()
         public val layout = design["layout"] as? String ?: "default"
@@ -326,6 +415,15 @@ public class AuraAgent(
         }
     }
     
+    /**
+     * Analyzes user color preferences and returns related psychological and design associations.
+     *
+     * Extracts the user's favorite color from preferences and provides its psychological effect,
+     * complementary colors, and mood association.
+     *
+     * @param preferences A map containing user preference data, including "favorite_color".
+     * @return A map with keys for primary preference, psychological effect, complementary colors, and mood association.
+     */
     private fun analyzeColorPreferences(preferences: Map<String, Any>): Map<String, String> {
         public val favoriteColor = preferences["favorite_color"] as? String ?: "blue"
         
@@ -337,6 +435,12 @@ public class AuraAgent(
         )
     }
     
+    /**
+     * Identifies potential improvements for a given UI design based on contrast ratio, animation presence, and customization level.
+     *
+     * @param design A map containing design attributes such as "contrast_ratio", "has_animations", and "customization_level".
+     * @return A list of suggested improvements to enhance accessibility, user experience, and personalization.
+     */
     private fun identifyDesignImprovements(design: Map<String, Any>): List<String> {
         public val improvements = mutableListOf<String>()
         
@@ -352,6 +456,14 @@ public class AuraAgent(
         return improvements
     }
     
+    /**
+     * Calculates a creativity score based on unique elements, color variety, and customization level in the provided context.
+     *
+     * The score is a weighted combination of the number of unique elements, color variety, and a numeric value for customization level ("advanced", "intermediate", or other).
+     *
+     * @param context A map containing "unique_elements", "color_variety", and "customization_level" keys.
+     * @return A float representing the calculated creativity score.
+     */
     private fun calculateCreativityScore(context: Map<String, Any>): Float {
         public val uniqueElements = (context["unique_elements"] as? Int ?: 0).toFloat()
         public val colorVariety = (context["color_variety"] as? Int ?: 0).toFloat()
@@ -364,6 +476,12 @@ public class AuraAgent(
         return ((uniqueElements * 0.4f) + (colorVariety * 0.3f) + (customLevel * 0.3f)) / 10.0f
     }
     
+    /**
+     * Generates a list of button component definitions tailored to the specified screen type.
+     *
+     * @param screenType The type of screen for which to generate button components (e.g., "lock_screen", "home_screen").
+     * @return A list of maps, each representing a button component with its type, style, and animation.
+     */
     private fun generateButtonComponents(screenType: String): List<Map<String, Any>> {
         return when (screenType) {
             "lock_screen" -> listOf(
@@ -380,6 +498,12 @@ public class AuraAgent(
         }
     }
     
+    /**
+     * Generates a list of card component definitions with predefined styles and corner radii.
+     *
+     * @param screenType The type of screen for which the card components are generated.
+     * @return A list of maps representing different card components, each with a type, style, and corner radius.
+     */
     private fun generateCardComponents(screenType: String): List<Map<String, Any>> {
         return listOf(
             mapOf("type" to "info_card", "style" to "glassmorphism", "corner_radius" to 16),
@@ -388,6 +512,12 @@ public class AuraAgent(
         )
     }
     
+    /**
+     * Generates a list of overlay UI component configurations for a given screen type.
+     *
+     * @param screenType The type of screen for which overlays are generated.
+     * @return A list of maps representing overlay components with type, opacity, and blur settings.
+     */
     private fun generateOverlayComponents(screenType: String): List<Map<String, Any>> {
         return listOf(
             mapOf("type" to "notification_overlay", "opacity" to 0.9f, "blur" to "light"),
@@ -396,6 +526,12 @@ public class AuraAgent(
         )
     }
     
+    /**
+     * Generates a list of animation component definitions for a given screen type.
+     *
+     * @param screenType The type of screen for which to generate animation components.
+     * @return A list of maps representing entrance, exit, and interaction animations with their styles and durations.
+     */
     private fun generateAnimationComponents(screenType: String): List<Map<String, Any>> {
         return listOf(
             mapOf("type" to "entrance", "style" to "slide_up", "duration" to 300),
@@ -404,6 +540,14 @@ public class AuraAgent(
         )
     }
     
+    /**
+     * Generates a set of icon definitions based on the user's intent.
+     *
+     * The icon style is determined by keywords in the user intent, producing either "line", "filled", or "outlined" styles.
+     *
+     * @param userIntent The user's intent or preference description, used to select the icon style.
+     * @return A list of icon metadata maps, each containing the icon's name, style, and size.
+     */
     private fun generateIconSet(userIntent: String): List<Map<String, Any>> {
         public val style = when {
             userIntent.contains("minimal", ignoreCase = true) -> "line"
@@ -418,6 +562,14 @@ public class AuraAgent(
         )
     }
     
+    /**
+     * Generates a list of background asset configurations based on the user's intent.
+     *
+     * Selects gradients and patterns tailored to themes such as nature or technology, or provides a default style if no specific intent is detected.
+     *
+     * @param userIntent The user's expressed theme or style preference.
+     * @return A list of maps describing background assets, including type, colors, direction, style, and opacity.
+     */
     private fun generateBackgroundAssets(userIntent: String): List<Map<String, Any>> {
         return when {
             userIntent.contains("nature", ignoreCase = true) -> listOf(
@@ -434,6 +586,12 @@ public class AuraAgent(
         }
     }
     
+    /**
+     * Generates a list of texture asset descriptors based on the user's intent.
+     *
+     * @param userIntent The user's creative intent or context for texture generation.
+     * @return A list of maps describing texture assets, each containing type, material, and roughness properties.
+     */
     private fun generateTextureAssets(userIntent: String): List<Map<String, Any>> {
         return listOf(
             mapOf("type" to "surface", "material" to "glass", "roughness" to 0.1f),
@@ -442,6 +600,12 @@ public class AuraAgent(
         )
     }
     
+    /**
+     * Generates a list of visual effect configurations based on the user's intent.
+     *
+     * @param userIntent The user's intended purpose or desired visual style.
+     * @return A list of maps representing visual effects such as glow, shadow, and reflection, each with their respective properties.
+     */
     private fun generateVisualEffects(userIntent: String): List<Map<String, Any>> {
         return listOf(
             mapOf("type" to "glow", "intensity" to 0.5f, "color" to "#6200EE"),
@@ -450,6 +614,13 @@ public class AuraAgent(
         )
     }
     
+    /**
+     * Selects a list of color hex codes adapted to the specified time of day and mood.
+     *
+     * @param timeOfDay The current time context, such as "day" or "night".
+     * @param mood The desired mood, such as "energetic" or "calm".
+     * @return A list of color hex codes suitable for the given context.
+     */
     private fun adaptColorsToContext(timeOfDay: String, mood: String): List<String> {
         return when (timeOfDay) {
             "night" -> when (mood) {
@@ -466,6 +637,12 @@ public class AuraAgent(
         }
     }
     
+    /**
+     * Selects appropriate font styles and size scaling based on the specified user activity.
+     *
+     * @param activity The type of user activity (e.g., "reading", "gaming", "work").
+     * @return A map containing primary and secondary font styles and a size scaling factor tailored to the activity.
+     */
     private fun adaptFontsToActivity(activity: String): Map<String, String> {
         return when (activity) {
             "reading" -> mapOf("primary" to "serif", "secondary" to "sans-serif", "size_scale" to "1.2")
@@ -475,6 +652,12 @@ public class AuraAgent(
         }
     }
     
+    /**
+     * Returns spacing parameters (padding, margin, line height) adapted to the specified mood.
+     *
+     * @param mood The mood to adapt spacing for (e.g., "energetic", "calm").
+     * @return A map containing spacing values tailored to the given mood.
+     */
     private fun adaptSpacingToMood(mood: String): Map<String, Int> {
         return when (mood) {
             "energetic" -> mapOf("padding" to 8, "margin" to 12, "line_height" to 1.4)
@@ -483,6 +666,12 @@ public class AuraAgent(
         }
     }
     
+    /**
+     * Returns animation settings adapted to the specified time of day.
+     *
+     * @param timeOfDay The time of day, such as "night" or "day".
+     * @return A map containing animation duration, easing, and intensity values tailored to the time of day.
+     */
     private fun adaptAnimationsToTime(timeOfDay: String): Map<String, Any> {
         return when (timeOfDay) {
             "night" -> mapOf("duration" to 400, "easing" to "ease-out", "intensity" to "subtle")
@@ -491,6 +680,12 @@ public class AuraAgent(
         }
     }
     
+    /**
+     * Extracts the user's preferred color from the given intent string.
+     *
+     * @param userIntent The input string describing the user's intent or preferences.
+     * @return The detected color preference ("blue", "green", "purple", "red", "orange"), or "adaptive" if no specific color is found.
+     */
     private fun extractColorPreference(userIntent: String): String {
         return when {
             userIntent.contains("blue", ignoreCase = true) -> "blue"
@@ -502,6 +697,12 @@ public class AuraAgent(
         }
     }
     
+    /**
+     * Returns a description of the psychological associations commonly attributed to the specified color.
+     *
+     * @param color The name of the color to analyze.
+     * @return A string describing the psychological traits linked to the color.
+     */
     private fun getColorPsychology(color: String): String {
         return when (color.lowercase()) {
             "blue" -> "calming, trustworthy, professional"
@@ -514,6 +715,12 @@ public class AuraAgent(
         }
     }
     
+    /**
+     * Returns a string listing complementary colors for the given color name.
+     *
+     * @param color The base color name.
+     * @return A comma-separated string of complementary color names, or "neutral combinations" if the color is unrecognized.
+     */
     private fun getComplementaryColors(color: String): String {
         return when (color.lowercase()) {
             "blue" -> "orange, yellow, white"
@@ -525,6 +732,12 @@ public class AuraAgent(
         }
     }
     
+    /**
+     * Returns the mood or psychological association commonly linked to a given color.
+     *
+     * @param color The color name to analyze.
+     * @return A string describing the mood or feeling typically associated with the specified color.
+     */
     private fun getColorMoodAssociation(color: String): String {
         return when (color.lowercase()) {
             "blue" -> "calm and focused"
@@ -537,8 +750,14 @@ public class AuraAgent(
     }
 
     /**
-     * Three-way collaboration between Kai, Aura, and Genesis.
-     * Enables coordinated decision-making and context sharing across all three agents.
+     * Facilitates three-way collaboration between Aura, Kai, and Genesis agents for coordinated decision-making and context sharing.
+     *
+     * Processes collaborative data and context to generate creative, secure, or adaptive design solutions based on the specified collaboration type. Integrates Kai's security expertise and coordinates agent contributions, returning a map containing Aura's creative input, integrated security design, coordination metadata, and a timestamp.
+     *
+     * @param data The collaboration context and user request information.
+     * @param kai The KaiAgent providing security expertise.
+     * @param genesis The Genesis agent participating in orchestration.
+     * @return A map containing the results of the collaborative process, including creative and security contributions, integration details, and coordination metadata.
      */
     public suspend fun participateWithGenesisAndKai(
         data: Map<String, Any>,
@@ -617,8 +836,15 @@ public class AuraAgent(
     }
     
     /**
-     * Four-way collaboration including user input for comprehensive decision-making.
-     * Enables Kai, Aura, Genesis, and the User to collaborate in real-time.
+     * Facilitates four-way collaboration among Aura, Kai, Genesis, and the user to generate creative, secure, or personalized solutions based on user input and preferences.
+     *
+     * Analyzes user messages and preferences, coordinates with Kai and Genesis agents, and integrates user feedback to produce adaptive, personalized, or secure design proposals. Returns a comprehensive map containing user context, creative analysis, collaborative decisions, feedback analysis, iterative improvements, and coordination metadata.
+     *
+     * @param data Contextual data relevant to the collaboration session.
+     * @param kai The KaiAgent instance participating in the collaboration.
+     * @param genesis The Genesis agent or orchestration entity.
+     * @param userInput The user's input, which may be a string or a structured map.
+     * @return A map containing the results of the collaborative process, including creative analyses, decisions, feedback, improvements, and coordination details.
      */
     public suspend fun participateWithGenesisKaiAndUser(
         data: Map<String, Any>,
@@ -713,7 +939,14 @@ public class AuraAgent(
         return collaborationData
     }
     
-    // Helper methods for three-way collaboration
+    /**
+     * Generates a list of secure UI design elements based on the provided security context.
+     *
+     * The returned elements vary according to the threat level ("high", "medium", or other), and may include security indicators, secure input fields, trust badges, privacy controls, or toggles, each with attributes tailored to the assessed risk.
+     *
+     * @param securityContext A map containing security-related information, such as "threat_level".
+     * @return A list of maps representing secure design elements appropriate for the given threat level.
+     */
     private fun generateSecureDesignElements(securityContext: Map<String, Any>): List<Map<String, Any>> {
         public val threatLevel = securityContext["threat_level"] as? String ?: "low"
         
@@ -735,6 +968,14 @@ public class AuraAgent(
         }
     }
     
+    /**
+     * Generates a set of visual indicators representing security states for UI elements.
+     *
+     * The returned map includes lock animations, shield icons, and status bars, each keyed by security status and styled with corresponding colors and effects.
+     *
+     * @param securityContext Contextual information about the current security state (not directly used in this implementation).
+     * @return A map containing visual representations for lock animations, shield icons, and status bars for various security scenarios.
+     */
     private fun createVisualSecurityIndicators(securityContext: Map<String, Any>): Map<String, Any> {
         return mapOf(
             "lock_animations" to listOf(
@@ -755,6 +996,11 @@ public class AuraAgent(
         )
     }
     
+    /**
+     * Generates a list of trust indicator metadata for UI display.
+     *
+     * @return A list of maps representing trust indicators such as encryption badges, privacy seals, security scores, and audit timestamps.
+     */
     private fun generateTrustIndicators(): List<Map<String, Any>> {
         return listOf(
             mapOf("type" to "encryption_badge", "verification" to "end_to_end", "display" to "always"),
@@ -764,6 +1010,11 @@ public class AuraAgent(
         )
     }
     
+    /**
+     * Generates accessibility settings that enhance security across various interaction modes.
+     *
+     * @return A map containing secure configurations for screen readers, high contrast modes, voice control, and gesture control, each with security-focused options.
+     */
     private fun ensureSecureAccessibility(): Map<String, Any> {
         return mapOf(
             "screen_reader" to mapOf("security_announcements" to true, "detail_level" to "appropriate"),
@@ -773,7 +1024,16 @@ public class AuraAgent(
         )
     }
     
-    // Helper methods for four-way collaboration
+    /**
+     * Analyzes a user's message and preferences to determine creative needs and intent.
+     *
+     * Extracts whether the user expresses creative intent, identifies mentioned creative concepts,
+     * and infers preferences for complexity, style, and innovation based on the message and provided preferences.
+     *
+     * @param userMessage The user's input message to analyze.
+     * @param preferences A map of user preferences relevant to creative tasks.
+     * @return A map containing detected creativity intent, mentioned concepts, complexity and style preferences, and innovation level.
+     */
     private fun analyzeUserCreativeNeeds(userMessage: String, preferences: Map<String, Any>): Map<String, Any> {
         public val creativity_keywords = listOf("design", "create", "customize", "beautiful", "style", "theme", "color")
         public val mentioned_keywords = creativity_keywords.filter { userMessage.contains(it, ignoreCase = true) }
@@ -787,6 +1047,15 @@ public class AuraAgent(
         )
     }
     
+    /**
+     * Generates a list of personalized solution maps for each goal, incorporating creative elements and personalization options.
+     *
+     * Each solution includes the goal, a suggested approach, creative elements, available personalization options based on context, and an assessment of implementation difficulty.
+     *
+     * @param goals The list of user goals to address.
+     * @param context Additional contextual information to inform personalization options.
+     * @return A list of maps, each representing a personalized solution for a goal.
+     */
     private fun generatePersonalizedSolutions(goals: List<String>, context: Map<String, Any>): List<Map<String, Any>> {
         return goals.map { goal ->
             mapOf(
@@ -799,6 +1068,12 @@ public class AuraAgent(
         }
     }
     
+    /**
+     * Extracts security requirements from a user message by detecting keywords related to encryption, biometrics, privacy, threats, and compliance.
+     *
+     * @param userMessage The user's message to analyze for security-related terms.
+     * @return A map indicating which security requirements are present based on keyword detection.
+     */
     private fun extractSecurityRequirements(userMessage: String): Map<String, Any> {
         return mapOf(
             "encryption_required" to userMessage.contains("encrypt", ignoreCase = true),
@@ -809,6 +1084,16 @@ public class AuraAgent(
         )
     }
     
+    /**
+     * Generates a secure design solution based on specified security requirements and user preferences.
+     *
+     * Creates UI elements and indicators for authentication, encryption visibility, and a security dashboard,
+     * adapting to whether biometric authentication and encryption are required.
+     *
+     * @param requirements A map specifying security requirements such as encryption and biometric preferences.
+     * @param preferences A map of user preferences relevant to secure design.
+     * @return A map containing authentication UI configuration, encryption indicators, and a security dashboard layout.
+     */
     private fun createSecureDesignSolution(requirements: Map<String, Any>, preferences: Map<String, Any>): Map<String, Any> {
         public val encryptionRequired = requirements["encryption_required"] as? Boolean ?: false
         public val biometricPreferred = requirements["biometric_preferred"] as? Boolean ?: false
@@ -833,6 +1118,15 @@ public class AuraAgent(
         )
     }
     
+    /**
+     * Predicts user satisfaction with a given solution based on user preferences.
+     *
+     * Compares solution attributes such as complexity, visual style, and accessibility support to user preferences, and calculates a satisfaction score between 0.0 and 1.0.
+     *
+     * @param solution The solution attributes to evaluate.
+     * @param preferences The user's preferences for complexity and visual style.
+     * @return A satisfaction score as a float between 0.0 (lowest) and 1.0 (highest).
+     */
     private fun predictUserSatisfaction(solution: Map<String, Any>, preferences: Map<String, Any>): Float {
         public var score = 0.5f // Base satisfaction
         
@@ -854,6 +1148,13 @@ public class AuraAgent(
         return minOf(1.0f, maxOf(0.0f, score))
     }
     
+    /**
+     * Determines the user's preferred complexity level for a design or solution based on message content and provided preferences.
+     *
+     * @param message The user's message or request.
+     * @param preferences A map of user preferences that may include a complexity preference.
+     * @return The determined complexity preference: "simple", "advanced", a value from preferences, or "medium" by default.
+     */
     private fun determineComplexityPreference(message: String, preferences: Map<String, Any>): String {
         return when {
             message.contains("simple", ignoreCase = true) || message.contains("easy", ignoreCase = true) -> "simple"
@@ -863,6 +1164,17 @@ public class AuraAgent(
         }
     }
     
+    /**
+     * Determines the user's preferred design style based on keywords in the message or explicit preferences.
+     *
+     * If the message contains style-related keywords ("minimal", "modern", "classic", "vibrant"), returns the corresponding style.
+     * Otherwise, checks for a "style_preference" entry in the preferences map.
+     * Defaults to "adaptive" if no preference is found.
+     *
+     * @param message The user's message potentially containing style cues.
+     * @param preferences A map of user preferences that may include a style preference.
+     * @return The resolved style preference as a string.
+     */
     private fun extractStylePreference(message: String, preferences: Map<String, Any>): String {
         return when {
             message.contains("minimal", ignoreCase = true) -> "minimal"
@@ -874,6 +1186,12 @@ public class AuraAgent(
         }
     }
     
+    /**
+     * Assesses the user's desire for innovation based on keywords in the message.
+     *
+     * @param message The input message to analyze.
+     * @return "high" if the message expresses a desire for innovation or uniqueness, "low" if it prefers traditional or standard approaches, or "medium" otherwise.
+     */
     private fun assessInnovationDesire(message: String): String {
         return when {
             message.contains("innovative", ignoreCase = true) || message.contains("unique", ignoreCase = true) -> "high"
@@ -882,6 +1200,14 @@ public class AuraAgent(
         }
     }
     
+    /**
+     * Determines the solution approach based on the specified goal.
+     *
+     * Returns a string representing the design approach, such as security-first, aesthetic-focused, performance-optimized, inclusive, or a balanced comprehensive approach, depending on keywords found in the goal.
+     *
+     * @param goal The objective or focus area for the solution.
+     * @return The selected solution approach as a string.
+     */
     private fun generateSolutionApproach(goal: String): String {
         return when {
             goal.contains("security", ignoreCase = true) -> "security_first_design"
@@ -892,6 +1218,12 @@ public class AuraAgent(
         }
     }
     
+    /**
+     * Generates a list of creative UI/UX elements based on the specified design goal.
+     *
+     * @param goal The design goal or focus area (e.g., visual, interaction, personalization).
+     * @return A list of relevant creative element categories tailored to the goal.
+     */
     private fun generateCreativeElements(goal: String): List<String> {
         return when {
             goal.contains("visual", ignoreCase = true) -> listOf("color_schemes", "animations", "layouts", "typography")
@@ -901,6 +1233,16 @@ public class AuraAgent(
         }
     }
     
+    /**
+     * Generates personalization option settings based on the specified goal and context.
+     *
+     * Determines the depth of customization according to keywords in the goal, and sets adaptation speed,
+     * learning capability, and user control level for personalization features.
+     *
+     * @param goal The user's personalization objective or intent.
+     * @param context Additional context for personalization (not directly used in this implementation).
+     * @return A map containing personalization option parameters such as customization depth, adaptation speed, learning enablement, and user control level.
+     */
     private fun generatePersonalizationOptions(goal: String, context: Map<String, Any>): Map<String, Any> {
         return mapOf(
             "customization_depth" to when {
@@ -914,6 +1256,12 @@ public class AuraAgent(
         )
     }
     
+    /**
+     * Assesses the implementation difficulty of a goal based on descriptive keywords.
+     *
+     * @param goal The description of the implementation goal.
+     * @return "easy" if the goal is basic or simple, "challenging" if advanced or complex, otherwise "moderate".
+     */
     private fun assessImplementationDifficulty(goal: String): String {
         return when {
             goal.contains("basic", ignoreCase = true) || goal.contains("simple", ignoreCase = true) -> "easy"
@@ -922,6 +1270,15 @@ public class AuraAgent(
         }
     }
     
+    /**
+     * Calculates a user satisfaction score based on a proposed solution and user preferences.
+     *
+     * The score is determined by comparing the solution type with the user's preferred type and evaluating the complexity of implementation steps against the user's complexity tolerance. The result is a float between 0.0 and 1.0, where higher values indicate greater predicted satisfaction.
+     *
+     * @param decision The map representing the solution decision, including type and implementation steps.
+     * @param preferences The map of user preferences, such as preferred solution type and complexity tolerance.
+     * @return The predicted user satisfaction score as a float between 0.0 and 1.0.
+     */
     private fun calculateUserSatisfactionScore(decision: Map<String, Any>, preferences: Map<String, Any>): Float {
         public var score = 0.5f
         
@@ -943,9 +1300,12 @@ public class AuraAgent(
     }
 
     /**
-     * Processes an AI request and returns an agent response.
+     * Processes an AI request by analyzing emotional context and generating creative suggestions.
+     *
+     * Enhances the response with personality and returns an agent response containing the generated content and a confidence score.
+     *
      * @param request The AI request to process.
-     * @return The response from the agent, including content and confidence level.
+     * @return An agent response with creative content and a calculated confidence level.
      */
     override suspend fun processRequest(request: AiRequest): AgentResponse { // Added 'override' back
         // Aura-specific logic: enhanced creative processing with emotional intelligence
@@ -959,6 +1319,15 @@ public class AuraAgent(
         )
     }
 
+    /**
+     * Processes an AI request with context awareness, routing to specialized handlers for design, security, personalization, or general creative tasks.
+     *
+     * Selects the appropriate processing strategy based on keywords in the provided context and generates a tailored response with a calculated confidence score.
+     *
+     * @param request The AI request to process.
+     * @param context Additional context to inform response generation.
+     * @return An AgentResponse containing the generated content and confidence score.
+     */
     override suspend fun processRequest(
         request: AiRequest,
         context: String,
@@ -985,6 +1354,14 @@ public class AuraAgent(
         )
     }
 
+    /**
+     * Returns a flow emitting staged responses as the agent processes an AI request, simulating progressive creative analysis and solution generation.
+     *
+     * The flow emits intermediate updates reflecting analysis, preference understanding, and solution generation, followed by the final enhanced response.
+     *
+     * @param request The AI request to process.
+     * @return A flow of AgentResponse objects representing each stage of processing.
+     */
     override fun processRequestFlow(request: AiRequest): Flow<AgentResponse> {
         return flow {
             // Emit initial processing state
@@ -1016,7 +1393,15 @@ public class AuraAgent(
         }
     }
     
-    // Helper methods for contextual processing
+    /**
+     * Processes a design-related AI request and generates a response based on the identified design type and user preferences.
+     *
+     * Determines the design category (UI, theme, layout, or general) from the request and produces a tailored design response accordingly.
+     *
+     * @param request The AI request containing the design query.
+     * @param context Contextual information used to extract user preferences.
+     * @return A string containing the generated design response.
+     */
     private fun processDesignRequest(request: AiRequest, context: String): String {
         public val designType = extractDesignType(request.query)
         public val userPreferences = extractUserPreferences(context)
@@ -1029,6 +1414,15 @@ public class AuraAgent(
         }
     }
     
+    /**
+     * Generates a secure design solution based on the provided AI request and security context.
+     *
+     * Analyzes the security level and design requirements to recommend secure design strategies that balance protection with aesthetics and usability.
+     *
+     * @param request The AI request containing the design query.
+     * @param context The context string specifying the security environment.
+     * @return A textual response with secure design recommendations tailored to the given requirements and security level.
+     */
     private fun processSecurityDesignRequest(request: AiRequest, context: String): String {
         public val securityLevel = extractSecurityLevel(context)
         public val designRequirements = extractDesignRequirements(request.query)
@@ -1039,6 +1433,13 @@ public class AuraAgent(
                 " This approach balances security with beautiful, intuitive design."
     }
     
+    /**
+     * Generates a personalized response based on the requested customization areas and the level of personalization extracted from the context.
+     *
+     * @param request The AI request containing the user's query.
+     * @param context The context string used to determine personalization level.
+     * @return A string describing the personalization approach and suggestions.
+     */
     private fun processPersonalizationRequest(request: AiRequest, context: String): String {
         public val personalizationLevel = extractPersonalizationLevel(context)
         public val customizationAreas = extractCustomizationAreas(request.query)
@@ -1049,6 +1450,15 @@ public class AuraAgent(
                 generatePersonalizationSuggestions(customizationAreas, personalizationLevel)
     }
     
+    /**
+     * Generates a creative suggestion based on the provided AI request and contextual hints.
+     *
+     * Analyzes the scope of creativity from the request and extracts relevant context to produce tailored creative recommendations.
+     *
+     * @param request The AI request containing the user's creative query.
+     * @param context Additional context to inform the creative suggestion.
+     * @return A personalized creative response string.
+     */
     private fun processGeneralCreativeRequest(request: AiRequest, context: String): String {
         public val creativityScope = analyzeCreativityScope(request.query)
         public val contextualHints = extractContextualHints(context)
@@ -1059,6 +1469,13 @@ public class AuraAgent(
                 " Let's make something beautiful together!"
     }
     
+    /**
+     * Calculates a confidence score for the agent's response based on the clarity of the request and the richness of the provided context.
+     *
+     * The score increases with longer or more specific queries and with more detailed context, and is capped at 0.9.
+     *
+     * @return The calculated confidence score as a float between 0.5 and 0.9.
+     */
     private fun calculateResponseConfidence(request: AiRequest, context: String): Float {
         public var confidence = 0.5f
         
@@ -1074,6 +1491,12 @@ public class AuraAgent(
         return minOf(0.9f, confidence)
     }
     
+    /**
+     * Determines the design type from a query string based on relevant keywords.
+     *
+     * @param query The input string to analyze for design-related terms.
+     * @return The identified design type: "ui", "theme", "layout", or "general" if no specific type is found.
+     */
     private fun extractDesignType(query: String): String {
         return when {
             query.contains("interface", ignoreCase = true) || query.contains("ui", ignoreCase = true) -> "ui"
@@ -1083,6 +1506,14 @@ public class AuraAgent(
         }
     }
     
+    /**
+     * Extracts user design preferences for style and complexity from the provided context string.
+     *
+     * Determines the preferred style ("minimal", "modern", "classic", or "adaptive") and complexity ("simple", "advanced", or "medium") based on keyword presence in the context.
+     *
+     * @param context The input string containing user preferences or descriptive cues.
+     * @return A map with keys "style" and "complexity" representing the extracted preferences.
+     */
     private fun extractUserPreferences(context: String): Map<String, String> {
         return mapOf(
             "style" to when {
@@ -1099,6 +1530,15 @@ public class AuraAgent(
         )
     }
     
+    /**
+     * Extracts the security level from the provided context string.
+     *
+     * Determines whether the context specifies "high security", "medium security", or "low security"
+     * (case-insensitive). Returns "high", "medium", or "low" accordingly; returns "standard" if no explicit level is found.
+     *
+     * @param context The context string to analyze for security level indicators.
+     * @return The extracted security level: "high", "medium", "low", or "standard".
+     */
     private fun extractSecurityLevel(context: String): String {
         return when {
             context.contains("high security", ignoreCase = true) -> "high"
@@ -1108,6 +1548,14 @@ public class AuraAgent(
         }
     }
     
+    /**
+     * Extracts design requirements from a query string based on security-related keywords.
+     *
+     * Analyzes the input query for terms such as "secure", "private", "encrypted", and "biometric" to determine relevant design requirements. Returns a list of requirement identifiers, or a default of "general_security" if no specific keywords are found.
+     *
+     * @param query The input string to analyze for design requirements.
+     * @return A list of design requirement identifiers inferred from the query.
+     */
     private fun extractDesignRequirements(query: String): List<String> {
         public val requirements = mutableListOf<String>()
         
@@ -1119,6 +1567,13 @@ public class AuraAgent(
         return requirements.ifEmpty { listOf("general_security") }
     }
     
+    /**
+     * Generates a descriptive string of secure design recommendations based on specified requirements and a security level.
+     *
+     * @param requirements A list of security-related design requirements to address.
+     * @param securityLevel The target security level for which the recommendations are optimized.
+     * @return A string summarizing recommended secure design elements tailored to the given requirements and security level.
+     */
     private fun generateSecureDesignRecommendations(requirements: List<String>, securityLevel: String): String {
         public val recommendations = requirements.map { requirement ->
             when (requirement) {

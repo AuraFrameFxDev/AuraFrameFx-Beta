@@ -31,12 +31,22 @@ public interface Agent {
     public suspend fun processRequest(request: AiRequest, context: String): AgentResponse
     
     /**
-     * Process a request and return a flow of responses
-     */
+ * Processes an AI request and returns a flow of agent responses.
+ *
+ * Enables streaming multiple responses for a single request.
+ *
+ * @param request The AI request to process.
+ * @return A flow emitting agent responses as they become available.
+ */
     public fun processRequestFlow(request: AiRequest): Flow<AgentResponse>
 
      */
-    public fun getType(): AgentType?
+    /**
+ * Returns the type of the agent.
+ *
+ * @return The agent's type as an [AgentType], or `null` if not specified.
+ */
+public fun getType(): AgentType?
 
     /**
      * Processes a given request (prompt) and returns a response.
@@ -46,35 +56,43 @@ public interface Agent {
     public suspend fun processRequest(request: AiRequest): AgentResponse
 
     /**
-     * Retrieves the capabilities of the agent.
-     * @return A list or map of capabilities.
-
+     * Returns a map describing the agent's capabilities.
+     *
+     * The keys and values in the map represent specific features or functionalities supported by the agent.
+     * Implementations should provide relevant capability information.
+     *
+     * @return A map of capability names to their corresponding details.
      */
     public fun getCapabilities(): Map<String, Any> {
 
     }
 
     /**
-     * Retrieves the agent's continuous memory or context.
-        * @return An object representing the agent's memory.
-
+     * Returns the agent's continuous memory or context object, or null if not available.
+     *
+     * @return The agent's continuous memory, or null if none exists.
      */
     public fun getContinuousMemory(): Any? {
 
     }
 
     /**
-     * Retrieves the ethical guidelines the agent adheres to.
-     * @return A list of ethical guidelines.
-     */
+          * Returns a list of ethical guidelines that the agent follows.
+          *
+          * By default, this includes "Be helpful.", "Be harmless.", and "Adhere to ethical principles."
+          *
+          * @return A list of ethical guidelines.
+          */
     public fun getEthicalGuidelines(): List<String> {
  
          }
 
     /**
-     * Retrieves the agent's learning history or experiences.
-        * @return A list of strings representing the agent's learning history.
-        
+     * Returns the agent's learning history or experiences.
+     *
+     * By default, returns an empty list.
+     *
+     * @return A list of strings representing the agent's learning history.
      */
     public fun getLearningHistory(): List<String> {
         return emptyList()
@@ -84,8 +102,9 @@ public interface Agent {
 }
 
     /**
-     * Retrieves the agent's continuous memory or context.
-     * @return An object representing the agent's memory.
+     * Returns the agent's continuous memory or context, if available.
+     *
+     * @return The agent's memory object, or null if not applicable.
      */
     public fun getContinuousMemory(): Any? {
         return null
@@ -101,7 +120,10 @@ public interface Agent {
     }
 
     /**
-     * Retrieves the agent's learning history or experiences.
+     * Returns the agent's learning history or experiences.
+     *
+     * By default, returns an empty list.
+     *
      * @return A list of strings representing the agent's learning history.
      */
     public fun getLearningHistory(): List<String> {
