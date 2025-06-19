@@ -43,8 +43,12 @@ public class AuraShieldAgent(
     }
 
     /**
-     * Analyzes threats based on the given security context.
-     * Performs comprehensive threat assessment and updates security state.
+     * Performs a comprehensive threat analysis using the provided or current security context.
+     *
+     * Aggregates threats detected from application security, network security, system integrity, and privacy analyses.
+     * Updates the internal security state and logs a scan event reflecting the findings.
+     *
+     * @param securityContextState Optional security context to use for analysis; if null, the current context is used.
      */
     public suspend fun analyzeThreats(securityContextState: SecurityContextState?) {
         public val contextToAnalyze = securityContextState ?: _securityContext.value
@@ -75,7 +79,9 @@ public class AuraShieldAgent(
     }
 
     /**
-     * Performs real-time security monitoring for immediate threat detection.
+     * Continuously emits updated security context states by performing periodic security checks.
+     *
+     * @return A Flow emitting the latest SecurityContextState every 5 seconds.
      */
     public suspend fun performRealTimeMonitoring(): Flow<SecurityContextState> {
         return kotlinx.coroutines.flow.flow {
@@ -88,7 +94,10 @@ public class AuraShieldAgent(
     }
 
     /**
-     * Scans a specific application for security vulnerabilities.
+     * Scans the specified application for security vulnerabilities, including suspicious permissions, signature risks, and known malware patterns.
+     *
+     * @param packageName The package name of the application to scan.
+     * @return An ActiveThreat object describing the detected threat if any vulnerabilities are found, or null if the application is considered safe or an error occurs.
      */
     public suspend fun scanApplication(packageName: String): ActiveThreat? {
         return try {
@@ -122,7 +131,11 @@ public class AuraShieldAgent(
     }
 
     /**
-     * Provides security recommendations based on current threat landscape.
+     * Generates a list of security recommendations tailored to the current active threats.
+     *
+     * Recommendations address application security, network security, system integrity, and privacy violations as detected. If no threats are present, a positive message is returned.
+     *
+     * @return A list of actionable security recommendations based on detected threats.
      */
     public fun generateSecurityRecommendations(): List<String> {
         public val threats = _activeThreats.value
@@ -156,7 +169,12 @@ public class AuraShieldAgent(
     }
 
     /**
-     * Calculates overall security score for the device.
+     * Calculates the device's overall security score based on the severity of active threats.
+     *
+     * The score starts at 100 and is reduced according to the severity of each detected threat.
+     * The minimum possible score is 0.
+     *
+     * @return The calculated security score, where a higher value indicates better security.
      */
     public fun calculateSecurityScore(): Float {
         public val threats = _activeThreats.value
@@ -176,7 +194,11 @@ public class AuraShieldAgent(
         return maxOf(0.0f, baseScore)
     }
 
-    // Private implementation methods
+    /**
+     * Initializes the security context with device information and monitoring status.
+     *
+     * Sets the initial values for device identifier, security level, scan time, and protection flags.
+     */
     private fun initializeSecurityMonitoring() {
         _securityContext.value = SecurityContextState(
             deviceId = getDeviceIdentifier(),
@@ -187,6 +209,9 @@ public class AuraShieldAgent(
         )
     }
 
+    /**
+     * Records an initial clean security scan event and appends it to the scan history.
+     */
     private fun performInitialSecurityScan() {
         public val initialScanEvent = ScanEvent(
             id = "initial_scan_${System.currentTimeMillis()}",
@@ -201,11 +226,23 @@ public class AuraShieldAgent(
         _scanHistory.value = _scanHistory.value + initialScanEvent
     }
 
+    /**
+     * Performs a security check by analyzing current threats and returns the updated security context state.
+     *
+     * @return The latest security context state after threat analysis.
+     */
     private suspend fun performSecurityCheck(): SecurityContextState {
         analyzeThreats(_securityContext.value)
         return _securityContext.value
     }
 
+    /**
+     * Analyzes all installed applications (excluding the agent's own app) for security threats.
+     *
+     * Iterates through installed applications and checks each for suspicious permissions, signature risks, or known malware patterns.
+     *
+     * @return A list of detected active threats found among installed applications.
+     */
     private fun analyzeSuspiciousApplications(): List<ActiveThreat> {
         public val threats = mutableListOf<ActiveThreat>()
         
@@ -227,6 +264,14 @@ public class AuraShieldAgent(
         return threats
     }
 
+    /**
+     * Analyzes the current network security context and returns a list of detected network-related threats.
+     *
+     * Simulates detection of insecure network connections and adds a medium severity threat if such a connection is found.
+     *
+     * @param context The current security context state.
+     * @return A list of active network security threats, or an empty list if none are detected.
+     */
     private fun analyzeNetworkSecurity(context: SecurityContextState): List<ActiveThreat> {
         public val threats = mutableListOf<ActiveThreat>()
         
@@ -250,6 +295,11 @@ public class AuraShieldAgent(
         return threats
     }
 
+    /**
+     * Analyzes the device for system integrity threats such as enabled developer options and root access.
+     *
+     * @return A list of detected system integrity threats, including developer options enabled and root status if applicable.
+     */
     private fun analyzeSystemIntegrity(): List<ActiveThreat> {
         public val threats = mutableListOf<ActiveThreat>()
         
@@ -288,6 +338,11 @@ public class AuraShieldAgent(
         return threats
     }
 
+    /**
+     * Identifies privacy threats by detecting applications with excessive permissions.
+     *
+     * @return A list of active threats representing apps that request an unusually high number of permissions.
+     */
     private fun analyzePrivacyThreats(): List<ActiveThreat> {
         public val threats = mutableListOf<ActiveThreat>()
         
@@ -312,6 +367,12 @@ public class AuraShieldAgent(
         return threats
     }
 
+    /**
+     * Checks the specified application for suspicious permissions and returns an active threat if any are found.
+     *
+     * @param packageName The package name of the application to analyze.
+     * @return An ActiveThreat object if suspicious permissions are detected; otherwise, null.
+     */
     private fun checkApplicationSecurity(packageName: String): ActiveThreat? {
         try {
             public val packageInfo = context.packageManager.getPackageInfo(packageName, PackageManager.GET_PERMISSIONS)
@@ -336,6 +397,14 @@ public class AuraShieldAgent(
         return null
     }
 
+    /**
+     * Returns a list of permissions from the input array that are considered suspicious.
+     *
+     * Filters the provided permissions against a predefined list of high-risk Android permissions commonly associated with privacy or security concerns.
+     *
+     * @param permissions The array of permission strings to analyze.
+     * @return A list of suspicious permissions found in the input, or an empty list if none are present.
+     */
     private fun analyzeSuspiciousPermissions(permissions: Array<String>?): List<String> {
         if (permissions == null) return emptyList()
         
@@ -356,18 +425,40 @@ public class AuraShieldAgent(
         return permissions.filter { it in suspiciousPermissions }
     }
 
+    /**
+     * Determines whether the application's signature is considered risky.
+     *
+     * This implementation always returns false and does not perform actual signature analysis.
+     *
+     * @param packageName The package name of the application to analyze.
+     * @return False, indicating no signature risk detected.
+     */
     private fun analyzeAppSignature(packageName: String): Boolean {
         // Simplified signature analysis
         // In a real implementation, this would check against known good/bad signatures
         return false
     }
 
+    /**
+     * Checks if the given package name matches any known malware signature patterns.
+     *
+     * @param packageName The package name to check for malware patterns.
+     * @return True if the package name contains a known malware signature; false otherwise.
+     */
     private fun checkMalwarePatterns(packageName: String): Boolean {
         // Simplified malware pattern check
         // In a real implementation, this would use actual malware detection algorithms
         return knownMalwareSignatures.any { packageName.contains(it, ignoreCase = true) }
     }
 
+    /**
+     * Determines the severity level of a detected threat based on suspicious permissions, signature risk, and malware risk.
+     *
+     * @param permissions List of suspicious permissions associated with the threat.
+     * @param signatureRisk Whether the application has a risky or untrusted signature.
+     * @param malwareRisk Whether the application matches known malware patterns.
+     * @return A string representing the severity level: "CRITICAL", "HIGH", "MEDIUM", "LOW", or "INFO".
+     */
     private fun determineThreatSeverity(permissions: List<String>, signatureRisk: Boolean, malwareRisk: Boolean): String {
         return when {
             malwareRisk -> "CRITICAL"
@@ -379,6 +470,15 @@ public class AuraShieldAgent(
         }
     }
 
+    /**
+     * Constructs a descriptive summary of detected security issues for a given application.
+     *
+     * @param packageName The package name of the application.
+     * @param permissions List of suspicious permissions identified.
+     * @param signatureRisk Whether a suspicious signature was detected.
+     * @param malwareRisk Whether a known malware pattern was detected.
+     * @return A string summarizing the security issues found in the application.
+     */
     private fun generateThreatDescription(packageName: String, permissions: List<String>, signatureRisk: Boolean, malwareRisk: Boolean): String {
         public val issues = mutableListOf<String>()
         
@@ -389,6 +489,17 @@ public class AuraShieldAgent(
         return "App '$packageName' detected with: ${issues.joinToString(", ")}"
     }
 
+    /**
+     * Calculates a risk score for an application based on the number of suspicious permissions,
+     * presence of signature risk, and detection of malware patterns.
+     *
+     * The score is capped at 10.0.
+     *
+     * @param permissions List of suspicious permissions detected.
+     * @param signatureRisk Whether a risky app signature was detected.
+     * @param malwareRisk Whether known malware patterns were found.
+     * @return The calculated risk score, with a maximum value of 10.0.
+     */
     private fun calculateRiskScore(permissions: List<String>, signatureRisk: Boolean, malwareRisk: Boolean): Float {
         public var score = 0.0f
         
@@ -399,6 +510,15 @@ public class AuraShieldAgent(
         return minOf(10.0f, score)
     }
 
+    /**
+     * Updates the current active threats and security context state based on the provided threat list.
+     *
+     * Sets the security level according to the highest severity among detected threats, updates the last scan time,
+     * and records the total number of threats.
+     *
+     * @param threats The list of detected active threats.
+     * @param context The current security context state to update.
+     */
     private fun updateSecurityState(threats: List<ActiveThreat>, context: SecurityContextState) {
         _activeThreats.value = threats
         
@@ -417,6 +537,11 @@ public class AuraShieldAgent(
         )
     }
 
+    /**
+     * Records a new scan event with the provided list of detected threats and updates the scan history, retaining only the most recent 50 events.
+     *
+     * @param threats The list of active threats identified during the scan.
+     */
     private fun logScanEvent(threats: List<ActiveThreat>) {
         public val scanEvent = ScanEvent(
             id = "scan_${System.currentTimeMillis()}",
@@ -431,17 +556,31 @@ public class AuraShieldAgent(
         _scanHistory.value = (_scanHistory.value + scanEvent).takeLast(50) // Keep last 50 scans
     }
 
-    // Helper methods for system checks
+    /**
+     * Returns a device identifier string composed of the device model and device name, with spaces replaced by underscores.
+     *
+     * @return A unique identifier string for the current device.
+     */
     private fun getDeviceIdentifier(): String {
         return "device_${Build.MODEL}_${Build.DEVICE}".replace(" ", "_")
     }
 
+    /**
+     * Determines whether the device is connected to an unsecure network.
+     *
+     * @return Always returns false as this is a stub implementation.
+     */
     private fun isConnectedToUnsecureNetwork(): Boolean {
         // Simplified network security check
         // In real implementation, would check actual network security
         return false
     }
 
+    /**
+     * Checks whether developer options are enabled on the device.
+     *
+     * @return `true` if developer options are enabled; `false` otherwise or if the status cannot be determined.
+     */
     private fun isDeveloperOptionsEnabled(): Boolean {
         return try {
             android.provider.Settings.Global.getInt(
@@ -454,6 +593,11 @@ public class AuraShieldAgent(
         }
     }
 
+    /**
+     * Checks if the device is rooted by attempting to execute the "su" command.
+     *
+     * @return `true` if root access is detected, `false` otherwise.
+     */
     private fun isDeviceRooted(): Boolean {
         // Simplified root detection
         return try {
@@ -465,6 +609,14 @@ public class AuraShieldAgent(
         }
     }
 
+    /**
+     * Returns a list of package names for installed applications that request more than 10 permissions.
+     *
+     * Applications exceeding this threshold are considered to have excessive permissions, which may indicate potential privacy risks.
+     * Handles exceptions gracefully and skips problematic packages.
+     *
+     * @return List of package names with excessive permissions.
+     */
     private fun findAppsWithExcessivePermissions(): List<String> {
         public val appsWithExcessivePermissions = mutableListOf<String>()
         
