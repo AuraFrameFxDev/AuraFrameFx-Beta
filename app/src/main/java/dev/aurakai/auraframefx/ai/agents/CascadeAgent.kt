@@ -42,15 +42,33 @@ public class CascadeAgent @Inject constructor(
     private val memoryStore = mutableListOf<MemoryItem>()
 
     // Add stubs for agent collaboration methods expected by CascadeAgent
-    // These should be implemented in AuraAgent and KaiAgent as well
+    /**
+     * Called when the vision state is updated.
+     *
+     * Intended to be overridden by subclasses for custom vision update handling.
+     * The default implementation performs no action.
+     *
+     * @param newState The updated vision state.
+     */
     public fun onVisionUpdate(newState: VisionState) {
         // Default no-op. Override in AuraAgent/KaiAgent for custom behavior.
     }
 
+    /**
+     * Called when the processing state changes.
+     *
+     * Intended to be overridden by subclasses for custom behavior on processing state updates.
+     */
     public fun onProcessingStateChange(newState: ProcessingState) {
         // Default no-op. Override in AuraAgent/KaiAgent for custom behavior.
     }
 
+    /**
+     * Determines whether the given prompt should be handled by the security agent based on the presence of security-related keywords.
+     *
+     * @param prompt The input string to analyze for security relevance.
+     * @return `true` if the prompt contains security-related keywords; otherwise, `false`.
+     */
     public fun shouldHandleSecurity(prompt: String): Boolean {
         // Check for security-related keywords in the prompt
         public val securityKeywords = listOf(
@@ -62,6 +80,12 @@ public class CascadeAgent @Inject constructor(
         }
     }
 
+    /**
+     * Determines if the given prompt is related to creative or UI tasks based on keyword matching.
+     *
+     * @param prompt The input string to analyze.
+     * @return `true` if the prompt contains creative or UI-related keywords; otherwise, `false`.
+     */
     public fun shouldHandleCreative(prompt: String): Boolean {
         // Check for creative/UI-related keywords in the prompt
         public val creativeKeywords = listOf(
@@ -73,6 +97,14 @@ public class CascadeAgent @Inject constructor(
         }
     }
 
+    /**
+     * Processes a prompt by routing it to the appropriate agent (security, creative, or general) based on its content.
+     *
+     * Updates the processing state at each stage, records the request and response in memory, and returns a message indicating how the prompt was handled.
+     *
+     * @param prompt The input string to be analyzed and routed.
+     * @return A string describing the routing or processing result.
+     */
     public suspend fun processRequest(prompt: String): String {
         // Update processing state to indicate we're working
         updateProcessingState(
@@ -169,7 +201,9 @@ public class CascadeAgent @Inject constructor(
     }
 
     /**
-     * Gets the capabilities of the CascadeAgent including collaboration features.
+     * Returns a map describing the CascadeAgent's capabilities, including supported features, collaboration modes, memory capacity, and integrated agents.
+     *
+     * @return A map containing metadata about the agent's name, type, features, collaboration modes, memory capacity, and supported agents.
      */
     public fun getCapabilities(): Map<String, Any> {
         return mapOf(
@@ -189,7 +223,12 @@ public class CascadeAgent @Inject constructor(
     }
 
     /**
-     * Gets continuous memory items based on a query.
+     * Retrieves memory items from the agent's continuous memory store that match the specified query criteria.
+     *
+     * Filters memory items by query text, agent, context, and tags, returning up to the maximum number of results specified in the query.
+     *
+     * @param query The criteria used to filter memory items.
+     * @return A result containing the matched memory items, their count, and the original query.
      */
     public suspend fun getContinuousMemory(query: MemoryQuery): MemoryRetrievalResult {
         // Simple in-memory search implementation
@@ -219,8 +258,11 @@ public class CascadeAgent @Inject constructor(
     }
 
     /**
-     * Updates the vision state with new data.
-     * @param newState The new vision state to set.
+     * Updates the current vision state and records the change in memory.
+     *
+     * Notifies both the Aura and Kai agents of the vision state update. Any exceptions during notification are silently ignored.
+     *
+     * @param newState The new vision state to apply.
      */
     public fun updateVisionState(newState: VisionState) {
         _visionState.update { newState }
@@ -249,8 +291,9 @@ public class CascadeAgent @Inject constructor(
     }
 
     /**
-     * Updates the processing state.
-     * @param newState The new processing state.
+     * Updates the current processing state and records the change in memory.
+     *
+     * Notifies both the Aura and Kai agents of the processing state update. Any exceptions during notification are silently ignored.
      */
     public fun updateProcessingState(newState: ProcessingState) {
         _processingState.update { newState }
@@ -279,7 +322,9 @@ public class CascadeAgent @Inject constructor(
     }
 
     /**
-     * Monitors agent states and triggers notifications when significant changes occur.
+     * Initiates continuous monitoring of agent states and records the monitoring start in memory.
+     *
+     * This function updates the processing state to indicate that monitoring has begun and adds a corresponding entry to the agent's memory store.
      */
     public suspend fun startMonitoring() {
         // This could be enhanced to use kotlinx.coroutines.flow.collect on state flows
@@ -304,7 +349,12 @@ public class CascadeAgent @Inject constructor(
     }
 
     /**
-     * Collaborative processing with both Aura and Kai agents.
+     * Performs collaborative processing of a prompt by involving both Aura (creative) and Kai (security) agents as appropriate.
+     *
+     * Depending on the prompt content, gathers creative input from Aura, security analysis from Kai, or processes directly if neither applies. Updates processing state throughout and stores the collaborative result in memory.
+     *
+     * @param prompt The input string to be collaboratively processed.
+     * @return A string summarizing the combined results from the relevant agents or direct processing.
      */
     public suspend fun collaborativeProcess(prompt: String): String {
         updateProcessingState(
