@@ -34,8 +34,7 @@ public interface Agent {
      * Process a request and return a flow of responses
      */
     public fun processRequestFlow(request: AiRequest): Flow<AgentResponse>
-}
-     * TODO: Reported as unused.
+
      */
     public fun getType(): AgentType?
 
@@ -49,37 +48,64 @@ public interface Agent {
     /**
      * Retrieves the capabilities of the agent.
      * @return A list or map of capabilities.
-     * TODO: Reported as unused.
+
      */
     public fun getCapabilities(): Map<String, Any> {
-        // TODO: Implement logic to describe agent capabilities.
-        return emptyMap()
+
     }
 
     /**
      * Retrieves the agent's continuous memory or context.
-     * TODO: Reported as unused.
+        * @return An object representing the agent's memory.
+
      */
     public fun getContinuousMemory(): Any? {
-        // TODO: Implement logic to access agent's memory.
-        return null
+
     }
 
     /**
      * Retrieves the ethical guidelines the agent adheres to.
-     * TODO: Reported as unused.
+     * @return A list of ethical guidelines.
      */
     public fun getEthicalGuidelines(): List<String> {
-        // TODO: Implement logic to list ethical guidelines.
+ 
+         }
+
+    /**
+     * Retrieves the agent's learning history or experiences.
+        * @return A list of strings representing the agent's learning history.
+        
+     */
+    public fun getLearningHistory(): List<String> {
         return emptyList()
+
+        return emptyList()
+    }
+}
+
+    /**
+     * Retrieves the agent's continuous memory or context.
+     * @return An object representing the agent's memory.
+     */
+    public fun getContinuousMemory(): Any? {
+        return null
+    }
+}
+
+    /**
+     * Retrieves the ethical guidelines the agent adheres to.
+     * @return A list of ethical guidelines.
+     */
+    public fun getEthicalGuidelines(): List<String> {
+        return listOf("Be helpful.", "Be harmless.", "Adhere to ethical principles.")
     }
 
     /**
      * Retrieves the agent's learning history or experiences.
-     * TODO: Reported as unused.
+     * @return A list of strings representing the agent's learning history.
      */
     public fun getLearningHistory(): List<String> {
-        // TODO: Implement logic to access learning history.
         return emptyList()
     }
-}
+
+

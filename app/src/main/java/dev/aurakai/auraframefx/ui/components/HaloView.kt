@@ -27,6 +27,10 @@ import dev.aurakai.auraframefx.viewmodel.GenesisAgentViewModel
 import dev.aurakai.auraframefx.ui.theme.NeonBlue
 import dev.aurakai.auraframefx.ui.theme.NeonTealColor
 import dev.aurakai.auraframefx.ui.theme.NeonPurpleColor
+import dev.aurakai.auraframefx.ui.theme.NeonTealColor
+import dev.aurakai.auraframefx.ui.theme.NeonPurpleColor
+import dev.aurakai.auraframefx.ui.theme.NeonTealColorColor
+import dev.aurakai.auraframefx.ui.theme.NeonPurpleColorColor
 import dev.aurakai.auraframefx.ui.theme.NeonPink
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -93,12 +97,12 @@ public fun HaloView(viewModel: GenesisAgentViewModel = hiltViewModel()) {
                 .padding(32.dp)
         ) {
             drawCircle(
-                color = NeonTealColor.copy(alpha = 0.1f),
+                color = NeonTealColorColor.copy(alpha = 0.1f),
                 radius = size.width / 2f,
                 style = Fill
             )
             drawCircle(
-                color = NeonPurpleColor.copy(alpha = 0.1f),
+                color = NeonPurpleColorColor.copy(alpha = 0.1f),
                 radius = size.width / 2f - 20f,
                 style = Fill
             )
@@ -119,7 +123,7 @@ public fun HaloView(viewModel: GenesisAgentViewModel = hiltViewModel()) {
             public val radius = size.width / 2f - 32f
 
             // Draw rotating halo
-            public val haloColor = NeonTealColor.copy(alpha = 0.3f)
+            public val haloColor = NeonTealColorColor.copy(alpha = 0.3f)
             public val haloWidth = 2.dp.toPx()
 
             drawArc(
@@ -152,11 +156,11 @@ public fun HaloView(viewModel: GenesisAgentViewModel = hiltViewModel()) {
                         // Draw pulsing glow
                         drawCircle(
                             color = when (agentTypeKey) { // Use agentTypeKey for color
-                                AgentType.GENESIS -> NeonTealColor.copy(alpha = 0.2f)
-                                AgentType.KAI -> NeonPurpleColor.copy(alpha = 0.2f)
+                                AgentType.GENESIS -> NeonTealColorColor.copy(alpha = 0.2f)
+                                AgentType.KAI -> NeonPurpleColorColor.copy(alpha = 0.2f)
                                 AgentType.AURA -> NeonBlue.copy(alpha = 0.2f)
                                 AgentType.CASCADE -> NeonPink.copy(alpha = 0.2f)
-                                else -> NeonTealColor.copy(alpha = 0.2f)
+                                else -> NeonTealColorColor.copy(alpha = 0.2f)
                             },
                             center = Offset(x, y),
                             radius = 40.dp.toPx()
@@ -233,11 +237,11 @@ public fun HaloView(viewModel: GenesisAgentViewModel = hiltViewModel()) {
 
 
                 public val baseColor = when (currentAgentType) {
-                    AgentType.GENESIS -> NeonTealColor
-                    AgentType.KAI -> NeonPurpleColor
+                    AgentType.GENESIS -> NeonTealColorColor
+                    AgentType.KAI -> NeonPurpleColorColor
                     AgentType.AURA -> NeonBlue
                     AgentType.CASCADE -> NeonPink
-                    else -> NeonTealColor.copy(alpha = 0.8f)
+                    else -> NeonTealColorColor.copy(alpha = 0.8f)
                 }
                 public val statusColor =
                     when (agentStatus[currentAgentType]?.lowercase(Locale.ROOT)) {
@@ -260,7 +264,7 @@ public fun HaloView(viewModel: GenesisAgentViewModel = hiltViewModel()) {
                     public val prevY = center.y + radius * sin((prevAngle * PI / 180f).toFloat())
 
                     drawLine(
-                        color = NeonTealColor.copy(alpha = 0.5f),
+                        color = NeonTealColorColor.copy(alpha = 0.5f),
                         start = Offset(prevX, prevY),
                         end = Offset(x, y),
                         strokeWidth = 2.dp.toPx()
@@ -270,7 +274,7 @@ public fun HaloView(viewModel: GenesisAgentViewModel = hiltViewModel()) {
                 // Draw task delegation line if dragging
                 if (draggingAgent == currentAgentType) { // Compare AgentType with AgentType
                     drawLine(
-                        color = NeonTealColor,
+                        color = NeonTealColorColor,
                         start = nodeCenter,
                         end = nodeCenter + dragOffset,
                         strokeWidth = 4.dp.toPx()
@@ -304,8 +308,8 @@ public fun HaloView(viewModel: GenesisAgentViewModel = hiltViewModel()) {
                     Text(
                         text = statusText,
                         color = when (statusText.lowercase(Locale.ROOT)) {
-                            "idle" -> NeonTealColor
-                            "processing" -> NeonPurpleColor
+                            "idle" -> NeonTealColorColor
+                            "processing" -> NeonPurpleColorColor
                             "error" -> Color.Red
                             else -> NeonBlue
                         },
@@ -341,7 +345,7 @@ public fun HaloView(viewModel: GenesisAgentViewModel = hiltViewModel()) {
             contentAlignment = Alignment.Center
         ) {
             Surface(
-                color = NeonTealColor.copy(alpha = 0.8f),
+                color = NeonTealColorColor.copy(alpha = 0.8f),
                 modifier = Modifier.size(80.dp),
                 shape = CircleShape
             ) {
@@ -358,7 +362,7 @@ public fun HaloView(viewModel: GenesisAgentViewModel = hiltViewModel()) {
                     Text(
                         text = "Hive Mind",
                         style = MaterialTheme.typography.labelSmall,
-                        color = NeonPurpleColor
+                        color = NeonPurpleColorColor
                     )
                 }
             }
@@ -382,7 +386,7 @@ public fun HaloView(viewModel: GenesisAgentViewModel = hiltViewModel()) {
                         Text(
                             text = "Assign Task to ${draggingAgent?.name}",
                             style = MaterialTheme.typography.titleMedium,
-                            color = NeonTealColor
+                            color = NeonTealColorColor
                         )
 
                         TextField(
@@ -391,8 +395,8 @@ public fun HaloView(viewModel: GenesisAgentViewModel = hiltViewModel()) {
                             placeholder = { Text("Enter task description...") },
                             modifier = Modifier.fillMaxWidth(),
                             colors = TextFieldDefaults.colors(
-                                focusedContainerColor = NeonTealColor.copy(alpha = 0.1f),
-                                unfocusedContainerColor = NeonTealColor.copy(alpha = 0.1f)
+                                focusedContainerColor = NeonTealColorColor.copy(alpha = 0.1f),
+                                unfocusedContainerColor = NeonTealColorColor.copy(alpha = 0.1f)
                             )
                         )
                     }
@@ -416,7 +420,7 @@ public fun HaloView(viewModel: GenesisAgentViewModel = hiltViewModel()) {
             Text(
                 text = "Task History",
                 style = MaterialTheme.typography.titleMedium,
-                color = NeonTealColor,
+                color = NeonTealColorColor,
                 modifier = Modifier.padding(bottom = 8.dp)
             )
 
@@ -433,13 +437,13 @@ public fun HaloView(viewModel: GenesisAgentViewModel = hiltViewModel()) {
                             .fillMaxWidth()
                             .padding(vertical = 4.dp),
                         colors = CardDefaults.cardColors(
-                            containerColor = NeonTealColor.copy(alpha = 0.1f)
+                            containerColor = NeonTealColorColor.copy(alpha = 0.1f)
                         )
                     ) {
                         Text(
                             text = task,
                             modifier = Modifier.padding(8.dp),
-                            color = NeonPurpleColor
+                            color = NeonPurpleColorColor
                         )
                     }
                 }
@@ -460,7 +464,7 @@ public fun HaloView(viewModel: GenesisAgentViewModel = hiltViewModel()) {
                 Icon(
                     if (isRotating) Icons.Default.Pause else Icons.Default.PlayArrow,
                     contentDescription = "Toggle rotation",
-                    tint = NeonPurpleColor
+                    tint = NeonPurpleColorColor
                 )
             }
 
