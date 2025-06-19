@@ -19,9 +19,9 @@ import dev.aurakai.auraframefx.ui.theme.*
  * Data class representing a chat message
  */
 public data class ChatMessage(
-    public val content: String,
-    public val isFromUser: Boolean,
-    public val timestamp: Long = System.currentTimeMillis(),
+    val content: String,
+    val isFromUser: Boolean,
+    val timestamp: Long = System.currentTimeMillis(),
 )
 
 /**
@@ -36,8 +36,8 @@ public data class ChatMessage(
 @Composable
 public fun AiChatScreen() {
     // State handling with rememberSaveable to persist through configuration changes
-    public var messageText by rememberSaveable { mutableStateOf("") }
-    public var chatMessages by rememberSaveable {
+    var messageText by rememberSaveable { mutableStateOf("") }
+    var chatMessages by rememberSaveable {
         mutableStateOf(
             listOf(
                 ChatMessage("Hello! How can I help you today?", false),
@@ -92,11 +92,11 @@ public fun AiChatScreen() {
                 onClick = {
                     if (messageText.isNotBlank()) {
                         // Add user message
-                        public val userMessage = ChatMessage(messageText.trim(), true)
+                        val userMessage = ChatMessage(messageText.trim(), true)
                         chatMessages = chatMessages + userMessage
 
                         // Simulate AI response
-                        public val aiResponse = ChatMessage(
+                        val aiResponse = ChatMessage(
                             "I received your message: '${messageText.trim()}'. This is a simulated response.",
                             false
                         )
@@ -128,18 +128,18 @@ public fun AiChatScreen() {
  */
 @Composable
 public fun ChatMessageItem(message: ChatMessage) {
-    public val alignment = if (message.isFromUser) Alignment.End else Alignment.Start
-    public val background = if (message.isFromUser)
+    val alignment = if (message.isFromUser) Alignment.End else Alignment.Start
+    val background = if (message.isFromUser)
         MaterialTheme.colorScheme.primaryContainer
     else
         MaterialTheme.colorScheme.surfaceVariant
 
-    public val textColor = if (message.isFromUser)
+    val textColor = if (message.isFromUser)
         MaterialTheme.colorScheme.onPrimaryContainer
     else
         MaterialTheme.colorScheme.onSurfaceVariant
 
-    public val bubbleShape = if (message.isFromUser)
+    val bubbleShape = if (message.isFromUser)
         ChatBubbleOutgoingShape
     else
         ChatBubbleIncomingShape

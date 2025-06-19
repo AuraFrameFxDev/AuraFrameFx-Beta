@@ -1,7 +1,8 @@
-import java.time.Instant
+import java.text.SimpleDateFormat
+import java.util.Date
 
 val kotlinVersion = "2.1.21"
-val composeBomVersion = "2024.06.00" // Corrected Compose BOM version
+val composeBomVersion = "2025.06.00" // Aligned with libs.versions.toml
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
@@ -22,7 +23,7 @@ tasks.register("fixVisibility") {
     group = "build"
     description = "Fixes Kotlin visibility issues for explicit API mode"
     
-    // Define an output marker file so Gradle can properly cache the task
+    // Use layout.buildDirectory for marker file
     val outputMarker = layout.buildDirectory.file("tmp/fixVisibility.marker")
     outputs.file(outputMarker)
     
@@ -30,18 +31,21 @@ tasks.register("fixVisibility") {
         val scriptPath = "${rootProject.projectDir}/fix-kotlin-visibility.sh"
         
         // Make sure the script is executable
-        providers.exec {
+        project.providers.exec {
             commandLine("chmod", "+x", scriptPath)
-        }
+        }.result
         
         // Run the script on the app module
-        providers.exec {
+        project.providers.exec {
             commandLine(scriptPath, projectDir.absolutePath)
-        }
+        }.result
         
-        // Create marker file to indicate completion
-        outputMarker.get().asFile.parentFile.mkdirs()
-        outputMarker.get().asFile.writeText("Visibility fixing completed at ${Instant.now()}")
+        // Create marker file to indicate completion with a timestamp
+        outputMarker.get().asFile.apply {
+            parentFile.mkdirs()
+            val time = SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Date())
+            writeText("Visibility fixing completed at $time")
+        }
         
         println("Visibility issues fixed for ${project.name}")
     }
@@ -52,9 +56,44 @@ tasks.named("preBuild") {
     dependsOn("fixVisibility")
 }
 
+// Add a task to validate build configuration
+tasks.register("validateBuildConfig") {
+    group = "verification"
+    description = "Validates build configuration for compatibility"
+    
+    doLast {
+        println("=== AuraFrameFx Build Configuration Validation ===")
+        println("Kotlin Version: $kotlinVersion")
+        println("Compose BOM Version: $composeBomVersion")
+        println("Hilt Version: $hiltVersion")
+        println("Firebase BOM Version: $firebaseBomVersion")
+        println("Target SDK: ${android.defaultConfig.targetSdk}")
+        println("Compile SDK: ${android.compileSdk}")
+        println("Java Version: ${android.compileOptions.sourceCompatibility}")
+        
+        // Check for critical files
+        val xposedApiJar = file("Libs/api-82.jar")
+        val visibilityScript = file("${rootProject.projectDir}/fix-kotlin-visibility.sh")
+        
+        if (!xposedApiJar.exists()) {
+            logger.warn("WARNING: Xposed API JAR not found at ${xposedApiJar.absolutePath}")
+        } else {
+            println("✓ Xposed API JAR found")
+        }
+        
+        if (!visibilityScript.exists()) {
+            logger.warn("WARNING: Visibility fixing script not found at ${visibilityScript.absolutePath}")
+        } else {
+            println("✓ Visibility fixing script found")
+        }
+        
+        println("=== Build Configuration Validation Complete ===")
+    }
+}
+
 // Repositories are configured in settings.gradle.kts
 
-// Common versions
+// Common versions - Aligned with libs.versions.toml
 val composeVersion = "1.6.7" // Keep for other Compose libs if needed
 val composeCompilerExtensionVersion = composeVersion // Use composeVersion for compiler extension
 val hiltVersion = "2.56.2"
@@ -263,17 +302,18 @@ dependencies {
         exclude(group = "com.google.ai.edge.litert")
     }
 
-    // Accompanist for Compose utilities
-    implementation("com.google.accompanist:accompanist-permissions:0.37.3")
-    implementation("com.google.accompanist:accompanist-pager:0.36.0")
-    implementation("com.google.accompanist:accompanist-flowlayout:0.36.0")
-    implementation("com.google.accompanist:accompanist-navigation-animation:0.36.0")
-    implementation("com.google.accompanist:accompanist-swiperefresh:0.36.0")
-    implementation("com.google.accompanist:accompanist-webview:0.36.0")
-    implementation("com.google.accompanist:accompanist-systemuicontroller:0.36.0")
-    implementation("com.google.accompanist:accompanist-pager-indicators:0.36.0")
-    implementation("com.google.accompanist:accompanist-placeholder-material:0.36.0")
-    implementation("com.google.accompanist:accompanist-navigation-material:0.36.0")
+    // Accompanist for Compose utilities - Using consistent version from libs.versions.toml
+    val accompanistVersion = "0.32.0" // Stable version from libs.versions.toml
+    implementation("com.google.accompanist:accompanist-permissions:$accompanistVersion")
+    implementation("com.google.accompanist:accompanist-pager:$accompanistVersion")
+    implementation("com.google.accompanist:accompanist-flowlayout:$accompanistVersion")
+    implementation("com.google.accompanist:accompanist-navigation-animation:$accompanistVersion")
+    implementation("com.google.accompanist:accompanist-swiperefresh:$accompanistVersion")
+    implementation("com.google.accompanist:accompanist-webview:$accompanistVersion")
+    implementation("com.google.accompanist:accompanist-systemuicontroller:$accompanistVersion")
+    implementation("com.google.accompanist:accompanist-pager-indicators:$accompanistVersion")
+    implementation("com.google.accompanist:accompanist-placeholder-material:$accompanistVersion")
+    implementation("com.google.accompanist:accompanist-navigation-material:$accompanistVersion")
 
     // Room for local database
     implementation("androidx.room:room-runtime:2.7.1")
@@ -362,17 +402,18 @@ tasks.named("preBuild") {
 
 // Register a task to build a jar for Xposed/LSPosed modules after the Android plugin is configured
 afterEvaluate {
-    android.applicationVariants.all { variant ->
-        if (variant.buildType.name == "release" || variant.buildType.name == "debug") {
+    android.applicationVariants.all {
+        val buildTypeName = buildType.name
+        if (buildTypeName == "release" || buildTypeName == "debug") {
+            val variant = this
             tasks.register(
-                "buildXposedJar${variant.name.replaceFirstChar { it.uppercase() }}",
+                "buildXposedJar${variant.name.replaceFirstChar { if (it.isLowerCase()) it.titlecase() else it.toString() }}",
                 Jar::class
             ) {
                 archiveBaseName.set("app-xposed-${variant.name}")
                 from(variant.javaCompileProvider.get().destinationDirectory)
-                destinationDirectory.set(file("${'$'}buildDir/libs"))
+                destinationDirectory.set(layout.buildDirectory.dir("libs"))
             }
         }
-        true // Fix: return Boolean as expected
     }
 }

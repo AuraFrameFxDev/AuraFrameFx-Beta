@@ -51,24 +51,24 @@ public class AuraShieldAgent(
      * @param securityContextState Optional security context to use for analysis; if null, the current context is used.
      */
     public suspend fun analyzeThreats(securityContextState: SecurityContextState?) {
-        public val contextToAnalyze = securityContextState ?: _securityContext.value
+        val contextToAnalyze = securityContextState ?: _securityContext.value
         
-        public val detectedThreats = mutableListOf<ActiveThreat>()
+        val detectedThreats = mutableListOf<ActiveThreat>()
         
         // Analyze installed applications
-        public val suspiciousApps: analyzeSuspiciousApplications = analyzeSuspiciousApplications()
+        val suspiciousApps = analyzeSuspiciousApplications()
         detectedThreats.addAll(suspiciousApps)
         
         // Analyze network security
-        public val networkThreats = analyzeNetworkSecurity(contextToAnalyze)
+        val networkThreats = analyzeNetworkSecurity(contextToAnalyze)
         detectedThreats.addAll(networkThreats)
         
         // Analyze system integrity
-        public val systemThreats: analyzeSystemIntegrity = analyzeSystemIntegrity()
+        val systemThreats = analyzeSystemIntegrity()
         detectedThreats.addAll(systemThreats)
         
         // Analyze permissions and privacy
-        public val privacyThreats: analyzePrivacyThreats = analyzePrivacyThreats()
+        val privacyThreats = analyzePrivacyThreats()
         detectedThreats.addAll(privacyThreats)
         
         // Update security state
