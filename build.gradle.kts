@@ -29,26 +29,26 @@ plugins {
 }
 
 // Custom task to fix Kotlin visibility issues
-tasks.register("fixKotlinVisibility") {
-    group = "build"
-    description = "Fixes Kotlin visibility issues for explicit API mode"
+// tasks.register("fixKotlinVisibility") {
+//     group = "build"
+//     description = "Fixes Kotlin visibility issues for explicit API mode"
     
-    doLast {
-        val scriptPath = "${rootProject.projectDir}/fix-kotlin-visibility.sh"
+//     doLast {
+//         val scriptPath = "${rootProject.projectDir}/fix-kotlin-visibility.sh"
         
-        // Make sure the script is executable
-        providers.exec {
-            commandLine("chmod", "+x", scriptPath)
-        }
+//         // Make sure the script is executable
+//         providers.exec {
+//             commandLine("chmod", "+x", scriptPath)
+//         }
         
-        // Run the script
-        providers.exec {
-            commandLine(scriptPath)
-        }
+//         // Run the script
+//         providers.exec {
+//             commandLine(scriptPath)
+//         }
         
-        println("Kotlin visibility fixing completed")
-    }
-}
+//         println("Kotlin visibility fixing completed")
+//     }
+// }
 
 subprojects {
     tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
