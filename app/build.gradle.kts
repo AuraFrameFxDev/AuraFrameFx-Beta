@@ -19,41 +19,41 @@ plugins {
 }
 
 // Add a task to fix Kotlin visibility issues
-tasks.register("fixVisibility") {
-    group = "build"
-    description = "Fixes Kotlin visibility issues for explicit API mode"
+// tasks.register("fixVisibility") {
+//     group = "build"
+//     description = "Fixes Kotlin visibility issues for explicit API mode"
     
-    // Use layout.buildDirectory for marker file
-    val outputMarker = layout.buildDirectory.file("tmp/fixVisibility.marker")
-    outputs.file(outputMarker)
+//     // Use layout.buildDirectory for marker file
+//     val outputMarker = layout.buildDirectory.file("tmp/fixVisibility.marker")
+//     outputs.file(outputMarker)
     
-    doLast {
-        val scriptPath = "${rootProject.projectDir}/fix-kotlin-visibility.sh"
+//     doLast {
+//         val scriptPath = "${rootProject.projectDir}/fix-kotlin-visibility.sh"
         
-        // Make sure the script is executable
-        project.providers.exec {
-            commandLine("chmod", "+x", scriptPath)
-        }.result
+//         // Make sure the script is executable
+//         project.providers.exec {
+//             commandLine("chmod", "+x", scriptPath)
+//         }.result
         
-        // Run the script on the app module
-        project.providers.exec {
-            commandLine(scriptPath, projectDir.absolutePath)
-        }.result
+//         // Run the script on the app module
+//         project.providers.exec {
+//             commandLine(scriptPath, projectDir.absolutePath)
+//         }.result
         
-        // Create marker file to indicate completion with a timestamp
-        outputMarker.get().asFile.apply {
-            parentFile.mkdirs()
-            val time = SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Date())
-            writeText("Visibility fixing completed at $time")
-        }
+//         // Create marker file to indicate completion with a timestamp
+//         outputMarker.get().asFile.apply {
+//             parentFile.mkdirs()
+//             val time = SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Date())
+//             writeText("Visibility fixing completed at $time")
+//         }
         
-        println("Visibility issues fixed for ${project.name}")
-    }
-}
+//         println("Visibility issues fixed for ${project.name}")
+//     }
+// }
 
 // Run the visibility fixer before preBuild
 tasks.named("preBuild") {
-    dependsOn("fixVisibility")
+    // dependsOn("fixVisibility")
 }
 
 // Add a task to validate build configuration
@@ -199,8 +199,8 @@ android {
             // Add the path to exclude in freeCompilerArgs
             freeCompilerArgs.addAll(
                 listOf(
-                    "-Xexplicit-api=strict",
-                    "-Xno-source=/dev/aurakai/auraframefx/generated/model"
+                    "-Xexplicit-api=strict"
+                    // Removed "-Xno-source=/dev/aurakai/auraframefx/generated/model"
                 )
             )
         }
@@ -390,7 +390,8 @@ openApiGenerate {
             "useCoroutines" to "true",
             "enumPropertyNaming" to "UPPERCASE",
             "serializationLibrary" to "kotlinx_serialization",
-            "library" to "jvm-retrofit2" // Added library option
+            "library" to "jvm-retrofit2", // Added library option
+            "explicitApi" to "true" // Add this line
         )
     )
 }
