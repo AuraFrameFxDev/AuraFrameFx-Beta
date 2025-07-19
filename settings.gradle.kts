@@ -13,7 +13,7 @@ pluginManagement {
                 useVersion("2.1.21")
             }
             if (requested.id.id == "com.android.application") {
-                useVersion("8.6.0")
+                useVersion("8.10.1")
             }
             if (requested.id.id == "com.google.devtools.ksp") {
                 useVersion("2.1.21-2.0.1")

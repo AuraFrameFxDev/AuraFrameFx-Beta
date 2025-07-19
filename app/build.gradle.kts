@@ -4,6 +4,7 @@ import java.util.Date
 val kotlinVersion = "2.1.21"
 val composeBomVersion = "2025.06.00" // Aligned with libs.versions.toml
 plugins {
+    id("io.gitlab.arturbosch.detekt")
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("kotlin-kapt")
@@ -14,7 +15,7 @@ plugins {
     id("androidx.navigation.safeargs.kotlin")
     id("com.google.firebase.firebase-perf")
     id("org.jetbrains.kotlin.plugin.compose")
-    id("org.openapi.generator") version "7.5.0"
+    id("org.openapi.generator") version "7.14"
     id("com.google.devtools.ksp") version "2.1.21-2.0.1"
 }
 
@@ -329,6 +330,9 @@ dependencies {
 
     // Coil for image loading
     implementation("io.coil-kt:coil-compose:2.7.0")
+
+    // Lottie for animations
+    implementation("com.airbnb.android:lottie-compose:6.4.1")
 
     // Retrofit for network calls
     implementation("com.squareup.retrofit2:retrofit:3.0.0")
