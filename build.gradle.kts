@@ -15,6 +15,7 @@ buildscript {
 }
 
 plugins {
+    id("io.gitlab.arturbosch.detekt") version "1.23.6" apply false
     id("com.android.application") version "8.10.1" apply false
     id("org.jetbrains.kotlin.android") version "2.1.21" apply false
     id("org.jetbrains.kotlin.plugin.compose") version "2.1.21" apply true
@@ -25,7 +26,7 @@ plugins {
     id("com.google.firebase.firebase-perf") version "1.4.2" apply false
     id("androidx.navigation.safeargs.kotlin") version "2.9.0" apply false
     id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin") version "2.0.1" apply false
-    id("org.openapi.generator") version "7.5.0" apply false
+    id("org.openapi.generator") version "7.14" apply false
 }
 
 // Custom task to fix Kotlin visibility issues
