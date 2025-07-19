@@ -331,6 +331,9 @@ dependencies {
     // Coil for image loading
     implementation("io.coil-kt:coil-compose:2.7.0")
 
+    // Lottie for animations
+    implementation("com.airbnb.android:lottie-compose:6.4.1")
+
     // Retrofit for network calls
     implementation("com.squareup.retrofit2:retrofit:3.0.0")
     implementation("com.squareup.retrofit2:converter-gson:3.0.0")
