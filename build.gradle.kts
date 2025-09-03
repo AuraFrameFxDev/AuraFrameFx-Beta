@@ -2,6 +2,7 @@ buildscript {
     repositories {
         google()
         mavenCentral()
+        gradlePluginPortal()
     }
     dependencies {
         classpath("com.android.tools.build:gradle:8.10.1")
@@ -11,6 +12,7 @@ buildscript {
         classpath("com.google.firebase:firebase-crashlytics-gradle:3.0.4")
         classpath("com.google.firebase:perf-plugin:1.4.2")
         classpath("androidx.navigation:navigation-safe-args-gradle-plugin:2.9.0")
+        classpath("org.openapitools:openapi-generator-gradle-plugin:7.14.0")
     }
 }
 
@@ -26,8 +28,9 @@ plugins {
     id("com.google.firebase.firebase-perf") version "1.4.2" apply false
     id("androidx.navigation.safeargs.kotlin") version "2.9.0" apply false
     id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin") version "2.0.1" apply false
-    id("org.openapi.generator") version "7.14" apply false
 }
+
+apply(plugin = "org.openapi.generator")
 
 // Custom task to fix Kotlin visibility issues
 // tasks.register("fixKotlinVisibility") {

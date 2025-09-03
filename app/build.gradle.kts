@@ -15,7 +15,6 @@ plugins {
     id("androidx.navigation.safeargs.kotlin")
     id("com.google.firebase.firebase-perf")
     id("org.jetbrains.kotlin.plugin.compose")
-    id("org.openapi.generator") version "7.14"
     id("com.google.devtools.ksp") version "2.1.21-2.0.1"
 }
 
